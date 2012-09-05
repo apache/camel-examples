@@ -125,20 +125,20 @@
                 <dependency>
                     <groupId>org.jboss.spec</groupId>
                     <artifactId>jboss-javaee-6.0</artifactId>
-                    <version>1.0.0.Final</version>
+                    <version>${jboss-javaee-6-version}</version>
                     <type>pom</type>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
-                    <version>1.0.0.CR3</version>
+                    <version>${arquillian-weld-ee-embedded-version}</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.weld</groupId>
                     <artifactId>weld-core</artifactId>
-                    <version>1.1.5.Final</version>
+                  <version>${weld-version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
