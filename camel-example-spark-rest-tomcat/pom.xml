@@ -26,9 +26,9 @@
     <version>2.14-SNAPSHOT</version>
   </parent>
 
-  <artifactId>camel-example-spark-tomcat</artifactId>
-  <name>Camel :: Example :: Spark Tomcat</name>
-  <description>An example using Spark with Apache Tomcat</description>
+  <artifactId>camel-example-spark-rest-tomcat</artifactId>
+  <name>Camel :: Example :: Spark REST Tomcat</name>
+  <description>An example using Spark REST with Apache Tomcat</description>
   <packaging>war</packaging>
 
   <dependencies>
@@ -44,7 +44,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-spark</artifactId>
+      <artifactId>camel-spark-rest</artifactId>
       <!-- exclude javax servlet as its already part of the servlet container -->
       <exclusions>
         <exclusion>

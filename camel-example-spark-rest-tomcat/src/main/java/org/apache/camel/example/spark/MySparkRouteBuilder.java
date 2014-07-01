@@ -16,7 +16,7 @@
  */
 package org.apache.camel.example.spark;
 
-import org.apache.camel.component.spark.SparkRouteBuilder;
+import org.apache.camel.component.sparkrest.SparkRouteBuilder;
 
 /**
  * Define REST services using {@link SparkRouteBuilder}.

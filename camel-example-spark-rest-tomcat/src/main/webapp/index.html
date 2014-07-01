@@ -17,12 +17,12 @@
 <html>
 
 <body>
-<h2>Spark and Apache Tomcat example</h2>
+<h2>Spark REST and Apache Tomcat example</h2>
 
-This example shows how to use Spark Java to define REST endpoints in Camel routes using the CamelSparkRouteBuilder DSL
+This example shows how to use Spark REST to define REST endpoints in Camel routes using the CamelSparkRouteBuilder DSL
 
 <br/>
-The routes are defined in Java code, in the <tt>org.apache.camel.example.spark.MySparkRouteBuilder</tt> class.
+The routes are defined in Java code, in the <tt>org.apache.camel.example.sparkrest.MySparkRouteBuilder</tt> class.
 
 <p/>
 There is a <i>hello</i> REST service that supports different content-type
@@ -48,12 +48,12 @@ You can access the <i>text/plain</i> service from the web browser by clicking <a
 You can try the <i>text/xml</i> or <i>application/json</i> from the command line using <b>curl</b> or similar tool.
 
 <pre>
-    curl -H "Accept: application/json" http://localhost:8080/camel-example-spark-tomcat/hello/you
-    curl -H "Accept: text/xml" http://localhost:8080/camel-example-spark-tomcat/hello/you
+    curl -H "Accept: application/json" http://localhost:8080/camel-example-spark-rest-tomcat-{version}/hello/you
+    curl -H "Accept: text/xml" http://localhost:8080/camel-example-spark-rest-tomcat-{version}/hello/you
 </pre>
 
-This assume you installed the example by copying the .war as <tt>camel-example-spark-tomcat.war</tt>
-into the <b>webapps</b> directory of Apache Tomcat.
+This assume you installed the example by copying the .war as <tt>camel-example-spark-rest-tomcat-VERSION.war</tt>
+, where VERSION is the Camel version such as 2.14.0, into the <b>webapps</b> directory of Apache Tomcat.
 
 <p/>
 If you hit any problems please let us know on the
