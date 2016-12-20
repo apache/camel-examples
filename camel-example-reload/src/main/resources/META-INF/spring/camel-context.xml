@@ -22,15 +22,26 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+  <!-- notice Camel will only update the routes that has been changed, so you can edit either either route or both
+       and save the file, and Camel will update only what is required -->
+
   <camelContext xmlns="http://camel.apache.org/schema/spring">
-    <route id="myRoute">
+
+    <route id="timer">
       <from uri="timer:foo"/>
-      <!-- try to change me and save this file -->
-      <transform>
-        <constant>Hello World</constant>
-      </transform>
+      <to uri="direct:foo"/>
+      <!-- you can try changing me -->
       <log message="You said: ${body}"/>
     </route>
+
+    <route id="foo">
+      <from uri="direct:foo"/>
+      <transform>
+        <!-- and I can be changed too -->
+        <constant>Hello World</constant>
+      </transform>
+    </route>
+
   </camelContext>
 
 </beans>
