@@ -36,27 +36,27 @@ public final class CamelJmsToFileExample {
     }
     
     public static void main(String args[]) throws Exception {
-        // START SNIPPET: e1
+        // tag::e1[]
         CamelContext context = new DefaultCamelContext();
-        // END SNIPPET: e1
+        // end::e1[]
         // Set up the ActiveMQ JMS Components
-        // START SNIPPET: e2
+        // tag::e2[]
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
         // Note we can explicit name the component
         context.addComponent("test-jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-        // END SNIPPET: e2
+        // end::e2[]
         // Add some configuration by hand ...
-        // START SNIPPET: e3
+        // tag::e3[]
         context.addRoutes(new RouteBuilder() {
             public void configure() {
                 from("test-jms:queue:test.queue").to("file://test");
             }
         });
-        // END SNIPPET: e3
+        // end::e3[]
         // Camel template - a handy class for kicking off exchanges
-        // START SNIPPET: e4
+        // tag::e4[]
         ProducerTemplate template = context.createProducerTemplate();
-        // END SNIPPET: e4
+        // end::e4[]
         // Now everything is set up - lets start the context
         context.start();
         // Now send some test text to a component - for this case a JMS Queue
@@ -68,11 +68,11 @@ public final class CamelJmsToFileExample {
         // test we sent here.
         // The listener on the file component gets notified when new files are
         // found ... that's it!
-        // START SNIPPET: e5
+        // tag::e5[]
         for (int i = 0; i < 10; i++) {
             template.sendBody("test-jms:queue:test.queue", "Test Message: " + i);
         }
-        // END SNIPPET: e5
+        // end::e5[]
 
         // wait a bit and then stop
         Thread.sleep(1000);
