@@ -25,14 +25,59 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-parent</artifactId>
         <version>3.1.0-SNAPSHOT</version>
-        <relativePath>../parent</relativePath>
     </parent>
 
-    <artifactId>examples</artifactId>
-    <name>Camel :: Example</name>
     <groupId>org.apache.camel.example</groupId>
-    <description>Camel Examples</description>
+    <artifactId>examples</artifactId>
+    <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <name>Camel Examples</name>
+    <description>Examples for Camel</description>
+    <url>https://camel.apache.org</url>
+
+    <developers>
+        <developer>
+            <name>The Apache Camel Team</name>
+            <email>dev@camel.apache.org</email>
+            <url>https://camel.apache.org</url>
+            <organization>Apache Software Foundation</organization>
+            <organizationUrl>http://apache.org/</organizationUrl>
+        </developer>
+    </developers>
+
+    <mailingLists>
+        <mailingList>
+            <name>Development List</name>
+            <subscribe>dev-subscribe@camel.apache.org</subscribe>
+            <unsubscribe>dev-unsubscribe@camel.apache.org</unsubscribe>
+            <post>dev@camel.apache.org</post>
+        </mailingList>
+        <mailingList>
+            <name>User List</name>
+            <subscribe>users-subscribe@camel.apache.org</subscribe>
+            <unsubscribe>users-unsubscribe@camel.apache.org</unsubscribe>
+            <post>users@camel.apache.org</post>
+        </mailingList>
+        <mailingList>
+            <name>Commits List</name>
+            <subscribe>commits-subscribe@camel.apache.org</subscribe>
+            <unsubscribe>commits-unsubscribe@camel.apache.org</unsubscribe>
+            <post>commits@camel.apache.org</post>
+        </mailingList>
+    </mailingLists>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>https://issues.apache.org/jira/browse/CAMEL</url>
+    </issueManagement>
+
+    <distributionManagement>
+        <site>
+            <id>apache.website</id>
+            <url>${site-repo-url}</url>
+        </site>
+    </distributionManagement>
 
     <modules>
         <module>camel-example-activemq-tomcat</module>
@@ -125,6 +170,24 @@
     </modules>
 
     <properties>
+        <!-- Spring-Boot target version -->
+        <spring-boot-version>2.2.4.RELEASE</spring-boot-version>
+
+        <!-- Camel target version -->
+        <camel-version>3.1.0-SNAPSHOT</camel-version>
+
+        <!-- Versions -->
+        <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
+        <activemq-artemis-version>2.11.0</activemq-artemis-version>
+        <arquillian-version>1.6.0.Final</arquillian-version>
+        <cdi-api-2.0-version>2.0</cdi-api-2.0-version>
+        <deltaspike-version>1.9.0</deltaspike-version>
+        <log4j2-version>2.13.0</log4j2-version>
+        <hapi-version>2.3</hapi-version>
+        <pax-exam-version>4.13.1</pax-exam-version>
+        <karaf4-version>4.2.8</karaf4-version>
+        <weld3-version>3.0.5.Final</weld3-version>
+
         <!-- for symbolicName in OSGi examples we only want the artifactId, eg camel-example-sql -->
         <!-- as having org.apache.camel as prefix is not needed and makes the name very long -->
         <camel.osgi.symbolic.name>${project.artifactId}</camel.osgi.symbolic.name>
@@ -134,16 +197,61 @@
         <camel.osgi.manifest>${project.build.outputDirectory}/META-INF/MANIFEST.MF</camel.osgi.manifest>
     </properties>
 
+    <!-- Comment out the snapshot repositories as we don't need them now -->
+    <repositories>
+        <repository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+            <name>Apache Snapshot Repo</name>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencyManagement>
         <dependencies>
-            <!--
-              CAMEL-13084 Fix the spring-boot examples start up error by overriding servlet API version from camel-parent
-              Wqe need to clean it up once camel-parent upgrade the servlet api version.
-            -->
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${javax.servlet.api.version}</version>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-core-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-parent</artifactId>
+                <version>${camel-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google-guava-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

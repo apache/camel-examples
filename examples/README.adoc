@@ -118,9 +118,6 @@ Number of Examples: 85 (0 deprecated)
 
 | link:camel-example-management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
 
-| link:camel-example-opentracing/README.adoc[OpenTracing] (camel-example-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
-    
-
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
 | link:camel-example-activemq-tomcat/README.adoc[ActiveMQ Tomcat] (camel-example-activemq-tomcat) | Messaging | An example using ActiveMQ Broker and Camel with Apache Tomcat
@@ -142,8 +139,6 @@ Number of Examples: 85 (0 deprecated)
 
 | link:camel-example-netty-custom-correlation/readme.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
-| link:camel-example-rabbitmq/readme.adoc[Rabbitmq] (camel-example-rabbitmq) | Messaging | An example showing how to work with Camel and RabbitMQ
-
 | link:camel-example-spring-jms/README.adoc[Spring JMS] (camel-example-spring-jms) | Messaging | An example using Spring XML to talk to the JMS server from different kind of client techniques
     
 
@@ -158,6 +153,8 @@ Number of Examples: 85 (0 deprecated)
     
 
 | link:camel-example-olingo4-blueprint/README.adoc[Olingo4 OSGi] (camel-example-olingo4-blueprint) | OSGi | An example which use the Olingo4 component in OSGi Blueprint
+
+| link:camel-example-openapi-osgi/README.adoc[OpenApi OSGi] (camel-example-openapi-osgi) | OSGi | An example using REST DSL in XML and OpenApi API
 
 | link:camel-example-rest-karaf-osgi-activator/README.adoc[Karaf OSGi Activator] (camel-example-rest-karaf-osgi-activator) | OSGi | An example showing how to use Apache Camel on Apache Karaf with the OSGi Activator component
 
@@ -177,6 +174,8 @@ Number of Examples: 85 (0 deprecated)
 | link:camel-example-reactive-executor-vertx/readme.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 
 | link:camel-example-cdi-rest-servlet/README.adoc[CDI Rest] (camel-example-cdi-rest-servlet) | Rest | Rest DSL using Servlet with CDI example
+
+| link:camel-example-openapi-cdi/README.adoc[OpenApi CDI] (camel-example-openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
 
 | link:camel-example-spark-rest/README.adoc[Spark Rest] (camel-example-spark-rest) | Rest | An example using Spark Rest
 
