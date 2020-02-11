@@ -33,5 +33,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - name: mvn build and tests
+      - name: mvn build
         run: ./mvnw -f examples/pom.xml -V --no-transfer-progress clean install -DskipTests
