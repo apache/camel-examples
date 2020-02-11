@@ -1,5 +1,6 @@
 # Apache Camel Examples
 
+![master build](https://github.com/apache/camel-examples/workflows/master%20build/badge.svg)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.camel/apache-camel/badge.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/org.apache.camel/apache-camel)
 [![Javadocs](http://www.javadoc.io/badge/org.apache.camel/apache-camel.svg?color=brightgreen)](http://www.javadoc.io/doc/org.apache.camel/camel-core)
 [![Stack Overflow](https://img.shields.io/:stack%20overflow-apache--camel-brightgreen.svg)](http://stackoverflow.com/questions/tagged/apache-camel)
