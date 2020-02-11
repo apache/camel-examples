@@ -22,9 +22,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-parent</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>21</version>
     </parent>
 
     <groupId>org.apache.camel.example</groupId>
@@ -170,6 +170,14 @@
     </modules>
 
     <properties>
+        <!-- unify the encoding for all the modules -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <site-repo-url>scpexe://people.apache.org/www/camel.apache.org/maven/</site-repo-url>
+        <jdk.version>1.8</jdk.version>
+        <compiler.fork>false</compiler.fork>
+
         <!-- Spring-Boot target version -->
         <spring-boot-version>2.2.4.RELEASE</spring-boot-version>
 
@@ -178,15 +186,96 @@
 
         <!-- Versions -->
         <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
+        <aether-version>1.0.2.v20150114</aether-version>
+        <arquillian-container-se-managed-version>1.0.2.Final</arquillian-container-se-managed-version>
+        <arquillian-version>1.5.0.Final</arquillian-version>
+        <asciidoctorj-version>2.1.0</asciidoctorj-version>
         <activemq-artemis-version>2.11.0</activemq-artemis-version>
-        <arquillian-version>1.6.0.Final</arquillian-version>
+        <atomix-version>1.0.8</atomix-version>
+        <avro-version>1.8.1</avro-version>
+        <bouncycastle-version>1.64</bouncycastle-version>
+        <cassandra-driver-guava-version>19.0</cassandra-driver-guava-version>
+        <camel-bundle-plugin-version>${project.version}</camel-bundle-plugin-version>
         <cdi-api-2.0-version>2.0</cdi-api-2.0-version>
+        <cdi-api-1.2-version>1.2</cdi-api-1.2-version>
+        <curator-version>2.12.0</curator-version>
+        <commons-dbcp-version>1.4</commons-dbcp-version>
         <deltaspike-version>1.9.0</deltaspike-version>
-        <log4j2-version>2.13.0</log4j2-version>
+        <egit-github-core-version>2.1.5</egit-github-core-version>
+        <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
+        <freemarker-version>2.3.29</freemarker-version>
+        <geronimo-ws-metadata-spec-version>1.1.3</geronimo-ws-metadata-spec-version>
+        <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
+        <gmavenplus-plugin-version>1.6.2</gmavenplus-plugin-version>
+        <google-guava-version>19.0</google-guava-version>
+        <groovy-version>2.5.8</groovy-version>
+        <groovy-version>2.5.8</groovy-version>
+        <grpc-guava-version>26.0-android</grpc-guava-version>
+        <grpc-version>1.24.1</grpc-version>
+        <gson-version>2.8.5</gson-version>
+        <hadoop2-version>2.7.4</hadoop2-version>
         <hapi-version>2.3</hapi-version>
+        <hibernate-validator-version>6.0.17.Final</hibernate-validator-version>
+        <hibernate-version>5.2.16.Final</hibernate-version>
+        <infinispan-spring-boot-version>2.2.0.Final</infinispan-spring-boot-version>
         <pax-exam-version>4.13.1</pax-exam-version>
+        <jackson-version>1.9.12</jackson-version>
+        <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
+        <jandex-version>2.1.1.Final</jandex-version>
+        <javax-annotation-api-version>1.3.2</javax-annotation-api-version>
+        <jaxb-version>2.3.0</jaxb-version>
+        <jetty9-version>9.4.20.v20190813</jetty9-version>
+        <jetty-version>${jetty9-version}</jetty-version>
+        <jetty-plugin-version>${jetty-version}</jetty-plugin-version>
+        <jolokia-version>1.6.2</jolokia-version>
+        <jooq-version>3.11.12</jooq-version>
+        <junit-jupiter-version>5.5.2</junit-jupiter-version>
+        <kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
         <karaf4-version>4.2.8</karaf4-version>
-        <weld3-version>3.0.5.Final</weld3-version>
+        <log4j2-version>2.13.0</log4j2-version>
+        <logback-version>1.2.3</logback-version>
+        <lucene3-version>3.6.0</lucene3-version>
+        <hsqldb-version>2.5.0</hsqldb-version>
+        <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
+        <maven-checkstyle-version>8.26</maven-checkstyle-version>
+        <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
+        <maven-javadoc-plugin-version>3.0.1</maven-javadoc-plugin-version>
+        <maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
+        <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
+        <micrometer-version>1.2.2</micrometer-version>
+        <mvel-version>2.4.4.Final</mvel-version>
+        <mycila-license-version>3.0</mycila-license-version>
+        <openjpa-version>3.1.0</openjpa-version>
+        <opentracing-version>0.33.0</opentracing-version>
+        <os-maven-plugin-version>1.6.0</os-maven-plugin-version>
+        <pax-cdi-version>1.0.0</pax-cdi-version>
+        <protobuf-maven-plugin-version>0.6.1</protobuf-maven-plugin-version>
+        <protobuf-version>3.9.1</protobuf-version>
+        <properties-maven-plugin-version>1.0-alpha-2</properties-maven-plugin-version>
+        <reactor-version>3.2.12.RELEASE</reactor-version>
+        <roaster-version>2.20.1.Final</roaster-version>
+        <rxjava-version>1.3.8</rxjava-version>
+        <shrinkwrap-resolver-version>3.1.3</shrinkwrap-resolver-version>
+        <shrinkwrap-version>1.2.6</shrinkwrap-version>
+        <shrinkwrap-descriptors-version>2.0.0</shrinkwrap-descriptors-version>
+        <sshd-version>2.0.0</sshd-version>
+        <slf4j-version>1.7.30</slf4j-version>
+        <sql-maven-plugin-version>1.5</sql-maven-plugin-version>
+        <spring-ws-version>3.0.7.RELEASE</spring-ws-version>
+        <spring-cloud-commons-version>2.2.1.RELEASE</spring-cloud-commons-version>
+        <spring-cloud-consul-version>2.2.1.RELEASE</spring-cloud-consul-version>
+        <spring-cloud-netflix-version>2.2.1.RELEASE</spring-cloud-netflix-version>
+        <spring-cloud-zookeeper-version>2.2.0.RELEASE</spring-cloud-zookeeper-version>
+        <spring-security-version>5.2.1.RELEASE</spring-security-version>
+        <spring-version-range>[5,6)</spring-version-range>
+        <spring-version>${spring5-version}</spring-version>
+        <spring5-version>5.2.3.RELEASE</spring5-version>
+        <surefire.version>${maven-surefire-plugin-version}</surefire.version>
+        <testcontainers-version>1.12.3</testcontainers-version>
+        <tomcat-version>9.0.30</tomcat-version>
+        <undertow-version>2.0.28.Final</undertow-version>
+        <weld3-version>3.0.5.FINAL</weld3-version>
+        <wsdl4j-version>1.6.3</wsdl4j-version>
 
         <!-- for symbolicName in OSGi examples we only want the artifactId, eg camel-example-sql -->
         <!-- as having org.apache.camel as prefix is not needed and makes the name very long -->
@@ -195,6 +284,37 @@
         <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
         <camel.osgi.export.pkg/>
         <camel.osgi.manifest>${project.build.outputDirectory}/META-INF/MANIFEST.MF</camel.osgi.manifest>
+
+        <!-- OSGi bundles properties -->
+        <camel.osgi.import.camel.version>
+            version="[$(version;==;${camel.osgi.version.clean}),$(version;=+;${camel.osgi.version.clean}))"
+        </camel.osgi.import.camel.version>
+        <camel.osgi.import.strict.version>
+            version="[$(version;===;${camel.osgi.version.clean}),$(version;==+;${camel.osgi.version.clean}))"
+        </camel.osgi.import.strict.version>
+        <camel.osgi.import.default.version>[$(version;==;$(@)),$(version;+;$(@)))</camel.osgi.import.default.version>
+        <camel.osgi.import.defaults>
+        </camel.osgi.import.defaults>
+        <camel.osgi.import.before.defaults />
+        <camel.osgi.import.additional />
+        <camel.osgi.import.pkg>
+            org.apache.camel.*;${camel.osgi.import.camel.version},
+            ${camel.osgi.import.before.defaults},
+            ${camel.osgi.import.defaults},
+            ${camel.osgi.import.additional},
+            *
+        </camel.osgi.import.pkg>
+        <camel.osgi.activator />
+        <camel.osgi.failok>false</camel.osgi.failok>
+        <camel.osgi.private.pkg>!*</camel.osgi.private.pkg>
+        <camel.osgi.export.pkg>$${replace;{local-packages};;;\;}</camel.osgi.export.pkg>
+        <camel.osgi.export>${camel.osgi.export.pkg};-noimport:=true;${camel.osgi.version}</camel.osgi.export>
+        <camel.osgi.version>version=${project.version}</camel.osgi.version>
+        <camel.osgi.import>${camel.osgi.import.pkg}</camel.osgi.import>
+        <camel.osgi.dynamic />
+        <camel.osgi.exclude.dependencies>false</camel.osgi.exclude.dependencies>
+        <camel.osgi.require.capability />
+        <camel.osgi.provide.capability />
     </properties>
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
@@ -360,6 +480,37 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <maxmem>512M</maxmem>
+                    <fork>${compiler.fork}</fork>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                    <source>${jdk.version}</source>
+                    <quiet>true</quiet>
+                    <bottom>Apache Camel</bottom>
+                    <detectOfflineLinks>false</detectOfflineLinks>
+                    <javadocVersion>1.8.0</javadocVersion>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -387,6 +538,201 @@
                             </pluginExecutions>
                         </lifecycleMappingMetadata>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-eclipse-plugin</artifactId>
+                    <version>2.10</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.camel</groupId>
+                            <artifactId>camel-buildtools</artifactId>
+                            <version>${camel-version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <downloadSources>true</downloadSources>
+                        <downloadJavadocs>false</downloadJavadocs>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.rat</groupId>
+                    <artifactId>apache-rat-plugin</artifactId>
+                    <configuration>
+                        <excludeSubProjects>false</excludeSubProjects>
+                        <excludes>
+                            <exclude>**/generated.txt</exclude>
+                            <exclude>**/*.json</exclude>
+                            <exclude>**/README</exclude>
+                            <exclude>**/README.txt</exclude>
+                            <exclude>**/README.md</exclude>
+                            <exclude>**/ReadMe.md</exclude>
+                            <exclude>**/resources/**/*.xsd</exclude>
+                            <exclude>**/webapp/js/**/*</exclude>
+                            <exclude>**/test/resources/**/*</exclude>
+                            <exclude>**/test/data*/**/*</exclude>
+                            <exclude>.gitignore</exclude>
+                            <exclude>.git/**/*</exclude>
+                            <exclude>**/*.adoc</exclude>
+                            <exclude>**/*.adoc.template</exclude>
+                            <exclude>**/*.md</exclude>
+                            <exclude>**/*.sh</exclude>
+                            <exclude>**/*.bat</exclude>
+                            <exclude>**/java9-maven-settings</exclude>
+                            <exclude>**/*.pfx</exclude>
+                            <!-- tooling json-simple parser -->
+                            <exclude>**/src/main/java/org/json/simple/**</exclude>
+                            <!-- tooling/camel-manual/src/styles/print.css use a different license -->
+                            <exclude>**/src/styles/print.css</exclude>
+                            <!-- tooling for component docs -->
+                            <exclude>**/component-header.mvel</exclude>
+                            <exclude>**/component-options.mvel</exclude>
+                            <exclude>**/endpoint-options.mvel</exclude>
+                            <exclude>**/dataformat-options.mvel</exclude>
+                            <exclude>**/eip-options.mvel</exclude>
+                            <exclude>**/language-options.mvel</exclude>
+                            <exclude>**/website-components-list.mvel</exclude>
+                            <exclude>**/website-languages-list.mvel</exclude>
+                            <exclude>**/website-others-list.mvel</exclude>
+                            <exclude>**/website-dataformats-list.mvel</exclude>
+                            <exclude>**/readme-examples.mvel</exclude>
+                            <exclude>**/spring-boot-auto-configure-options.mvel</exclude>
+                            <exclude>**/camel-NOTICE.txt</exclude>
+                            <exclude>**/spring-boot-starter-NOTICE.txt</exclude>
+                            <!-- cxf does not handle comments here -->
+                            <exclude>**/src/main/resources/META-INF/cxf/cxf.extension</exclude>
+                            <exclude>**/src/main/resources/META-INF/cxf/bus-extensions.txt</exclude>
+                            <!-- ignore the api signatures files -->
+                            <exclude>**/src/signatures/*.txt</exclude>
+                            <!-- camel-salesforce BSD license from salesforce developers -->
+                            <exclude>**/CometDReplayExtension.java</exclude>
+                            <exclude>**/LICENSE-SALESFORCE.txt</exclude>
+                            <!-- camel-as2 -->
+                            <exclude>**/mdnDescription.vm</exclude>
+                            <!-- camel-jbpm -->
+                            <exclude>**/src/main/resources/*.wid</exclude>
+                            <!-- camel website and user-manual -->
+                            <exclude>**/node/**</exclude>
+                            <exclude>**/node_modules/**</exclude>
+                            <exclude>**/user-manual/**</exclude>
+                            <exclude>**/yarn.lock</exclude>
+                            <!-- examples -->
+                            <exclude>**/fabric8/*.yaml</exclude>
+                            <exclude>**/src/main/data/*.patient</exclude>
+                            <exclude>**/src/main/data/*.csv</exclude>
+                            <exclude>**/src/main/resources/avro/*.avsc</exclude>
+                            <!-- generated files -->
+                            <exclude>**/target/**/*</exclude>
+                            <exclude>**/eclipse-classes/**/*</exclude>
+                            <exclude>**/.*</exclude>
+                            <exclude>**/.settings/**/*</exclude>
+                            <exclude>**/*.iml</exclude>
+                            <exclude>**/.idea/**/*</exclude>
+                            <exclude>**/avro/**/*.avpr</exclude>
+                            <exclude>**/OSGI-INF/bundle.info</exclude>
+                            <exclude>**/test_rsa*</exclude>
+                            <exclude>**/data*/**/*.xml</exclude>
+                            <exlucde>**/*.log</exlucde>
+                            <exclude>**/id_file</exclude>
+                            <exclude>**/dependency-reduced-pom.xml</exclude>
+                            <exclude>**/Dropbox_API_Terms_and_Conditions.txt</exclude>
+                            <exclude>**/MerchandiseRestResource.apxc</exclude>
+                            <exclude>**/file-sig-api.txt</exclude>
+                            <exclude>**/Tasks__c.java</exclude>
+                            <exclude>**/*.proto</exclude>
+                            <exclude>
+                                **/src/main/resources/META-INF/services/org.kie.server.services.api.KieServerExtension
+                            </exclude>
+                            <!-- Maven Wrapper -->
+                            <exclude>.mvn/**/*</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <!-- see https://issues.apache.org/jira/browse/MRELEASE-812 -->
+                    <version>2.4.2</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.scm</groupId>
+                            <artifactId>maven-scm-provider-gitexe</artifactId>
+                            <version>1.9</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <localCheckout>true</localCheckout>
+                        <pushChanges>true</pushChanges>
+                        <tagNameFormat>@{project.artifactId}-@{project.version}</tagNameFormat>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <preparationGoals>clean install</preparationGoals>
+                        <goals>deploy</goals>
+                        <!-- The profile we want to use when doing the release -->
+                        <arguments>-Prelease,apache-release,enable-schemagen,apt,sourcecheck,hibernate</arguments>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-remote-resources-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>process-resource-bundles</id>
+                            <phase>disabled</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>1.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>default-cli</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                            <configuration>
+                                <updatePomFile>true</updatePomFile>
+                                <pomElements>
+                                    <build>keep</build>
+                                    <dependencyManagement>keep</dependencyManagement>
+                                    <description>keep</description>
+                                    <name>keep</name>
+                                    <parent>expand</parent>
+                                    <pluginManagement>keep</pluginManagement>
+                                    <profiles>remove</profiles>
+                                    <properties>keep</properties>
+                                </pomElements>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-invoker-plugin</artifactId>
+                    <configuration>
+                        <skipInstallation>${invoker.skip}</skipInstallation>
+                        <skipInvocation>${invoker.skip}</skipInvocation>
+                        <mavenOpts>-Xmx64m -XshowSettings</mavenOpts>
+                        <showVersion>true</showVersion>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin-version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
