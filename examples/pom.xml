@@ -17,7 +17,8 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -178,9 +179,6 @@
         <jdk.version>1.8</jdk.version>
         <compiler.fork>false</compiler.fork>
 
-        <!-- Spring-Boot target version -->
-        <spring-boot-version>2.2.4.RELEASE</spring-boot-version>
-
         <!-- Camel target version -->
         <camel-version>3.1.0-SNAPSHOT</camel-version>
 
@@ -190,9 +188,11 @@
         <arquillian-container-se-managed-version>1.0.2.Final</arquillian-container-se-managed-version>
         <arquillian-version>1.5.0.Final</arquillian-version>
         <asciidoctorj-version>2.1.0</asciidoctorj-version>
+        <activemq-version>5.15.11</activemq-version>
         <activemq-artemis-version>2.11.0</activemq-artemis-version>
         <atomix-version>1.0.8</atomix-version>
         <avro-version>1.8.1</avro-version>
+        <awaitility-version>4.0.2</awaitility-version>
         <bouncycastle-version>1.64</bouncycastle-version>
         <cassandra-driver-guava-version>19.0</cassandra-driver-guava-version>
         <camel-bundle-plugin-version>${project.version}</camel-bundle-plugin-version>
@@ -200,25 +200,35 @@
         <cdi-api-1.2-version>1.2</cdi-api-1.2-version>
         <curator-version>2.12.0</curator-version>
         <commons-dbcp-version>1.4</commons-dbcp-version>
+        <commons-dbcp2-version>2.7.0</commons-dbcp2-version>
+        <commons-lang3-version>3.4</commons-lang3-version>
+        <commons-logging-version>1.2</commons-logging-version>
+        <commons-io-version>2.6</commons-io-version>
+        <cxf-version>3.3.5</cxf-version>
+        <cxf-version-range>[3.3,4.0)</cxf-version-range>
         <deltaspike-version>1.9.0</deltaspike-version>
+        <derby-version>10.14.2.0</derby-version>
         <egit-github-core-version>2.1.5</egit-github-core-version>
         <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
         <freemarker-version>2.3.29</freemarker-version>
         <geronimo-ws-metadata-spec-version>1.1.3</geronimo-ws-metadata-spec-version>
+        <geronimo-j2ee-connector-spec-version>2.0.0</geronimo-j2ee-connector-spec-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <gmavenplus-plugin-version>1.6.2</gmavenplus-plugin-version>
         <google-guava-version>19.0</google-guava-version>
         <groovy-version>2.5.8</groovy-version>
-        <groovy-version>2.5.8</groovy-version>
+        <geronimo-jms2-spec-version>1.0-alpha-2</geronimo-jms2-spec-version>
         <grpc-guava-version>26.0-android</grpc-guava-version>
         <grpc-version>1.24.1</grpc-version>
         <gson-version>2.8.5</gson-version>
         <hadoop2-version>2.7.4</hadoop2-version>
         <hapi-version>2.3</hapi-version>
+        <hamcrest-version>2.2</hamcrest-version>
         <hibernate-validator-version>6.0.17.Final</hibernate-validator-version>
         <hibernate-version>5.2.16.Final</hibernate-version>
         <infinispan-spring-boot-version>2.2.0.Final</infinispan-spring-boot-version>
         <pax-exam-version>4.13.1</pax-exam-version>
+        <pax-url-aether>2.6.2</pax-url-aether>
         <jackson-version>1.9.12</jackson-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jandex-version>2.1.1.Final</jandex-version>
@@ -230,9 +240,11 @@
         <jolokia-version>1.6.2</jolokia-version>
         <jooq-version>3.11.12</jooq-version>
         <junit-jupiter-version>5.5.2</junit-jupiter-version>
+        <junit-version>4.12</junit-version>
         <kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
         <karaf4-version>4.2.8</karaf4-version>
         <log4j2-version>2.13.0</log4j2-version>
+        <log4j-version>1.2.17</log4j-version>
         <logback-version>1.2.3</logback-version>
         <lucene3-version>3.6.0</lucene3-version>
         <hsqldb-version>2.5.0</hsqldb-version>
@@ -242,12 +254,15 @@
         <maven-javadoc-plugin-version>3.0.1</maven-javadoc-plugin-version>
         <maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
+        <metrics-cdi-version>1.3.3</metrics-cdi-version>
         <micrometer-version>1.2.2</micrometer-version>
+        <mina-version>2.1.3</mina-version>
         <mvel-version>2.4.4.Final</mvel-version>
         <mycila-license-version>3.0</mycila-license-version>
         <openjpa-version>3.1.0</openjpa-version>
         <opentracing-version>0.33.0</opentracing-version>
         <os-maven-plugin-version>1.6.0</os-maven-plugin-version>
+        <osgi-version>6.0.0</osgi-version>
         <pax-cdi-version>1.0.0</pax-cdi-version>
         <protobuf-maven-plugin-version>0.6.1</protobuf-maven-plugin-version>
         <protobuf-version>3.9.1</protobuf-version>
@@ -260,8 +275,10 @@
         <shrinkwrap-descriptors-version>2.0.0</shrinkwrap-descriptors-version>
         <sshd-version>2.0.0</sshd-version>
         <slf4j-version>1.7.30</slf4j-version>
+        <slf4j-api-version>1.7.30</slf4j-api-version>
         <sql-maven-plugin-version>1.5</sql-maven-plugin-version>
         <spring-ws-version>3.0.7.RELEASE</spring-ws-version>
+        <spring-boot-version>2.2.4.RELEASE</spring-boot-version>
         <spring-cloud-commons-version>2.2.1.RELEASE</spring-cloud-commons-version>
         <spring-cloud-consul-version>2.2.1.RELEASE</spring-cloud-consul-version>
         <spring-cloud-netflix-version>2.2.1.RELEASE</spring-cloud-netflix-version>
@@ -272,10 +289,16 @@
         <spring5-version>5.2.3.RELEASE</spring5-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <testcontainers-version>1.12.3</testcontainers-version>
+        <tinybundles-version>2.1.1</tinybundles-version>
         <tomcat-version>9.0.30</tomcat-version>
         <undertow-version>2.0.28.Final</undertow-version>
         <weld3-version>3.0.5.Final</weld3-version>
         <wsdl4j-version>1.6.3</wsdl4j-version>
+        <woodstox-version>6.0.3</woodstox-version>
+        <xbean-spring-version>4.14</xbean-spring-version>
+        <xbean-asm5-shaded-version>4.5</xbean-asm5-shaded-version>
+        <xerces-version>2.12.0</xerces-version>
+        <xmlunit-version>1.6</xmlunit-version>
 
         <!-- for symbolicName in OSGi examples we only want the artifactId, eg camel-example-sql -->
         <!-- as having org.apache.camel as prefix is not needed and makes the name very long -->
@@ -295,8 +318,8 @@
         <camel.osgi.import.default.version>[$(version;==;$(@)),$(version;+;$(@)))</camel.osgi.import.default.version>
         <camel.osgi.import.defaults>
         </camel.osgi.import.defaults>
-        <camel.osgi.import.before.defaults />
-        <camel.osgi.import.additional />
+        <camel.osgi.import.before.defaults/>
+        <camel.osgi.import.additional/>
         <camel.osgi.import.pkg>
             org.apache.camel.*;${camel.osgi.import.camel.version},
             ${camel.osgi.import.before.defaults},
@@ -304,17 +327,17 @@
             ${camel.osgi.import.additional},
             *
         </camel.osgi.import.pkg>
-        <camel.osgi.activator />
+        <camel.osgi.activator/>
         <camel.osgi.failok>false</camel.osgi.failok>
         <camel.osgi.private.pkg>!*</camel.osgi.private.pkg>
         <camel.osgi.export.pkg>$${replace;{local-packages};;;\;}</camel.osgi.export.pkg>
         <camel.osgi.export>${camel.osgi.export.pkg};-noimport:=true;${camel.osgi.version}</camel.osgi.export>
         <camel.osgi.version>version=${project.version}</camel.osgi.version>
         <camel.osgi.import>${camel.osgi.import.pkg}</camel.osgi.import>
-        <camel.osgi.dynamic />
+        <camel.osgi.dynamic/>
         <camel.osgi.exclude.dependencies>false</camel.osgi.exclude.dependencies>
-        <camel.osgi.require.capability />
-        <camel.osgi.provide.capability />
+        <camel.osgi.require.capability/>
+        <camel.osgi.provide.capability/>
     </properties>
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
@@ -346,43 +369,18 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-core-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+            <!-- Add Camel BOM -->
             <dependency>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-parent</artifactId>
+                <artifactId>camel-bom</artifactId>
                 <version>${camel-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${google-guava-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
-        <!--<resources>-->
-        <!--<resource>-->
-        <!--<directory>src/main/resources</directory>-->
-        <!--<filtering>true</filtering>-->
-        <!--</resource>-->
-        <!--</resources>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -532,7 +530,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
