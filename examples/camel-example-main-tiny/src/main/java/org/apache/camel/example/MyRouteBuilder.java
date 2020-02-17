@@ -24,8 +24,6 @@ public class MyRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         from("timer:foo?period={{myPeriod}}")
             .bean("myBean", "hello")
-            .log("${body}")
-            .bean("myBean", "bye")
             .log("${body}");
     }
 }
