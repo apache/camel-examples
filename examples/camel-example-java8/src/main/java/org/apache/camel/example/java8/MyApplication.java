@@ -34,7 +34,7 @@ public final class MyApplication {
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
-        main.addRouteBuilder(new MyRouteBuilder());
+        main.addRoutesBuilder(new MyRouteBuilder());
         main.run(args);
     }
 
