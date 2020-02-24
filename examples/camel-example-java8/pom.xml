@@ -51,13 +51,20 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-        </dependency>
+        <!-- camel main to bootstrap camel -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-main</artifactId>
+        </dependency>
+
+        <!-- camel components used -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-bean</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-timer</artifactId>
         </dependency>
 
         <!-- logging -->
@@ -90,7 +97,7 @@
 
     <build>
         <plugins>
-            <!-- Allows the example to be run via 'mvn compile exec:java' -->
+            <!-- Allows the example to be run via 'mvn compile camel:run' -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-maven-plugin</artifactId>
