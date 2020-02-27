@@ -251,7 +251,6 @@
         <pax-cdi-version>1.0.0</pax-cdi-version>
         <properties-maven-plugin-version>1.0-alpha-2</properties-maven-plugin-version>
         <reactor-version>3.2.12.RELEASE</reactor-version>
-        <roaster-version>2.20.1.Final</roaster-version>
         <rxjava-version>1.3.8</rxjava-version>
         <shrinkwrap-resolver-version>3.1.3</shrinkwrap-resolver-version>
         <shrinkwrap-version>1.2.6</shrinkwrap-version>
