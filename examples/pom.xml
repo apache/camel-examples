@@ -210,7 +210,6 @@
         <geronimo-j2ee-connector-spec-version>2.0.0</geronimo-j2ee-connector-spec-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <gmavenplus-plugin-version>1.6.2</gmavenplus-plugin-version>
-        <google-guava-version>19.0</google-guava-version>
         <groovy-version>2.5.8</groovy-version>
         <geronimo-jms2-spec-version>1.0-alpha-2</geronimo-jms2-spec-version>
         <grpc-guava-version>26.0-android</grpc-guava-version>
