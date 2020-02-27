@@ -52,22 +52,21 @@ public final class MessagePublisherClient {
 
                 // setup kafka component with the brokers
                 ComponentsBuilderFactory.kafka()
-                        .brokers("{{kafka.host}}:{{kafka.port}}")
                         .register(camelContext, "kafka");
 
                 from("direct:kafkaStart").routeId("DirectToKafka")
-                    .to("kafka:{{producer.topic}}").log("${headers}");
+                    .to("kafka:{{producer.topic}}?brokers={{kafka.host}}:{{kafka.port}}").log("${headers}");
 
                 // Topic can be set in header as well.
 
                 from("direct:kafkaStartNoTopic").routeId("kafkaStartNoTopic")
-                    .to("kafka:dummy")
+                    .to("kafka:dummy?brokers={{kafka.host}}:{{kafka.port}}")
                     .log("${headers}");
 
                 // Use custom partitioner based on the key.
 
                 from("direct:kafkaStartWithPartitioner").routeId("kafkaStartWithPartitioner")
-                        .to("kafka:{{producer.topic}}?partitioner={{producer.partitioner}}")
+                        .to("kafka:{{producer.topic}}?partitioner={{producer.partitioner}}&brokers={{kafka.host}}:{{kafka.port}}")
                         .log("${headers}");
 
 
