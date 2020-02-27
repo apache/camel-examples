@@ -220,7 +220,6 @@
         <pax-exam-version>4.13.1</pax-exam-version>
         <pax-url-aether>2.6.2</pax-url-aether>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
-        <javax-annotation-api-version>1.3.2</javax-annotation-api-version>
         <jaxb-version>2.3.0</jaxb-version>
         <jetty9-version>9.4.20.v20190813</jetty9-version>
         <jetty-version>${jetty9-version}</jetty-version>
