@@ -250,7 +250,6 @@
         <osgi-version>6.0.0</osgi-version>
         <pax-cdi-version>1.0.0</pax-cdi-version>
         <properties-maven-plugin-version>1.0-alpha-2</properties-maven-plugin-version>
-        <shrinkwrap-resolver-version>3.1.3</shrinkwrap-resolver-version>
         <shrinkwrap-descriptors-version>2.0.0</shrinkwrap-descriptors-version>
         <sshd-version>2.0.0</sshd-version>
         <slf4j-version>1.7.30</slf4j-version>
