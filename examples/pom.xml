@@ -249,7 +249,6 @@
         <os-maven-plugin-version>1.6.0</os-maven-plugin-version>
         <osgi-version>6.0.0</osgi-version>
         <pax-cdi-version>1.0.0</pax-cdi-version>
-        <protobuf-version>3.9.1</protobuf-version>
         <properties-maven-plugin-version>1.0-alpha-2</properties-maven-plugin-version>
         <reactor-version>3.2.12.RELEASE</reactor-version>
         <roaster-version>2.20.1.Final</roaster-version>
