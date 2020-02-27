@@ -219,7 +219,6 @@
         <infinispan-spring-boot-version>2.2.0.Final</infinispan-spring-boot-version>
         <pax-exam-version>4.13.1</pax-exam-version>
         <pax-url-aether>2.6.2</pax-url-aether>
-        <jackson-version>1.9.12</jackson-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jandex-version>2.1.1.Final</jandex-version>
         <javax-annotation-api-version>1.3.2</javax-annotation-api-version>
