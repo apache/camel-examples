@@ -113,7 +113,6 @@
         <module>camel-example-debezium</module>
         <module>camel-example-ehcache-blueprint</module>
         <module>camel-example-ftp</module>
-        <module>camel-example-google-pubsub</module>
         <module>camel-example-hazelcast-kubernetes</module>
         <module>camel-example-java8</module>
         <module>camel-example-jdbc</module>
