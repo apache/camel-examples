@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 85 (0 deprecated)
+Number of Examples: 84 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -128,8 +128,6 @@ Number of Examples: 85 (0 deprecated)
 | link:camel-example-artemis-large-messages/README.adoc[Artemis Large Messages] (camel-example-artemis-large-messages) | Messaging | Demonstrates sending large messages (handles GBs in size) between Apache Camel and ActiveMQ Artemis in
         streaming mode
     
-
-| link:camel-example-google-pubsub/README.adoc[Google Pubsub] (camel-example-google-pubsub) | Messaging | An example for Google Pubsub
 
 | link:camel-example-jms-file/README.adoc[JMS-File] (camel-example-jms-file) | Messaging | An example that persists messages from JMS to files
 
