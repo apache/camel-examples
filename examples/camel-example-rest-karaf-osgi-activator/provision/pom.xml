@@ -23,7 +23,7 @@
   <parent>
         <groupId>org.apache.camel.example</groupId>
         <artifactId>camel-example-rest-karaf-osgi-activator-parent</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.2.0-SNAPSHOT</version>
         <relativePath>../parent</relativePath>
     </parent>
   <artifactId>camel-example-rest-karaf-osgi-activator-provision</artifactId>
