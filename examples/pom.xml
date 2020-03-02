@@ -261,7 +261,6 @@
         <testcontainers-version>1.12.3</testcontainers-version>
         <tinybundles-version>2.1.1</tinybundles-version>
         <tomcat-version>9.0.30</tomcat-version>
-        <undertow-version>2.0.28.Final</undertow-version>
         <weld3-version>3.0.5.Final</weld3-version>
         <wsdl4j-version>1.6.3</wsdl4j-version>
         <woodstox-version>6.0.3</woodstox-version>
