@@ -258,7 +258,6 @@
         <spring-version>${spring5-version}</spring-version>
         <spring5-version>5.2.3.RELEASE</spring5-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <testcontainers-version>1.12.3</testcontainers-version>
         <tinybundles-version>2.1.1</tinybundles-version>
         <tomcat-version>9.0.30</tomcat-version>
         <weld3-version>3.0.5.Final</weld3-version>
