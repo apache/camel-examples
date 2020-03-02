@@ -27,7 +27,7 @@ public final class UserMain {
     public static void main(String[] args) throws Exception {
         Main main = new Main();
         main.bind("userService", new UserService());
-        main.addRouteBuilder(new UserRouteBuilder());
+        main.addRoutesBuilder(new UserRouteBuilder());
         main.run();
     }
 }

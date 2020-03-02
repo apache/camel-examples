@@ -29,7 +29,7 @@ public final class MyServer {
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
-        main.addRouteBuilder(new MyRouteBuilder());
+        main.addRoutesBuilder(new MyRouteBuilder());
         main.bind("myEncoder", new MyCodecEncoderFactory());
         main.bind("myDecoder", new MyCodecDecoderFactory());
         main.run(args);

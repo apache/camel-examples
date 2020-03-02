@@ -36,10 +36,10 @@ public final class WidgetMain {
         main.bind("activemq", createActiveMQComponent());
 
         // add the widget/gadget route
-        main.addRouteBuilder(new WidgetGadgetRoute());
+        main.addRoutesBuilder(new WidgetGadgetRoute());
 
         // add a 2nd route that routes files from src/main/data to the order queue
-        main.addRouteBuilder(new CreateOrderRoute());
+        main.addRoutesBuilder(new CreateOrderRoute());
 
         // start and run Camel (block)
         main.run();
