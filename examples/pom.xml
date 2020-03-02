@@ -256,7 +256,7 @@
         <spring-security-version>5.2.1.RELEASE</spring-security-version>
         <spring-version-range>[5,6)</spring-version-range>
         <spring-version>${spring5-version}</spring-version>
-        <spring5-version>5.2.3.RELEASE</spring5-version>
+        <spring5-version>5.2.4.RELEASE</spring5-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <tinybundles-version>2.1.1</tinybundles-version>
         <tomcat-version>9.0.30</tomcat-version>
