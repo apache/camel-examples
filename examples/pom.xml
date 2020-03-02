@@ -254,7 +254,6 @@
         <slf4j-api-version>1.7.30</slf4j-api-version>
         <sql-maven-plugin-version>1.5</sql-maven-plugin-version>
         <spring-ws-version>3.0.7.RELEASE</spring-ws-version>
-        <spring-boot-version>2.2.4.RELEASE</spring-boot-version>
         <spring-cloud-commons-version>2.2.1.RELEASE</spring-cloud-commons-version>
         <spring-cloud-consul-version>2.2.1.RELEASE</spring-cloud-consul-version>
         <spring-cloud-netflix-version>2.2.1.RELEASE</spring-cloud-netflix-version>
