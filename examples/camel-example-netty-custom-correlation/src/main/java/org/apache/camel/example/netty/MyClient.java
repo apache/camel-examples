@@ -33,7 +33,7 @@ public final class MyClient {
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
-        main.addRouteBuilder(new MyRouteBuilder());
+        main.addRoutesBuilder(new MyRouteBuilder());
 
         // setup correlation manager and its timeout (when a request has not received a response within the given time millis)
         MyCorrelationManager manager = new MyCorrelationManager();

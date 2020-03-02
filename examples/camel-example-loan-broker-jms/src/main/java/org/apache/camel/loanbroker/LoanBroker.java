@@ -33,7 +33,7 @@ public final class LoanBroker {
         // configure the location of the Spring XML file
 
         main.setApplicationContextUri("META-INF/spring/server.xml");
-        main.addRouteBuilder(new LoanBrokerRoute());
+        main.addRoutesBuilder(new LoanBrokerRoute());
 
         main.run();
     }

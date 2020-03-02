@@ -68,7 +68,7 @@ public final class CamelTwitterWebSocketMain {
         route.setPort(9090);
 
         // add our routes to Camel
-        main.addRouteBuilder(route);
+        main.addRoutesBuilder(route);
 
         // and run, which keeps blocking until we terminate the JVM (or stop CamelContext)
         main.run();
