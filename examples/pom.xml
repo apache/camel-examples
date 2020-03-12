@@ -214,7 +214,7 @@
         <hapi-version>2.3</hapi-version>
         <hamcrest-version>2.2</hamcrest-version>
         <hibernate-validator-version>6.1.2.Final</hibernate-validator-version>
-        <pax-exam-version>4.13.1</pax-exam-version>
+        <pax-exam-version>4.13.2</pax-exam-version>
         <pax-url-aether>2.6.2</pax-url-aether>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
