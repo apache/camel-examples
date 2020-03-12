@@ -259,7 +259,7 @@
         <spring5-version>5.2.4.RELEASE</spring5-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <tinybundles-version>2.1.1</tinybundles-version>
-        <tomcat-version>9.0.30</tomcat-version>
+        <tomcat-version>9.0.31</tomcat-version>
         <weld3-version>3.0.5.Final</weld3-version>
         <wsdl4j-version>1.6.3</wsdl4j-version>
         <woodstox-version>6.0.3</woodstox-version>
