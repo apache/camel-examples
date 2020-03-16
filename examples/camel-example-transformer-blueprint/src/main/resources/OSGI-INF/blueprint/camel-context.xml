@@ -31,7 +31,7 @@
 
     <!-- START SNIPPET: e2 -->
     <route id="timer-route">
-      <from uri="timer:foo?period=5s"/>
+      <from uri="timer:foo?period=5000"/>
       <log message="start --&gt;"/>
       <setBody><constant>&lt;MyRequest&gt;foobar&lt;/MyRequest&gt;</constant></setBody>
       <log message="--&gt; Sending:[${body}]"/>

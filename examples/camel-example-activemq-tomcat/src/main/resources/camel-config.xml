@@ -31,7 +31,7 @@
   <camelContext xmlns="http://camel.apache.org/schema/spring">
 	  <!-- Camel route to feed the ActiveMQ inbox queue once per second -->
 	  <route id="timerToInRoute">
-		  <from uri="timer:foo?period=1s"/>
+		  <from uri="timer:foo?period=1000"/>
 		  <transform>
 			  <simple>Message at ${date:now:yyyy-MM-dd HH:mm:ss}</simple>
 		  </transform>

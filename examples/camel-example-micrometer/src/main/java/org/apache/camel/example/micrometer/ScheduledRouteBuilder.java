@@ -30,7 +30,7 @@ public class ScheduledRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer:foo?period=1s&fixedRate=true")
+        from("timer:foo?period=1000&fixedRate=true")
                 .routeId(TIMER_ROUTE_ID)
                 .setHeader("random").exchange(exchange -> random.nextInt(100))
                 .log(LoggingLevel.INFO, "Delay is ${header.random}")

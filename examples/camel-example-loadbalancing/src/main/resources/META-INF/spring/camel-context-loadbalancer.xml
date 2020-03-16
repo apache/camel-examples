@@ -30,7 +30,7 @@
   <camelContext xmlns="http://camel.apache.org/schema/spring">
 
     <route id="sendMessage">
-      <from uri="timer://org.apache.camel.example.loadbalancer?period=10s"/>
+      <from uri="timer://org.apache.camel.example.loadbalancer?period=10000"/>
       <bean ref="service" method="createReport"/>
       <to uri="direct:loadbalance"/>
     </route>

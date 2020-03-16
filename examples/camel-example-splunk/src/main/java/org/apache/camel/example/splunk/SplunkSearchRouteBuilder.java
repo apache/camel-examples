@@ -28,7 +28,7 @@ public class SplunkSearchRouteBuilder extends RouteBuilder {
         // configure properties component
         getContext().getPropertiesComponent().setLocation("classpath:application.properties");
 
-        from("splunk://normal?host={{splunk.host}}&port={{splunk.port}}&delay=10s"
+        from("splunk://normal?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
                 + "&username={{splunk.username}}&password={{splunk.password}}&initEarliestTime=08/17/13 08:35:46:456"
                 + "&sourceType=access_combined_wcookie&search=search Code=D | head 5")
                 .log("${body}");

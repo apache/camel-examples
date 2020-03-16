@@ -22,7 +22,7 @@ public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer:foo?period=2s")
+        from("timer:foo?period=2000")
             .setBody().constant("Hello World")
             .delay(simple("${random(0,1000)}"))
             .log("${body}");

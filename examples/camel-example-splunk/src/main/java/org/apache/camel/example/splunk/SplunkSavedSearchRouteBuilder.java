@@ -27,7 +27,7 @@ public class SplunkSavedSearchRouteBuilder extends RouteBuilder {
         // configure properties component
         getContext().getPropertiesComponent().setLocation("classpath:application.properties");
 
-        from("splunk://savedsearch?host={{splunk.host}}&port={{splunk.port}}&delay=10s"
+        from("splunk://savedsearch?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
                 + "&username={{splunk.username}}&password={{splunk.password}}&initEarliestTime=08/17/13 08:35:46:456"
                 + "&savedSearch=failed_password")
                 .log("${body}");

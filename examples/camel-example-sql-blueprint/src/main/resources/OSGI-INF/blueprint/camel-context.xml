@@ -58,7 +58,7 @@
 
     <!-- route that generate new orders and insert them in the database -->
     <route id="generateOrder-route">
-      <from uri="timer:foo?period=5s"/>
+      <from uri="timer:foo?period=5000"/>
       <transform>
         <method ref="orderBean" method="generateOrder"/>
       </transform>

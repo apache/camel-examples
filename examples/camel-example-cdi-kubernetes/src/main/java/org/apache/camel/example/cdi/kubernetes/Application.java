@@ -45,7 +45,7 @@ public class Application {
 
         @Override
         public void configure() {
-            from("timer:client?period=10s").routeId("kubernetes-client")
+            from("timer:client?period=10000").routeId("kubernetes-client")
                 .onException(KubernetesClientException.class).handled(true)
                     .log(LoggingLevel.ERROR, "${exception.message}")
                     .log("Stopping the Kubernetes route...")
