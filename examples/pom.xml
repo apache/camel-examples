@@ -226,7 +226,7 @@
         <junit-jupiter-version>5.5.2</junit-jupiter-version>
         <junit-version>4.12</junit-version>
         <karaf4-version>4.2.8</karaf4-version>
-        <log4j2-version>2.13.0</log4j2-version>
+        <log4j2-version>2.13.1</log4j2-version>
         <log4j-version>1.2.17</log4j-version>
         <logback-version>1.2.3</logback-version>
         <hsqldb-version>2.5.0</hsqldb-version>
