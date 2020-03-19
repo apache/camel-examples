@@ -20,7 +20,6 @@ import java.util.UUID;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
-import com.hazelcast.config.GroupConfig;
 import com.hazelcast.config.SSLConfig;
 import com.hazelcast.core.HazelcastInstance;
 import org.apache.camel.Exchange;
@@ -38,7 +37,6 @@ public class HazelcastRoute extends RouteBuilder {
         ClientConfig config = new ClientConfig();
         config.getNetworkConfig().addAddress("hazelcast");
         config.getNetworkConfig().setSSLConfig(new SSLConfig().setEnabled(false));
-        config.setGroupConfig(new GroupConfig("someGroup"));
         HazelcastInstance instance = HazelcastClient.newHazelcastClient(config);
 
         // setup camel hazelcast
