@@ -18,6 +18,7 @@ package org.apache.camel.example.kafka;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.builder.component.ComponentsBuilderFactory;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,12 @@ public final class MessageConsumerClient {
 
                 log.info("About to start route: Kafka Server -> Log ");
 
-                from("kafka:{{consumer.topic}}?brokers={{kafka.host}}:{{kafka.port}}"
+                // setup kafka component with the brokers
+                ComponentsBuilderFactory.kafka()
+                        .brokers("{{kafka.host}}:{{kafka.port}}")
+                        .register(camelContext, "kafka");
+
+                from("kafka:{{consumer.topic}}"
                         + "&maxPollRecords={{consumer.maxPollRecords}}"
                         + "&consumersCount={{consumer.consumersCount}}"
                         + "&seekTo={{consumer.seekTo}}"
