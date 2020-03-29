@@ -59,12 +59,12 @@
         <dependency>
             <groupId>org.apache.camel.karaf</groupId>
             <artifactId>camel-blueprint</artifactId>
-            <version>${project.version}</version>
+            <version>${camel.karaf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.karaf</groupId>
             <artifactId>camel-blueprint-main</artifactId>
-            <version>${project.version}</version>
+            <version>${camel.karaf.version}</version>
         </dependency>
 
         <!-- logging -->
@@ -91,7 +91,7 @@
         <dependency>
             <groupId>org.apache.camel.karaf</groupId>
             <artifactId>camel-test-blueprint</artifactId>
-            <version>${project.version}</version>
+            <version>${camel.karaf.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
