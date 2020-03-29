@@ -56,8 +56,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>org.apache.camel.karaf</groupId>
             <artifactId>camel-blueprint</artifactId>
+            <version>${camel.karaf.version}</version>
         </dependency>
 
         <dependency>
