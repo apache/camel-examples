@@ -206,7 +206,7 @@
         <derby-version>10.14.2.0</derby-version>
         <egit-github-core-version>2.1.5</egit-github-core-version>
         <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
-        <freemarker-version>2.3.29</freemarker-version>
+        <freemarker-version>2.3.30</freemarker-version>
         <geronimo-j2ee-connector-spec-version>2.0.0</geronimo-j2ee-connector-spec-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <groovy-version>3.0.2</groovy-version>
