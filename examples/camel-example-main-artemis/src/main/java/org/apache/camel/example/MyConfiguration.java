@@ -25,10 +25,6 @@ public class MyConfiguration {
      * Creates the Artemis JMS ConnectionFactory and bind it to the Camel registry
      * so we can do autowiring on the Camel JMS component.
      * See more details in the application.properties file.
-     * <p/>
-     * Note: This autowiring is disabled in this example as we use camel-main-maven-plugin
-     * to do classpath scanning to detect the Artemis JMS Client and automatic create a autowire.properties
-     * file with some binding details, and then provide additional configuraions in the application.properties file.
      */
 //    @BindToRegistry
 //    public ConnectionFactory myArtemisClient(@PropertyInject("artemisBroker") String brokerUrl) {

@@ -108,18 +108,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Run 'mvn camel-main:generate' -->
-            <!-- generate autowire.properties file that can automatic detect resources
-                 from the classpath to make convention over configuration for Camel components -->
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-main-maven-plugin</artifactId>
-                <version>${project.version}</version>
-                <configuration>
-                    <logClasspath>false</logClasspath>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 

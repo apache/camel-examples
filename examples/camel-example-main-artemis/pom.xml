@@ -110,24 +110,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Run 'mvn camel-main:generate' -->
-            <!-- generate autowire.properties file that can automatic detect resources
-                 from the classpath to make convention over configuration for Camel components -->
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-main-maven-plugin</artifactId>
-                <version>${project.version}</version>
-                <configuration>
-                    <logClasspath>false</logClasspath>
-                    <!-- lets show which options are unmapped -->
-                    <!-- <logUnmapped>true</logUnmapped> -->
-                    <!-- just include only the jms component -->
-                    <!-- <include>jms</include> -->
-                    <!-- to use spring caching connection factory instead of the default -->
-                    <!-- <mappings>javax.jms.ConnectionFactory=#class:org.springframework.jms.connection.CachingConnectionFactory</mappings> -->
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 

@@ -9,28 +9,6 @@ via Camel built-in dependency-injection that supports binding via the
 
 Also notice how you can configure Camel in the `application.properties` file.
 
-The example also demonstrates how you can configure the ActiveMQ Artemis JMS `ConnectionFactory`
-via two different styles
-
-- via `@BindToRegistry` from Java source code in the `MyConfiguration.java` source file
-- via `application.properties` and the `camel-main-maven-plugin`
-  that performs classpath scanning to auto-detect the JMS client and prepare for autowiring
-  by generating the `META-INF/services/org/apache/camel/autowire.properties` file.
-
-=== Generating tooling meta-data
-
-The `camel-main-maven-plugin` is used for pre-scanning your project and prepare
-autowiring and spring boot tooling support by classpath scanning.
-
-You can run manually via
-
-    mvn camel-main:generate
-
-However this example is using this plugin to generate autowiring for Apache Artemis,
-which are generated in `target/classes/META-INF/services/org/apache/camel/autowire.properties`.
-
-See also more details in `application.properties`
-
 === How to run
 
 First install https://activemq.apache.org/components/artemis/[Apache ActiveMQ Artemis]
