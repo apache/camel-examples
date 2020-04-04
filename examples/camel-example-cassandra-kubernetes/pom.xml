@@ -35,7 +35,7 @@
     <properties>
         <category>Cloud</category>
         <!-- dependency versions -->
-        <cassandra.driver.version>3.3.0</cassandra.driver.version>
+        <cassandra.driver.version>3.7.2</cassandra.driver.version>
     </properties>
 
     <dependencyManagement>
