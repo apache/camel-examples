@@ -142,7 +142,6 @@
         <module>camel-example-route-throttling</module>
         <module>camel-example-servlet-rest-blueprint</module>
         <module>camel-example-servlet-tomcat</module>
-        <module>camel-example-spark-rest</module>
         <module>camel-example-splunk</module>
         <module>camel-example-spring</module>
         <module>camel-example-spring-javaconfig</module>
@@ -178,8 +177,8 @@
         <jdk.version>1.8</jdk.version>
         <compiler.fork>false</compiler.fork>
 
-        <camel.version>3.2.0-SNAPSHOT</camel.version>
-        <camel.karaf.version>3.2.0-SNAPSHOT</camel.karaf.version>
+        <camel.version>3.2.0</camel.version>
+        <camel.karaf.version>3.2.0</camel.karaf.version>
 
         <!-- Versions -->
         <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
