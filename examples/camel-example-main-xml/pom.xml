@@ -97,17 +97,6 @@
 
     <build>
         <plugins>
-            <!-- Allows the example to be run via 'mvn camel:run' -->
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-maven-plugin</artifactId>
-                <version>${camel.version}</version>
-                <configuration>
-                    <logClasspath>true</logClasspath>
-                    <mainClass>org.apache.camel.example.MyApplication</mainClass>
-                </configuration>
-            </plugin>
-
             <!-- Run 'mvn camel-main:generate' -->
             <!-- generate autowire.properties file that can automatic detect resources
                  from the classpath to make convention over configuration for Camel components -->
@@ -119,7 +108,6 @@
                     <logClasspath>false</logClasspath>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
