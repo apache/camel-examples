@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 83 (0 deprecated)
+Number of Examples: 84 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -136,6 +136,8 @@ Number of Examples: 83 (0 deprecated)
 | link:camel-example-main-artemis/readme.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
 | link:camel-example-netty-custom-correlation/readme.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
+
+| link:camel-example-spring-boot-amqp/README.adoc[Spring Boot Amqp] (camel-example-spring-boot-amqp) | Messaging | An example showing how to work with Camel, ActiveMQ Amqp and Spring Boot
 
 | link:camel-example-spring-jms/README.adoc[Spring JMS] (camel-example-spring-jms) | Messaging | An example using Spring XML to talk to the JMS server from different kind of client techniques
     
