@@ -178,6 +178,7 @@
         <jdk.version>1.8</jdk.version>
         <compiler.fork>false</compiler.fork>
 
+        <camel.version>3.2.0-SNAPSHOT</camel.version>
         <camel.karaf.version>3.2.0-SNAPSHOT</camel.karaf.version>
 
         <!-- Versions -->
@@ -192,7 +193,7 @@
         <avro-version>1.8.1</avro-version>
         <awaitility-version>4.0.2</awaitility-version>
         <bouncycastle-version>1.64</bouncycastle-version>
-        <camel-bundle-plugin-version>${project.version}</camel-bundle-plugin-version>
+        <camel-bundle-plugin-version>${camel.version}</camel-bundle-plugin-version>
         <cdi-api-2.0-version>2.0</cdi-api-2.0-version>
         <cdi-api-1.2-version>1.2</cdi-api-1.2-version>
         <curator-version>2.12.0</curator-version>
@@ -351,7 +352,7 @@
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-package-maven-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${camel.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -366,7 +367,7 @@
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-report-maven-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${camel.version}</version>
                 <configuration>
                     <failOnError>false</failOnError>
                     <includeTest>true</includeTest>
@@ -507,7 +508,7 @@
                         <dependency>
                             <groupId>org.apache.camel</groupId>
                             <artifactId>camel-buildtools</artifactId>
-                            <version>${project.version}</version>
+                            <version>${camel.version}</version>
                         </dependency>
                     </dependencies>
                     <configuration>
