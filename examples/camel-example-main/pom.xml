@@ -42,7 +42,7 @@
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-bom</artifactId>
-                <version>${project.version}</version>
+                <version>${camel.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -86,17 +86,17 @@
 
     <build>
         <plugins>
-            <!-- Allows the example to be run via 'mvn camel:run' -->
+            <!-- Run 'mvn camel-main:generate' -->
+            <!-- generate autowire.properties file that can automatic detect resources
+                 from the classpath to make convention over configuration for Camel components -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-maven-plugin</artifactId>
-                <version>${project.version}</version>
+                <artifactId>camel-main-maven-plugin</artifactId>
+                <version>${camel.version}</version>
                 <configuration>
-                    <logClasspath>true</logClasspath>
-                    <mainClass>org.apache.camel.example.MyApplication</mainClass>
+                    <logClasspath>false</logClasspath>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 

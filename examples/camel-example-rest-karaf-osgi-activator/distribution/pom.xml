@@ -61,7 +61,7 @@
          <dependency>
             <groupId>org.apache.camel.example</groupId>
             <artifactId>camel-example-rest-karaf-osgi-activator-provision</artifactId>
-            <version>${project.version}</version>
+            <version>${camel.version}</version>
             <type>kar</type>
             <scope>runtime</scope>
         </dependency>
