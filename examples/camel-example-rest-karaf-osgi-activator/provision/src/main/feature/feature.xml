@@ -18,16 +18,16 @@
 
 -->
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.5.0" name="provision">
-    <repository>mvn:org.apache.camel.karaf/apache-camel/${project.version}/xml/features</repository>
-    <feature name="camel-example-rest-karaf-osgi-activator-provision" description="camel-example-rest-karaf-osgi-activator-provision" version="${project.version}">
-        <feature version='${project.version}'>camel-core</feature>
-        <feature version='${project.version}'>camel-jackson</feature>
-        <feature version='${project.version}'>camel-netty-http</feature>
-        <feature version='${project.version}'>camel-swagger-java</feature>
-        <feature version='${project.version}'>camel-tika</feature>
+    <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
+    <feature name="camel-example-rest-karaf-osgi-activator-provision" description="camel-example-rest-karaf-osgi-activator-provision" version="${camel.version}">
+        <feature version='${camel.version}'>camel-core</feature>
+        <feature version='${camel.version}'>camel-jackson</feature>
+        <feature version='${camel.version}'>camel-netty-http</feature>
+        <feature version='${camel.version}'>camel-swagger-java</feature>
+        <feature version='${camel.version}'>camel-tika</feature>
         <feature>webconsole</feature>
-        <bundle start-level='50'>mvn:org.apache.camel/camel-osgi-activator/${project.version}</bundle>
-        <bundle>mvn:org.apache.camel.example/camel-example-rest-karaf-osgi-activator-core-rest/${project.version}</bundle>
-        <bundle>mvn:org.apache.camel.example/camel-example-rest-karaf-osgi-activator-tika-detect/${project.version}</bundle>
+        <bundle start-level='50'>mvn:org.apache.camel/camel-osgi-activator/${camel.version}</bundle>
+        <bundle>mvn:org.apache.camel.example/camel-example-rest-karaf-osgi-activator-core-rest/${camel.version}</bundle>
+        <bundle>mvn:org.apache.camel.example/camel-example-rest-karaf-osgi-activator-tika-detect/${camel.version}</bundle>
     </feature>
 </features>

@@ -18,12 +18,12 @@
 
 -->
 <features>
-    <repository>mvn:org.apache.camel.karaf/apache-camel/${project.version}/xml/features</repository>
+    <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
 
-    <feature name='camel-example-aggregate' version='${project.version}'>
-        <feature version="${project.version}">camel</feature>
-        <feature version="${project.version}">camel-stream</feature>
-        <bundle>mvn:org.apache.camel.example/camel-example-aggregate/${project.version}</bundle>
+    <feature name='camel-example-aggregate' version='${camel.version}'>
+        <feature version="${camel.version}">camel</feature>
+        <feature version="${camel.version}">camel-stream</feature>
+        <bundle>mvn:org.apache.camel.example/camel-example-aggregate/${camel.version}</bundle>
     </feature>
 
 </features>

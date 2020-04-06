@@ -47,20 +47,20 @@ $ bin/karaf
 +
 [source,sh]
 ----
-curl http://localhost:8080/camel-rest-osgi-activator/tika/detect?filePath=system/org/apache/camel/example/camel-example-rest-karaf-osgi-activator-tika-detect/${project.version}/camel-example-rest-karaf-osgi-activator-tika-detect-${project.version}.jar
+curl http://localhost:8080/camel-rest-osgi-activator/tika/detect?filePath=system/org/apache/camel/example/camel-example-rest-karaf-osgi-activator-tika-detect/${camel.version}/camel-example-rest-karaf-osgi-activator-tika-detect-${camel.version}.jar
 ----
 +
 . Install a new bundle with it's own REST route
 +
 [source,sh]
 ----
-karaf@root()> install -s mvn:org.apache.camel.example/camel-example-rest-karaf-osgi-activator-tika-parse/${project.version}
+karaf@root()> install -s mvn:org.apache.camel.example/camel-example-rest-karaf-osgi-activator-tika-parse/${camel.version}
 ----
 . This will expose a new route that can be tested without restarting
 +
 [source,sh]
 ----
-curl http://localhost:8080/camel-rest-osgi-activator/tika/parse?filePath=system/org/apache/camel/example/camel-example-rest-karaf-osgi-activator-tika-detect/${project.version}/camel-example-rest-karaf-osgi-activator-tika-detect-${project.version}.jar
+curl http://localhost:8080/camel-rest-osgi-activator/tika/parse?filePath=system/org/apache/camel/example/camel-example-rest-karaf-osgi-activator-tika-detect/${camel.version}/camel-example-rest-karaf-osgi-activator-tika-detect-${camel.version}.jar
 ----
 
 === Help and contributions

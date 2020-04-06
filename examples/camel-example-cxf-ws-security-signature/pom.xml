@@ -45,7 +45,7 @@
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-bom</artifactId>
-                <version>${project.version}</version>
+                <version>${camel.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -142,7 +142,7 @@
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-maven-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${camel.version}</version>
                 <configuration>
                     <fileApplicationContextUri>src/main/resources/META-INF/spring/camel-context.xml
                     </fileApplicationContextUri>

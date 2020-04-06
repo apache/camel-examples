@@ -18,14 +18,14 @@
 
 -->
 <features>
-    <repository>mvn:org.apache.camel.karaf/apache-camel/${project.version}/xml/features</repository>
+    <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
 
-    <feature name="${project.artifactId}" version="${project.version}">
-        <feature version="${project.version}">camel</feature>
-        <feature version="${project.version}">camel-blueprint</feature>
-        <feature version="${project.version}">camel-amqp</feature>
-        <feature version="${project.version}">camel-netty-http</feature>
-        <bundle>mvn:org.apache.camel.example/${project.artifactId}/${project.version}</bundle>
+    <feature name="${project.artifactId}" version="${camel.version}">
+        <feature version="${camel.version}">camel</feature>
+        <feature version="${camel.version}">camel-blueprint</feature>
+        <feature version="${camel.version}">camel-amqp</feature>
+        <feature version="${camel.version}">camel-netty-http</feature>
+        <bundle>mvn:org.apache.camel.example/${project.artifactId}/${camel.version}</bundle>
     </feature>
 
 </features>

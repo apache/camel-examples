@@ -16,10 +16,10 @@ mvn install
 === Run with Karaf
 
 To install Apache Camel in Karaf you type in the shell (we use version
-$\{project.version}):
+$\{camel.version}):
 
 ....
-feature:repo-add camel ${project.version}
+feature:repo-add camel ${camel.version}
 feature:install camel
 ....
 
@@ -34,7 +34,7 @@ feature:install camel-jackson
 Then you can install the example:
 
 ....
-install -s mvn:org.apache.camel.example/camel-example-ehcache-blueprint/${project.version}
+install -s mvn:org.apache.camel.example/camel-example-ehcache-blueprint/${camel.version}
 ....
 
 And you can see the application running by tailing the logs:
