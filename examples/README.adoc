@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 84 (0 deprecated)
+Number of Examples: 83 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -174,8 +174,6 @@ Number of Examples: 84 (0 deprecated)
 | link:camel-example-cdi-rest-servlet/README.adoc[CDI Rest] (camel-example-cdi-rest-servlet) | Rest | Rest DSL using Servlet with CDI example
 
 | link:camel-example-openapi-cdi/README.adoc[OpenApi CDI] (camel-example-openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
-
-| link:camel-example-spark-rest/README.adoc[Spark Rest] (camel-example-spark-rest) | Rest | An example using Spark Rest
 
 | link:camel-example-swagger-cdi/README.adoc[Swagger CDI] (camel-example-swagger-cdi) | Rest | An example using REST DSL and Swagger Java with CDI
 
