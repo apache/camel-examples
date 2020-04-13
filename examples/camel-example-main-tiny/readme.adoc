@@ -5,11 +5,7 @@ on the classpath as possible. For more details see the `pom.xml` file.
 
 This example shows how to run Camel standalone via the built-in Main class.
 
-The example also demonstrates how you can configure the Camel application
-via Camel built-in dependency-injection that supports binding via the
-`@BindToRegistry`, `@BeanInject` and `@PropertyInject` annotations.
-
-Also notice how you can configure Camel in the `application.properties` file.
+Notice how you can configure Camel in the `application.properties` file.
 
 === How to run
 

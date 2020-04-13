@@ -93,16 +93,44 @@
 
     <build>
         <plugins>
-            <!-- Run 'mvn camel-main:generate' -->
-            <!-- generate autowire.properties file that can automatic detect resources
-                 from the classpath to make convention over configuration for Camel components -->
+            <!-- generate source code for configurer classes, which avoids reflection -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-main-maven-plugin</artifactId>
+                <artifactId>camel-package-maven-plugin</artifactId>
                 <version>${camel.version}</version>
-                <configuration>
-                    <logClasspath>false</logClasspath>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate-component</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- include source code generated to maven sources paths -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/generated/java</source>
+                            </sources>
+                            <resources>
+                                <resource>
+                                    <directory>src/generated/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
