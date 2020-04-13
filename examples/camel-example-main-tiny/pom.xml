@@ -55,17 +55,6 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-main</artifactId>
-            <exclusions>
-                <!-- we dont need LRUCache, and headersmap -->
-                <exclusion>
-                    <groupId>org.apache.camel</groupId>
-                    <artifactId>camel-caffeine-lrucache</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.camel</groupId>
-                    <artifactId>camel-headersmap</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- we use these 2 camel components in this example -->
         <dependency>
