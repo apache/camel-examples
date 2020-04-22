@@ -191,7 +191,7 @@
         <atomix-version>1.0.8</atomix-version>
         <avro-version>1.8.1</avro-version>
         <awaitility-version>4.0.2</awaitility-version>
-        <bouncycastle-version>1.64</bouncycastle-version>
+        <bouncycastle-version>1.65</bouncycastle-version>
         <camel-bundle-plugin-version>${camel.version}</camel-bundle-plugin-version>
         <cdi-api-2.0-version>2.0</cdi-api-2.0-version>
         <cdi-api-1.2-version>1.2</cdi-api-1.2-version>
