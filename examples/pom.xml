@@ -239,7 +239,7 @@
         <maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <metrics-cdi-version>1.3.3</metrics-cdi-version>
-        <micrometer-version>1.4.1</micrometer-version>
+        <micrometer-version>1.4.2</micrometer-version>
         <mina-version>2.1.3</mina-version>
         <mvel-version>2.4.5.Final</mvel-version>
         <mycila-license-version>3.0</mycila-license-version>
