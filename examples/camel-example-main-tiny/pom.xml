@@ -82,6 +82,15 @@
 
     <build>
         <plugins>
+            <!-- to run the application -->
+            <plugin>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-maven-plugin</artifactId>
+                <version>${camel.version}</version>
+                <configuration>
+                    <mainClass>org.apache.camel.example.MyApplication</mainClass>
+                </configuration>
+            </plugin>
             <!-- generate source code for configurer classes, which avoids reflection -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
