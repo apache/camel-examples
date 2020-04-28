@@ -187,7 +187,7 @@
         <arquillian-version>1.5.0.Final</arquillian-version>
         <asciidoctorj-version>2.1.0</asciidoctorj-version>
         <activemq-version>5.15.12</activemq-version>
-        <activemq-artemis-version>2.11.0</activemq-artemis-version>
+        <activemq-artemis-version>2.12.0</activemq-artemis-version>
         <atomix-version>1.0.8</atomix-version>
         <avro-version>1.8.1</avro-version>
         <awaitility-version>4.0.2</awaitility-version>
