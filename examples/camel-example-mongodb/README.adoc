@@ -1,0 +1,40 @@
+== Camel MongoDB Example
+
+This example shows how to use Camel MongoDB component. There are three REST endpoints that will trigger the MongoDB component for reading and for writing.
+
+=== Run a Mongo instance
+
+You need to have an instance of MongoDB server running locally. You can find a docker-compose file under `/docker/` directory.
+
+    cd docker
+    docker-compose up
+
+=== Run the Camel integration
+
+You can now run your application by executing:
+
+    mvn exec:java
+
+=== Make some test call
+
+You can insert an "hello" document by POSTing to `/hello` endpoint:
+
+    curl -X POST -H "Content-Type: application/json" -d '{"text":"Hello from Camel"}' http://localhost:8081/hello
+
+You can read all the documents by requesting to `/` endpoint:
+
+    curl localhost:8081
+
+You can also read a single document by providing the `id` parameter:
+
+    curl localhost:8081/hello?id=5eaa94933aff184354c4a874
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
