@@ -30,7 +30,7 @@ public final class MyApplication {
         // use Camels Main class
         Main main = new Main();
         // and add the routes (you can specify multiple classes)
-        main.addRouteBuilder(MyRouteBuilder.class);
+        main.configure().addRoutesBuilder(MyRouteBuilder.class);
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
     }
