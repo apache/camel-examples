@@ -37,9 +37,9 @@ public final class Application {
         main = new Main();
         // bind connectionBean used by the component
         main.bind("myDb", MongoClients.create("mongodb://localhost"));
-        main.addRoutesBuilder(new MongoDBFindByIDRouteBuilder());
-        main.addRoutesBuilder(new MongoDBFindAllRouteBuilder());
-        main.addRoutesBuilder(new MongoDBInsertRouteBuilder());
+        main.configure().addRoutesBuilder(new MongoDBFindByIDRouteBuilder());
+        main.configure().addRoutesBuilder(new MongoDBFindAllRouteBuilder());
+        main.configure().addRoutesBuilder(new MongoDBInsertRouteBuilder());
         System.out.println("Starting Camel. Use CTRL + C to terminate the process.\n");
         main.run();
     }

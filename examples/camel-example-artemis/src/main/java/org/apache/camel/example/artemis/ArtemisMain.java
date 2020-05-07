@@ -38,10 +38,10 @@ public final class ArtemisMain {
         main.bind("artemis", createArtemisComponent());
 
         // add the widget/gadget route
-        main.addRoutesBuilder(new WidgetGadgetRoute());
+        main.configure().addRoutesBuilder(new WidgetGadgetRoute());
 
         // add a 2nd route that routes files from src/data to the order queue
-        main.addRoutesBuilder(new CreateOrderRoute());
+        main.configure().addRoutesBuilder(new CreateOrderRoute());
 
         // start and run Camel (block)
         main.run();

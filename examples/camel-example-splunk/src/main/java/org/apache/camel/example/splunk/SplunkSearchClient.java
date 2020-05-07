@@ -30,7 +30,7 @@ public final class SplunkSearchClient {
     public static void main(String[] args) throws Exception {
         LOG.info("About to run splunk-camel integration...");
         Main main = new Main();
-        main.addRoutesBuilder(new SplunkSearchRouteBuilder());
+        main.configure().addRoutesBuilder(new SplunkSearchRouteBuilder());
         main.run();
     }
 

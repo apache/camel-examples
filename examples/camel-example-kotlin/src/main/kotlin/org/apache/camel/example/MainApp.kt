@@ -30,6 +30,6 @@ fun main(args: Array<String>) {
     System.out.println("\n\n\n\n");
 
     val main = Main()
-    main.addRoutesBuilder(MyRouteBuilder())
+    main.configure().addRoutesBuilder(MyRouteBuilder())
     main.run(args)
 }

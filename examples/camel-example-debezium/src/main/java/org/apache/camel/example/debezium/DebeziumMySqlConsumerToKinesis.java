@@ -46,7 +46,7 @@ public final class DebeziumMySqlConsumerToKinesis {
         LOG.debug("About to run Debezium integration...");
 
         // add route
-        main.addRoutesBuilder(new RouteBuilder() {
+        main.configure().addRoutesBuilder(new RouteBuilder() {
             public void configure() {
                 // Initial Debezium route that will run and listens to the changes,
                 // first it will perform an initial snapshot using (select * from) in case there are no offsets
