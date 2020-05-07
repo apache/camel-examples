@@ -29,7 +29,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(CamelSpringBootRunner.class)
-@SpringBootTest(classes = SampleAmqApplication.class)
+@SpringBootTest(classes = SampleAmqpApplication.class)
 public class SampleAmqApplicationTests {
     @Autowired
     private CamelContext camelContext;

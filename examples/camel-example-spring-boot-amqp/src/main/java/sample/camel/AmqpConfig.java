@@ -16,6 +16,7 @@
  */
 package sample.camel;
 
+import org.apache.qpid.jms.JmsConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,32 +24,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AmqpConfig {
 
-    @Value("${AMQP_HOST}")
-    private String amqpHost;
-    @Value("${AMQP_SERVICE_PORT}")
-    private String amqpPort;
+
     @Value("${AMQP_SERVICE_USERNAME}")
     private String userName;
     @Value("${AMQP_SERVICE_PASSWORD}")
     private String pass;
     @Value("${AMQP_REMOTE_URI}")
     private String remoteUri;
-
-    public String getAmqpHost() {
-        return amqpHost;
-    }
-
-    public void setAmqpHost(String amqpHost) {
-        this.amqpHost = amqpHost;
-    }
-
-    public String getAmqpPort() {
-        return amqpPort;
-    }
-
-    public void setAmqpPort(String amqpPort) {
-        this.amqpPort = amqpPort;
-    }
 
     public String getUserName() {
         return userName;
@@ -75,8 +57,8 @@ public class AmqpConfig {
     }
 
     @Bean
-    public org.apache.qpid.jms.JmsConnectionFactory amqpConnectionFactory() {
-        org.apache.qpid.jms.JmsConnectionFactory jmsConnectionFactory = new org.apache.qpid.jms.JmsConnectionFactory();
+    public JmsConnectionFactory amqpConnectionFactory() {
+        JmsConnectionFactory jmsConnectionFactory = new JmsConnectionFactory();
         jmsConnectionFactory.setRemoteURI(remoteUri);
         jmsConnectionFactory.setUsername(userName);
         jmsConnectionFactory.setPassword(pass);
