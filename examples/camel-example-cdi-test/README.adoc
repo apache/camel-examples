@@ -15,8 +15,6 @@ particular features provided by the `+camel-test-cdi+` module:
 [width="100%",cols="33%,67%",options="header",]
 |===
 |Test class |Description
-|link:src/test/java/org/apache/camel/example/cdi/test/AdviceTest.java[`+AdviceTest+`]
-|Adds a test route using Camel advice API
 
 |link:src/test/java/org/apache/camel/example/cdi/test/AlternativeTest.java[`+AlternativeTest+`]
 |Mocks a bean used in a Camel route with a CDI alternative
