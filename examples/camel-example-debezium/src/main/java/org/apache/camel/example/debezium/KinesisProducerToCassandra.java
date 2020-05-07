@@ -44,7 +44,7 @@ public final class KinesisProducerToCassandra {
         LOG.debug("About to run Kinesis to Cassandra integration...");
 
         // add route
-        main.addRoutesBuilder(new RouteBuilder() {
+        main.configure().addRoutesBuilder(new RouteBuilder() {
             public void configure() {
                 // We set the CQL templates we need, note that an UPDATE in Cassandra means an UPSERT which is what we need
                 final String cqlUpdate = "update products set name = ?, description = ?, weight = ? where id = ?";
