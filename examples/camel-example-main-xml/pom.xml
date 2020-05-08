@@ -97,15 +97,13 @@
 
     <build>
         <plugins>
-            <!-- Run 'mvn camel-main:generate' -->
-            <!-- generate autowire.properties file that can automatic detect resources
-                 from the classpath to make convention over configuration for Camel components -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-main-maven-plugin</artifactId>
+                <artifactId>camel-maven-plugin</artifactId>
                 <version>${camel.version}</version>
                 <configuration>
                     <logClasspath>false</logClasspath>
+                    <mainClass>org.apache.camel.example.MyApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
