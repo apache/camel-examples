@@ -46,7 +46,7 @@
     <camel:package>org.apache.camel.example.server</camel:package>
     <!-- enable JMX connector so we can connect to the server and browse mbeans -->
     <!-- Camel will log at INFO level the service URI to use for connecting with jconsole -->
-    <camel:jmxAgent id="agent" createConnector="true"/>
+    <camel:jmxAgent id="agent"/>
   </camel:camelContext>
   <!-- END SNIPPET: e3 -->
 
