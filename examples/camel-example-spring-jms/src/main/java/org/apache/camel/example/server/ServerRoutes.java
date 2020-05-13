@@ -31,7 +31,7 @@ public class ServerRoutes extends RouteBuilder {
         // Camel will introspect the multiplier bean and find the best candidate of the method to invoke.
         // You can add annotations etc to help Camel find the method to invoke.
         // As our multiplier bean only have one method its easy for Camel to find the method to use.
-        from("jms:queue:numbers").to("multiplier");
+        from("jms:queue:numbers").to("bean:multiplier");
 
         // Camel has several ways to configure the same routing, we have defined some of them here below
 
