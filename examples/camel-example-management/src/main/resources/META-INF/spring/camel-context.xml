@@ -31,7 +31,7 @@
   <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring" depends-on="broker">
     <!-- Default JMX connector url: "service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi/camel" -->
     <!-- lets include extended information -->
-    <jmxAgent id="agent" createConnector="true" loadStatisticsEnabled="true" statisticsLevel="Extended"/>
+    <jmxAgent id="agent" loadStatisticsEnabled="true" statisticsLevel="Extended"/>
 
     <route>
       <description>Route that creates input files</description>
