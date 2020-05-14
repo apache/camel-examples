@@ -60,7 +60,7 @@
         <!-- use spring for xml -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring</artifactId>
+            <artifactId>camel-spring-main</artifactId>
         </dependency>
 
         <!-- camel jms and activemq -->
