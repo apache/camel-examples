@@ -44,15 +44,12 @@
        in the package org.apache.camel.example.server -->
   <camel:camelContext id="camel-server">
     <camel:package>org.apache.camel.example.server</camel:package>
-    <!-- enable JMX connector so we can connect to the server and browse mbeans -->
-    <!-- Camel will log at INFO level the service URI to use for connecting with jconsole -->
-    <camel:jmxAgent id="agent"/>
   </camel:camelContext>
   <!-- END SNIPPET: e3 -->
 
   <!-- START SNIPPET: e4 -->
   <!-- lets configure the ActiveMQ JMS broker server -->
-  <broker:broker useJmx="true" persistent="false" brokerName="myBroker">
+  <broker:broker useJmx="false" persistent="false" brokerName="myBroker">
     <broker:transportConnectors>
       <!-- expose a VM transport for in-JVM transport between AMQ and Camel on the server side -->
       <broker:transportConnector name="vm" uri="vm://myBroker"/>
