@@ -16,12 +16,10 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.spi.Configurer;
-
-@Configurer
 public class MyBean {
 
     private String hi;
+    private int counter;
 
     public String getHi() {
         return hi;
@@ -32,7 +30,7 @@ public class MyBean {
     }
 
     public String hello() {
-        return hi + " how are you?";
+        return hi + " how are you? I am called " + ++counter + " times";
     }
 
 }

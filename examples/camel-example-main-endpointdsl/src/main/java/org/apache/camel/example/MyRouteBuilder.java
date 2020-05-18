@@ -16,6 +16,7 @@
  */
 package org.apache.camel.example;
 
+import org.apache.camel.BeanScope;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 
 /**
@@ -25,8 +26,19 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from(timer("foo").period("{{myPeriod}}"))
-            .to(bean("myBean").method("hello"))
+        // the endpoint-dsl allows to define endpoints in type safe fluent builders
+        // here we configure the time and bean endpoint
+
+        from(timer("foo")
+                .period("{{myPeriod}}") // here we use {{ }} to refer to properties from application.properties
+                .includeMetadata(false)
+                .repeatCount(123))
+            .to(bean("org.apache.camel.example.MyBean")
+                    .method("hello")
+                    // try change this to Prototype scope
+                    .scope(BeanScope.Singleton)
+                    // we can configure advanced options
+                    .advanced().parameters("hi", "Davs"))
             .log("${body}");
     }
 }
