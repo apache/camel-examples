@@ -28,6 +28,6 @@ public class CreateOrderRoute extends RouteBuilder {
         // route files form src/data (noop = keep the file as-is after done, and do not pickup the same file again)
         from("file:src/data?noop=true")
             // route to the newOrder queue on the Artemis broker
-            .to("artemis:queue:newOrder?jmsMessageType=Text");
+            .to("jms:queue:newOrder?jmsMessageType=Text");
     }
 }

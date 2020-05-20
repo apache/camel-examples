@@ -35,7 +35,7 @@ public final class ArtemisMain {
 
     public static void main(String[] args) throws Exception {
         // create the ActiveMQ Artemis component
-        main.bind("artemis", createArtemisComponent());
+        main.bind("jms", createArtemisComponent());
 
         // add the widget/gadget route
         main.configure().addRoutesBuilder(new WidgetGadgetRoute());
