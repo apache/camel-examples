@@ -76,6 +76,8 @@ Number of Examples: 85 (0 deprecated)
 
 | link:camel-example-aggregate/README.adoc[Aggregate] (camel-example-aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
 
+| link:camel-example-aggregate-dist/README.adoc[Aggregate Distributed] (camel-example-aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
+
 | link:camel-example-artemis/README.adoc[Widget Gadget using Apache ActiveMQ Artemis] (camel-example-artemis) | EIP | The widget and gadget example from the EIP book using Apache ActiveMQ Artemis
 
 | link:camel-example-bigxml-split/README.adoc[Bigxml Split] (camel-example-bigxml-split) | EIP | How to deal with big XML files in Camel
