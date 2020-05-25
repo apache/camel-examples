@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 85 (0 deprecated)
+Number of Examples: 87 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -22,6 +22,8 @@ Number of Examples: 85 (0 deprecated)
 | link:camel-example-any23/README.adoc[Any23 example] (camel-example-any23) | Beginner | An example that uses the Any23 dataformat
 
 | link:camel-example-as2/README.adoc[AS2 Example] (camel-example-as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
+
+| link:camel-example-basic/README.adoc[Basic] (camel-example-basic) | Beginner | Basic example
 
 | link:camel-example-cdi/README.adoc[CDI] (camel-example-cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
 
@@ -76,7 +78,7 @@ Number of Examples: 85 (0 deprecated)
 
 | link:camel-example-aggregate/README.adoc[Aggregate] (camel-example-aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
 
-| link:camel-example-aggregate-dist/README.adoc[Aggregate Distributed] (camel-example-aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
+| link:camel-example-aggregate-dist/README.adoc[Aggregate Dist] (camel-example-aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
 
 | link:camel-example-artemis/README.adoc[Widget Gadget using Apache ActiveMQ Artemis] (camel-example-artemis) | EIP | The widget and gadget example from the EIP book using Apache ActiveMQ Artemis
 
