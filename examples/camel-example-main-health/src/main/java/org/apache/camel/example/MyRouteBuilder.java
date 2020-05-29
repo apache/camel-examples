@@ -27,8 +27,13 @@ public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("quartz:foo?cron={{myCron}}").routeId("foo")
+        from("quartz:foo?cron={{myCron}}").routeId("quartz")
             .bean(monkey, "chaos")
             .log("${body}");
+
+        // this route is invalid and fails during startup
+        // the supervising route controller will take over and attempt
+        // to restart this route
+        from("netty:tcp:unknownhost").to("log:dummy").routeId("netty");
     }
 }
