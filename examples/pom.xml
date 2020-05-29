@@ -129,6 +129,7 @@
         <module>camel-example-main</module>
         <module>camel-example-main-artemis</module>
         <module>camel-example-main-endpointdsl</module>
+        <module>camel-example-main-health</module>
         <module>camel-example-main-tiny</module>
         <module>camel-example-main-xml</module>
         <module>camel-example-management</module>

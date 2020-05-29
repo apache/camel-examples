@@ -1,0 +1,29 @@
+== Camel Example Main Health
+
+This example shows how to use Camel health-check in standalone mode.
+The example shows how you can build custom health-checks and have
+them automatic discovered by Camel and used as parts of its health-check system.
+
+=== How to run
+
+You can run this example using
+
+[source,shell]
+----
+mvn camel:run
+----
+
+=== JMX Management
+
+You can from JMX see the health-check status in the Camel tree under health and
+find the DefaultHealthCheck MBean.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
