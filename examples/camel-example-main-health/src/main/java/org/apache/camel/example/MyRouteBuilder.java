@@ -27,7 +27,7 @@ public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("quartz:foo?cron={{myCron}}").routeId("quartz")
+        from("timer:foo?period={{myPeriod}}").routeId("timer")
             .bean(monkey, "chaos")
             .log("${body}");
 
