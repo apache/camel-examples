@@ -4,6 +4,17 @@ This example shows how to use Camel health-check in standalone mode.
 The example shows how you can build custom health-checks and have
 them automatic discovered by Camel and used as parts of its health-check system.
 
+The example has two routes, a timer that calls a bean that flips a boolean that
+causes the custom health check to be in either UP or DOWN state.
+
+The 2nd route is on purpose made to fail on startup by configuring netty to an unknown host.
+Camel supervising route controller will attempt to restart the route up till 10 times before exhausting.
+
+The routes health check will therefore report this route as DOWN until its exhausted
+where the states are changed to UNKNOWN.
+
+The details can be seen at runtime via JMX.
+
 === How to run
 
 You can run this example using
