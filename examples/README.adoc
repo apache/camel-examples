@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 87 (0 deprecated)
+Number of Examples: 88 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -40,6 +40,8 @@ Number of Examples: 87 (0 deprecated)
 | link:camel-example-main/readme.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
 | link:camel-example-main-endpointdsl/readme.adoc[Main Endpointdsl] (camel-example-main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
+
+| link:camel-example-main-health/readme.adoc[Main Health] (camel-example-main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
 | link:camel-example-main-tiny/readme.adoc[Main Tiny] (camel-example-main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
 
