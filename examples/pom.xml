@@ -182,8 +182,8 @@
         <jdk.version>1.8</jdk.version>
         <compiler.fork>false</compiler.fork>
 
-        <camel.version>3.4.0-SNAPSHOT</camel.version>
-        <camel.karaf.version>3.4.0-SNAPSHOT</camel.karaf.version>
+        <camel.version>3.4.0</camel.version>
+        <camel.karaf.version>3.4.0</camel.karaf.version>
 
         <!-- Versions -->
         <arquillian-version>1.5.0.Final</arquillian-version>
