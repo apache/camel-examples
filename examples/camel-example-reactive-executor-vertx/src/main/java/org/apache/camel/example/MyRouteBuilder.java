@@ -22,9 +22,10 @@ public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer:foo?period=2000")
-            .setBody().constant("Hello World")
-            .delay(simple("${random(0,1000)}"))
-            .log("${body}");
+        from("timer:foo?period=5s")
+            .setBody().constant("H,e,l,l,o, ,W,o,r,l,d,!,!,!, , ")
+            .split(body().tokenize(",")).parallelProcessing()
+                .log("${body}")
+            .end();
     }
 }

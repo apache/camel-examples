@@ -16,6 +16,7 @@
  */
 package org.apache.camel.example;
 
+import io.vertx.core.Vertx;
 import org.apache.camel.main.Main;
 
 /**
@@ -23,16 +24,25 @@ import org.apache.camel.main.Main;
  */
 public final class MyApplication {
 
+    private static Vertx vertx;
+
     private MyApplication() {
     }
 
     public static void main(String[] args) throws Exception {
+        vertx = Vertx.vertx();
+
         // use Camels Main class
         Main main = new Main();
+        // register existing vertx which should be used by Camel
+        main.bind("vertx", vertx);
         // and add the routes (you can specify multiple classes)
         main.configure().addRoutesBuilder(MyRouteBuilder.class);
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
+
+        // stop vertx
+        vertx.close();
     }
 
 }
