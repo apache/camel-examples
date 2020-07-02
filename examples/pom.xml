@@ -145,6 +145,7 @@
         <module>camel-example-rest-karaf-osgi-activator</module>
         -->
         <module>camel-example-route-throttling</module>
+        <module>camel-example-routetemplate</module>
         <module>camel-example-servlet-rest-blueprint</module>
         <module>camel-example-servlet-tomcat</module>
         <module>camel-example-splunk</module>

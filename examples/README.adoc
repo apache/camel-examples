@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 88 (0 deprecated)
+Number of Examples: 89 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -49,6 +49,8 @@ Number of Examples: 88 (0 deprecated)
 
 | link:camel-example-pojo-messaging/README.adoc[POJO Routing] (camel-example-pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
     
+
+| link:camel-example-routetemplate/readme.adoc[Routetemplate] (camel-example-routetemplate) | Beginner | How to use route templates (parameterized routes)
 
 | link:camel-example-servlet-tomcat/README.adoc[Servlet Tomcat] (camel-example-servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
 
