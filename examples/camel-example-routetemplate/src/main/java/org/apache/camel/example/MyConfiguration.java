@@ -16,23 +16,28 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.main.BaseMainSupport;
-import org.apache.camel.main.MainListenerSupport;
+import org.apache.camel.CamelContext;
 
-public class MyMainListener extends MainListenerSupport {
+public class MyConfiguration {
 
-    @Override
-    public void beforeStart(BaseMainSupport main) {
+    /**
+     * Configure and adds routes from route templates.
+     *
+     * The method name <tt>configureRouteTemplates</tt> is detected from camel-main
+     * and invoked after routes and route templates has been loaded which allows
+     * to create and add routes from the route templates during bootstrap
+     */
+    public void configureRouteTemplates(CamelContext context) {
         // create two routes from the template
-        main.getCamelContext().addRouteFromTemplate("myTemplate")
-                .parameter("name", "one")
-                .parameter("greeting", "Hello")
-                .build();
+        context.addRouteFromTemplate("myTemplate")
+            .parameter("name", "one")
+            .parameter("greeting", "Hello")
+            .build();
 
-        main.getCamelContext().addRouteFromTemplate("myTemplate")
-                .parameter("name", "two")
-                .parameter("greeting", "Bonjour")
-                .parameter("myPeriod", "5s")
-                .build();
+        context.addRouteFromTemplate("myTemplate")
+            .parameter("name", "two")
+            .parameter("greeting", "Bonjour")
+            .parameter("myPeriod", "5s")
+            .build();
     }
 }

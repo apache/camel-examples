@@ -29,10 +29,10 @@ public final class MyApplication {
     public static void main(String[] args) throws Exception {
         // use Camels Main class
         Main main = new Main();
-        // add listener that create routes from the template
-        main.addMainListener(new MyMainListener());
         // and add route templates via routes builder
         main.configure().addRoutesBuilder(MyRouteTemplates.class);
+        // add configuration class which setup the routes from the route templates
+        main.configure().addConfigurationClass(MyConfiguration.class);
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
     }
