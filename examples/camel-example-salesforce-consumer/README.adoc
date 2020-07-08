@@ -1,0 +1,64 @@
+== Salesforce Streaming API Example
+
+This example shows how to use Salesforce Streaming API.
+
+=== Configuring Salesforce
+This examples uses OAuth 2.0 Refresh Token Flow, which requires 3 credentials collected from Salesforce - `Client ID`, `Client Secret` and `Refresh Token`. You will need to put your own credentials in `src/main/resources/application.properties` file.
+
+NOTE: you might want to sign up with your own Developer account at developer.salesforce.com. After you have done that, you’ll need to create a Connected Application for your integration.
+
+NOTE: This was written with Salesforce Lightening user interface. Classic user interface might have slightly different menu and/or workflow.
+
+Here is an example workflow of creating a Connected Application and get required credentials. For more details, please check Salesforce online manual
+https://help.salesforce.com/articleView?id=extend_code_overview.htm&type=5
+
+==== Creating a Connected Application
+. Go to `PLATFORM TOOLS > Apps > App Manager` in a navigation tree at the left of Salesforce Setup screen
+. Click `New Connected App` button at the upper right
+. Enter `camelk_knative_source_salesforce` for Connected App Name
+. Enter your email address for Contact Email
+. Check Enable OAuth Settings
+. Enter `https://login.salesforce.com/services/oauth2/success` for Callback URL
+. Choose 2 OAuth scopes, `Access and manage your data (api)` and `Perform requests on your behalf at any time (refresh_token, offline_access)`, then click Add button
+. Click Save button and then click Continue button
+. You will be redirected to `Manage Connected Apps` page. `Consumer Key` and `Consumer Secret` are available in API section. Use `Consumer Key` as a `Client ID` and `Consumer Secret` as a `Client Secret`.
+. Go to `PLATFORM TOOLS > Apps > Connected Apps > Manage Connected Apps`
+. Click `Edit` next to the `camelk_knative_source_salesforce`
+. In OAuth Policies section,
+.. Choose `Relax IP restrictions` for IP Relaxation
+.. Choose `Refresh token is valid until revoked`
+. Click `Save`
+
+==== Getting an OAuth refresh token
+In your browser go to the URL, with substituting the `__YOUR_CLIENT_ID_HERE__` with your connected application Consumer Key:
+
+```
+https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=YOUR_CLIENT_ID_HERE&redirect_uri=https://login.salesforce.com/services/oauth2/success&display=touch
+```
+
+Allow access to the application, and you’ll end up on a page with `refresh_token`, something like:
+
+```
+https://login.salesforce.com/services/oauth2/success#access_token=..&refresh_token=<refresh_token>&instance_url=...&issued_at=...&signature=...&scope=...&token_type=Bearer
+```
+
+
+=== How to run
+
+You can run this example using
+
+    mvn compile camel:run
+
+=== Custom topic name and operation flags
+
+You can specify your topic name (`salesforce.topic`) and turn on/off each operation to be notified (for example, set true for `camel.component.salesforce.config.notifyForOperationCreate` to receive Contact created event) in `src/main/resources/application.properties` file.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
