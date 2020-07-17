@@ -32,7 +32,16 @@ public final class MyApplication {
         // and add route templates via routes builder
         main.configure().addRoutesBuilder(MyRouteTemplates.class);
         // add configuration class which setup the routes from the route templates
-        main.configure().addConfigurationClass(MyConfiguration.class);
+
+        // to configure route templates we can use java code as below from a configuration class,
+        // gives more power as its java code.
+        // or we can configure as well from application.properties,
+        // less power as its key value pair properties
+        // and you can also use both java and properties together
+
+        // in this example we use properties by default and have disabled java
+        // main.configure().addConfigurationClass(MyConfiguration.class);
+
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
     }
