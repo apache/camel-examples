@@ -149,6 +149,7 @@
         <module>camel-example-salesforce-consumer</module>
         <module>camel-example-servlet-rest-blueprint</module>
         <module>camel-example-servlet-tomcat</module>
+        <module>camel-example-servlet-rest-karaf-jaas</module>
         <module>camel-example-splunk</module>
         <module>camel-example-spring</module>
         <module>camel-example-spring-javaconfig</module>
