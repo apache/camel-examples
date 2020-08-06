@@ -145,8 +145,6 @@
         <module>camel-example-spring-ws</module>
         <module>camel-example-spring-xquery</module>
         <module>camel-example-spring-security</module>
-        <module>camel-example-ssh</module>
-        <module>camel-example-ssh-security</module>
         <module>camel-example-swagger-cdi</module>
         <module>camel-example-openapi-cdi</module>
         <module>camel-example-telegram</module>
@@ -168,19 +166,16 @@
         <compiler.fork>false</compiler.fork>
 
         <camel.version>3.5.0-SNAPSHOT</camel.version>
-        <camel.karaf.version>3.5.0-SNAPSHOT</camel.karaf.version>
 
         <!-- Versions -->
         <arquillian-version>1.5.0.Final</arquillian-version>
         <asciidoctorj-version>2.1.0</asciidoctorj-version>
-        <camel-bundle-plugin-version>${camel.version}</camel-bundle-plugin-version>
         <cdi-api-1.2-version>1.2</cdi-api-1.2-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <groovy-version>3.0.2</groovy-version>
         <pax-exam-version>4.13.2</pax-exam-version>
         <pax-url-aether>2.6.2</pax-url-aether>
         <jaxb-version>2.3.0</jaxb-version>
-        <karaf4-version>4.2.8</karaf4-version>
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <maven-javadoc-plugin-version>3.0.1</maven-javadoc-plugin-version>
@@ -190,50 +185,10 @@
         <pax-cdi-version>1.0.0</pax-cdi-version>
         <spring-security-version>5.3.0.RELEASE</spring-security-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <tinybundles-version>2.1.1</tinybundles-version>
         <tomcat-version>9.0.36</tomcat-version>
         <woodstox-version>6.0.3</woodstox-version>
         <xmlunit-version>1.6</xmlunit-version>
         <derby-version>10.14.2.0</derby-version>
-
-        <!-- for symbolicName in OSGi examples we only want the artifactId, eg camel-example-sql -->
-        <!-- as having org.apache.camel as prefix is not needed and makes the name very long -->
-        <camel.osgi.symbolic.name>${project.artifactId}</camel.osgi.symbolic.name>
-        <skip.starting.camel.context>false</skip.starting.camel.context>
-        <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
-        <camel.osgi.export.pkg/>
-        <camel.osgi.manifest>${project.build.outputDirectory}/META-INF/MANIFEST.MF</camel.osgi.manifest>
-
-        <!-- OSGi bundles properties -->
-        <camel.osgi.import.camel.version>
-            version="[$(version;==;${camel.osgi.version.clean}),$(version;=+;${camel.osgi.version.clean}))"
-        </camel.osgi.import.camel.version>
-        <camel.osgi.import.strict.version>
-            version="[$(version;===;${camel.osgi.version.clean}),$(version;==+;${camel.osgi.version.clean}))"
-        </camel.osgi.import.strict.version>
-        <camel.osgi.import.default.version>[$(version;==;$(@)),$(version;+;$(@)))</camel.osgi.import.default.version>
-        <camel.osgi.import.defaults>
-        </camel.osgi.import.defaults>
-        <camel.osgi.import.before.defaults/>
-        <camel.osgi.import.additional/>
-        <camel.osgi.import.pkg>
-            org.apache.camel.*;${camel.osgi.import.camel.version},
-            ${camel.osgi.import.before.defaults},
-            ${camel.osgi.import.defaults},
-            ${camel.osgi.import.additional},
-            *
-        </camel.osgi.import.pkg>
-        <camel.osgi.activator/>
-        <camel.osgi.failok>false</camel.osgi.failok>
-        <camel.osgi.private.pkg>!*</camel.osgi.private.pkg>
-        <camel.osgi.export.pkg>$${replace;{local-packages};;;\;}</camel.osgi.export.pkg>
-        <camel.osgi.export>${camel.osgi.export.pkg};-noimport:=true;${camel.osgi.version}</camel.osgi.export>
-        <camel.osgi.version>version=${project.version}</camel.osgi.version>
-        <camel.osgi.import>${camel.osgi.import.pkg}</camel.osgi.import>
-        <camel.osgi.dynamic/>
-        <camel.osgi.exclude.dependencies>false</camel.osgi.exclude.dependencies>
-        <camel.osgi.require.capability/>
-        <camel.osgi.provide.capability/>
     </properties>
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
@@ -313,55 +268,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-bundle-plugin</artifactId>
-                <version>${camel-bundle-plugin-version}</version>
-                <extensions>false</extensions>
-                <configuration>
-                    <supportIncrementalBuild>true</supportIncrementalBuild>
-                    <noWarningProjectTypes>pom</noWarningProjectTypes>
-                    <excludeDependencies>${camel.osgi.exclude.dependencies}</excludeDependencies>
-                    <instructions>
-                        <Bundle-Name>${project.artifactId}</Bundle-Name>
-                        <Bundle-SymbolicName>${camel.osgi.symbolic.name}</Bundle-SymbolicName>
-                        <Bundle-Activator>${camel.osgi.activator}</Bundle-Activator>
-                        <Import-Package>${camel.osgi.import}</Import-Package>
-                        <Export-Package>${camel.osgi.export}</Export-Package>
-                        <DynamicImport-Package>${camel.osgi.dynamic}</DynamicImport-Package>
-                        <Private-Package>${camel.osgi.private.pkg}</Private-Package>
-                        <Require-Capability>${camel.osgi.require.capability}</Require-Capability>
-                        <Provide-Capability>${camel.osgi.provide.capability}</Provide-Capability>
-                        <Implementation-Title>Apache Camel</Implementation-Title>
-                        <Implementation-Version>${project.version}</Implementation-Version>
-                        <Karaf-Info>Camel;${project.artifactId}=${project.version}</Karaf-Info>
-                        <_versionpolicy>${camel.osgi.import.default.version}</_versionpolicy>
-                        <_failok>${camel.osgi.failok}</_failok>
-                        <_removeheaders>Bnd-LastModified</_removeheaders>
-                    </instructions>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>versions</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>cleanVersions</goal>
-                        </goals>
-                        <configuration>
-                            <versions>
-                                <camel.osgi.version.clean>${project.version}</camel.osgi.version.clean>
-                            </versions>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin-version}</version>
@@ -395,31 +301,6 @@
         </plugins>
         <pluginManagement>
             <plugins>
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.camel</groupId>
-                                        <artifactId>camel-bundle-plugin</artifactId>
-                                        <versionRange>[2.3.7,)</versionRange>
-                                        <goals>
-                                            <goal>cleanVersions</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore/>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -516,7 +397,6 @@
                             <exclude>**/*.iml</exclude>
                             <exclude>**/.idea/**/*</exclude>
                             <exclude>**/avro/**/*.avpr</exclude>
-                            <exclude>**/OSGI-INF/bundle.info</exclude>
                             <exclude>**/test_rsa*</exclude>
                             <exclude>**/data*/**/*.xml</exclude>
                             <exlucde>**/*.log</exlucde>

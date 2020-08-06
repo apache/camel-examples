@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 76 (0 deprecated)
+Number of Examples: 73 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -144,11 +144,6 @@ Number of Examples: 76 (0 deprecated)
 
 | link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
-| link:camel-example-ssh/README.adoc[SSH] (camel-example-ssh) | OSGi | A simple SSH example which creates a bundle that can be dropped into any OSGi container
-
-| link:camel-example-ssh-security/README.adoc[SSH Security] (camel-example-ssh-security) | OSGi | A Certificate secured SSH example that creates a bundle that can be dropped into any OSGi container
-    
-
 | link:camel-example-kotlin/README.adoc[Kotlin] (camel-example-kotlin) | Other Languages | A Camel route using Kotlin
 
 | link:camel-example-reactive-executor-vertx/readme.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
@@ -174,8 +169,6 @@ Number of Examples: 76 (0 deprecated)
 | link:camel-example-cxf-proxy/README.adoc[CXF Proxy] (camel-example-cxf-proxy) | WebService | An example which uses Camel to proxy a web service
 
 | link:camel-example-cxf-tomcat/README.adoc[CXF Tomcat] (camel-example-cxf-tomcat) | WebService | An example using Camel CXF (code first) with Apache Tomcat
-
-| link:camel-example-cxf-ws-security-signature/README.adoc[CXF using WS-Security Signature] (camel-example-cxf-ws-security-signature) | WebService | CXF example using WS-Security Signature Action
 
 | link:camel-example-spring-ws/README.adoc[Spring WebService] (camel-example-spring-ws) | WebService | An example showing how to work with Camel and Spring Web Services
 |===
