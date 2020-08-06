@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 78 (0 deprecated)
+Number of Examples: 76 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -78,8 +78,6 @@ Number of Examples: 78 (0 deprecated)
 
 | link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
-| link:camel-example-mybatis/README.adoc[MyBatis] (camel-example-mybatis) | Database | An example for showing Camel using MyBatis SQL mapper component
-
 | link:camel-example-aggregate/README.adoc[Aggregate] (camel-example-aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
 
 | link:camel-example-aggregate-dist/README.adoc[Aggregate Dist] (camel-example-aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
@@ -145,10 +143,6 @@ Number of Examples: 78 (0 deprecated)
     
 
 | link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
-
-| link:camel-example-netty-http/README.adoc[Netty HTTP] (camel-example-netty-http) | OSGi | An example showing how to use a shared Netty HTTP server with multiple Camel applications in OSGi
-        container
-    
 
 | link:camel-example-ssh/README.adoc[SSH] (camel-example-ssh) | OSGi | A simple SSH example which creates a bundle that can be dropped into any OSGi container
 
