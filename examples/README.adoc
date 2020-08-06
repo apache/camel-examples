@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 91 (0 deprecated)
+Number of Examples: 79 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -112,11 +112,6 @@ Number of Examples: 91 (0 deprecated)
 
 | link:camel-example-fhir/README.adoc[FHIR] (camel-example-fhir) | Health Care | An example running Camel FHIR using Camel CDI
 
-| link:camel-example-fhir-osgi/README.adoc[Fhir Osgi] (camel-example-fhir-osgi) | Health Care | An example running Camel FHIR using OSGi Blueprint
-
-| link:camel-example-transformer-blueprint/README.adoc[Transformer OSGi Blueprint] (camel-example-transformer-blueprint) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using OSGi Blueprint
-    
-
 | link:camel-example-transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
     
 
@@ -133,9 +128,6 @@ Number of Examples: 91 (0 deprecated)
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
 | link:camel-example-activemq-tomcat/README.adoc[ActiveMQ Tomcat] (camel-example-activemq-tomcat) | Messaging | An example using ActiveMQ Broker and Camel with Apache Tomcat
-
-| link:camel-example-artemis-amqp-blueprint/README.adoc[Artemis Amqp Blueprint] (camel-example-artemis-amqp-blueprint) | Messaging | Demonstrates ActiveMQ Artemis using Camel's AMQP component.
-    
 
 | link:camel-example-artemis-large-messages/README.adoc[Artemis Large Messages] (camel-example-artemis-large-messages) | Messaging | Demonstrates sending large messages (handles GBs in size) between Apache Camel and ActiveMQ Artemis in
         streaming mode
@@ -154,32 +146,16 @@ Number of Examples: 91 (0 deprecated)
 
 | link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
-| link:camel-example-cxf-blueprint/README.adoc[CXF Blueprint] (camel-example-cxf-blueprint) | OSGi | An example which use a CXF consumer and the OSGI HTTP Service
-
 | link:camel-example-ehcache-blueprint/README.adoc[EHCache OSGi] (camel-example-ehcache-blueprint) | OSGi | An example using EHCache with OSGi Blueprint
 
 | link:camel-example-netty-http/README.adoc[Netty HTTP] (camel-example-netty-http) | OSGi | An example showing how to use a shared Netty HTTP server with multiple Camel applications in OSGi
         container
     
 
-| link:camel-example-olingo4-blueprint/README.adoc[Olingo4 OSGi] (camel-example-olingo4-blueprint) | OSGi | An example which use the Olingo4 component in OSGi Blueprint
-
-| link:camel-example-openapi-osgi/README.adoc[OpenApi OSGi] (camel-example-openapi-osgi) | OSGi | An example using REST DSL in XML and OpenApi API
-
-| link:camel-example-rest-karaf-osgi-activator/README.adoc[Karaf OSGi Activator] (camel-example-rest-karaf-osgi-activator) | OSGi | An example showing how to use Apache Camel on Apache Karaf with the OSGi Activator component
-
-| link:camel-example-servlet-rest-blueprint/README.adoc[Servlet REST Blueprint] (camel-example-servlet-rest-blueprint) | OSGi | An example using Servlet Rest with OSGi Blueprint
-
-| link:camel-example-servlet-rest-karaf-jaas/README.adoc[Servlet REST Blueprint] (camel-example-servlet-rest-karaf-jaas) | OSGi | An example using Servlet REST with OSGi Blueprint, and REST endpoint protected by Basic Auth, delegate user/password authentication to Karaf Jaas Service
-
-| link:camel-example-sql-blueprint/README.adoc[SQL Blueprint] (camel-example-sql-blueprint) | OSGi | An example for showing Camel using SQL component with OSGi Blueprint
-
 | link:camel-example-ssh/README.adoc[SSH] (camel-example-ssh) | OSGi | A simple SSH example which creates a bundle that can be dropped into any OSGi container
 
 | link:camel-example-ssh-security/README.adoc[SSH Security] (camel-example-ssh-security) | OSGi | A Certificate secured SSH example that creates a bundle that can be dropped into any OSGi container
     
-
-| link:camel-example-swagger-osgi/README.adoc[Swagger OSGi] (camel-example-swagger-osgi) | OSGi | An example using REST DSL in XML and Swagger API
 
 | link:camel-example-kotlin/README.adoc[Kotlin] (camel-example-kotlin) | Other Languages | A Camel route using Kotlin
 
@@ -198,8 +174,6 @@ Number of Examples: 91 (0 deprecated)
 | link:camel-example-telegram/README.adoc[Telegram] (camel-example-telegram) | Social | An example that uses Telegram API
 
 | link:camel-example-twitter-websocket/README.adoc[Twitter Websocket] (camel-example-twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
-
-| link:camel-example-twitter-websocket-blueprint/README.adoc[Twitter Websocket Blueprint] (camel-example-twitter-websocket-blueprint) | Social | An example that pushes new tweets to a web page using web-socket
 
 | link:camel-example-cdi-test/README.adoc[CDI Test] (camel-example-cdi-test) | Testing | An example illustrating Camel CDI testing features
 
