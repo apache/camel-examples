@@ -35,10 +35,6 @@
     <properties>
         <category>Beginner</category>
         <title>CDI Properties</title>
-
-        <camel.osgi.export.pkg>
-            org.apache.camel.example.cdi.properties*
-        </camel.osgi.export.pkg>
     </properties>
 
     <dependencyManagement>

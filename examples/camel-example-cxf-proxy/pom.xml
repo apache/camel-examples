@@ -35,15 +35,6 @@
     <properties>
         <category>WebService</category>
         <title>CXF Proxy</title>
-
-        <camel.osgi.export.pkg>
-            org.apache.camel.example.*
-        </camel.osgi.export.pkg>
-        <camel.osgi.private.pkg>
-            org.apache.camel.example.reportincident
-        </camel.osgi.private.pkg>
-        <!-- to avoid us import bunch of cxf package -->
-        <camel.osgi.dynamic>*</camel.osgi.dynamic>
     </properties>
 
     <dependencyManagement>

@@ -35,15 +35,6 @@
     <properties>
         <category>EIP</category>
         <title>Loan Broker WebService</title>
-
-        <camel.osgi.import.additional>
-            org.apache.cxf.*;version="${cxf-version-range}"
-        </camel.osgi.import.additional>
-        <camel.osgi.export.pkg>
-            org.apache.camel.loanbroker.*
-        </camel.osgi.export.pkg>
-        <!-- to avoid us import bunch of cxf package -->
-        <camel.osgi.dynamic>*</camel.osgi.dynamic>
     </properties>
 
     <dependencyManagement>

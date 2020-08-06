@@ -34,7 +34,6 @@
 
     <properties>
         <category>EIP</category>
-        <camel.osgi.export.pkg>org.apache.camel.example.cafe.*</camel.osgi.export.pkg>
     </properties>
 
     <dependencyManagement>
