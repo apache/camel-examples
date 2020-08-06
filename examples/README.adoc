@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 79 (0 deprecated)
+Number of Examples: 78 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -145,8 +145,6 @@ Number of Examples: 79 (0 deprecated)
     
 
 | link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
-
-| link:camel-example-ehcache-blueprint/README.adoc[EHCache OSGi] (camel-example-ehcache-blueprint) | OSGi | An example using EHCache with OSGi Blueprint
 
 | link:camel-example-netty-http/README.adoc[Netty HTTP] (camel-example-netty-http) | OSGi | An example showing how to use a shared Netty HTTP server with multiple Camel applications in OSGi
         container
