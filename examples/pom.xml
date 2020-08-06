@@ -107,7 +107,6 @@
         <module>camel-example-cxf</module>
         <module>camel-example-cxf-proxy</module>
         <module>camel-example-cxf-tomcat</module>
-        <module>camel-example-cxf-ws-security-signature</module>
         <module>camel-example-console</module>
         <module>camel-example-debezium</module>
         <module>camel-example-ftp</module>
