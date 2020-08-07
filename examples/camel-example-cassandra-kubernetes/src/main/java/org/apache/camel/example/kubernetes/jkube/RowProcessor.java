@@ -14,21 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.kubernetes.fmp;
+package org.apache.camel.example.kubernetes.jkube;
 
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Session;
+import com.datastax.oss.driver.api.core.cql.Row;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 
-public class CqlPopulateBean {
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public void populate() {
-        Cluster cluster = Cluster.builder().addContactPoint("cassandra").build();
-        Session session = cluster.connect();
-        session.execute("create keyspace if not exists test with replication = {'class':'SimpleStrategy', 'replication_factor':1};");
-        session.execute("create table if not exists test.users ( id int primary key, name text );");
-        session.execute("insert into test.users (id,name) values (1, 'oscerd') if not exists;");
-        session.close();
-        cluster.close();
-    }
-
+public class RowProcessor implements Processor {
+  @SuppressWarnings("unchecked")
+  @Override
+  public void process(Exchange exchange) {
+    final List<Row> rows = exchange.getIn().getBody(List.class);
+    exchange.getIn().setBody(rows.stream()
+      .map(row -> String.format("%s-%s", row.getInt("id"), row.getString("name")))
+      .collect(Collectors.joining(","))
+    );
+  }
 }

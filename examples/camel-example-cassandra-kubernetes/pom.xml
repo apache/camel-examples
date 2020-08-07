@@ -36,6 +36,7 @@
         <category>Cloud</category>
         <!-- dependency versions -->
         <cassandra.driver.version>3.7.2</cassandra.driver.version>
+        <main.class>org.apache.camel.spring.Main</main.class>
     </properties>
 
     <dependencyManagement>
@@ -72,6 +73,12 @@
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-core</artifactId>
             <version>${cassandra.driver.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-handler</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- used for generating random message -->
@@ -98,30 +105,55 @@
             <version>${log4j-version}</version>
         </dependency>
     </dependencies>
-
-    <!-- only run tests if this profile is enabled -->
+    <build>
+        <plugins>
+            <!-- allows the route to be ran via 'mvn exec:java' -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven-plugin-version}</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+            <!-- Create a Fat JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin-version}</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <archive>
+                        <manifest>
+                            <mainClass>${main.class}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>fat-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <profiles>
         <profile>
             <id>kubernetes-install</id>
-
             <build>
                 <defaultGoal>install</defaultGoal>
-
                 <plugins>
-
                     <plugin>
-                        <groupId>io.fabric8</groupId>
-                        <artifactId>fabric8-maven-plugin</artifactId>
-                        <version>${fabric8-maven-plugin-version}</version>
-                        <configuration>
-                            <generator>
-                                <config>
-                                    <java-exec>
-                                        <mainClass>org.apache.camel.spring.Main</mainClass>
-                                    </java-exec>
-                                </config>
-                            </generator>
-                        </configuration>
+                        <groupId>org.eclipse.jkube</groupId>
+                        <artifactId>kubernetes-maven-plugin</artifactId>
+                        <version>${jkube-version}</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -132,15 +164,7 @@
                         </executions>
                     </plugin>
 
-                    <!-- allows the route to be ran via 'mvn exec:java' -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>${exec-maven-plugin-version}</version>
-                        <configuration>
-                            <mainClass>org.apache.camel.spring.Main</mainClass>
-                        </configuration>
-                    </plugin>
+
 
                 </plugins>
             </build>

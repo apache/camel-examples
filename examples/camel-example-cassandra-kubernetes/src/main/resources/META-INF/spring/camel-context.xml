@@ -26,14 +26,15 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-  <bean id="populate" class="org.apache.camel.example.kubernetes.fmp.CqlPopulateBean" init-method="populate"/>
-
+  <bean id="populate" class="org.apache.camel.example.kubernetes.jkube.CqlPopulateBean" init-method="populate"/>
+  <bean id="rowProcessor" class="org.apache.camel.example.kubernetes.jkube.RowProcessor"/>
   <camelContext xmlns="http://camel.apache.org/schema/spring" depends-on="populate">
 
     <route id="cassandra-route">
       <from uri="timer:foo?period=5000"/>
-      <to uri="cql://cassandra/test?cql=select * from users;&amp;consistencyLevel=quorum" />
-      <log message="Query result set ${body}"/>
+      <to uri="cql://cassandra/test?datacenter=DC1-K8Demo&amp;cql=SELECT * FROM users;&amp;consistencyLevel=quorum" />
+      <process ref="rowProcessor"/>
+      <log message="Query result set [${body}]"/>
     </route>
 
   </camelContext>

@@ -189,6 +189,7 @@
         <woodstox-version>6.0.3</woodstox-version>
         <xmlunit-version>1.6</xmlunit-version>
         <derby-version>10.14.2.0</derby-version>
+        <jkube-version>1.0.0-rc-1</jkube-version>
     </properties>
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
