@@ -1,8 +1,6 @@
-== Apache Any23 Example
+== Apache OAIPMH Example
 
-This example shows how to extract data from a page with RDF content using Apache Any23. In this example the Dbpedia webpage of a country (Ecuador) is processed with the camel-any23 dataformat as a RDF4J Model. 
-The extracted information is filtered in order to select the URIS of the country's leaders through the Dbpedia property http://dbpedia.org/ontology/leader . 
-Afterwards, the information of each leader is requested and presented in JSON-LD format.
+This example shows how to use the consumer and producer component to harvest data from a repository using the OAIPMH protocol. The repository to be harvested is ArXiv, which contains preprint information for scientific articles and is widely known on the web. The example first queries the collections available in the repository. From the available collections, it filters those that are identified as "Mathematics" and from their identifier it extracts the titles of the publications contained in this collection.
 
 == How to run
 
@@ -10,13 +8,13 @@ You can run this example using
 
     mvn compile exec:java
 
-== More information about the camel-any23 Dataformat.
+== More information about the camel-oaipmh Component.
 
-You can find more information about camel-any23 at the website: https://github.com/apache/camel/blob/master/components/camel-any23/src/main/docs/any23-dataformat.adoc
+You can find more information about camel-OAIPMH at the website: https://github.com/apache/camel/blob/master/components/camel-oaipmh/src/main/docs/oaipmh-dataformat.adoc
 
-== More information about Apache Any23
+== More information about OAIPMH protocol
 
-You can find more information about Apache Any23 at the website: https://any23.apache.org
+You can find more information about OAIPMH protocol at the website: http://www.openarchives.org/OAI/openarchivesprotocol.html
 
 == More information about Apache Camel
 
