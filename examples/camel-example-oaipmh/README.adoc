@@ -10,7 +10,7 @@ You can run this example using
 
 == More information about the camel-oaipmh Component.
 
-You can find more information about camel-OAIPMH at the website: https://github.com/apache/camel/blob/master/components/camel-oaipmh/src/main/docs/oaipmh-dataformat.adoc
+You can find more information about camel-OAIPMH at the website: https://github.com/apache/camel/blob/master/components/camel-oaipmh/src/main/docs/oaipmh-component.adoc
 
 == More information about OAIPMH protocol
 
