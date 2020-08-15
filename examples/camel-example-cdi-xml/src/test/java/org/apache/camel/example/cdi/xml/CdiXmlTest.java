@@ -32,7 +32,7 @@ import org.apache.camel.cdi.Uri;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.reifier.RouteReifier;
-import org.apache.camel.spi.CamelEvent.CamelContextStartingEvent;
+import org.apache.camel.spi.CamelEvent.CamelContextStartedEvent;
 import org.apache.camel.test.cdi.CamelCdiRunner;
 import org.apache.camel.test.cdi.Order;
 import org.awaitility.Awaitility;
@@ -40,6 +40,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.apache.camel.component.mock.MockEndpoint.assertIsSatisfied;
+
+
 
 @RunWith(CamelCdiRunner.class)
 public class CdiXmlTest {
@@ -51,7 +53,7 @@ public class CdiXmlTest {
     @Inject
     private ProducerTemplate prompt;
 
-    void pipeMatrixStream(@Observes CamelContextStartingEvent event,
+    void pipeMatrixStream(@Observes CamelContextStartedEvent event,
                           ModelCamelContext context) throws Exception {
         RouteReifier
             .adviceWith(context.getRouteDefinition("matrix"), context, new AdviceWithRouteBuilder() {

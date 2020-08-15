@@ -294,6 +294,7 @@
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf-codegen-plugin-version}</version>
                 <executions>
                     <execution>
                         <id>generate-sources</id>
