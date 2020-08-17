@@ -37,16 +37,6 @@ public class Application extends RouteBuilder {
     public Application() throws IOException {
     }
 
-    @Override
-    public void configure() {
-        from("minio://bucket-name?deleteAfterRead=false&maxMessagesPerPoll=25&delay=5000")
-                .log(LoggingLevel.INFO, "consuming", "Consumer Fired!")
-                .idempotentConsumer(header("CamelMinioETag"),
-                        FileIdempotentRepository.fileIdempotentRepository(new File("target/file.data"), 250, 512000))
-                .log(LoggingLevel.INFO, "Replay Message Sent to file:minio_out ${in.header.CamelAwsS3Key}")
-                .to("file:target/minio_out?fileName=${in.header.CamelMinioObjectName}");
-    }
-
     @Produces
     @Named("minioClient")
     MinioClient minioClient() {
@@ -56,4 +46,15 @@ public class Application extends RouteBuilder {
                 .region(properties.getProperty("region"));
         return client.build();
     }
+
+    @Override
+    public void configure() {
+        from("minio://bucket-name?deleteAfterRead=false&maxMessagesPerPoll=25&delay=5000")
+                .log(LoggingLevel.INFO, "consuming", "Consumer Fired!")
+                .idempotentConsumer(header("CamelMinioETag"),
+                        FileIdempotentRepository.fileIdempotentRepository(new File("target/file.data"), 250, 512000))
+                .log(LoggingLevel.INFO, "Replay Message Sent to file:minio_out ${in.header.CamelMinioObjectName}")
+                .to("file:target/minio_out?fileName=${in.header.CamelMinioObjectName}");
+    }
+
 }
