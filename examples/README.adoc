@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 75 (0 deprecated)
+Number of Examples: 77 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -70,11 +70,15 @@ Number of Examples: 75 (0 deprecated)
 
 | link:camel-example-cdi-kubernetes/README.adoc[CDI Kubernetes] (camel-example-cdi-kubernetes) | Cloud | An example running Camel CDI on Kubernetes
 
+| link:camel-example-cdi-minio/README.adoc[CDI Minio] (camel-example-cdi-minio) | Cloud | Minio CDI example
+
 | link:camel-example-hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (camel-example-hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
 
 | link:camel-example-cdi-cassandraql/README.adoc[CDI Cassandra] (camel-example-cdi-cassandraql) | Database | Cassandraql CDI example
 
 | link:camel-example-debezium/README.adoc[Debezium] (camel-example-debezium) | Database | An example for Debezium Component
+
+| link:camel-example-debezium-eventhubs-blob/README.adoc[Debezium Eventhubs Blob] (camel-example-debezium-eventhubs-blob) | Database | An example for Debezium Component with Azure Event Hubs and Azure Storage Blob
 
 | link:camel-example-jdbc/README.adoc[JDBC] (camel-example-jdbc) | Database | An example for showing Camel using JDBC component
 
