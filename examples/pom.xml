@@ -98,6 +98,7 @@
         <module>camel-example-fhir</module>
         <module>camel-example-cdi-kubernetes</module>
         <module>camel-example-cdi-metrics</module>
+        <module>camel-example-cdi-minio</module>
         <module>camel-example-cdi-properties</module>
         <module>camel-example-cdi-rest-servlet</module>
         <module>camel-example-cdi-test</module>
@@ -145,6 +146,7 @@
         <module>camel-example-spring-ws</module>
         <module>camel-example-spring-xquery</module>
         <module>camel-example-spring-security</module>
+        <module>camel-example-ssh</module>
         <module>camel-example-swagger-cdi</module>
         <module>camel-example-openapi-cdi</module>
         <module>camel-example-telegram</module>
@@ -154,7 +156,6 @@
         <module>camel-example-widget-gadget-cdi</module>
         <module>camel-example-widget-gadget-java</module>
         <module>camel-example-widget-gadget-xml</module>
-      <module>camel-example-cdi-minio</module>
   </modules>
 
     <properties>
