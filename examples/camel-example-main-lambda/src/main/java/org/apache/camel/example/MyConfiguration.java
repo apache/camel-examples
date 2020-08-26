@@ -18,8 +18,7 @@ package org.apache.camel.example;
 
 import org.apache.camel.BindToRegistry;
 import org.apache.camel.PropertyInject;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.builder.RouteBuilderConfigurer;
+import org.apache.camel.builder.LambdaRouteBuilder;
 
 /**
  * Class to configure the Camel application.
@@ -33,11 +32,11 @@ public class MyConfiguration {
     }
 
     /**
-     * Here we define a route as a method that returns a RouteBuilderConfigurer instance.
+     * Here we define a route as a method that returns a LambdaRouteBuilder instance.
      * This allows us to use lambda style.
      */
     @BindToRegistry
-    public RouteBuilderConfigurer myRoute() {
+    public LambdaRouteBuilder myRoute() {
         return rb -> rb.from("quartz:foo?cron={{myCron}}")
                 .bean("myBean", "hello")
                 .log("${body}")
