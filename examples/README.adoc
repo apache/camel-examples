@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 77 (0 deprecated)
+Number of Examples: 78 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -63,6 +63,8 @@ Number of Examples: 77 (0 deprecated)
 | link:camel-example-spring-javaconfig/README.adoc[Spring Java Config] (camel-example-spring-javaconfig) | Beginner | An example showing how to work with Camel and Spring Java Config
 
 | link:camel-example-spring-xquery/README.adoc[Spring XQuery] (camel-example-spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
+
+| link:camel-example-ssh/README.adoc[Ssh] (camel-example-ssh) | Beginner | An example that uses Camel SSH component
 
 | link:camel-example-cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (camel-example-cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
 
