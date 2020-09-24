@@ -26,8 +26,7 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from(aws2S3("camel-kafka-connector").delay(10L).deleteAfterRead(false))
-            .log("Consuming!")
-            .log("${body}");
+        from(aws2S3("{{bucketName}}").delay(1000L).deleteAfterRead(false))
+            .log("The content is ${body}");
     }
 }
