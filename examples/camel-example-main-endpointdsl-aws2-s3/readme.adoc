@@ -8,6 +8,8 @@ The example will poll an S3 bucket and Log the content of the file.
 
 Notice how you can configure Camel in the `application.properties` file.
 
+Don't forget to add your AWS Credentials and the bucket name.
+
 === How to run
 
 You can run this example using
