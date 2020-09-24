@@ -193,6 +193,7 @@
         <xmlunit-version>1.6</xmlunit-version>
         <derby-version>10.14.2.0</derby-version>
         <jkube-version>1.0.0</jkube-version>
+        <wsdl4j-version>1.6.3</wsdl4j-version>
     </properties>
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
