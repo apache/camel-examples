@@ -194,6 +194,7 @@
         <derby-version>10.14.2.0</derby-version>
         <jkube-version>1.0.0</jkube-version>
         <wsdl4j-version>1.6.3</wsdl4j-version>
+        <fabric8-maven-plugin-version>4.4.1</fabric8-maven-plugin-version>
     </properties>
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
