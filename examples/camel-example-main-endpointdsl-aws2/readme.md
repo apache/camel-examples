@@ -1,4 +1,4 @@
-== Camel Example Main Endpoint DSL with AWS2 Eventbridge, SQS and S3 components
+# Camel Example Main Endpoint DSL with AWS2 Eventbridge, SQS and S3 components
 
 This example shows how to use the endpoint DSL in your Camel routes
 to define endpoints using type safe fluent builders, which are Java methods
@@ -18,7 +18,7 @@ You'll need to create a trail in cloud trails service of AWS to make this exampl
 
 Also you'll need to create an SQS queue ahead of time, to make the eventbridge rule point it as target.
 
-=== How to run
+## How to run
 
 You can run this example following these steps:
 
@@ -42,7 +42,7 @@ Once completed you can stop the route
 
 In the aws2-sqs-consumer terminal you should see a createBucket event in the log.
 
-=== Help and contributions
+## Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
 https://camel.apache.org/support.html[let us know].
