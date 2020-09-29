@@ -26,7 +26,7 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from(aws2S3("{{bucketName}}").delay(1000L).deleteAfterRead(false))
-            .log("The content is ${body}");
+        from(aws2Sqs("{{sqs-queue-name}}").deleteAfterRead(true))
+        .log("${body}");
     }
 }
