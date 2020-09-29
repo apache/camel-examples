@@ -5,10 +5,10 @@ to define endpoints using type safe fluent builders, which are Java methods
 that are compiled.
 
 This example is splitted in 3 submodules
-  - Eventbridge module: This module is responsible for creating a rule in Eventbridge 
+* Eventbridge module: This module is responsible for creating a rule in Eventbridge 
 and targetting an SQS queue as target
-  - SQS Consumer: This module is responsibile for consuming the events coming into the queue
-  - S3 Events inject: This module will upload a file to a bucket and as first step it will autocreate a bucket
+* SQS Consumer: This module is responsibile for consuming the events coming into the queue
+* S3 Events inject: This module will upload a file to a bucket and as first step it will autocreate a bucket
 
 Notice how you can configure Camel in the `application.properties` file.
 
