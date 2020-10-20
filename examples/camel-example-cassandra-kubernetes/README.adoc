@@ -99,14 +99,14 @@ You should then see an output similar to this:
 [INFO] k8s: 2020-08-07 12:34:34,150 [main           ] INFO  Cluster                        - New Cassandra host cassandra/172.17.0.6:9042 added
 [INFO] k8s: 2020-08-07 12:34:36,780 [main           ] INFO  CqlPopulateBean                - Cassandra was populated with sample values for test.users table
 [INFO] k8s: 2020-08-07 12:34:37,372 [main           ] INFO  LRUCacheFactory                - Detected and using LRUCacheFactory: camel-caffeine-lrucache
-[INFO] k8s: 2020-08-07 12:34:38,012 [main           ] INFO  AbstractCamelContext           - Apache Camel 3.6.0-SNAPSHOT (camel-1) is starting
+[INFO] k8s: 2020-08-07 12:34:38,012 [main           ] INFO  AbstractCamelContext           - Apache Camel 3.7.0-SNAPSHOT (camel-1) is starting
 [INFO] k8s: 2020-08-07 12:34:38,019 [main           ] INFO  AbstractCamelContext           - StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
 [INFO] k8s: 2020-08-07 12:34:38,019 [main           ] INFO  AbstractCamelContext           - Using HealthCheck: camel-health
 [INFO] k8s: 2020-08-07 12:34:38,664 [main           ] INFO  DefaultMavenCoordinates        - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.8.0
 [INFO] k8s: 2020-08-07 12:34:39,554 [s0-admin-0     ] INFO  Clock                          - Using native clock for microsecond precision
 [INFO] k8s: 2020-08-07 12:34:41,453 [main           ] INFO  InternalRouteStartupManager    - Route: cassandra-route started and consuming from: timer://foo
 [INFO] k8s: 2020-08-07 12:34:41,454 [main           ] INFO  AbstractCamelContext           - Total 1 routes, of which 1 are started
-[INFO] k8s: 2020-08-07 12:34:41,455 [main           ] INFO  AbstractCamelContext           - Apache Camel 3.6.0-SNAPSHOT (camel-1) started in 3.441 seconds
+[INFO] k8s: 2020-08-07 12:34:41,455 [main           ] INFO  AbstractCamelContext           - Apache Camel 3.7.0-SNAPSHOT (camel-1) started in 3.441 seconds
 [INFO] k8s: 2020-08-07 12:34:41,469 [main           ] INFO  BaseMainSupport                - Using properties from: classpath:application.properties;optional=true
 [INFO] k8s: 2020-08-07 12:34:41,557 [main           ] INFO  DefaultRoutesCollector         - No additional Camel XML routes discovered from: classpath:camel/*.xml
 [INFO] k8s: 2020-08-07 12:34:41,557 [main           ] INFO  DefaultRoutesCollector         - No additional Camel XML route templates discovered from: classpath:camel-template/*.xml
