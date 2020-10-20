@@ -15,6 +15,13 @@ import org.apache.camel.example.MyBean;
 @SuppressWarnings("unchecked")
 public class MyBeanConfigurer extends org.apache.camel.support.component.PropertyConfigurerSupport implements GeneratedPropertyConfigurer, PropertyConfigurerGetter {
 
+    private static final Map<String, Object> ALL_OPTIONS;
+    static {
+        Map<String, Object> map = new CaseInsensitiveMap();
+        map.put("Hi", java.lang.String.class);
+        ALL_OPTIONS = map;
+    }
+
     @Override
     public boolean configure(CamelContext camelContext, Object obj, String name, Object value, boolean ignoreCase) {
         org.apache.camel.example.MyBean target = (org.apache.camel.example.MyBean) obj;
@@ -27,9 +34,7 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
 
     @Override
     public Map<String, Object> getAllOptions(Object target) {
-        Map<String, Object> answer = new CaseInsensitiveMap();
-        answer.put("Hi", java.lang.String.class);
-        return answer;
+        return ALL_OPTIONS;
     }
 
     @Override
