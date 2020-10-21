@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 79 (0 deprecated)
+Number of Examples: 80 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -77,6 +77,8 @@ Number of Examples: 79 (0 deprecated)
 | link:camel-example-cdi-minio/README.adoc[CDI Minio] (camel-example-cdi-minio) | Cloud | Minio CDI example
 
 | link:camel-example-hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (camel-example-hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
+
+| link:camel-example-main-endpointdsl-aws2/readme.md[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
 | link:camel-example-cdi-cassandraql/README.adoc[CDI Cassandra] (camel-example-cdi-cassandraql) | Database | Cassandraql CDI example
 
