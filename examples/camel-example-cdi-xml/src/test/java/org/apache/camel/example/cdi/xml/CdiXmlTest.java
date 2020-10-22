@@ -26,12 +26,12 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.ServiceStatus;
+import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.cdi.Uri;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ModelCamelContext;
-import org.apache.camel.reifier.RouteReifier;
 import org.apache.camel.spi.CamelEvent.CamelContextStartedEvent;
 import org.apache.camel.test.cdi.CamelCdiRunner;
 import org.apache.camel.test.cdi.Order;
@@ -55,13 +55,12 @@ public class CdiXmlTest {
 
     void pipeMatrixStream(@Observes CamelContextStartedEvent event,
                           ModelCamelContext context) throws Exception {
-        RouteReifier
-            .adviceWith(context.getRouteDefinition("matrix"), context, new AdviceWithRouteBuilder() {
-                @Override
-                public void configure() {
-                    weaveAddLast().to("mock:matrix");
-                }
-            });
+        AdviceWith.adviceWith(context.getRouteDefinition("matrix"), context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() {
+                weaveAddLast().to("mock:matrix");
+            }
+        });
     }
 
     static class RescueMission extends RouteBuilder {
