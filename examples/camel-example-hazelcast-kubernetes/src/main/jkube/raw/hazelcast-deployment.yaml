@@ -15,13 +15,16 @@
 # limitations under the License.
 #
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: hazelcast
   labels: 
     name: hazelcast
-spec: 
+spec:
+  selector:
+    matchLabels:
+      name: hazelcast
   template: 
     metadata: 
       labels: 
@@ -29,7 +32,7 @@ spec:
     spec: 
       containers: 
       - name: hazelcast
-        image: quay.io/pires/hazelcast-kubernetes:3.12.1
+        image: hazelcast/hazelcast:4.0.3
         imagePullPolicy: Always
         env:
         - name: "DNS_DOMAIN"
