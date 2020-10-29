@@ -125,6 +125,7 @@
         <module>camel-example-main-artemis</module>
         <module>camel-example-main-endpointdsl</module>
         <module>camel-example-main-endpointdsl-aws2-s3</module>
+        <module>camel-example-main-endpointdsl-aws2-s3-kafka</module>
         <module>camel-example-main-health</module>
         <module>camel-example-main-lambda</module>
         <module>camel-example-main-joor</module>
