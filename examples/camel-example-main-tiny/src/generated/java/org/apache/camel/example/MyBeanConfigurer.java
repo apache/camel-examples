@@ -4,6 +4,7 @@ package org.apache.camel.example;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.spi.ConfigurerStrategy;
 import org.apache.camel.spi.GeneratedPropertyConfigurer;
 import org.apache.camel.spi.PropertyConfigurerGetter;
 import org.apache.camel.util.CaseInsensitiveMap;
@@ -20,6 +21,7 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
         Map<String, Object> map = new CaseInsensitiveMap();
         map.put("Hi", java.lang.String.class);
         ALL_OPTIONS = map;
+        ConfigurerStrategy.addConfigurerClearer(MyBeanConfigurer::clearConfigurers);
     }
 
     @Override
@@ -35,6 +37,13 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
     @Override
     public Map<String, Object> getAllOptions(Object target) {
         return ALL_OPTIONS;
+    }
+
+    public static void clearBootstrapConfigurers() {
+    }
+
+    public static void clearConfigurers() {
+        ALL_OPTIONS.clear();
     }
 
     @Override
