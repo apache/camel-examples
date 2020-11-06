@@ -21,7 +21,7 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
         Map<String, Object> map = new CaseInsensitiveMap();
         map.put("Hi", java.lang.String.class);
         ALL_OPTIONS = map;
-        ConfigurerStrategy.addConfigurerClearer(MyBeanConfigurer::clearConfigurers);
+        ConfigurerStrategy.addBootstrapConfigurerClearer(MyBeanConfigurer::clearBootstrapConfigurers);
     }
 
     @Override
@@ -40,10 +40,16 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
     }
 
     public static void clearBootstrapConfigurers() {
+        ALL_OPTIONS.clear();
     }
 
-    public static void clearConfigurers() {
-        ALL_OPTIONS.clear();
+    @Override
+    public Class<?> getOptionType(String name, boolean ignoreCase) {
+        switch (ignoreCase ? name.toLowerCase() : name) {
+        case "hi":
+        case "Hi": return java.lang.String.class;
+        default: return null;
+        }
     }
 
     @Override
