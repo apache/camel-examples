@@ -4,9 +4,10 @@ package org.apache.camel.example;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.spi.ExtendedPropertyConfigurerGetter;
+import org.apache.camel.spi.PropertyConfigurerGetter;
 import org.apache.camel.spi.ConfigurerStrategy;
 import org.apache.camel.spi.GeneratedPropertyConfigurer;
-import org.apache.camel.spi.PropertyConfigurerGetter;
 import org.apache.camel.util.CaseInsensitiveMap;
 import org.apache.camel.example.MyBean;
 
@@ -16,14 +17,6 @@ import org.apache.camel.example.MyBean;
 @SuppressWarnings("unchecked")
 public class MyBeanConfigurer extends org.apache.camel.support.component.PropertyConfigurerSupport implements GeneratedPropertyConfigurer, PropertyConfigurerGetter {
 
-    private static final Map<String, Object> ALL_OPTIONS;
-    static {
-        Map<String, Object> map = new CaseInsensitiveMap();
-        map.put("Hi", java.lang.String.class);
-        ALL_OPTIONS = map;
-        ConfigurerStrategy.addBootstrapConfigurerClearer(MyBeanConfigurer::clearBootstrapConfigurers);
-    }
-
     @Override
     public boolean configure(CamelContext camelContext, Object obj, String name, Object value, boolean ignoreCase) {
         org.apache.camel.example.MyBean target = (org.apache.camel.example.MyBean) obj;
@@ -32,15 +25,6 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
         case "Hi": target.setHi(property(camelContext, java.lang.String.class, value)); return true;
         default: return false;
         }
-    }
-
-    @Override
-    public Map<String, Object> getAllOptions(Object target) {
-        return ALL_OPTIONS;
-    }
-
-    public static void clearBootstrapConfigurers() {
-        ALL_OPTIONS.clear();
     }
 
     @Override
