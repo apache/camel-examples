@@ -16,6 +16,11 @@ public class CSimpleScript1 extends org.apache.camel.language.csimple.CSimpleSup
     }
 
     @Override
+    public boolean isPredicate() {
+        return false;
+    }
+
+    @Override
     public String getText() {
         return "${random(20)}";
     }

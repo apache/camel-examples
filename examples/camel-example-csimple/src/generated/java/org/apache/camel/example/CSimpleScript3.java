@@ -16,6 +16,11 @@ public class CSimpleScript3 extends org.apache.camel.language.csimple.CSimpleSup
     }
 
     @Override
+    public boolean isPredicate() {
+        return true;
+    }
+
+    @Override
     public String getText() {
         return "${body} > 5";
     }
