@@ -24,10 +24,6 @@ public class MyTemplateBuilder implements ConfigureRouteTemplates {
 
     /**
      * Configure and adds routes from route templates.
-     *
-     * The method name <tt>configureRouteTemplates</tt> is detected from camel-main
-     * and invoked after routes and route templates has been loaded which allows
-     * to create and add routes from the route templates during bootstrap
      */
     public void configure(CamelContext context) {
 

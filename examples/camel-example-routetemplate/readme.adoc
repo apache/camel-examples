@@ -7,7 +7,7 @@ The route template is defined via Java or XML DSL (RouteBuilder) in the `MyRoute
 
 The `application.properties` is used to create two routes from the template using different set of parameters.
 
-An alternative to create routes is from Java which is done in the `MyConfiguration.java` class.
+An alternative to create routes is from Java which is done in the `MyTemplateBuilder.java` class.
 See the `MyApplication.java` where you can change the source to use java instead of property file for the template parameters.
 
 The example runs standalone via Camel Main in the `MyApplication.java` source file.
