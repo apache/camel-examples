@@ -18,8 +18,9 @@ package org.apache.camel.example;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.TemplatedRouteBuilder;
+import org.apache.camel.main.ConfigureRouteTemplates;
 
-public class MyConfiguration {
+public class MyTemplateBuilder implements ConfigureRouteTemplates {
 
     /**
      * Configure and adds routes from route templates.
@@ -28,7 +29,7 @@ public class MyConfiguration {
      * and invoked after routes and route templates has been loaded which allows
      * to create and add routes from the route templates during bootstrap
      */
-    public void configureRouteTemplates(CamelContext context) {
+    public void configure(CamelContext context) {
 
         // create two routes from the template
 
