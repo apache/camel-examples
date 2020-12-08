@@ -50,7 +50,7 @@ public final class MessageConsumerClient {
                         .register(camelContext, "kafka");
 
                 from("kafka:{{consumer.topic}}"
-                        + "&maxPollRecords={{consumer.maxPollRecords}}"
+                        + "?maxPollRecords={{consumer.maxPollRecords}}"
                         + "&consumersCount={{consumer.consumersCount}}"
                         + "&seekTo={{consumer.seekTo}}"
                         + "&groupId={{consumer.group}}")
