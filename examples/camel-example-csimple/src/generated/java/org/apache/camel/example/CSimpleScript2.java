@@ -11,8 +11,7 @@ import static org.apache.camel.language.csimple.CSimpleHelper.*;
 
 public class CSimpleScript2 extends org.apache.camel.language.csimple.CSimpleSupport {
 
-    public CSimpleScript2(CamelContext context) {
-        init(context);
+    public CSimpleScript2() {
     }
 
     @Override
