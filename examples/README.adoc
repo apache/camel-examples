@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 82 (0 deprecated)
+Number of Examples: 84 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -32,6 +32,10 @@ Number of Examples: 82 (0 deprecated)
 | link:camel-example-cdi-xml/README.adoc[CDI Camel XML] (camel-example-cdi-xml) | Beginner | CDI and Camel XML example
 
 | link:camel-example-console/README.adoc[Console] (camel-example-console) | Beginner | An example that reads input from the console
+
+| link:camel-example-csimple/readme.adoc[Csimple] (camel-example-csimple) | Beginner | Shows using compiled simple language
+
+| link:camel-example-csimple-joor/readme.adoc[Csimple Joor] (camel-example-csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
 | link:camel-example-ftp/README.md[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
 
