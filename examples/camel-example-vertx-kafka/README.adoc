@@ -2,7 +2,7 @@
 
 === Introduction
 
-An example which shows how to integrate Camel with Kafka. It is mainly based on Camel Kafka example.
+An example which shows how to integrate Camel with Kafka using Camel Vertx Kafka component. It is mainly based on Camel Kafka example.
 
 This project consists of the following examples:
 
