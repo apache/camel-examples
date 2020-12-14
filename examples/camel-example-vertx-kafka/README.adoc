@@ -1,0 +1,65 @@
+== Camel Vertx Kafka example
+
+=== Introduction
+
+An example which shows how to integrate Camel with Kafka. It is mainly based on Camel Kafka example.
+
+This project consists of the following examples:
+
+  1. Send messages continuously by typing on the command line.
+  2. Example of partitioner for a given producer.
+  3. Topic is sent in the header as well as in the URL.
+
+=== Preparing Kafka
+
+The easiest way to get Kafka up and running for _dev_ environment, is to use Confluent Local Community setup, you can set it up using the instructions https://docs.confluent.io/platform/current/quickstart/ce-quickstart.html#ce-quickstart[here].
+
+Once you have done with the setup, start Kafka using this command:
+```
+confluent local services start
+```
+
+When you are done from the example, you can stop kafka with this command:
+```
+confluent local services stop
+```
+
+We don't need to create the topics here as the Confluent dev environment configured to create topics automatically once the producer has started to produce messages to Kafka.
+
+=== Build
+
+You will need to compile this example first:
+
+    $ mvn compile
+
+=== Run
+
+Run the consumer first in separate shell 
+
+    $ mvn compile exec:java -Pkafka-consumer
+
+Run the message producer in the seperate shell
+
+    $ mvn compile exec:java -Pkafka-producer
+
+Initially, some messages are sent programmatically. 
+On the command prompt, type the messages. Each line is sent as one message to kafka
+Press `Ctrl-C` to exit.
+
+=== Configuration
+
+You can configure the details in the file:
+  `src/main/resources/application.properties`
+
+You can enable verbose logging by adjusting the `src/main/resources/log4j2.properties`
+  file as documented in the file.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, 
+then please https://camel.apache.org/support.html[let us know].
+
+We also love contributors, 
+so https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

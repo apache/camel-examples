@@ -160,6 +160,7 @@
         <module>camel-example-transformer-cdi</module>
         <module>camel-example-transformer-demo</module>
         <module>camel-example-twitter-websocket</module>
+        <module>camel-example-vertx-kafka</module>
         <module>camel-example-widget-gadget-cdi</module>
         <module>camel-example-widget-gadget-java</module>
         <module>camel-example-widget-gadget-xml</module>
