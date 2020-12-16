@@ -6,13 +6,10 @@ import java.util.stream.*;
 
 import org.apache.camel.*;
 import org.apache.camel.util.*;
-import org.apache.camel.spi.*;
 import static org.apache.camel.language.csimple.CSimpleHelper.*;
 
 
 public class CSimpleScript2 extends org.apache.camel.language.csimple.CSimpleSupport {
-
-    Language bean;
 
     public CSimpleScript2() {
     }
