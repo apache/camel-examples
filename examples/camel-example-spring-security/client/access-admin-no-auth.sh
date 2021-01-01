@@ -19,5 +19,5 @@
 rm -rf work
 mkdir work
 POM_VERSION=$(../../../mvnw -f ../pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
-wget --http-user=bob --http-password=bobspassword --directory-prefix=work  --output-file=work/log.txt http://localhost:8080/camel-example-spring-security-$POM_VERSION/camel/admin
+wget --directory-prefix=work  --output-file=work/log.txt http://localhost:8080/camel-example-spring-security-$POM_VERSION/camel/admin
 cat -n work/* | less
