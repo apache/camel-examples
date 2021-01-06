@@ -58,8 +58,8 @@ public final class DebeziumMySqlConsumerToAzureEventHubs {
                         + "&databasePassword={{debezium.mysql.databasePassword}}"
                         + "&databaseServerName={{debezium.mysql.databaseServerName}}"
                         + "&databaseHistoryFileFilename={{debezium.mysql.databaseHistoryFileName}}"
-                        + "&databaseWhitelist={{debezium.mysql.databaseWhitelist}}"
-                        + "&tableWhitelist={{debezium.mysql.tableWhitelist}}"
+                        + "&databaseIncludeList={{debezium.mysql.databaseIncludeList}}"
+                        + "&tableIncludeList={{debezium.mysql.tableIncludeList}}"
                         + "&offsetStorageFileName={{debezium.mysql.offsetStorageFileName}}")
                         .routeId("FromDebeziumMySql")
                         // We will need to prepare the data for Azure EventHubs Therefore, we will hash the key to make sure our record land on the same partition
