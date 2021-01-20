@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 85 (0 deprecated)
+Number of Examples: 86 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -140,6 +140,8 @@ Number of Examples: 85 (0 deprecated)
     
 
 | link:camel-example-cdi-metrics/README.adoc[CDI Metrics] (camel-example-cdi-metrics) | Management and Monitoring | Dropwizard Metrics CDI example
+
+| link:camel-example-flight-recorder/readme.adoc[Flight Recorder] (camel-example-flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
 
 | link:camel-example-jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
 

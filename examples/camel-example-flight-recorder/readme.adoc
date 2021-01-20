@@ -1,0 +1,44 @@
+== Camel Example Flight Recorder
+
+This example demonstrates how to integrate Camel with Java Flight Recorder
+which can be used to diagnose your JVM applications.
+
+In JDK Mission Control (visual tool for flight recorder), you can browse Camel events
+which for example can help diagnose problems with slow startup of Camel routes.
+
+=== How to run
+
+You can run this example using
+
+    mvn camel:run   
+
+And then after Camel has been started up, a recording is saved to disk, where you can see
+from the logs the location of the file, such as:
+
+    Flight recorder recording saved: /Users/davsclaus/camel-recording13093057117733087947.jfr
+
+You can then open this `jfr` file in JDK Mission Control and browse the information.
+In the Event Browser you can find the Camel Startup events, which can help pin-point to where
+Camel is slow to startup.
+
+NOTE: The recording is started when Camel is bootstrapped, and therefore not from the very beginning of the JVM.
+To capture from the JVM beginning you can run java with `-XX:StartFlightRecording`.
+
+=== Using logger instead of flight recorder
+
+Instead of capturing a recording you can configure Camel to log the startup steps instead by setting
+
+    camel.main.startup-recorder = logging
+
+In the `application.properties` file.
+
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
