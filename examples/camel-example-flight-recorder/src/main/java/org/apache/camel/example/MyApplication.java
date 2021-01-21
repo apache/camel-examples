@@ -27,9 +27,6 @@ public final class MyApplication {
     }
 
     public static void main(String[] args) throws Exception {
-//        System.out.println(">>>>>>>>>>>>>>> sleep 10 ");
-//        Thread.sleep(10000);
-
         // use Camels Main class
         Main main = new Main();
         // and add the routes (you can specify multiple classes)
