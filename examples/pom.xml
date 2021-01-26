@@ -165,6 +165,7 @@
         <module>camel-example-widget-gadget-cdi</module>
         <module>camel-example-widget-gadget-java</module>
         <module>camel-example-widget-gadget-xml</module>
+        <module>camel-example-azure-storage-blob</module>
   </modules>
 
     <properties>
