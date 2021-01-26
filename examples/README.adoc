@@ -76,6 +76,8 @@ Number of Examples: 86 (0 deprecated)
 
 | link:camel-example-ssh/README.adoc[Ssh] (camel-example-ssh) | Beginner | An example that uses Camel SSH component
 
+| link:camel-example-azure-storage-blob/README.adoc[Azure Storage Blob List] (camel-example-azure-storage-blob) | Beginner | An example that uses Camel Azure Storage Blob and explain how list large blob container.
+
 | link:camel-example-cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (camel-example-cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
 
 | link:camel-example-cdi-aws-s3/README.adoc[CDI AWS S3] (camel-example-cdi-aws-s3) | Cloud | AWS S3 CDI example
