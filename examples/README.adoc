@@ -25,7 +25,7 @@ Number of Examples: 89 (0 deprecated)
 
 | link:azure-storage-blob/README.adoc[Azure Storage Blob] (camel-example-azure-storage-blob) | Beginner | Azure Storage Blob example
 
-| link:camel-example-basic/README.adoc[Basic] (camel-example-basic) | Beginner | Basic example
+| link:basic/README.adoc[Basic] (camel-example-basic) | Beginner | Basic example
 
 | link:camel-example-cdi/README.adoc[CDI] (camel-example-cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
 
@@ -112,9 +112,9 @@ Number of Examples: 89 (0 deprecated)
 
 | link:artemis/README.adoc[Widget Gadget using Apache ActiveMQ Artemis] (camel-example-artemis) | EIP | The widget and gadget example from the EIP book using Apache ActiveMQ Artemis
 
-| link:camel-example-bigxml-split/README.adoc[Bigxml Split] (camel-example-bigxml-split) | EIP | How to deal with big XML files in Camel
+| link:bigxml-split/README.adoc[Bigxml Split] (camel-example-bigxml-split) | EIP | How to deal with big XML files in Camel
 
-| link:camel-example-billboard-aggr/README.adoc[Billboard Aggr] (camel-example-billboard-aggr) | EIP | Billboard aggregation example
+| link:billboard-aggregation/README.adoc[Billboard Aggr] (camel-example-billboard-aggr) | EIP | Billboard aggregation example
 
 | link:camel-example-cafe/README.adoc[Cafe] (camel-example-cafe) | EIP | A cafe example showing how to work with Camel
 
