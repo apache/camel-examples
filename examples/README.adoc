@@ -1,6 +1,6 @@
-# Welcome to the Apache Camel Examples
+= Welcome to the Apache Camel Examples
 
-= Introduction
+== Introduction
 
 This directory contains the various examples for working with Apache
 Camel. The examples can be run using Maven. When using the Maven
