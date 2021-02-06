@@ -22,17 +22,16 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.main.Main;
 import org.apache.camel.processor.aggregate.jdbc.JdbcAggregationRepository;
 import org.apache.camel.spi.AggregationRepository;
-import org.apache.camel.spi.OptimisticLockingAggregationRepository.OptimisticLockingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -58,18 +57,19 @@ public class Application {
     private static final String DB_USER = "admin";
     private static final String DB_PASS = "admin";
 
-    private static String CORRELATION_ID, EXPECTED_RESULT;
-    private static Queue<Integer> INPUT_QUEUE;
-    private static CountDownLatch LATCH;
+    private static String correlationId;
+    private static String expectedResult;
+    private static Queue<Integer> inputQueue;
+    private static CountDownLatch latch;
 
     public static void main(String[] args) throws Exception {
         // init
-        CORRELATION_ID = UUID.randomUUID().toString();
-        EXPECTED_RESULT = IntStream.rangeClosed(1, END)
+        correlationId = UUID.randomUUID().toString();
+        expectedResult = IntStream.rangeClosed(1, END)
                 .mapToObj(Integer::toString).collect(Collectors.joining("."));
-        INPUT_QUEUE = new ConcurrentLinkedQueue<>();
-        IntStream.rangeClosed(1, END).forEach(INPUT_QUEUE::add);
-        LATCH = new CountDownLatch(THREADS);
+        inputQueue = new ConcurrentLinkedQueue<>();
+        IntStream.rangeClosed(1, END).forEach(inputQueue::add);
+        latch = new CountDownLatch(THREADS);
 
         // test
         ExecutorService executor = Executors.newFixedThreadPool(THREADS);
@@ -78,7 +78,7 @@ public class Application {
         }
 
         // wait
-        LATCH.await();
+        latch.await();
         stop(executor);
     }
 
@@ -105,7 +105,7 @@ public class Application {
 
             camel.start();
             LOG.debug("Camel started");
-            LATCH.await();
+            latch.await();
             camel.stop();
             LOG.debug("Camel stopped");
         } catch (Exception e) {
@@ -140,7 +140,7 @@ public class Application {
         JdbcAggregationRepository repo = new JdbcAggregationRepository(txManager, "aggregation", ds);
         repo.setUseRecovery(false);
         repo.setStoreBodyAsText(false);
-        return (AggregationRepository) repo;
+        return repo;
     }
 
     private static Exchange aggregationStrategy(Exchange oldExchange, Exchange newExchange) {
@@ -150,7 +150,7 @@ public class Application {
         String body = oldExchange.getIn().getBody(String.class) + "."
                 + newExchange.getIn().getBody(String.class);
         oldExchange.getIn().setBody(body);
-        LOG.trace("Queue: {}", INPUT_QUEUE);
+        LOG.trace("Queue: {}", inputQueue);
         LOG.trace("Aggregation: {}", oldExchange.getIn().getBody());
         return oldExchange;
     }
@@ -160,7 +160,7 @@ public class Application {
         final String body = exchange.getIn().getBody(String.class);
         if (body != null && !body.isEmpty()) {
             String[] a1 = body.split("\\.");
-            String[] a2 = EXPECTED_RESULT.split("\\.");
+            String[] a2 = expectedResult.split("\\.");
             if (a1.length == a2.length) {
                 Arrays.sort(a1);
                 Arrays.sort(a2);
@@ -188,17 +188,20 @@ public class Application {
     }
 
     static class MyProducerBean {
-        public void run(Exchange exchange) throws Exception {
+        public void run(Exchange exchange) {
             CamelContext context = exchange.getContext();
-            ProducerTemplate template = context.createProducerTemplate();
-            template.setThreadedAsyncMode(false);
-            Endpoint endpoint = context.getEndpoint("direct:aggregator");
-            Integer item = null;
-            while ((item = INPUT_QUEUE.poll()) != null) {
-                template.sendBodyAndHeader(endpoint, item, CID_HEADER, CORRELATION_ID);
+            try (ProducerTemplate template = context.createProducerTemplate()) {
+                template.setThreadedAsyncMode(false);
+                Endpoint endpoint = context.getEndpoint("direct:aggregator");
+                Integer item;
+                while ((item = inputQueue.poll()) != null) {
+                    template.sendBodyAndHeader(endpoint, item, CID_HEADER, correlationId);
+                }
+                template.stop();
+            } catch (IOException e) {
+                LOG.error("Error during execution");
             }
-            template.stop();
-            LATCH.countDown();
+            latch.countDown();
         }
     }
 
