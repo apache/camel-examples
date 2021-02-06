@@ -24,57 +24,62 @@ _application server_ but just a plain old _Java Main_.
 
 You will need to build this example first:
 
-....
-mvn install
-....
+[source,sh]
+----
+$ mvn package
+----
 
 === Install ActiveMQ Artemis
 
 To automate downloading, unpacking and configuration of Apache ActiveMQ
 Artemis with latest defined version a special profile is added. It's
-necessary to run following Maven command for do this during example
+necessary to run the following Maven command for this during example
 install:
 
-....
-mvn install -P artemis
-....
+[source,sh]
+----
+$ mvn install -P artemis
+----
 
 === Run ActiveMQ Artemis
 
 To start configured ActiveMQ Artemis instance in a shell use:
 
-....
+[source,sh]
+----
 $ target/artemis-instance/bin/artemis run
-....
+----
 
 Which startup ActiveMQ Artemis in the foreground and keeps it running
-until you hit ctrl+c to shutdown ActiveMQ Artemis.
+until you hit `ctrl+c` to shut down ActiveMQ Artemis.
 
 === Run Camel
 
 The Camel application connects to the message broker on url:
-`+tcp://localhost:61616+`. The url can be changed in the
-`+ArtemisMain.java+` source code.
+`tcp://localhost:61616`. The url can be changed in the
+`ArtemisMain.java` source code.
 
 When the ActiveMQ Artemis broker is running, then you can run this
-example using:
+example using the following command in a new shell:
 
-....
-mvn compile exec:java
-....
+[source,sh]
+----
+$ mvn compile exec:java
+----
 
 When the Camel application runs, you should see 2 orders being processed
 and logged to the console, with an output similar to:
 
-....
-2019-04-26 11:04:27,154 [sumer[newOrder]] INFO  gadget                         - Exchange[ExchangePattern: InOnly, BodyType: String, Body: ...<order>  <customerId>456</customerId>  <product>gadget</product>  <amount>3</amount></order>]
-2019-04-26 11:04:27,162 [sumer[newOrder]] INFO  widget                         - Exchange[ExchangePattern: InOnly, BodyType: String, Body: ...<order>  <customerId>123</customerId>  <product>widget</product>  <amount>2</amount></order>]
-....
+[source,sh]
+----
+$ 2019-04-26 11:04:27,154 [sumer[newOrder]] INFO  gadget - Exchange[ExchangePattern: InOnly, BodyType: String, Body: ...<order>  <customerId>456</customerId>  <product>gadget</product>  <amount>3</amount></order>]
+$ 2019-04-26 11:04:27,162 [sumer[newOrder]] INFO  widget - Exchange[ExchangePattern: InOnly, BodyType: String, Body: ...<order>  <customerId>123</customerId>  <product>widget</product>  <amount>2</amount></order>]
+----
 
 You can access the ActiveMQ Artemis web console using
-http://localhost:8161/console and then browse the queues. The user name
-and password for accessing the console are setup when creating the
-broker instance and are, in this example, set to `+admin+` and `+admin+`
+http://localhost:8161/console and then browse the queues. The username
+and password for accessing the console are set up when creating the
+broker instance and are, in this example, set to `admin` and `admin`
 respectively.
 
 You should see the three queues:
@@ -83,12 +88,12 @@ You should see the three queues:
 * widget
 * gadget
 
-The Camel application can be stopped pressing ctrl+c in the shell.
+The Camel application can be stopped pressing `ctrl+c` in the shell.
 
 === Configuration
 
 The Camel application is configured in the
-`+src/main/java/org/apache/camel/example/ArtemisMain.java+` file.
+`src/main/java/org/apache/camel/example/ArtemisMain.java` file.
 
 === Help and contributions
 

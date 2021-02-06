@@ -9,9 +9,10 @@ in a distributed environment (multiple independent Camel Contexts).
 
 You can build and run the example with this simple command:
 
-....
-mvn clean compile exec:java
-....
+[source,sh]
+----
+$ mvn clean compile exec:java
+----
 
 === Help and contributions
 

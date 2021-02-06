@@ -7,31 +7,31 @@ This is a very basic example that shows how to get started with Camel.
 This example shows you that Camel can be used in standalone mode
 as a _public static void main_ application.
 
-The example has only 1 java file in the `CamelBasic.java` located in the src folder.
+The example has only 1 java file in the link:../camel-example-basic/src/main/java/org/apache/camel/example/basic/CamelBasic.java[`CamelBasic.java`] located in the src folder.
 There is code comments explaining in more details.
 
 === Build
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+[source,sh]
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn camel:run
-....
+[source,sh]
+----
+$ mvn camel:run
+----
 
-The
-
-To stop the example hit ctrl+c
+To stop the example hit `ctrl+c`
 
 You can also run the example from your editor such as Eclipse, IDEA etc,
-by opening the org.apache.camel.example.basic.CamelBasic class
+by opening the class link:../camel-example-basic/src/main/java/org/apache/camel/example/basic/CamelBasic.java[org.apache.camel.example.basic.CamelBasic.java]
 and then right click, and chose run java application.
 
 === Help and contributions
