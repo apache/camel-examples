@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 86 (0 deprecated)
+Number of Examples: 89 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -22,6 +22,8 @@ Number of Examples: 86 (0 deprecated)
 | link:camel-example-any23/README.adoc[Any23 example] (camel-example-any23) | Beginner | An example that uses the Any23 dataformat
 
 | link:camel-example-as2/README.adoc[AS2 Example] (camel-example-as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
+
+| link:camel-example-azure-storage-blob/README.adoc[Azure Storage Blob] (camel-example-azure-storage-blob) | Beginner | Azure Storage Blob example
 
 | link:camel-example-basic/README.adoc[Basic] (camel-example-basic) | Beginner | Basic example
 
@@ -40,6 +42,8 @@ Number of Examples: 86 (0 deprecated)
 | link:camel-example-ftp/README.md[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
 
 | link:camel-example-java8/readme.adoc[Java8] (camel-example-java8) | Beginner | An example for showing Camel DSL for Java 8
+
+| link:camel-example-kamelet/readme.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
 
 | link:camel-example-main/readme.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
@@ -64,6 +68,8 @@ Number of Examples: 86 (0 deprecated)
 | link:camel-example-pojo-messaging/README.adoc[POJO Routing] (camel-example-pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
     
 
+| link:camel-example-routeloader/readme.adoc[Routeloader] (camel-example-routeloader) | Beginner | Example loading and compiling Java routes on startup
+
 | link:camel-example-routetemplate/readme.adoc[Routetemplate] (camel-example-routetemplate) | Beginner | How to use route templates (parameterized routes)
 
 | link:camel-example-servlet-tomcat/README.adoc[Servlet Tomcat] (camel-example-servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
@@ -75,8 +81,6 @@ Number of Examples: 86 (0 deprecated)
 | link:camel-example-spring-xquery/README.adoc[Spring XQuery] (camel-example-spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
 | link:camel-example-ssh/README.adoc[Ssh] (camel-example-ssh) | Beginner | An example that uses Camel SSH component
-
-| link:camel-example-azure-storage-blob/README.adoc[Azure Storage Blob List] (camel-example-azure-storage-blob) | Beginner | An example that uses Camel Azure Storage Blob and explain how list large blob container.
 
 | link:camel-example-cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (camel-example-cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
 
