@@ -16,25 +16,21 @@ Set `ACCOUNT` & `ACCESS_KEY` & `BLOB_CONTAINER_NAME` for start example.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+[source,sh]
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn camel:run
-....
+[source,sh]
+----
+$ mvn camel:run
+----
 
-The
-
-To stop the example hit ctrl+c
-
-You can also run the example from your editor such as Eclipse, IDEA etc,
-by opening the org.apache.camel.example.basic.CamelBasic class
-and then right click, and chose run java application.
+To stop the example hit `ctrl+c`
 
 === Help and contributions
 

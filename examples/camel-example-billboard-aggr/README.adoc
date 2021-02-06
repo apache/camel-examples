@@ -42,7 +42,7 @@ Build and run the test with this single command.
 
 [source,sh]
 ----
-mvn clean test
+$ mvn test
 ----
 
 === Help and contributions
