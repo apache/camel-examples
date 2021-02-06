@@ -33,7 +33,7 @@ public final class CamelBasic {
         // (to keep all code in a single java file for this basic example)
         camel.addRoutes(new RouteBuilder() {
             @Override
-            public void configure() throws Exception {
+            public void configure() {
                 from("timer:foo")
                     .log("Hello Camel");
             }

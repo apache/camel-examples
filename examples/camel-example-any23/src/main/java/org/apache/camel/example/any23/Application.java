@@ -25,10 +25,10 @@ public final class Application {
     }
 
     public static void main(String[] args) throws Exception {
-        CamelContext context = new DefaultCamelContext();
-        context.addRoutes(new Any23RouteBuilder());
-        context.start();
-        context.addStartupListener(new Any23StartupMessage());
+        try (CamelContext context = new DefaultCamelContext()) {
+            context.addRoutes(new Any23RouteBuilder());
+            context.start();
+            context.addStartupListener(new Any23StartupMessage());
+        }
     }
-
 }

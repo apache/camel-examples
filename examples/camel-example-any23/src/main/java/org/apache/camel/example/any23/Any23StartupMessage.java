@@ -20,12 +20,16 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.StartupListener;
 
+import java.io.IOException;
+
 public class Any23StartupMessage implements StartupListener {
 
     @Override
-    public void onCamelContextStarted(CamelContext context, boolean alreadyStarted) throws Exception {
-        ProducerTemplate template = context.createProducerTemplate();
-        template.sendBody("direct:start", "This is a test message to run the example");
+    public void onCamelContextStarted(CamelContext context, boolean alreadyStarted) {
+        try (ProducerTemplate template = context.createProducerTemplate()) {
+            template.sendBody("direct:start", "This is a test message to run the example");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
 }
