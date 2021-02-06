@@ -46,14 +46,14 @@ public final class Utils {
     private Utils() {
     }
 
-    public static AuthorityKeyIdentifier createAuthorityKeyId(PublicKey pub) throws IOException {
+    public static AuthorityKeyIdentifier createAuthorityKeyId(PublicKey pub) {
         SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(pub.getEncoded());
 
         BcX509ExtensionUtils utils = new BcX509ExtensionUtils();
         return utils.createAuthorityKeyIdentifier(info);
     }
 
-    public static SubjectKeyIdentifier createSubjectKeyId(PublicKey pub) throws IOException {
+    public static SubjectKeyIdentifier createSubjectKeyId(PublicKey pub) {
         SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(pub.getEncoded());
 
         return new BcX509ExtensionUtils().createSubjectKeyIdentifier(info);
