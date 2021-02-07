@@ -112,7 +112,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:bigxml-split/README.adoc[Bigxml Split] (camel-example-bigxml-split) | EIP | How to deal with big XML files in Camel
 
-| link:billboard-aggregation/README.adoc[Billboard Aggr] (camel-example-billboard-aggr) | EIP | Billboard aggregation example
+| link:billboard-aggregate/README.adoc[Billboard Aggr] (camel-example-billboard-aggr) | EIP | Billboard aggregation example
 
 | link:camel-example-cafe/README.adoc[Cafe] (camel-example-cafe) | EIP | A cafe example showing how to work with Camel
 
