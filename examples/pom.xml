@@ -79,16 +79,17 @@
     </distributionManagement>
 
     <modules>
-        <module>camel-example-activemq-tomcat</module>
-        <module>camel-example-aggregate</module>
-        <module>camel-example-aggregate-dist</module>
-        <module>camel-example-any23</module>
-        <module>camel-example-artemis</module>
-        <module>camel-example-artemis-large-messages</module>
-        <module>camel-example-as2</module>
-        <module>camel-example-basic</module>
-        <module>camel-example-billboard-aggr</module>
-        <module>camel-example-bigxml-split</module>
+        <module>activemq-tomcat</module>
+        <module>aggregate</module>
+        <module>aggregate-dist</module>
+        <module>any23</module>
+        <module>artemis</module>
+        <module>artemis-large-messages</module>
+        <module>as2</module>
+        <module>azure-storage-blob</module>
+        <module>basic</module>
+        <module>billboard-aggregate</module>
+        <module>bigxml-split</module>
         <module>camel-example-cafe</module>
         <module>camel-example-cafe-endpointdsl</module>
         <module>camel-example-cassandra-kubernetes</module>
@@ -167,7 +168,6 @@
         <module>camel-example-widget-gadget-cdi</module>
         <module>camel-example-widget-gadget-java</module>
         <module>camel-example-widget-gadget-xml</module>
-        <module>camel-example-azure-storage-blob</module>
   </modules>
 
     <properties>
