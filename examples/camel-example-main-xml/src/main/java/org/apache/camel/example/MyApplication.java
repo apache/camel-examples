@@ -33,7 +33,7 @@ public final class MyApplication {
         // (properties are automatic loaded from application.properties)
         main.configure().addConfigurationClass(MyConfiguration.class);
         // and add all the XML routes
-        main.configure().withXmlRoutes("routes/*.xml");
+        main.configure().withRoutesIncludePattern("routes/*.xml");
 
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
