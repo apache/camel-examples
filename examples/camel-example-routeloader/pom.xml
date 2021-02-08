@@ -51,10 +51,7 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-        </dependency>
+        <!-- camel main -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-main</artifactId>
@@ -64,6 +61,13 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-joor</artifactId>
         </dependency>
+        <!-- xml-io with fast xml route loader -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-xml-io</artifactId>
+        </dependency>
+
+        <!-- components -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-timer</artifactId>
