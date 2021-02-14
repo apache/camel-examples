@@ -1,0 +1,25 @@
+== Camel Persistent Aggregate
+
+=== Introduction
+
+This example shows how to use Camel JDBC Aggregator optimistic locking feature
+in a distributed environment (multiple independent Camel Contexts).
+
+=== Build and run
+
+You can build and run the example with this simple command:
+
+[source,sh]
+----
+$ mvn clean compile exec:java
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

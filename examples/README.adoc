@@ -1,6 +1,6 @@
-# Welcome to the Apache Camel Examples
+= Welcome to the Apache Camel Examples
 
-= Introduction
+== Introduction
 
 This directory contains the various examples for working with Apache
 Camel. The examples can be run using Maven. When using the Maven
@@ -19,13 +19,13 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
 
-| link:camel-example-any23/README.adoc[Any23 example] (camel-example-any23) | Beginner | An example that uses the Any23 dataformat
+| link:any23/README.adoc[Any23 example] (camel-example-any23) | Beginner | An example that uses the Any23 dataformat
 
-| link:camel-example-as2/README.adoc[AS2 Example] (camel-example-as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
+| link:as2/README.adoc[AS2 Example] (camel-example-as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
-| link:camel-example-azure-storage-blob/README.adoc[Azure Storage Blob] (camel-example-azure-storage-blob) | Beginner | Azure Storage Blob example
+| link:azure-storage-blob/README.adoc[Azure Storage Blob] (camel-example-azure-storage-blob) | Beginner | Azure Storage Blob example
 
-| link:camel-example-basic/README.adoc[Basic] (camel-example-basic) | Beginner | Basic example
+| link:basic/README.adoc[Basic] (camel-example-basic) | Beginner | Basic example
 
 | link:camel-example-cdi/README.adoc[CDI] (camel-example-cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
 
@@ -104,15 +104,15 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
-| link:camel-example-aggregate/README.adoc[Aggregate] (camel-example-aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
+| link:aggregate/README.adoc[Aggregate] (camel-example-aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
 
-| link:camel-example-aggregate-dist/README.adoc[Aggregate Dist] (camel-example-aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
+| link:aggregate-dist/README.adoc[Aggregate Dist] (camel-example-aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
 
-| link:camel-example-artemis/README.adoc[Widget Gadget using Apache ActiveMQ Artemis] (camel-example-artemis) | EIP | The widget and gadget example from the EIP book using Apache ActiveMQ Artemis
+| link:artemis/README.adoc[Widget Gadget using Apache ActiveMQ Artemis] (camel-example-artemis) | EIP | The widget and gadget example from the EIP book using Apache ActiveMQ Artemis
 
-| link:camel-example-bigxml-split/README.adoc[Bigxml Split] (camel-example-bigxml-split) | EIP | How to deal with big XML files in Camel
+| link:bigxml-split/README.adoc[Bigxml Split] (camel-example-bigxml-split) | EIP | How to deal with big XML files in Camel
 
-| link:camel-example-billboard-aggr/README.adoc[Billboard Aggr] (camel-example-billboard-aggr) | EIP | Billboard aggregation example
+| link:billboard-aggregate/README.adoc[Billboard Aggr] (camel-example-billboard-aggr) | EIP | Billboard aggregation example
 
 | link:camel-example-cafe/README.adoc[Cafe] (camel-example-cafe) | EIP | A cafe example showing how to work with Camel
 
@@ -153,9 +153,9 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
-| link:camel-example-activemq-tomcat/README.adoc[ActiveMQ Tomcat] (camel-example-activemq-tomcat) | Messaging | An example using ActiveMQ Broker and Camel with Apache Tomcat
+| link:activemq-tomcat/README.adoc[ActiveMQ Tomcat] (camel-example-activemq-tomcat) | Messaging | An example using ActiveMQ Broker and Camel with Apache Tomcat
 
-| link:camel-example-artemis-large-messages/README.adoc[Artemis Large Messages] (camel-example-artemis-large-messages) | Messaging | Demonstrates sending large messages (handles GBs in size) between Apache Camel and ActiveMQ Artemis in
+| link:artemis-large-messages/README.adoc[Artemis Large Messages] (camel-example-artemis-large-messages) | Messaging | Demonstrates sending large messages (handles GBs in size) between Apache Camel and ActiveMQ Artemis in
         streaming mode
     
 
