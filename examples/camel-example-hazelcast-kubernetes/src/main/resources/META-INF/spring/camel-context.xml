@@ -27,7 +27,7 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
   <!-- Java route -->
-  <bean id="route" class="org.apache.camel.example.kubernetes.fmp.HazelcastRoute"/>
+  <bean id="route" class="org.apache.camel.example.kubernetes.jkube.HazelcastRoute"/>
 
   <camelContext xmlns="http://camel.apache.org/schema/spring">
 
