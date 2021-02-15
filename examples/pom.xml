@@ -101,7 +101,7 @@
         <module>cdi-minio</module>
         <module>cdi-properties</module>
         <module>cdi-rest-servlet</module>
-        <module>camel-example-cdi-test</module>
+        <module>cdi-test</module>
         <module>camel-example-cdi-xml</module>
         <module>camel-example-csimple</module>
         <module>camel-example-csimple-joor</module>
