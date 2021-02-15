@@ -7,11 +7,24 @@ A maven plugin (configured in pom.xml) detects the csimple scripts from the proj
 This makes the csimple language native Java compiled, with no runtime overhead.
 The generated source code in `src/generated/java` is just regular Java source code and you can therefore debug the code. You can try this by loading the project into a Java IDE, and then launch the application in debug mode from the `MyApplication` class. You can then set breakpoints in the generated source code in the `src/generated/java` folder.
 
-=== How to run
 
-You can run this example using
+=== Build
 
-    mvn camel:run   
+You will need to compile this example first:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== Run
+
+To run the example execute
+
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 
