@@ -191,7 +191,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi-test/README.adoc[CDI Test] (camel-example-cdi-test) | Testing | An example illustrating Camel CDI testing features
 
-| link:camel-example-cxf/README.adoc[CXF] (camel-example-cxf) | WebService | An example which demonstrates the use of the Camel CXF component
+| link:cxf/README.adoc[CXF] (camel-example-cxf) | WebService | An example which demonstrates the use of the Camel CXF component
 
 | link:camel-example-cxf-proxy/README.adoc[CXF Proxy] (camel-example-cxf-proxy) | WebService | An example which uses Camel to proxy a web service
 
