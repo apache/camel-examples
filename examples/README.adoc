@@ -143,7 +143,7 @@ Number of Examples: 87 (0 deprecated)
         Spring DSL
     
 
-| link:camel-example-cdi-metrics/README.adoc[CDI Metrics] (camel-example-cdi-metrics) | Management and Monitoring | Dropwizard Metrics CDI example
+| link:cdi-metrics/README.adoc[CDI Metrics] (camel-example-cdi-metrics) | Management and Monitoring | Dropwizard Metrics CDI example
 
 | link:camel-example-flight-recorder/readme.adoc[Flight Recorder] (camel-example-flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
 
