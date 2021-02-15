@@ -104,7 +104,7 @@
         <module>cdi-test</module>
         <module>cdi-xml</module>
         <module>console</module>
-        <module>camel-example-csimple</module>
+        <module>csimple</module>
         <module>camel-example-csimple-joor</module>
         <module>camel-example-cxf</module>
         <module>camel-example-cxf-proxy</module>
