@@ -91,9 +91,9 @@
         <module>billboard-aggregate</module>
         <module>bigxml-split</module>
         <module>cafe</module>
-        <module>camel-example-cafe-endpointdsl</module>
-        <module>camel-example-cassandra-kubernetes</module>
-        <module>camel-example-cdi</module>
+        <module>cafe-endpointdsl</module>
+        <module>cassandra-kubernetes</module>
+        <module>cdi</module>
         <module>camel-example-cdi-aws-s3</module>
         <module>camel-example-cdi-cassandraql</module>
         <module>camel-example-fhir</module>
