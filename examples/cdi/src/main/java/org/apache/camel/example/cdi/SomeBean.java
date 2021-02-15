@@ -25,7 +25,7 @@ public class SomeBean {
 
     private int counter;
 
-    public String someMethod(String body) {
+    public String someMethod() {
         return "Saying Hello World " + ++counter + " times";
     }
 

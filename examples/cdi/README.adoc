@@ -27,7 +27,7 @@ $ mvn camel:run
 ----
 
 You can see the routing rules by looking at the java code in the
-`+src/main/java+` directory.
+`src/main/java` directory.
 
 To stop the example hit ctrl+c.
 
