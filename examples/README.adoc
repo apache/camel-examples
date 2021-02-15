@@ -35,7 +35,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:console/README.adoc[Console] (camel-example-console) | Beginner | An example that reads input from the console
 
-| link:camel-example-csimple/readme.adoc[Csimple] (camel-example-csimple) | Beginner | Shows using compiled simple language
+| link:csimple/readme.adoc[Csimple] (camel-example-csimple) | Beginner | Shows using compiled simple language
 
 | link:camel-example-csimple-joor/readme.adoc[Csimple Joor] (camel-example-csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
