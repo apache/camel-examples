@@ -175,7 +175,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-reactive-executor-vertx/readme.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 
-| link:camel-example-cdi-rest-servlet/README.adoc[CDI Rest] (camel-example-cdi-rest-servlet) | Rest | Rest DSL using Servlet with CDI example
+| link:cdi-rest-servlet/README.adoc[CDI Rest] (camel-example-cdi-rest-servlet) | Rest | Rest DSL using Servlet with CDI example
 
 | link:camel-example-openapi-cdi/README.adoc[OpenApi CDI] (camel-example-openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
 

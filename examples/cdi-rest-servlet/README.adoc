@@ -59,6 +59,7 @@ http://localhost:8080/camel/say/hello/, and being responded with
 
 Otherwise, in a separate prompt, by running:
 
+[source,sh]
 ....
 curl http://localhost:8080/camel/say/hello/Antonin
 ....
@@ -76,6 +77,15 @@ And see the following message being logged by the Camel application:
 ....
 
 The Camel application can be stopped pressing ctrl+c in the shell.
+
+=== Run unit tests
+
+There are unit tests implemented, which can be run with the following command:
+
+[source,sh]
+----
+$ mvn test
+----
 
 === Help and contributions
 
