@@ -97,7 +97,7 @@
         <module>cdi-aws-s3</module>
         <module>cdi-cassandraql</module>
         <module>cdi-kubernetes</module>
-        <module>camel-example-cdi-metrics</module>
+        <module>cdi-metrics</module>
         <module>camel-example-cdi-minio</module>
         <module>camel-example-cdi-properties</module>
         <module>camel-example-cdi-rest-servlet</module>
