@@ -5,29 +5,29 @@
 This example illustrates the integration between Camel, CDI and
 Cassandra.
 
-The example get the list of pods from a Kubernetes cluster and print
+The example gets the list of pods from a Kubernetes cluster and prints
 name and status of each one of the pods returned.
 
-The `+camel-cdi+`, `+camel-core+` and `+camel-cassandraql+` components
+The components `camel-cdi`, `camel-core` and `camel-cassandraql`
 are used in this example. The example assumes you have a running
 Cassandra Cluster in your environment. We will use Docker to spin up
 this cluster.
 
-By default cluster requires significant amount of RAM memory (approx.
-12GB). You can limit memory of docker container specifying parameter:
-`+--env MAX_HEAP_SIZE+`
+By default, a cluster requires a significant amount of RAM/memory (approx. 12GB).
+You can limit memory of docker container specifying parameter:
+`--env MAX_HEAP_SIZE`
 
 As first step we will need to run a single node cluster:
 
-....
+----
 $ docker run --name master_node --env MAX_HEAP_SIZE='800M' -dt oscerd/cassandra
 $ docker run --name node1 --env MAX_HEAP_SIZE='800M' -d -e SEED="$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' master_node)" oscerd/cassandra
 $ docker run --name node2 --env MAX_HEAP_SIZE='800M' -d -e SEED="$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' master_node)" oscerd/cassandra
-....
+----
 
 We now have three nodes in our cluster.
 
-....
+----
 $ docker exec -ti master_node /opt/cassandra/bin/nodetool status
 Datacenter: datacenter1
 =======================
@@ -37,37 +37,37 @@ Status=Up/Down
 UN  172.17.0.3  102.67 KiB  256          65.9%             1a985c48-33a1-44aa-b7e9-f1a3620a6482  rack1
 UN  172.17.0.2  107.64 KiB  256          68.2%             da54ce5e-6433-4ea0-b2c3-fbc6c63ea955  rack1
 UN  172.17.0.4  15.42 KiB  256          65.8%             0f2ba25a-37b0-4f27-a10a-d9a44655396a  rack1
-....
+----
 
 From your local http://cassandra.apache.org/[Apache Cassandra] directory
-run the `+cqlsh+` command:
+run the `cqlsh` command:
 
-....
+----
 <LOCAL_CASSANDRA_HOME>/bin/cqlsh $(docker inspect --format='{{ .NetworkSettings.IPAddress }}' master_node)
-....
+----
 
 You should see the Cqlsh prompt
 
-....
+----
 Connected to Test Cluster at 172.17.0.2:9042.
 [cqlsh 5.0.1 | Cassandra 3.6 | CQL spec 3.4.2 | Native protocol v4]
 Use HELP for help.
 cqlsh>
-....
+----
 
-Let's create a namespace `+test+` with a table `+users+`
+Let's create a namespace `test` with a table `users`
 
-....
+----
 create keyspace test with replication = {'class':'SimpleStrategy', 'replication_factor':3};
 use test;
 create table users ( id int primary key, name text );
 insert into users (id,name) values (1, 'oscerd');
 quit;
-....
+----
 
 run a simple query to check everything works:
 
-....
+----
 cqlsh> use test;
 cqlsh:test> select * from users;
 
@@ -77,7 +77,7 @@ cqlsh:test> select * from users;
 
 (1 rows)
 cqlsh:test> 
-....
+----
 
 Remember to edit the apache-deltaspike.properties file to add the
 correct addresses of the different nodes running in Docker.
@@ -102,7 +102,7 @@ $ mvn compile camel:run
 
 When the Camel application runs, you should see the following result:
 
-....
+----
 2016-07-24 15:33:50,812 [cdi.Main.main()] INFO  Version                        - WELD-000900: 2.3.5 (Final)
 Jul 24, 2016 3:33:50 PM org.apache.deltaspike.core.impl.config.EnvironmentPropertyConfigSourceProvider <init>
 INFO: Custom config found by DeltaSpike. Name: 'META-INF/apache-deltaspike.properties', URL: 'file:/home/oscerd/workspace/apache-camel/camel/examples/camel-example-cdi-cassandraql/target/classes/META-INF/apache-deltaspike.properties'
@@ -136,13 +136,13 @@ INFO: Computed the following DeltaSpike ProjectStage: Production
 2016-07-24 15:33:52,987 [cdi.Main.main()] INFO  DefaultCamelContext            - Apache Camel 2.18.0 (CamelContext: camel-example-cassandraql-cdi) started in 0.742 seconds
 2016-07-24 15:33:53,018 [cdi.Main.main()] INFO  Bootstrap                      - WELD-ENV-002003: Weld SE container STATIC_INSTANCE initialized
 2016-07-24 15:33:54,041 [ timer://stream] INFO  route1                         - Result from query [Row[1, oscerd]]
-....
+----
 
 The Camel application can be stopped pressing ctrl+c in the shell.
 
-If you run the query again you should see a `+davsclaus+` entry too:
+If you run the query again you should see a `davsclaus` entry too:
 
-....
+----
 cqlsh> use test;
 cqlsh:test> select * from users;
 
@@ -153,7 +153,7 @@ cqlsh:test> select * from users;
 
 (2 rows)
 cqlsh:test> 
-....
+----
 
 === Help and contributions
 

@@ -94,7 +94,7 @@
         <module>cafe-endpointdsl</module>
         <module>cassandra-kubernetes</module>
         <module>cdi</module>
-        <module>camel-example-cdi-aws-s3</module>
+        <module>cdi-aws-s3</module>
         <module>camel-example-cdi-cassandraql</module>
         <module>camel-example-fhir</module>
         <module>camel-example-flight-recorder</module>
