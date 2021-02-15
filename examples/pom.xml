@@ -106,7 +106,7 @@
         <module>console</module>
         <module>csimple</module>
         <module>csimple-joor</module>
-        <module>camel-example-cxf</module>
+        <module>cxf</module>
         <module>camel-example-cxf-proxy</module>
         <module>camel-example-cxf-tomcat</module>
         <module>camel-example-debezium</module>
