@@ -102,7 +102,7 @@
         <module>cdi-properties</module>
         <module>cdi-rest-servlet</module>
         <module>cdi-test</module>
-        <module>camel-example-cdi-xml</module>
+        <module>cdi-xml</module>
         <module>camel-example-csimple</module>
         <module>camel-example-csimple-joor</module>
         <module>camel-example-cxf</module>

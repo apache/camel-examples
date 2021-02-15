@@ -31,7 +31,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi-properties/README.adoc[CDI Properties] (camel-example-cdi-properties) | Beginner | DeltaSpike configuration properties CDI example
 
-| link:camel-example-cdi-xml/README.adoc[CDI Camel XML] (camel-example-cdi-xml) | Beginner | CDI and Camel XML example
+| link:cdi-xml/README.adoc[CDI Camel XML] (camel-example-cdi-xml) | Beginner | CDI and Camel XML example
 
 | link:camel-example-console/README.adoc[Console] (camel-example-console) | Beginner | An example that reads input from the console
 
