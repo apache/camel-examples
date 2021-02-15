@@ -98,7 +98,7 @@
         <module>cdi-cassandraql</module>
         <module>cdi-kubernetes</module>
         <module>cdi-metrics</module>
-        <module>camel-example-cdi-minio</module>
+        <module>cdi-minio</module>
         <module>camel-example-cdi-properties</module>
         <module>camel-example-cdi-rest-servlet</module>
         <module>camel-example-cdi-test</module>
@@ -142,6 +142,7 @@
         <module>camel-example-mongodb</module>
         <module>camel-example-netty-custom-correlation</module>
         <module>camel-example-oaipmh</module>
+        <module>camel-example-openapi-cdi</module>
         <module>camel-example-pojo-messaging</module>
         <module>camel-example-reactive-executor-vertx</module>
         <module>camel-example-route-throttling</module>
@@ -157,7 +158,6 @@
         <module>camel-example-spring-xquery</module>
         <module>camel-example-spring-security</module>
         <module>camel-example-swagger-cdi</module>
-        <module>camel-example-openapi-cdi</module>
         <module>camel-example-telegram</module>
         <module>camel-example-transformer-cdi</module>
         <module>camel-example-transformer-demo</module>
