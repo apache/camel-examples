@@ -3,35 +3,45 @@
 === Introduction
 
 This example uses the Camel Endpoint DSL to configure Camel endpoints
-using a type-safe Java endpoint DSL (eg fluent builder style).
+using a type-safe Java endpoint DSL (e.g. fluent builder style).
 
 This example shows how to work with splitter and aggregator to implement
 a Cafe demo.
 
 First it uses the splitter to dispatch the order, then sends the orders
 to barista by checking if the coffee is hot or cold. When the coffee is
-ready, we use a aggregate to gather the drinks for waiter to deliver.
+ready, we use an aggregator to gather the drinks for waiter to deliver.
 
 === Build
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+[source,sh]
+----
+$ mvn compile
+----
 
 === Run
 
-To run the example type
+To run the example execute
 
-....
-mvn camel:run
-....
+[source,sh]
+----
+$ mvn camel:run
+----
 
-You can see the routing rules by looking at the java code in the
-`+src/main/java+` directory.
+You can see the routing rules by looking at the java code in `src/main/java`.
 
-To stop the example hit ctrl+c
+To stop the example hit `ctrl+c`
+
+=== Run unit tests
+
+There are unit tests implemented, which can be run with the following command:
+
+[source,sh]
+----
+$ mvn test
+----
 
 === Help and contributions
 
