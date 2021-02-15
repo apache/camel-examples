@@ -7,12 +7,23 @@ When Camel bootstrap then each csimple scripts is compiled using the JVM compile
 This makes the csimple language native Java compiled, with no runtime overhead.
 The generated source code are in memory only and compiled at runtime. This means debugging the generated source code is not possible. See the other csimple example which uses a Maven plugin to detect csimple scripts from the source code, to genereate Java source code at build time; which can be debugged.
 
+=== Build
 
-=== How to run
+You will need to compile this example first:
 
-You can run this example using
+[source,sh]
+----
+$ mvn compile
+----
 
-    mvn camel:run   
+=== Run
+
+To run the example execute
+
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 
