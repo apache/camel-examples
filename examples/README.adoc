@@ -37,7 +37,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:csimple/readme.adoc[Csimple] (camel-example-csimple) | Beginner | Shows using compiled simple language
 
-| link:camel-example-csimple-joor/readme.adoc[Csimple Joor] (camel-example-csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
+| link:csimple-joor/readme.adoc[Csimple Joor] (camel-example-csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
 | link:camel-example-ftp/README.md[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
 
