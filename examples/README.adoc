@@ -29,7 +29,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi/README.adoc[CDI] (camel-example-cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
 
-| link:camel-example-cdi-properties/README.adoc[CDI Properties] (camel-example-cdi-properties) | Beginner | DeltaSpike configuration properties CDI example
+| link:cdi-properties/README.adoc[CDI Properties] (camel-example-cdi-properties) | Beginner | DeltaSpike configuration properties CDI example
 
 | link:camel-example-cdi-xml/README.adoc[CDI Camel XML] (camel-example-cdi-xml) | Beginner | CDI and Camel XML example
 
