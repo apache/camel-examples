@@ -10,7 +10,7 @@ the output of the `+kubectl get pods+` command.
 
 The `+camel-cdi+` and `+camel-kubernetes+` components are used in this
 example. The example assumes you have a running Kubernetes cluster in
-your environment. For example you can use
+your environment. For example, you can use
 https://github.com/kubernetes/minikube[minikube] or the
 https://github.com/fabric8io/fabric8-installer/tree/master/vagrant/openshift[vagrant
 openshift image] from http://fabric8.io/[Fabric8 team].

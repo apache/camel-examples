@@ -96,9 +96,7 @@
         <module>cdi</module>
         <module>cdi-aws-s3</module>
         <module>cdi-cassandraql</module>
-        <module>camel-example-fhir</module>
-        <module>camel-example-flight-recorder</module>
-        <module>camel-example-cdi-kubernetes</module>
+        <module>cdi-kubernetes</module>
         <module>camel-example-cdi-metrics</module>
         <module>camel-example-cdi-minio</module>
         <module>camel-example-cdi-properties</module>
@@ -113,6 +111,8 @@
         <module>camel-example-csimple-joor</module>
         <module>camel-example-debezium</module>
         <module>camel-example-debezium-eventhubs-blob</module>
+        <module>camel-example-fhir</module>
+        <module>camel-example-flight-recorder</module>
         <module>camel-example-ftp</module>
         <module>camel-example-hazelcast-kubernetes</module>
         <module>camel-example-java8</module>
