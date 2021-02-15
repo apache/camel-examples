@@ -16,17 +16,19 @@ This is implemented with a Camel route defined in the Spring XML
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+[source,sh]
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn camel:run
-....
+[source,sh]
+----
+$ mvn camel:run
+----
 
 You can see the routing rules by looking at the XML in the directory:
 `+src/main/resources/META-INF/spring+`

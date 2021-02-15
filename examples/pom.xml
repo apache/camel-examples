@@ -103,12 +103,12 @@
         <module>cdi-rest-servlet</module>
         <module>cdi-test</module>
         <module>cdi-xml</module>
+        <module>console</module>
         <module>camel-example-csimple</module>
         <module>camel-example-csimple-joor</module>
         <module>camel-example-cxf</module>
         <module>camel-example-cxf-proxy</module>
         <module>camel-example-cxf-tomcat</module>
-        <module>camel-example-console</module>
         <module>camel-example-debezium</module>
         <module>camel-example-debezium-eventhubs-blob</module>
         <module>camel-example-fhir</module>

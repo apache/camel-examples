@@ -33,7 +33,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi-xml/README.adoc[CDI Camel XML] (camel-example-cdi-xml) | Beginner | CDI and Camel XML example
 
-| link:camel-example-console/README.adoc[Console] (camel-example-console) | Beginner | An example that reads input from the console
+| link:console/README.adoc[Console] (camel-example-console) | Beginner | An example that reads input from the console
 
 | link:camel-example-csimple/readme.adoc[Csimple] (camel-example-csimple) | Beginner | Shows using compiled simple language
 
