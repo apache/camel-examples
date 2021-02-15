@@ -35,7 +35,7 @@ You can build this example using:
 
 [source,sh]
 ----
-$ mvn package
+$ mvn install
 ----
 
 === Run
@@ -61,6 +61,15 @@ You should see the following message being logged to the console:
 ....
 2016-03-04 17:54:18,725 [Thread-1       ] INFO  route - Bye from camel-test-cdi
 ....
+
+=== Run unit tests
+
+There are unit tests implemented, which can be run with the following command:
+
+[source,sh]
+----
+$ mvn test
+----
 
 === Help and contributions
 

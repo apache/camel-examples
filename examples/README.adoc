@@ -189,7 +189,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-twitter-websocket/README.adoc[Twitter Websocket] (camel-example-twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
 
-| link:camel-example-cdi-test/README.adoc[CDI Test] (camel-example-cdi-test) | Testing | An example illustrating Camel CDI testing features
+| link:cdi-test/README.adoc[CDI Test] (camel-example-cdi-test) | Testing | An example illustrating Camel CDI testing features
 
 | link:camel-example-cxf/README.adoc[CXF] (camel-example-cxf) | WebService | An example which demonstrates the use of the Camel CXF component
 
