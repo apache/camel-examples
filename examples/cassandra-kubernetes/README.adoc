@@ -22,7 +22,6 @@ Once your Minikube node is up and running you'll need to run the
 following command. In your `src/main/resource/jkube/` folder you'll find
 two yaml files. Run the following commands using them to prepare the Cassandra cluster:
 
-[source,sh]
 ----
 $ kubectl create -f src/main/resources/jkube/cassandra-service.yaml
 $ kubectl create -f src/main/resources/jkube/cassandra-statefulset.yaml
@@ -30,7 +29,6 @@ $ kubectl create -f src/main/resources/jkube/cassandra-statefulset.yaml
 
 To check the correct startup of the cluster run the following command:
 
-[source,sh]
 ----
 $ kubectl get statefulsets.apps
 NAME        READY   AGE
@@ -39,7 +37,6 @@ cassandra   2/2     3h44m
 
 and check the status of the pods
 
-[source,sh]
 ----
 $ kubectl get pods
 NAME                                       READY     STATUS    RESTARTS   AGE
@@ -49,7 +46,6 @@ cassandra-1                                1/1       Running   0          2h
 
 You can also verify the health of your cluster by running
 
-[source,sh]
 ----
 $ kubectl exec <pod_name> -it nodetool status
 Datacenter: DC1-K8Demo
@@ -89,7 +85,6 @@ $ mvn -Pkubernetes-install k8s:log
 
 You should then see an output similar to this:
 
-[source,sh]
 ----
 [INFO] k8s: 2020-08-07 12:34:32,569 [main           ] INFO  GuavaCompatibility             - Detected Guava >= 19 in the classpath, using modern compatibility layer
 [INFO] k8s: 2020-08-07 12:34:32,834 [main           ] INFO  ClockFactory                   - Using native clock to generate timestamps.
@@ -120,7 +115,6 @@ You should then see an output similar to this:
 
 Run following to undeploy the application and cassandra nodes
 
-[source,sh]
 ----
 $ mvn -Pkubernetes-install k8s:undeploy
 $ kubectl delete -f src/main/resources/jkube/cassandra-service.yaml
@@ -129,7 +123,6 @@ $ kubectl delete -f src/main/resources/jkube/cassandra-statefulset.yaml
 
 Make sure no pod is running
 
-[source,sh]
 ----
 $ kubectl get pods
 No resources found.
