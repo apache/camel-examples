@@ -95,7 +95,7 @@
         <module>cassandra-kubernetes</module>
         <module>cdi</module>
         <module>cdi-aws-s3</module>
-        <module>camel-example-cdi-cassandraql</module>
+        <module>cdi-cassandraql</module>
         <module>camel-example-fhir</module>
         <module>camel-example-flight-recorder</module>
         <module>camel-example-cdi-kubernetes</module>

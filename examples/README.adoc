@@ -92,7 +92,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-main-endpointdsl-aws2/readme.md[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
-| link:camel-example-cdi-cassandraql/README.adoc[CDI Cassandra] (camel-example-cdi-cassandraql) | Database | Cassandraql CDI example
+| link:cdi-cassandraql/README.adoc[CDI Cassandra] (camel-example-cdi-cassandraql) | Database | Cassandraql CDI example
 
 | link:camel-example-debezium/README.adoc[Debezium] (camel-example-debezium) | Database | An example for Debezium Component
 
