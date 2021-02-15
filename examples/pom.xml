@@ -90,7 +90,7 @@
         <module>basic</module>
         <module>billboard-aggregate</module>
         <module>bigxml-split</module>
-        <module>camel-example-cafe</module>
+        <module>cafe</module>
         <module>camel-example-cafe-endpointdsl</module>
         <module>camel-example-cassandra-kubernetes</module>
         <module>camel-example-cdi</module>
