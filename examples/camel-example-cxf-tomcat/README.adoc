@@ -11,9 +11,9 @@ It can be run using Maven.
 
 You will need to first need to build the example:
 
-....
-mvn clean install
-....
+----
+$ mvn clean install
+----
 
 === Run
 
@@ -35,7 +35,8 @@ http://localhost:8080/camel-example-cxf-tomcat/webservices/incident?wsdl
 You can run a sample client using the `mvn exec:java` command, or,
 within soapUI, making sample SOAP requests such as the following:
 
-....
+[source,xml]
+----
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Body>
         <ns1:reportIncident xmlns:ns1="http://incident.cxf.example.camel.apache.org/">
@@ -62,7 +63,7 @@ within soapUI, making sample SOAP requests such as the following:
         </ns1:statusIncident>
     </soap:Body>
 </soap:Envelope>
-....
+----
 
 === Help and contributions
 
