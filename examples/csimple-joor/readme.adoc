@@ -1,0 +1,36 @@
+== Camel Example Compiled Simple using jooR compiler
+
+This example shows using csimple (compiled simple) scripting language in your Camel routes.
+
+When Camel bootstrap then each csimple scripts is compiled using the JVM compiler via the jOOR compiler library. The compilation happens once during startup.
+
+This makes the csimple language native Java compiled, with no runtime overhead.
+The generated source code are in memory only and compiled at runtime. This means debugging the generated source code is not possible. See the other csimple example which uses a Maven plugin to detect csimple scripts from the source code, to genereate Java source code at build time; which can be debugged.
+
+=== Build
+
+You will need to compile this example first:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== Run
+
+To run the example execute
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

@@ -90,29 +90,29 @@
         <module>basic</module>
         <module>billboard-aggregate</module>
         <module>bigxml-split</module>
-        <module>camel-example-cafe</module>
-        <module>camel-example-cafe-endpointdsl</module>
-        <module>camel-example-cassandra-kubernetes</module>
-        <module>camel-example-cdi</module>
-        <module>camel-example-cdi-aws-s3</module>
-        <module>camel-example-cdi-cassandraql</module>
-        <module>camel-example-fhir</module>
-        <module>camel-example-flight-recorder</module>
-        <module>camel-example-cdi-kubernetes</module>
-        <module>camel-example-cdi-metrics</module>
-        <module>camel-example-cdi-minio</module>
-        <module>camel-example-cdi-properties</module>
-        <module>camel-example-cdi-rest-servlet</module>
-        <module>camel-example-cdi-test</module>
-        <module>camel-example-cdi-xml</module>
-        <module>camel-example-cxf</module>
+        <module>cafe</module>
+        <module>cafe-endpointdsl</module>
+        <module>cassandra-kubernetes</module>
+        <module>cdi</module>
+        <module>cdi-aws-s3</module>
+        <module>cdi-cassandraql</module>
+        <module>cdi-kubernetes</module>
+        <module>cdi-metrics</module>
+        <module>cdi-minio</module>
+        <module>cdi-properties</module>
+        <module>cdi-rest-servlet</module>
+        <module>cdi-test</module>
+        <module>cdi-xml</module>
+        <module>console</module>
+        <module>csimple</module>
+        <module>csimple-joor</module>
+        <module>cxf</module>
         <module>camel-example-cxf-proxy</module>
         <module>camel-example-cxf-tomcat</module>
-        <module>camel-example-console</module>
-        <module>camel-example-csimple</module>
-        <module>camel-example-csimple-joor</module>
         <module>camel-example-debezium</module>
         <module>camel-example-debezium-eventhubs-blob</module>
+        <module>camel-example-fhir</module>
+        <module>camel-example-flight-recorder</module>
         <module>camel-example-ftp</module>
         <module>camel-example-hazelcast-kubernetes</module>
         <module>camel-example-java8</module>
@@ -142,6 +142,7 @@
         <module>camel-example-mongodb</module>
         <module>camel-example-netty-custom-correlation</module>
         <module>camel-example-oaipmh</module>
+        <module>camel-example-openapi-cdi</module>
         <module>camel-example-pojo-messaging</module>
         <module>camel-example-reactive-executor-vertx</module>
         <module>camel-example-route-throttling</module>
@@ -157,7 +158,6 @@
         <module>camel-example-spring-xquery</module>
         <module>camel-example-spring-security</module>
         <module>camel-example-swagger-cdi</module>
-        <module>camel-example-openapi-cdi</module>
         <module>camel-example-telegram</module>
         <module>camel-example-transformer-cdi</module>
         <module>camel-example-transformer-demo</module>

@@ -70,7 +70,6 @@ $ mvn compile exec:java
 When the Camel application runs, you should see 2 orders being processed
 and logged to the console, with an output similar to:
 
-[source,sh]
 ----
 $ 2019-04-26 11:04:27,154 [sumer[newOrder]] INFO  gadget - Exchange[ExchangePattern: InOnly, BodyType: String, Body: ...<order>  <customerId>456</customerId>  <product>gadget</product>  <amount>3</amount></order>]
 $ 2019-04-26 11:04:27,162 [sumer[newOrder]] INFO  widget - Exchange[ExchangePattern: InOnly, BodyType: String, Body: ...<order>  <customerId>123</customerId>  <product>widget</product>  <amount>2</amount></order>]
