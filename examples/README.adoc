@@ -145,7 +145,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi-metrics/README.adoc[CDI Metrics] (camel-example-cdi-metrics) | Management and Monitoring | Dropwizard Metrics CDI example
 
-| link:camel-example-flight-recorder/README.adoc[Flight Recorder] (camel-example-flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
+| link:flight-recorder/README.adoc[Flight Recorder] (camel-example-flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
 
 | link:camel-example-jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
 

@@ -112,7 +112,7 @@
         <module>debezium</module>
         <module>debezium-eventhubs-blob</module>
         <module>fhir</module>
-        <module>camel-example-flight-recorder</module>
+        <module>flight-recorder</module>
         <module>camel-example-ftp</module>
         <module>camel-example-hazelcast-kubernetes</module>
         <module>camel-example-java8</module>
