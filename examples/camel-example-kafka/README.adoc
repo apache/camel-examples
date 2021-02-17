@@ -33,21 +33,30 @@ On linux run
 
 You will need to compile this example first:
 
-    $ mvn compile
+[source,sh]
+----
+$ mvn compile
+----
 
 === Run
 
 Run the consumer first in separate shell 
 
-    $ mvn compile exec:java -Pkafka-consumer
+[source,sh]
+----
+$ mvn compile exec:java -Pkafka-consumer
+----
 
 Run the message producer in the seperate shell
 
-    $ mvn compile exec:java -Pkafka-producer
+[source,sh]
+----
+$ mvn compile exec:java -Pkafka-producer
+----
 
 Initially, some messages are sent programmatically. 
 On the command prompt, type the messages. Each line is sent as one message to kafka
-Press `Ctrl-C` to exit.
+Press `Ctrl+C` to exit.
 
 === Configuration
 

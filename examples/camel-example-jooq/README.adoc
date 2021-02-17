@@ -1,4 +1,3 @@
-:experimental:
 == JOOQ Example
 
 === Introduction
@@ -12,21 +11,27 @@ JOOQ classes are generated inside `target/generated-sources/jooq` directory by `
 === Build
 You will need to compile this example first:
 
-	mvn clean install
+[source,sh]
+----
+$ mvn clean install
+----
 
-This command will generate database and JOOQ classes.
+This command will generate the database and JOOQ classes.
 
 === Run with maven
 To run the example using Maven type
 
-	mvn camel:run
+[source,sh]
+----
+$ mvn camel:run
+----
 
 To stop the example hit kbd:[Ctrl+c]
 
 === Example routes
 
 [source,xml]
-------------------------------------------------------------
+----
 <camelContext xmlns="http://camel.apache.org/schema/spring">
     <!-- Producer -->
     <route id="produce-route">
@@ -53,7 +58,7 @@ To stop the example hit kbd:[Ctrl+c]
         <log message="Consumed: ${body}"/>
     </route>
 </camelContext>
-------------------------------------------------------------
+----
 
 In this example route `produce-route` inserts and selects new entity every 1s.
 
