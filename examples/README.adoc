@@ -39,7 +39,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:csimple-joor/readme.adoc[Csimple Joor] (camel-example-csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
-| link:camel-example-ftp/README[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
+| link:ftp/README[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
 
 | link:camel-example-java8/README.adoc[Java8] (camel-example-java8) | Beginner | An example for showing Camel DSL for Java 8
 
