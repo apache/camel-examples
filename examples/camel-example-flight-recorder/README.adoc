@@ -5,7 +5,7 @@
 This example demonstrates how to integrate Camel with Java Flight Recorder
 which can be used to diagnose your JVM applications.
 
-In JDK Mission Control (visual tool for flight recorder), you can browse Camel events
+In JDK Mission Control (visualisation tool for flight recorder), you can browse Camel events
 which for example can help diagnose problems with slow startup of Camel routes.
 
 === How to run
