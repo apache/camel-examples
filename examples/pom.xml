@@ -111,7 +111,7 @@
         <module>cxf-tomcat</module>
         <module>debezium</module>
         <module>debezium-eventhubs-blob</module>
-        <module>camel-example-fhir</module>
+        <module>fhir</module>
         <module>camel-example-flight-recorder</module>
         <module>camel-example-ftp</module>
         <module>camel-example-hazelcast-kubernetes</module>

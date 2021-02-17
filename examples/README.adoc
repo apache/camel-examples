@@ -134,7 +134,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
 
-| link:camel-example-fhir/README.adoc[FHIR] (camel-example-fhir) | Health Care | An example running Camel FHIR using Camel CDI
+| link:fhir/README.adoc[FHIR] (camel-example-fhir) | Health Care | An example running Camel FHIR using Camel CDI
 
 | link:camel-example-transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
     
