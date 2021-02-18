@@ -39,11 +39,11 @@ Number of Examples: 87 (0 deprecated)
 
 | link:csimple-joor/readme.adoc[Csimple Joor] (camel-example-csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
-| link:camel-example-ftp/README.md[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
+| link:ftp/README[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
 
-| link:camel-example-java8/readme.adoc[Java8] (camel-example-java8) | Beginner | An example for showing Camel DSL for Java 8
+| link:camel-example-java8/README.adoc[Java8] (camel-example-java8) | Beginner | An example for showing Camel DSL for Java 8
 
-| link:camel-example-kamelet/readme.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
+| link:camel-example-kamelet/README.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
 
 | link:camel-example-main/readme.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
@@ -94,9 +94,9 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi-cassandraql/README.adoc[CDI Cassandra] (camel-example-cdi-cassandraql) | Database | Cassandraql CDI example
 
-| link:camel-example-debezium/README.adoc[Debezium] (camel-example-debezium) | Database | An example for Debezium Component
+| link:debezium/README.adoc[Debezium] (camel-example-debezium) | Database | An example for Debezium Component
 
-| link:camel-example-debezium-eventhubs-blob/README.adoc[Debezium Eventhubs Blob] (camel-example-debezium-eventhubs-blob) | Database | An example for Debezium Component with Azure Event Hubs and Azure Storage Blob
+| link:debezium-eventhubs-blob/README.adoc[Debezium Eventhubs Blob] (camel-example-debezium-eventhubs-blob) | Database | An example for Debezium Component with Azure Event Hubs and Azure Storage Blob
 
 | link:camel-example-jdbc/README.adoc[JDBC] (camel-example-jdbc) | Database | An example for showing Camel using JDBC component
 
@@ -134,7 +134,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
 
-| link:camel-example-fhir/README.adoc[FHIR] (camel-example-fhir) | Health Care | An example running Camel FHIR using Camel CDI
+| link:fhir/README.adoc[FHIR] (camel-example-fhir) | Health Care | An example running Camel FHIR using Camel CDI
 
 | link:camel-example-transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
     
@@ -145,7 +145,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi-metrics/README.adoc[CDI Metrics] (camel-example-cdi-metrics) | Management and Monitoring | Dropwizard Metrics CDI example
 
-| link:camel-example-flight-recorder/readme.adoc[Flight Recorder] (camel-example-flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
+| link:flight-recorder/README.adoc[Flight Recorder] (camel-example-flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
 
 | link:camel-example-jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
 
@@ -193,9 +193,9 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cxf/README.adoc[CXF] (camel-example-cxf) | WebService | An example which demonstrates the use of the Camel CXF component
 
-| link:camel-example-cxf-proxy/README.adoc[CXF Proxy] (camel-example-cxf-proxy) | WebService | An example which uses Camel to proxy a web service
+| link:cxf-proxy/README.adoc[CXF Proxy] (camel-example-cxf-proxy) | WebService | An example which uses Camel to proxy a web service
 
-| link:camel-example-cxf-tomcat/README.adoc[CXF Tomcat] (camel-example-cxf-tomcat) | WebService | An example using Camel CXF (code first) with Apache Tomcat
+| link:cxf-tomcat/README.adoc[CXF Tomcat] (camel-example-cxf-tomcat) | WebService | An example using Camel CXF (code first) with Apache Tomcat
 
 | link:camel-example-spring-ws/README.adoc[Spring WebService] (camel-example-spring-ws) | WebService | An example showing how to work with Camel and Spring Web Services
 |===

@@ -1,5 +1,7 @@
 == Camel Example Kamelet
 
+=== Introduction
+
 This examples shows how to use Route Templates (parameterized routes) to specify a skeleton route
 which can be used for creating and adding new routes via Kamelets.
 
@@ -8,11 +10,23 @@ The routes are defined via Java in the `MyRoutes.java` source file.
 
 The example runs standalone via Camel Main in the `MyApplication.java` source file.
 
-=== How to run
+=== Build
+
+You will need to compile this example first:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== Run
 
 You can run this example using
 
-    mvn camel:run
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 

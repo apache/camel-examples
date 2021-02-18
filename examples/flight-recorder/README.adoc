@@ -1,16 +1,21 @@
 == Camel Example Flight Recorder
 
+=== Introduction
+
 This example demonstrates how to integrate Camel with Java Flight Recorder
 which can be used to diagnose your JVM applications.
 
-In JDK Mission Control (visual tool for flight recorder), you can browse Camel events
+In JDK Mission Control (visualisation tool for flight recorder), you can browse Camel events
 which for example can help diagnose problems with slow startup of Camel routes.
 
 === How to run
 
 You can run this example using
 
-    mvn camel:run   
+[source,sh]
+----
+$ mvn camel:run
+----
 
 And then after Camel has been started up, a recording is saved to disk, where you can see
 from the logs the location of the file, such as:
@@ -31,7 +36,6 @@ Instead of capturing a recording you can configure Camel to log the startup step
     camel.main.startup-recorder = logging
 
 In the `application.properties` file.
-
 
 === Help and contributions
 

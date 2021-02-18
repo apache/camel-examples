@@ -107,13 +107,13 @@
         <module>csimple</module>
         <module>csimple-joor</module>
         <module>cxf</module>
-        <module>camel-example-cxf-proxy</module>
-        <module>camel-example-cxf-tomcat</module>
-        <module>camel-example-debezium</module>
-        <module>camel-example-debezium-eventhubs-blob</module>
-        <module>camel-example-fhir</module>
-        <module>camel-example-flight-recorder</module>
-        <module>camel-example-ftp</module>
+        <module>cxf-proxy</module>
+        <module>cxf-tomcat</module>
+        <module>debezium</module>
+        <module>debezium-eventhubs-blob</module>
+        <module>fhir</module>
+        <module>flight-recorder</module>
+        <module>ftp</module>
         <module>camel-example-hazelcast-kubernetes</module>
         <module>camel-example-java8</module>
         <module>camel-example-jdbc</module>

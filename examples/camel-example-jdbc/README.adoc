@@ -9,17 +9,19 @@ Apache Derby database.
 
 First compile this example:
 
-....
-mvn compile
-....
+[source,sh]
+----
+$ mvn compile
+----
 
 === Compile
 
 Now to run the example type
 
-....
-mvn camel:run
-....
+[source,sh
+----
+$ mvn camel:run
+----
 
 To stop the example hit ctrl+c
 
