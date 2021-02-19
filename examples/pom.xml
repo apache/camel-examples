@@ -115,7 +115,7 @@
         <module>flight-recorder</module>
         <module>ftp</module>
         <module>hazelcast-kubernetes</module>
-        <module>camel-example-java8</module>
+        <module>java8</module>
         <module>camel-example-jdbc</module>
         <module>camel-example-jmx</module>
         <module>camel-example-jms-file</module>
