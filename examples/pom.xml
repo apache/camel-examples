@@ -116,7 +116,7 @@
         <module>ftp</module>
         <module>hazelcast-kubernetes</module>
         <module>java8</module>
-        <module>camel-example-jdbc</module>
+        <module>jdbc</module>
         <module>camel-example-jmx</module>
         <module>camel-example-jms-file</module>
         <module>camel-example-jooq</module>
