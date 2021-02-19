@@ -88,7 +88,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:cdi-minio/README.adoc[CDI Minio] (camel-example-cdi-minio) | Cloud | Minio CDI example
 
-| link:camel-example-hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (camel-example-hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
+| link:hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (camel-example-hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
 
 | link:camel-example-main-endpointdsl-aws2/readme.md[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
