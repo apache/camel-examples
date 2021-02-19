@@ -117,8 +117,8 @@
         <module>hazelcast-kubernetes</module>
         <module>java8</module>
         <module>jdbc</module>
+        <module>jms-file</module>
         <module>camel-example-jmx</module>
-        <module>camel-example-jms-file</module>
         <module>camel-example-jooq</module>
         <module>camel-example-kafka</module>
         <module>camel-example-kamelet</module>
