@@ -87,7 +87,7 @@ Number of Examples: 50 (0 deprecated)
         Spring DSL
     
 
-| link:camel-example-jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
+| link:jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
 
 | link:camel-example-management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
 
