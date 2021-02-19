@@ -119,7 +119,7 @@
         <module>jdbc</module>
         <module>jms-file</module>
         <module>jmx</module>
-        <module>camel-example-jooq</module>
+        <module>jooq</module>
         <module>camel-example-kafka</module>
         <module>camel-example-kamelet</module>
         <module>camel-example-kotlin</module>

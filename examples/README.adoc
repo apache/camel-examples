@@ -60,7 +60,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:jdbc/README.adoc[JDBC] (camel-example-jdbc) | Database | An example for showing Camel using JDBC component
 
-| link:camel-example-jooq/README.adoc[JOOQ] (camel-example-jooq) | Database | An example for showing Camel using JOOQ component
+| link:jooq/README.adoc[JOOQ] (camel-example-jooq) | Database | An example for showing Camel using JOOQ component
 
 | link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
