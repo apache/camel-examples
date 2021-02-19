@@ -7,18 +7,18 @@ Apache Derby database.
 
 === Build
 
-First compile this example:
+You will need to compile this example first:
 
 [source,sh]
 ----
 $ mvn compile
 ----
 
-=== Compile
+=== Run
 
-Now to run the example type
+To run the example execute
 
-[source,sh
+[source,sh]
 ----
 $ mvn camel:run
 ----
