@@ -4,9 +4,18 @@
 
 This example shows how to use Java 8 new features, such as lambda expressions and method references, in the definition of a Camel route.
 
-=== How to run
+=== Build
 
-You can run this example using
+You will need to compile this example first:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== Run
+
+To run the example execute
 
 [source,sh]
 ----
