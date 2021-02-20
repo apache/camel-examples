@@ -19,7 +19,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:camel-example-micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
 
-| link:camel-example-kamelet/README.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
+| link:kamelet/README.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
 
 | link:camel-example-main/readme.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
