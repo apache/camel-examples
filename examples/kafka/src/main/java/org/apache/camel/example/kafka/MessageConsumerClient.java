@@ -34,36 +34,37 @@ public final class MessageConsumerClient {
 
         LOG.info("About to run Kafka-camel integration...");
 
-        CamelContext camelContext = new DefaultCamelContext();
+        try (CamelContext camelContext = new DefaultCamelContext()) {
 
-        // Add route to send messages to Kafka
+            // Add route to send messages to Kafka
 
-        camelContext.addRoutes(new RouteBuilder() {
-            public void configure() {
-                camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
+            camelContext.addRoutes(new RouteBuilder() {
+                public void configure() {
+                    camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
 
-                log.info("About to start route: Kafka Server -> Log ");
+                    log.info("About to start route: Kafka Server -> Log ");
 
-                // setup kafka component with the brokers
-                ComponentsBuilderFactory.kafka()
-                        .brokers("{{kafka.host}}:{{kafka.port}}")
-                        .register(camelContext, "kafka");
+                    // setup kafka component with the brokers
+                    ComponentsBuilderFactory.kafka()
+                            .brokers("{{kafka.host}}:{{kafka.port}}")
+                            .register(camelContext, "kafka");
 
-                from("kafka:{{consumer.topic}}"
-                        + "?maxPollRecords={{consumer.maxPollRecords}}"
-                        + "&consumersCount={{consumer.consumersCount}}"
-                        + "&seekTo={{consumer.seekTo}}"
-                        + "&groupId={{consumer.group}}")
-                        .routeId("FromKafka")
-                    .log("${body}");
-            }
-        });
-        camelContext.start();
+                    from("kafka:{{consumer.topic}}"
+                            + "?maxPollRecords={{consumer.maxPollRecords}}"
+                            + "&consumersCount={{consumer.consumersCount}}"
+                            + "&seekTo={{consumer.seekTo}}"
+                            + "&groupId={{consumer.group}}")
+                            .routeId("FromKafka")
+                            .log("${body}");
+                }
+            });
+            camelContext.start();
 
-        // let it run for 5 minutes before shutting down
-        Thread.sleep(5 * 60 * 1000);
+            // let it run for 5 minutes before shutting down
+            Thread.sleep(5L * 60 * 1000);
 
-        camelContext.stop();
+            camelContext.stop();
+        }
     }
 
 }

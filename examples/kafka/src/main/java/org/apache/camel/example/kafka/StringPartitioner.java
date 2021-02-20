@@ -29,6 +29,7 @@ public class StringPartitioner implements Partitioner {
 
     @Override
     public void configure(Map<String, ?> configs) {
+        // noop
     }
 
     @Override
@@ -48,6 +49,7 @@ public class StringPartitioner implements Partitioner {
 
     @Override
     public void close() {
+        // noop
     }
 
 }
