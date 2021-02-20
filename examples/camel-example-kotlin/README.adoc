@@ -11,13 +11,13 @@ response.
 To build this project use
 
 ....
-mvn install
+$ mvn install
 ....
 
 To run this project
 
 ....
-mvn exec:java
+$ mvn exec:java
 ....
 
 You can then open the following url from a web browser:
