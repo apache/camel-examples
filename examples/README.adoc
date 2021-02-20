@@ -95,7 +95,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:jms-file/README.adoc[JMS-File] (camel-example-jms-file) | Messaging | An example that persists messages from JMS to files
 
-| link:camel-example-kafka/README.adoc[Kafka] (camel-example-kafka) | Messaging | An example for Kafka
+| link:kafka/README.adoc[Kafka] (camel-example-kafka) | Messaging | An example for Kafka
 
 | link:camel-example-main-artemis/readme.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
