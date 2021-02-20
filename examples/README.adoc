@@ -105,7 +105,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:camel-example-vertx-kafka/README.adoc[Vertx Kafka] (camel-example-vertx-kafka) | Messaging | An example for Vertx Kafka
 
-| link:camel-example-kotlin/README.adoc[Kotlin] (camel-example-kotlin) | Other Languages | A Camel route using Kotlin
+| link:kotlin/README.adoc[Kotlin] (camel-example-kotlin) | Other Languages | A Camel route using Kotlin
 
 | link:camel-example-reactive-executor-vertx/readme.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 

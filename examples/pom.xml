@@ -122,7 +122,7 @@
         <module>jooq</module>
         <module>kafka</module>
         <module>kamelet</module>
-        <module>camel-example-kotlin</module>
+        <module>kotlin</module>
         <module>camel-example-loadbalancing</module>
         <module>camel-example-loan-broker-cxf</module>
         <module>camel-example-loan-broker-jms</module>
