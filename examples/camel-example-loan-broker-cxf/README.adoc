@@ -3,8 +3,7 @@
 === Introduction
 
 This example shows how to use Camel to implement the EIP’s loan broker
-example, from the EIP book
-(http://www.enterpriseintegrationpatterns.com/SystemManagementExample.html).
+example, from the EIP book: http://www.enterpriseintegrationpatterns.com/SystemManagementExample.html[Loan Broker System Management].
 
 The example use web services for exchanging messages between the client,
 credit agency, and the banks.
@@ -14,17 +13,29 @@ credit agency, and the banks.
 You will need to compile this example first:
 
 ....
-mvn compile
+$ mvn compile
 ....
 
 === Run
 
 ....
-mvn exec:java -PWS.LoanBroker
-mvn exec:java -PWS.Client
+$ mvn exec:java -PWS.LoanBroker
+....
+and in another terminal session execute
+....
+$ mvn exec:java -PWS.Client
 ....
 
 To stop the example hit ctrl+c
+
+=== Run unit tests
+
+There are unit tests implemented, which can be run with the following command:
+
+[source,sh]
+----
+$ mvn test
+----
 
 === Help and contributions
 
