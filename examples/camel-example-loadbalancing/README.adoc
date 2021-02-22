@@ -27,32 +27,36 @@ will automatic failover to the next server.
 To compile and install the project in your maven repo, execute the
 following command on the root of the project
 
-....
-mvn clean install
-....
+[source,sh]
+----
+$ mvn clean install
+----
 
 === Run
 
 To run the example, then execute the following command in the respective
 folder:
 
-- mina1
+==== mina1
 
-....
+[source,sh]
+----
 mvn exec:java -Pmina1
-....
+----
 
-- mina2
+==== mina2
 
-....
+[source,sh]
+----
 mvn exec:java -Pmina2
-....
+----
 
-- loadbalancing
+==== loadbalancer
 
-....
+[source,sh]
+----
 mvn exec:java -Ploadbalancer
-....
+----
 
 === Help and contributions
 
