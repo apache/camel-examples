@@ -20,9 +20,9 @@ import org.apache.camel.example.model.Report;
 
 public class Generator  {
 
-    private static int count;
+    private int count;
 
-    public Report createReport() throws Exception {
+    public Report createReport() {
         int counter = ++count;
 
         // Create a Report object
