@@ -66,7 +66,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:camel-example-loadbalancing/readme.md[Load Balancing] (camel-example-loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 
-| link:camel-example-loan-broker-cxf/README.adoc[Loan Broker WebService] (camel-example-loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
+| link:loan-broker-cxf/README.adoc[Loan Broker WebService] (camel-example-loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
 
 | link:camel-example-loan-broker-jms/README.adoc[Loan Broker JMS] (camel-example-loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
 
