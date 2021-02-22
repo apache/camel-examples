@@ -13,16 +13,22 @@ credit agency, and the banks.
 
 You will need to compile this example first:
 
-....
+[source, sh]
+----
 mvn compile
-....
+----
 
 === Run
 
-....
+[source, sh]
+----
 mvn exec:java -PQueue.LoanBroker
+----
+
+[source, sh]
+----
 mvn exec:java -PQueue.Client
-....
+----
 
 To stop the example hit ctrl+c
 

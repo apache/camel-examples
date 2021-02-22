@@ -34,8 +34,7 @@ $ mvn clean install
 
 === Run
 
-To run the example, then execute the following command in the respective
-folder:
+To run the example, then execute the following commands, each in a separate session in the terminal:
 
 ==== mina1
 
