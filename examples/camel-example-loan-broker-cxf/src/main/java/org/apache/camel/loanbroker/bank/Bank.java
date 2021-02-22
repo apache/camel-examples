@@ -18,8 +18,8 @@ package org.apache.camel.loanbroker.bank;
 
 //START SNIPPET: bankImpl
 public class Bank implements BankWS {
-    private String bankName;
-    private double primeRate;
+    private final String bankName;
+    private final double primeRate;
 
     public Bank(String name) {
         bankName = name;
@@ -33,15 +33,14 @@ public class Bank implements BankWS {
 
     @Override
     public BankQuote getQuote(String ssn, double loanAmount, int loanDuration, int creditHistory, int creditScore) {
-        Double rate = primeRate + (double) (loanDuration / 12) / 10 + Math.random() * 10 / 10;
+        Double rate = primeRate +  ((double) loanDuration / 12) / 10 + Math.random() * 10 / 10;
         // Wait for a while
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             // do nothing here
         }
-        BankQuote result = new BankQuote(bankName, ssn, rate);
-        return result;
+        return new BankQuote(bankName, ssn, rate);
     }
 
 }
