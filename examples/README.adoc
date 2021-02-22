@@ -64,7 +64,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
-| link:camel-example-loadbalancing/readme.md[Load Balancing] (camel-example-loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
+| link:loadbalancing/readme.md[Load Balancing] (camel-example-loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 
 | link:loan-broker-cxf/README.adoc[Loan Broker WebService] (camel-example-loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
 

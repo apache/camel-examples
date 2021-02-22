@@ -124,7 +124,7 @@
         <module>kamelet</module>
         <module>kotlin</module>
         <module>loan-broker-cxf</module>
-        <module>camel-example-loadbalancing</module>
+        <module>loadbalancing</module>
         <module>camel-example-loan-broker-jms</module>
         <module>camel-example-main</module>
         <module>camel-example-main-artemis</module>
