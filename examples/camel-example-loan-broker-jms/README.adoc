@@ -4,7 +4,7 @@
 
 This example shows how to use Camel to implement the EIP’s loan broker
 example, from the EIP book
-(http://www.enterpriseintegrationpatterns.com/SystemManagementExample.html).
+http://www.enterpriseintegrationpatterns.com/SystemManagementExample.html[SystemManagementExample].
 
 The example uses JMS queues for exchanging messages between the client,
 credit agency, and the banks.
@@ -24,6 +24,8 @@ mvn compile
 ----
 mvn exec:java -PQueue.LoanBroker
 ----
+
+In a separate terminal session:
 
 [source, sh]
 ----
