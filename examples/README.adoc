@@ -68,7 +68,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:loan-broker-cxf/README.adoc[Loan Broker WebService] (camel-example-loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
 
-| link:camel-example-loan-broker-jms/README.adoc[Loan Broker JMS] (camel-example-loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
+| link:loan-broker-jms/README.adoc[Loan Broker JMS] (camel-example-loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
 
 | link:camel-example-route-throttling/readme.md[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages
