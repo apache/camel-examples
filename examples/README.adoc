@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 87 (0 deprecated)
+Number of Examples: 50 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -19,31 +19,7 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
 
-| link:any23/README.adoc[Any23 example] (camel-example-any23) | Beginner | An example that uses the Any23 dataformat
-
-| link:as2/README.adoc[AS2 Example] (camel-example-as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
-
-| link:azure-storage-blob/README.adoc[Azure Storage Blob] (camel-example-azure-storage-blob) | Beginner | Azure Storage Blob example
-
-| link:basic/README.adoc[Basic] (camel-example-basic) | Beginner | Basic example
-
-| link:cdi/README.adoc[CDI] (camel-example-cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
-
-| link:cdi-properties/README.adoc[CDI Properties] (camel-example-cdi-properties) | Beginner | DeltaSpike configuration properties CDI example
-
-| link:cdi-xml/README.adoc[CDI Camel XML] (camel-example-cdi-xml) | Beginner | CDI and Camel XML example
-
-| link:console/README.adoc[Console] (camel-example-console) | Beginner | An example that reads input from the console
-
-| link:csimple/readme.adoc[Csimple] (camel-example-csimple) | Beginner | Shows using compiled simple language
-
-| link:csimple-joor/readme.adoc[Csimple Joor] (camel-example-csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
-
-| link:ftp/README[FTP] (camel-example-ftp) | Beginner | An example for showing Camel FTP integration
-
-| link:camel-example-java8/README.adoc[Java8] (camel-example-java8) | Beginner | An example for showing Camel DSL for Java 8
-
-| link:camel-example-kamelet/README.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
+| link:kamelet/README.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
 
 | link:camel-example-main/readme.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
@@ -80,49 +56,19 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-spring-xquery/README.adoc[Spring XQuery] (camel-example-spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
-| link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (camel-example-cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
-
-| link:cdi-aws-s3/README.adoc[CDI AWS S3] (camel-example-cdi-aws-s3) | Cloud | AWS S3 CDI example
-
-| link:cdi-kubernetes/README.adoc[CDI Kubernetes] (camel-example-cdi-kubernetes) | Cloud | An example running Camel CDI on Kubernetes
-
-| link:cdi-minio/README.adoc[CDI Minio] (camel-example-cdi-minio) | Cloud | Minio CDI example
-
-| link:camel-example-hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (camel-example-hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
-
 | link:camel-example-main-endpointdsl-aws2/readme.md[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
-| link:cdi-cassandraql/README.adoc[CDI Cassandra] (camel-example-cdi-cassandraql) | Database | Cassandraql CDI example
+| link:jdbc/README.adoc[JDBC] (camel-example-jdbc) | Database | An example for showing Camel using JDBC component
 
-| link:debezium/README.adoc[Debezium] (camel-example-debezium) | Database | An example for Debezium Component
-
-| link:debezium-eventhubs-blob/README.adoc[Debezium Eventhubs Blob] (camel-example-debezium-eventhubs-blob) | Database | An example for Debezium Component with Azure Event Hubs and Azure Storage Blob
-
-| link:camel-example-jdbc/README.adoc[JDBC] (camel-example-jdbc) | Database | An example for showing Camel using JDBC component
-
-| link:camel-example-jooq/README.adoc[JOOQ] (camel-example-jooq) | Database | An example for showing Camel using JOOQ component
+| link:jooq/README.adoc[JOOQ] (camel-example-jooq) | Database | An example for showing Camel using JOOQ component
 
 | link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
-| link:aggregate/README.adoc[Aggregate] (camel-example-aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
+| link:loadbalancing/readme.md[Load Balancing] (camel-example-loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 
-| link:aggregate-dist/README.adoc[Aggregate Dist] (camel-example-aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
+| link:loan-broker-cxf/README.adoc[Loan Broker WebService] (camel-example-loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
 
-| link:artemis/README.adoc[Widget Gadget using Apache ActiveMQ Artemis] (camel-example-artemis) | EIP | The widget and gadget example from the EIP book using Apache ActiveMQ Artemis
-
-| link:bigxml-split/README.adoc[Bigxml Split] (camel-example-bigxml-split) | EIP | How to deal with big XML files in Camel
-
-| link:billboard-aggregate/README.adoc[Billboard Aggr] (camel-example-billboard-aggr) | EIP | Billboard aggregation example
-
-| link:cafe/README.adoc[Cafe] (camel-example-cafe) | EIP | A cafe example showing how to work with Camel
-
-| link:cafe-endpointdsl/README.adoc[Cafe Endpointdsl] (camel-example-cafe-endpointdsl) | EIP | A cafe example showing how to work with Camel and the Endpoint DSL
-
-| link:camel-example-loadbalancing/readme.md[Load Balancing] (camel-example-loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
-
-| link:camel-example-loan-broker-cxf/README.adoc[Loan Broker WebService] (camel-example-loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
-
-| link:camel-example-loan-broker-jms/README.adoc[Loan Broker JMS] (camel-example-loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
+| link:loan-broker-jms/README.adoc[Loan Broker JMS] (camel-example-loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
 
 | link:camel-example-route-throttling/readme.md[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages
@@ -134,8 +80,6 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
 
-| link:fhir/README.adoc[FHIR] (camel-example-fhir) | Health Care | An example running Camel FHIR using Camel CDI
-
 | link:camel-example-transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
     
 
@@ -143,25 +87,15 @@ Number of Examples: 87 (0 deprecated)
         Spring DSL
     
 
-| link:cdi-metrics/README.adoc[CDI Metrics] (camel-example-cdi-metrics) | Management and Monitoring | Dropwizard Metrics CDI example
-
-| link:flight-recorder/README.adoc[Flight Recorder] (camel-example-flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
-
-| link:camel-example-jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
+| link:jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
 
 | link:camel-example-management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
 
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
-| link:activemq-tomcat/README.adoc[ActiveMQ Tomcat] (camel-example-activemq-tomcat) | Messaging | An example using ActiveMQ Broker and Camel with Apache Tomcat
+| link:jms-file/README.adoc[JMS-File] (camel-example-jms-file) | Messaging | An example that persists messages from JMS to files
 
-| link:artemis-large-messages/README.adoc[Artemis Large Messages] (camel-example-artemis-large-messages) | Messaging | Demonstrates sending large messages (handles GBs in size) between Apache Camel and ActiveMQ Artemis in
-        streaming mode
-    
-
-| link:camel-example-jms-file/README.adoc[JMS-File] (camel-example-jms-file) | Messaging | An example that persists messages from JMS to files
-
-| link:camel-example-kafka/README.adoc[Kafka] (camel-example-kafka) | Messaging | An example for Kafka
+| link:kafka/README.adoc[Kafka] (camel-example-kafka) | Messaging | An example for Kafka
 
 | link:camel-example-main-artemis/readme.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
@@ -171,11 +105,9 @@ Number of Examples: 87 (0 deprecated)
 
 | link:camel-example-vertx-kafka/README.adoc[Vertx Kafka] (camel-example-vertx-kafka) | Messaging | An example for Vertx Kafka
 
-| link:camel-example-kotlin/README.adoc[Kotlin] (camel-example-kotlin) | Other Languages | A Camel route using Kotlin
+| link:kotlin/README.adoc[Kotlin] (camel-example-kotlin) | Other Languages | A Camel route using Kotlin
 
 | link:camel-example-reactive-executor-vertx/readme.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
-
-| link:cdi-rest-servlet/README.adoc[CDI Rest] (camel-example-cdi-rest-servlet) | Rest | Rest DSL using Servlet with CDI example
 
 | link:camel-example-openapi-cdi/README.adoc[OpenApi CDI] (camel-example-openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
 
@@ -188,14 +120,6 @@ Number of Examples: 87 (0 deprecated)
 | link:camel-example-telegram/README.adoc[Telegram] (camel-example-telegram) | Social | An example that uses Telegram API
 
 | link:camel-example-twitter-websocket/README.adoc[Twitter Websocket] (camel-example-twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
-
-| link:cdi-test/README.adoc[CDI Test] (camel-example-cdi-test) | Testing | An example illustrating Camel CDI testing features
-
-| link:cxf/README.adoc[CXF] (camel-example-cxf) | WebService | An example which demonstrates the use of the Camel CXF component
-
-| link:cxf-proxy/README.adoc[CXF Proxy] (camel-example-cxf-proxy) | WebService | An example which uses Camel to proxy a web service
-
-| link:cxf-tomcat/README.adoc[CXF Tomcat] (camel-example-cxf-tomcat) | WebService | An example using Camel CXF (code first) with Apache Tomcat
 
 | link:camel-example-spring-ws/README.adoc[Spring WebService] (camel-example-spring-ws) | WebService | An example showing how to work with Camel and Spring Web Services
 |===
