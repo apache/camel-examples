@@ -11,15 +11,13 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 50 (0 deprecated)
+Number of Examples: 40 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
 
 | link:camel-example-micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
-
-| link:kamelet/README.adoc[Kamelet] (camel-example-kamelet) | Beginner | How to use Kamelets
 
 | link:camel-example-main/readme.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
@@ -58,17 +56,7 @@ Number of Examples: 50 (0 deprecated)
 
 | link:camel-example-main-endpointdsl-aws2/readme.md[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
-| link:jdbc/README.adoc[JDBC] (camel-example-jdbc) | Database | An example for showing Camel using JDBC component
-
-| link:jooq/README.adoc[JOOQ] (camel-example-jooq) | Database | An example for showing Camel using JOOQ component
-
 | link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
-
-| link:loadbalancing/readme.md[Load Balancing] (camel-example-loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
-
-| link:loan-broker-cxf/README.adoc[Loan Broker WebService] (camel-example-loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
-
-| link:loan-broker-jms/README.adoc[Loan Broker JMS] (camel-example-loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
 
 | link:camel-example-route-throttling/readme.md[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages
@@ -87,15 +75,9 @@ Number of Examples: 50 (0 deprecated)
         Spring DSL
     
 
-| link:jmx/README.adoc[JMX] (camel-example-jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
-
 | link:camel-example-management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
 
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
-
-| link:jms-file/README.adoc[JMS-File] (camel-example-jms-file) | Messaging | An example that persists messages from JMS to files
-
-| link:kafka/README.adoc[Kafka] (camel-example-kafka) | Messaging | An example for Kafka
 
 | link:camel-example-main-artemis/readme.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
@@ -104,8 +86,6 @@ Number of Examples: 50 (0 deprecated)
 | link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
 | link:camel-example-vertx-kafka/README.adoc[Vertx Kafka] (camel-example-vertx-kafka) | Messaging | An example for Vertx Kafka
-
-| link:kotlin/README.adoc[Kotlin] (camel-example-kotlin) | Other Languages | A Camel route using Kotlin
 
 | link:camel-example-reactive-executor-vertx/readme.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 

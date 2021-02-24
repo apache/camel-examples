@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.aws.kinesis.KinesisConstants;
+import org.apache.camel.component.aws2.kinesis.Kinesis2Constants;
 import org.apache.camel.component.debezium.DebeziumConstants;
 import org.apache.camel.main.Main;
 import org.apache.camel.model.dataformat.JsonLibrary;
@@ -88,7 +88,7 @@ public final class DebeziumMySqlConsumerToKinesis {
                             final Struct key = (Struct) exchange.getMessage().getHeader(DebeziumConstants.HEADER_KEY);
                             final String hash = String.valueOf(key.hashCode());
 
-                            exchange.getMessage().setHeader(KinesisConstants.PARTITION_KEY, hash);
+                            exchange.getMessage().setHeader(Kinesis2Constants.PARTITION_KEY, hash);
                         })
                         // Marshal everything to JSON, you can use any other data format such as Avro, Protobuf..etc, but in this example we will keep it to JSON for simplicity
                         .marshal().json(JsonLibrary.Jackson)
