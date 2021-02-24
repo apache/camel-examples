@@ -94,7 +94,6 @@
         <module>cafe-endpointdsl</module>
         <module>cassandra-kubernetes</module>
         <module>cdi</module>
-        <module>cdi-aws-s3</module>
         <module>cdi-cassandraql</module>
         <module>cdi-kubernetes</module>
         <module>cdi-metrics</module>
