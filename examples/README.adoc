@@ -79,7 +79,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
-| link:camel-example-main-artemis/README.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
+| link:main-artemis/README.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
 | link:camel-example-netty-custom-correlation/readme.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
