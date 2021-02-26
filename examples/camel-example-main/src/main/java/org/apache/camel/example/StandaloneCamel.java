@@ -34,29 +34,30 @@ public final class StandaloneCamel {
 
     public static void main(String[] args) throws Exception {
         // create a new CamelContext
-        CamelContext camelContext = new DefaultCamelContext();
+        try (CamelContext camelContext = new DefaultCamelContext()) {
 
-        // configure where to load properties file in the properties component
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
-        // resolve property placeholder
-        String hello = camelContext.resolvePropertyPlaceholders("{{hi}}");
+            // configure where to load properties file in the properties component
+            camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
+            // resolve property placeholder
+            String hello = camelContext.resolvePropertyPlaceholders("{{hi}}");
 
-        // and create bean with the placeholder
-        MyBean myBean = new MyBean(hello, "Bye");
-        // register bean to Camel
-        camelContext.getRegistry().bind("myBean", myBean);
+            // and create bean with the placeholder
+            MyBean myBean = new MyBean(hello, "Bye");
+            // register bean to Camel
+            camelContext.getRegistry().bind("myBean", myBean);
 
-        // add routes to Camel
-        camelContext.addRoutes(new MyRouteBuilder());
+            // add routes to Camel
+            camelContext.addRoutes(new MyRouteBuilder());
 
-        // start Camel
-        camelContext.start();
+            // start Camel
+            camelContext.start();
 
-        // just run for 10 seconds and stop
-        System.out.println("Running for 10 seconds and then stopping");
-        Thread.sleep(10000);
+            // just run for 10 seconds and stop
+            System.out.println("Running for 10 seconds and then stopping");
+            Thread.sleep(10000);
 
-        // stop and shutdown Camel
-        camelContext.stop();
+            // stop and shutdown Camel
+            camelContext.stop();
+        }
     }
 }
