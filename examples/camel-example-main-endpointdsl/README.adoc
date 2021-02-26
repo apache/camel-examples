@@ -10,7 +10,10 @@ Notice how you can configure Camel in the `application.properties` file.
 
 You can run this example using
 
-    mvn camel:run   
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 

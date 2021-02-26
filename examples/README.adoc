@@ -21,7 +21,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:camel-example-main/README.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
-| link:camel-example-main-endpointdsl/readme.adoc[Main Endpointdsl] (camel-example-main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
+| link:camel-example-main-endpointdsl/README.adoc[Main Endpointdsl] (camel-example-main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
 
 | link:camel-example-main-endpointdsl-aws2-s3/readme.adoc[Main Endpointdsl Aws2 S3] (camel-example-main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
 
