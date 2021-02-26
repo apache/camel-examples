@@ -6,6 +6,15 @@ that are compiled.
 
 Notice how you can configure Camel in the `application.properties` file.
 
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
 === How to run
 
 You can run this example using
