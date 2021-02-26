@@ -14,7 +14,10 @@ Don't forget to add your AWS Credentials and the bucket name.
 
 You can run this example using
 
-    mvn camel:run   
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 
