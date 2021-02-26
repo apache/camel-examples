@@ -25,7 +25,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:camel-example-main-endpointdsl-aws2-s3/README.adoc[Main Endpointdsl Aws2 S3] (camel-example-main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
 
-| link:camel-example-main-endpointdsl-aws2-s3-kafka/readme.adoc[Main Endpointdsl Aws2 S3 Kafka] (camel-example-main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
+| link:camel-example-main-endpointdsl-aws2-s3-kafka/README.adoc[Main Endpointdsl Aws2 S3 Kafka] (camel-example-main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
 
 | link:camel-example-main-health/readme.adoc[Main Health] (camel-example-main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
