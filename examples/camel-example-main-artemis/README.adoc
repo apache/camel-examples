@@ -21,7 +21,10 @@ and `admin` as password:
 
 Then you can run this example using
 
-    mvn compile camel:run
+[source,sh]
+----
+$ mvn compile camel:run
+----
 
 === Help and contributions
 
