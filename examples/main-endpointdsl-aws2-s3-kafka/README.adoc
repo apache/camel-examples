@@ -1,20 +1,23 @@
-== Camel Example Main Endpoint DSL with AWS2 S3 component
+== Camel Example Main Endpoint DSL with AWS2 S3 component to Kafka
 
 This example shows how to use the endpoint DSL in your Camel routes
 to define endpoints using type safe fluent builders, which are Java methods
 that are compiled.
 
-The example will poll an S3 bucket and Log the content of the file.
+The example will poll an S3 bucket and send this to a Kafka topic.
 
 Notice how you can configure Camel in the `application.properties` file.
 
-Don't forget to add your AWS Credentials and the bucket name.
+Don't forget to add your AWS Credentials and the bucket name and point to the correct topic.
 
 === How to run
 
 You can run this example using
 
-    mvn camel:run   
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 

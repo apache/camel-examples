@@ -19,13 +19,13 @@ Number of Examples: 40 (0 deprecated)
 
 | link:camel-example-micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
 
-| link:camel-example-main/readme.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
+| link:main/README.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
-| link:camel-example-main-endpointdsl/readme.adoc[Main Endpointdsl] (camel-example-main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
+| link:main-endpointdsl/README.adoc[Main Endpointdsl] (camel-example-main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
 
-| link:camel-example-main-endpointdsl-aws2-s3/readme.adoc[Main Endpointdsl Aws2 S3] (camel-example-main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
+| link:main-endpointdsl-aws2-s3/README.adoc[Main Endpointdsl Aws2 S3] (camel-example-main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
 
-| link:camel-example-main-endpointdsl-aws2-s3-kafka/readme.adoc[Main Endpointdsl Aws2 S3 Kafka] (camel-example-main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
+| link:main-endpointdsl-aws2-s3-kafka/README.adoc[Main Endpointdsl Aws2 S3 Kafka] (camel-example-main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
 
 | link:camel-example-main-health/readme.adoc[Main Health] (camel-example-main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
@@ -54,7 +54,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:camel-example-spring-xquery/README.adoc[Spring XQuery] (camel-example-spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
-| link:camel-example-main-endpointdsl-aws2/readme.md[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
+| link:main-endpointdsl-aws2/README[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
 | link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
@@ -79,7 +79,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
-| link:camel-example-main-artemis/readme.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
+| link:main-artemis/README.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
 | link:camel-example-netty-custom-correlation/readme.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
