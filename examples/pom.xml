@@ -141,7 +141,7 @@
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>camel-example-oaipmh</module>
-        <module>camel-example-openapi-cdi</module>
+        <module>openapi-cdi</module>
         <module>camel-example-pojo-messaging</module>
         <module>camel-example-reactive-executor-vertx</module>
         <module>camel-example-route-throttling</module>
