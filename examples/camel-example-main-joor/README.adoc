@@ -7,7 +7,9 @@ The jOOR language is very performant, as it is compiled to Java code once during
 
 You can run this example using
 
-    mvn camel:run
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 
