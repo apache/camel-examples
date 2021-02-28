@@ -33,7 +33,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-lambda/README.adoc[Main Lambda] (camel-example-main-lambda) | Beginner | Camel routes lambda style
 
-| link:camel-example-main-tiny/readme.adoc[Main Tiny] (camel-example-main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
+| link:camel-example-main-tiny/README.adoc[Main Tiny] (camel-example-main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
 
 | link:camel-example-main-xml/readme.adoc[Main Xml] (camel-example-main-xml) | Beginner | An example for showing standalone Camel using XML
 
