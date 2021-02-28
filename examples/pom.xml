@@ -134,7 +134,7 @@
         <module>main-health</module>
         <module>main-joor</module>
         <module>main-lambda</module>
-        <module>camel-example-main-tiny</module>
+        <module>main-tiny</module>
         <module>camel-example-main-xml</module>
         <module>camel-example-management</module>
         <module>camel-example-micrometer</module>
