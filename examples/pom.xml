@@ -139,7 +139,7 @@
         <module>management</module>
         <module>micrometer</module>
         <module>mongodb</module>
-        <module>camel-example-netty-custom-correlation</module>
+        <module>netty-custom-correlation</module>
         <module>camel-example-oaipmh</module>
         <module>camel-example-openapi-cdi</module>
         <module>camel-example-pojo-messaging</module>

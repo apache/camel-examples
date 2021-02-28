@@ -81,7 +81,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-artemis/README.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
-| link:camel-example-netty-custom-correlation/README.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
+| link:netty-custom-correlation/README.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
 | link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
