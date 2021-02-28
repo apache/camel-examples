@@ -16,9 +16,9 @@ using a variable delay. The exchange is measured in various ways:
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Setup of Monitoring backend
 
@@ -29,12 +29,12 @@ backend.
 host
 * Edit the `+prometheus.yml+` file and append another `+scrape_config+`:
 
-....
+----
 ...
   - job_name: 'camel'
     static_configs:
       - targets: ['localhost:8088']
-....
+----
 
 * Start up Prometheus
 
@@ -52,9 +52,9 @@ this example).
 
 To run the example type
 
-....
-mvn exec:java
-....
+----
+$ mvn exec:java
+----
 
 * You can access http://localhost:8088/metrics in order to manually
 obtain the Micrometer output for Prometheus.
