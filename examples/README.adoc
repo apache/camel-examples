@@ -31,7 +31,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-joor/README.adoc[Main Joor] (camel-example-main-joor) | Beginner | An example for showing standalone Camel with jOOR runtime Java compiled
 
-| link:camel-example-main-lambda/README.adoc[Main Lambda] (camel-example-main-lambda) | Beginner | Camel routes lambda style
+| link:main-lambda/README.adoc[Main Lambda] (camel-example-main-lambda) | Beginner | Camel routes lambda style
 
 | link:camel-example-main-tiny/readme.adoc[Main Tiny] (camel-example-main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
 

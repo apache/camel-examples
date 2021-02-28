@@ -133,7 +133,7 @@
         <module>main-endpointdsl-aws2-s3-kafka</module>
         <module>main-health</module>
         <module>main-joor</module>
-        <module>camel-example-main-lambda</module>
+        <module>main-lambda</module>
         <module>camel-example-main-tiny</module>
         <module>camel-example-main-xml</module>
         <module>camel-example-management</module>
