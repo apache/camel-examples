@@ -137,7 +137,7 @@
         <module>main-tiny</module>
         <module>main-xml</module>
         <module>management</module>
-        <module>camel-example-micrometer</module>
+        <module>micrometer</module>
         <module>camel-example-mongodb</module>
         <module>camel-example-netty-custom-correlation</module>
         <module>camel-example-oaipmh</module>
