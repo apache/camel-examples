@@ -135,7 +135,7 @@
         <module>main-joor</module>
         <module>main-lambda</module>
         <module>main-tiny</module>
-        <module>camel-example-main-xml</module>
+        <module>main-xml</module>
         <module>camel-example-management</module>
         <module>camel-example-micrometer</module>
         <module>camel-example-mongodb</module>
