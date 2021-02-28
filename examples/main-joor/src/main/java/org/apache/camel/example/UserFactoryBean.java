@@ -20,12 +20,16 @@ import java.util.Random;
 
 public class UserFactoryBean {
 
-    private static MyUser user1 = new MyUser("Tony", 44);
-    private static MyUser user2 = new MyUser("Scott", 23);
-    private static MyUser user3 = new MyUser("Jack", 14);
+    private UserFactoryBean() {
+    }
+
+    private static final MyUser user1 = new MyUser("Tony", 44);
+    private static final MyUser user2 = new MyUser("Scott", 23);
+    private static final MyUser user3 = new MyUser("Jack", 14);
+    private static final Random RANDOM = new Random();
 
     public static MyUser createUser() {
-        int ran = new Random().nextInt(3);
+        int ran = RANDOM.nextInt(3);
         if (ran == 0) {
             return user1;
         } else if (ran == 1) {
