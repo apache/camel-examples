@@ -56,7 +56,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-endpointdsl-aws2/README[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
-| link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
+| link:mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
 | link:camel-example-route-throttling/readme.md[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages
