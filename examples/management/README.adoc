@@ -49,23 +49,23 @@ much faster now and the logger should output a higher throughput.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn camel:run
-....
+----
+$ mvn camel:run
+----
 
 To use jconsole type
 
-....
-jconsole
-....
+----
+$ jconsole
+----
 
 And you should be able to see a process id in the connect to agent tab.
 If its there then click in and you should be connected to the Camel

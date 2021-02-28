@@ -75,7 +75,7 @@ Number of Examples: 40 (0 deprecated)
         Spring DSL
     
 
-| link:camel-example-management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
+| link:management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
 
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 

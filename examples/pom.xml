@@ -136,7 +136,7 @@
         <module>main-lambda</module>
         <module>main-tiny</module>
         <module>main-xml</module>
-        <module>camel-example-management</module>
+        <module>management</module>
         <module>camel-example-micrometer</module>
         <module>camel-example-mongodb</module>
         <module>camel-example-netty-custom-correlation</module>
