@@ -14,11 +14,15 @@ You can run this example using two JVMs.
 
 To start the server run:
 
-    mvn compile exec:java -P server
+----
+$ mvn compile exec:java -P server
+----
 
 To start the client run:
 
-    mvn compile exec:java -P client
+----
+$ mvn compile exec:java -P client
+----
 
 In the client output you should see it logs request/response pairs.
 For requests that contains the word `beer` is delayed on the server side, and you
