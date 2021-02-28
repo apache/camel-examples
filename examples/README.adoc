@@ -37,7 +37,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-xml/README.adoc[Main Xml] (camel-example-main-xml) | Beginner | An example for showing standalone Camel using XML
 
-| link:camel-example-oaipmh/README.adoc[OAIPMH example] (camel-example-oaipmh) | Beginner | An example with OAIPMH component
+| link:oaipmh/README.adoc[OAIPMH example] (camel-example-oaipmh) | Beginner | An example with OAIPMH component
 
 | link:camel-example-pojo-messaging/README.adoc[POJO Routing] (camel-example-pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
     

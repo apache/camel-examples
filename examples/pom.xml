@@ -140,7 +140,7 @@
         <module>micrometer</module>
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
-        <module>camel-example-oaipmh</module>
+        <module>oaipmh</module>
         <module>openapi-cdi</module>
         <module>camel-example-pojo-messaging</module>
         <module>camel-example-reactive-executor-vertx</module>
