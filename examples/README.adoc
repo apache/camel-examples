@@ -29,7 +29,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-health/README.adoc[Main Health] (camel-example-main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
-| link:camel-example-main-joor/README.adoc[Main Joor] (camel-example-main-joor) | Beginner | An example for showing standalone Camel with jOOR runtime Java compiled
+| link:main-joor/README.adoc[Main Joor] (camel-example-main-joor) | Beginner | An example for showing standalone Camel with jOOR runtime Java compiled
 
 | link:camel-example-main-lambda/readme.adoc[Main Lambda] (camel-example-main-lambda) | Beginner | Camel routes lambda style
 
