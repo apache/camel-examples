@@ -3,7 +3,10 @@
 This example demonstrates how to use `LambdaRouteBuilder` as a way of defining Camel routes
 using lambda style.
 
-     rb -> rb.from("timer:foo").log("Hello Lambda");
+[source,java]
+----
+rb -> rb.from("timer:foo").log("Hello Lambda");
+----
 
 The `LambdaRouteBuilder` is a functional interface that makes defining routes with lambda style
 easy. All you need to do is to create a method that returns `LambdaRouteBuilder` and mark
@@ -17,7 +20,9 @@ Multiple routes can be defined by having multiple methods.
 
 You can run this example using
 
-    mvn camel:run
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 
