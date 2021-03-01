@@ -151,7 +151,7 @@
         <module>servlet-tomcat</module>
         <module>splunk</module>
         <module>spring</module>
-        <module>camel-example-spring-javaconfig</module>
+        <module>spring-javaconfig</module>
         <module>camel-example-spring-pulsar</module>
         <module>camel-example-spring-ws</module>
         <module>camel-example-spring-xquery</module>

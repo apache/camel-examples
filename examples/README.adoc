@@ -50,7 +50,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:spring/README.adoc[Spring] (camel-example-spring) | Beginner | An example showing how to work with Camel and Spring
 
-| link:camel-example-spring-javaconfig/README.adoc[Spring Java Config] (camel-example-spring-javaconfig) | Beginner | An example showing how to work with Camel and Spring Java Config
+| link:spring-javaconfig/README.adoc[Spring Java Config] (camel-example-spring-javaconfig) | Beginner | An example showing how to work with Camel and Spring Java Config
 
 | link:camel-example-spring-xquery/README.adoc[Spring XQuery] (camel-example-spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
