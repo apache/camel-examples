@@ -44,7 +44,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:routeloader/README.adoc[Routeloader] (camel-example-routeloader) | Beginner | Example loading and compiling Java routes on startup
 
-| link:camel-example-routetemplate/readme.adoc[Routetemplate] (camel-example-routetemplate) | Beginner | How to use route templates (parameterized routes)
+| link:camel-example-routetemplate/README.adoc[Routetemplate] (camel-example-routetemplate) | Beginner | How to use route templates (parameterized routes)
 
 | link:camel-example-servlet-tomcat/README.adoc[Servlet Tomcat] (camel-example-servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
 

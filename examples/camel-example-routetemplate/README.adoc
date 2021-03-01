@@ -16,7 +16,9 @@ The example runs standalone via Camel Main in the `MyApplication.java` source fi
 
 You can run this example using
 
-    mvn camel:run
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 
