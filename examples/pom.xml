@@ -145,7 +145,7 @@
         <module>pojo-messaging</module>
         <module>reactive-executor-vertx</module>
         <module>route-throttling</module>
-        <module>camel-example-routeloader</module>
+        <module>routeloader</module>
         <module>camel-example-routetemplate</module>
         <module>camel-example-salesforce-consumer</module>
         <module>camel-example-servlet-tomcat</module>
