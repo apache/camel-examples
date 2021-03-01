@@ -39,7 +39,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:oaipmh/README.adoc[OAIPMH example] (camel-example-oaipmh) | Beginner | An example with OAIPMH component
 
-| link:camel-example-pojo-messaging/README.adoc[POJO Routing] (camel-example-pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
+| link:pojo-messaging/README.adoc[POJO Routing] (camel-example-pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
     
 
 | link:camel-example-routeloader/readme.adoc[Routeloader] (camel-example-routeloader) | Beginner | Example loading and compiling Java routes on startup
