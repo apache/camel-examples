@@ -5,7 +5,7 @@ This example shows how to use Salesforce Streaming API.
 === Configuring Salesforce
 This examples uses OAuth 2.0 Refresh Token Flow, which requires 3 credentials collected from Salesforce - `Client ID`, `Client Secret` and `Refresh Token`. You will need to put your own credentials in `src/main/resources/application.properties` file.
 
-NOTE: you might want to sign up with your own Developer account at developer.salesforce.com. After you have done that, you’ll need to create a Connected Application for your integration.
+NOTE: You might want to sign up with your own Developer account at developer.salesforce.com. After you have done that, you’ll need to create a Connected Application for your integration.
 
 NOTE: This was written with Salesforce Lightening user interface. Classic user interface might have slightly different menu and/or workflow.
 
@@ -47,7 +47,9 @@ https://login.salesforce.com/services/oauth2/success#access_token=..&refresh_tok
 
 You can run this example using
 
-    mvn compile camel:run
+----
+$ mvn compile camel:run
+----
 
 === Custom topic name and operation flags
 
