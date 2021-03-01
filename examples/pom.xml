@@ -150,7 +150,7 @@
         <module>salesforce-consumer</module>
         <module>servlet-tomcat</module>
         <module>splunk</module>
-        <module>camel-example-spring</module>
+        <module>spring</module>
         <module>camel-example-spring-javaconfig</module>
         <module>camel-example-spring-pulsar</module>
         <module>camel-example-spring-ws</module>
