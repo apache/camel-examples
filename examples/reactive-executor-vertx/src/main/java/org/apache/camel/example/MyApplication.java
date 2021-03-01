@@ -24,13 +24,11 @@ import org.apache.camel.main.Main;
  */
 public final class MyApplication {
 
-    private static Vertx vertx;
-
     private MyApplication() {
     }
 
     public static void main(String[] args) throws Exception {
-        vertx = Vertx.vertx();
+        Vertx vertx = Vertx.vertx();
 
         // use Camels Main class
         Main main = new Main();
