@@ -125,23 +125,23 @@
         <module>loan-broker-cxf</module>
         <module>loadbalancing</module>
         <module>loan-broker-jms</module>
-        <module>camel-example-main</module>
-        <module>camel-example-main-artemis</module>
-        <module>camel-example-main-endpointdsl</module>
-        <module>camel-example-main-endpointdsl-aws2</module>
-        <module>camel-example-main-endpointdsl-aws2-s3</module>
-        <module>camel-example-main-endpointdsl-aws2-s3-kafka</module>
-        <module>camel-example-main-health</module>
-        <module>camel-example-main-lambda</module>
-        <module>camel-example-main-joor</module>
-        <module>camel-example-main-tiny</module>
-        <module>camel-example-main-xml</module>
-        <module>camel-example-management</module>
-        <module>camel-example-micrometer</module>
-        <module>camel-example-mongodb</module>
-        <module>camel-example-netty-custom-correlation</module>
-        <module>camel-example-oaipmh</module>
-        <module>camel-example-openapi-cdi</module>
+        <module>main</module>
+        <module>artemis</module>
+        <module>main-endpointdsl</module>
+        <module>main-endpointdsl-aws2</module>
+        <module>main-endpointdsl-aws2-s3</module>
+        <module>main-endpointdsl-aws2-s3-kafka</module>
+        <module>main-health</module>
+        <module>main-joor</module>
+        <module>main-lambda</module>
+        <module>main-tiny</module>
+        <module>main-xml</module>
+        <module>management</module>
+        <module>micrometer</module>
+        <module>mongodb</module>
+        <module>netty-custom-correlation</module>
+        <module>oaipmh</module>
+        <module>openapi-cdi</module>
         <module>camel-example-pojo-messaging</module>
         <module>camel-example-reactive-executor-vertx</module>
         <module>camel-example-route-throttling</module>

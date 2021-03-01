@@ -17,7 +17,7 @@ Number of Examples: 40 (0 deprecated)
 |===
 | Example | Category | Description
 
-| link:camel-example-micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
+| link:micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
 
 | link:main/README.adoc[Main] (camel-example-main) | Beginner | An example for showing standalone Camel
 
@@ -27,17 +27,17 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-endpointdsl-aws2-s3-kafka/README.adoc[Main Endpointdsl Aws2 S3 Kafka] (camel-example-main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
 
-| link:camel-example-main-health/readme.adoc[Main Health] (camel-example-main-health) | Beginner | An example for showing standalone Camel with Health Checks
+| link:main-health/README.adoc[Main Health] (camel-example-main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
-| link:camel-example-main-joor/readme.adoc[Main Joor] (camel-example-main-joor) | Beginner | An example for showing standalone Camel with jOOR runtime Java compiled
+| link:main-joor/README.adoc[Main Joor] (camel-example-main-joor) | Beginner | An example for showing standalone Camel with jOOR runtime Java compiled
 
-| link:camel-example-main-lambda/readme.adoc[Main Lambda] (camel-example-main-lambda) | Beginner | Camel routes lambda style
+| link:main-lambda/README.adoc[Main Lambda] (camel-example-main-lambda) | Beginner | Camel routes lambda style
 
-| link:camel-example-main-tiny/readme.adoc[Main Tiny] (camel-example-main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
+| link:main-tiny/README.adoc[Main Tiny] (camel-example-main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
 
-| link:camel-example-main-xml/readme.adoc[Main Xml] (camel-example-main-xml) | Beginner | An example for showing standalone Camel using XML
+| link:main-xml/README.adoc[Main Xml] (camel-example-main-xml) | Beginner | An example for showing standalone Camel using XML
 
-| link:camel-example-oaipmh/README.adoc[OAIPMH example] (camel-example-oaipmh) | Beginner | An example with OAIPMH component
+| link:oaipmh/README.adoc[OAIPMH example] (camel-example-oaipmh) | Beginner | An example with OAIPMH component
 
 | link:camel-example-pojo-messaging/README.adoc[POJO Routing] (camel-example-pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
     
@@ -56,7 +56,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:main-endpointdsl-aws2/README[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
-| link:camel-example-mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
+| link:mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
 | link:camel-example-route-throttling/readme.md[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages
@@ -75,13 +75,13 @@ Number of Examples: 40 (0 deprecated)
         Spring DSL
     
 
-| link:camel-example-management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
+| link:management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
 
 | link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
 | link:main-artemis/README.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
-| link:camel-example-netty-custom-correlation/readme.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
+| link:netty-custom-correlation/README.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
 | link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
@@ -89,7 +89,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:camel-example-reactive-executor-vertx/readme.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 
-| link:camel-example-openapi-cdi/README.adoc[OpenApi CDI] (camel-example-openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
+| link:openapi-cdi/README.adoc[OpenApi CDI] (camel-example-openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
 
 | link:camel-example-swagger-cdi/README.adoc[Swagger CDI] (camel-example-swagger-cdi) | Rest | An example using REST DSL and Swagger Java with CDI
 

@@ -1,0 +1,22 @@
+== Camel Example Main jOOR
+
+This example shows using the new jOOR language in the Camel DSL.
+The jOOR language is very performant, as it is compiled to Java code once during startup (runtime).
+
+=== How to run
+
+You can run this example using
+
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

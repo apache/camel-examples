@@ -1,0 +1,35 @@
+== Camel Example Main Lambda
+
+This example demonstrates how to use `LambdaRouteBuilder` as a way of defining Camel routes
+using lambda style.
+
+[source,java]
+----
+rb -> rb.from("timer:foo").log("Hello Lambda");
+----
+
+The `LambdaRouteBuilder` is a functional interface that makes defining routes with lambda style
+easy. All you need to do is to create a method that returns `LambdaRouteBuilder` and mark
+the method with `@BindToRegistry` or if using Spring Boot `@Bean` or `@Produce` for CDI/Quarkus.
+
+See the `MyConfiguration.java` for the configuration and Camel routes are setup.
+
+Multiple routes can be defined by having multiple methods.
+
+=== How to run
+
+You can run this example using
+
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
