@@ -48,7 +48,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:servlet-tomcat/README.adoc[Servlet Tomcat] (camel-example-servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
 
-| link:camel-example-spring/README.adoc[Spring] (camel-example-spring) | Beginner | An example showing how to work with Camel and Spring
+| link:spring/README.adoc[Spring] (camel-example-spring) | Beginner | An example showing how to work with Camel and Spring
 
 | link:camel-example-spring-javaconfig/README.adoc[Spring Java Config] (camel-example-spring-javaconfig) | Beginner | An example showing how to work with Camel and Spring Java Config
 
