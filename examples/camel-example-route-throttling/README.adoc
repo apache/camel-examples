@@ -21,31 +21,31 @@ route completes nearly in sync.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === How to Run
 
 The example has 3 maven goals to run the example
 
-....
-mvn compile exec:java -PCamelServer
-....
+----
+$ mvn compile exec:java -PCamelServer
+----
 
 Starts the Camel Server which contains the 3 routes and where you should
 check its log output for how it goes.
 
-....
-mvn compile exec:java -PCamelClient
-....
+----
+$ mvn compile exec:java -PCamelClient
+----
 
 Is a client that sends 10000 JMS messages to the JMS broker which is
 consumed by route1. The Server must be started beforehand.
 
-....
-mvn compile exec:java -PCamelFileClient
-....
+----
+$ mvn compile exec:java -PCamelFileClient
+----
 
 Is a client that creates 5000 files that are consumed by route2. The
 server may be started beforehand, but its not required.
