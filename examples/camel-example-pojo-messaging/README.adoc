@@ -10,17 +10,17 @@ produce, consume or route messages to endpoints.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn camel:run
-....
+----
+$ mvn camel:run
+----
 
 To stop the example hit ctrl+c
 
