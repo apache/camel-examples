@@ -147,7 +147,7 @@
         <module>route-throttling</module>
         <module>routeloader</module>
         <module>routetemplate</module>
-        <module>camel-example-salesforce-consumer</module>
+        <module>salesforce-consumer</module>
         <module>camel-example-servlet-tomcat</module>
         <module>camel-example-splunk</module>
         <module>camel-example-spring</module>
