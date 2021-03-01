@@ -8,9 +8,9 @@ An example which shows how to use the Camel Servlet with Apache Tomcat.
 
 You will need to package this example first:
 
-....
-mvn package
-....
+----
+$ mvn package
+----
 
 === Run
 
@@ -19,17 +19,17 @@ the deploy folder of Apache Tomcat.
 
 And then hit this url from a webbrowser which has further instructions
 
-....
+----
 http://localhost:8080/camel-example-servlet-tomcat
-....
+----
 
 http://localhost:8080/camel-example-servlet-tomcat
 
 The servlet is located at
 
-....
+----
 http://localhost:8080/camel-example-servlet-tomcat/camel/hello
-....
+----
 
 http://localhost:8080/camel-example-servlet-tomcat/camel/hello
 
