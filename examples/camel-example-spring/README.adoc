@@ -12,17 +12,17 @@ system.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn camel:run
-....
+----
+$ mvn camel:run
+----
 
 You can see the routing rules by looking at the java code in the
 `+src/main/java directory+` and the Spring XML configuration lives in
