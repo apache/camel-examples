@@ -144,7 +144,7 @@
         <module>openapi-cdi</module>
         <module>pojo-messaging</module>
         <module>reactive-executor-vertx</module>
-        <module>camel-example-route-throttling</module>
+        <module>route-throttling</module>
         <module>camel-example-routeloader</module>
         <module>camel-example-routetemplate</module>
         <module>camel-example-salesforce-consumer</module>
