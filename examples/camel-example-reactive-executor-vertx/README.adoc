@@ -8,7 +8,9 @@ different engines via a SPI interface. This example uses VertX as the engine.
 
 You can run this example using
 
-    mvn camel:run
+----
+$ mvn camel:run
+----
 
 === More information
 
