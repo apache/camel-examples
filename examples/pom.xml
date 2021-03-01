@@ -146,7 +146,7 @@
         <module>reactive-executor-vertx</module>
         <module>route-throttling</module>
         <module>routeloader</module>
-        <module>camel-example-routetemplate</module>
+        <module>routetemplate</module>
         <module>camel-example-salesforce-consumer</module>
         <module>camel-example-servlet-tomcat</module>
         <module>camel-example-splunk</module>
