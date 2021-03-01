@@ -77,7 +77,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:management/README.adoc[Management] (camel-example-management) | Management and Monitoring | An example for showing Camel JMX management
 
-| link:camel-example-splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
+| link:splunk/README.adoc[Splunk] (camel-example-splunk) | Management and Monitoring | An example using Splunk
 
 | link:main-artemis/README.adoc[Main Artemis] (camel-example-main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
