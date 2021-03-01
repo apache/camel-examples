@@ -142,7 +142,7 @@
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>
         <module>openapi-cdi</module>
-        <module>camel-example-pojo-messaging</module>
+        <module>pojo-messaging</module>
         <module>camel-example-reactive-executor-vertx</module>
         <module>camel-example-route-throttling</module>
         <module>camel-example-routeloader</module>
