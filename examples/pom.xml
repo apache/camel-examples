@@ -143,7 +143,7 @@
         <module>oaipmh</module>
         <module>openapi-cdi</module>
         <module>pojo-messaging</module>
-        <module>camel-example-reactive-executor-vertx</module>
+        <module>reactive-executor-vertx</module>
         <module>camel-example-route-throttling</module>
         <module>camel-example-routeloader</module>
         <module>camel-example-routetemplate</module>
