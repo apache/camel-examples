@@ -58,7 +58,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
-| link:route-throttling/readme.md[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
+| link:route-throttling/README.adoc[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages
     
 
