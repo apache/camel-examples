@@ -156,7 +156,7 @@
         <module>spring-security</module>
         <module>spring-ws</module>
         <module>spring-xquery</module>
-        <module>camel-example-swagger-cdi</module>
+        <module>swagger-cdi</module>
         <module>camel-example-telegram</module>
         <module>camel-example-transformer-cdi</module>
         <module>camel-example-transformer-demo</module>
