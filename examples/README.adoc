@@ -66,7 +66,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:widget-gadget-java/README.adoc[Widget Gadget Java] (camel-example-widget-gadget-java) | EIP | The widget and gadget example from the EIP book
 
-| link:camel-example-widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
+| link:widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
 
 | link:transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
     
