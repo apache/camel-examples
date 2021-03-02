@@ -85,7 +85,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
-| link:camel-example-vertx-kafka/README.adoc[Vertx Kafka] (camel-example-vertx-kafka) | Messaging | An example for Vertx Kafka
+| link:vertx-kafka/README.adoc[Vertx Kafka] (camel-example-vertx-kafka) | Messaging | An example for Vertx Kafka
 
 | link:reactive-executor-vertx/README.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 
