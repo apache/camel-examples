@@ -64,7 +64,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:widget-gadget-cdi/README.adoc[Widget Gadget CDI] (camel-example-widget-gadget-cdi) | EIP | The widget and gadget example from the EIP book
 
-| link:camel-example-widget-gadget-java/README.adoc[Widget Gadget Java] (camel-example-widget-gadget-java) | EIP | The widget and gadget example from the EIP book
+| link:widget-gadget-java/README.adoc[Widget Gadget Java] (camel-example-widget-gadget-java) | EIP | The widget and gadget example from the EIP book
 
 | link:camel-example-widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
 
