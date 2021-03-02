@@ -162,7 +162,7 @@
         <module>transformer-demo</module>
         <module>twitter-websocket</module>
         <module>vertx-kafka</module>
-        <module>camel-example-widget-gadget-cdi</module>
+        <module>widget-gadget-cdi</module>
         <module>camel-example-widget-gadget-java</module>
         <module>camel-example-widget-gadget-xml</module>
   </modules>
