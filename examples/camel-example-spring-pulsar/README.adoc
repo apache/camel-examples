@@ -9,14 +9,14 @@ received message.
 
 You can run the Pulsar cluster through docker:
 
-....
-docker run -it \
+----
+$ docker run -it \
   -p 6650:6650 \
   -p 8080:8080 \
   -v $PWD/data:/pulsar/data \
   apachepulsar/pulsar:latest \
   bin/pulsar standalone
-....
+----
 
 The Server is required to be running when you try the clients.
 
@@ -30,9 +30,9 @@ using the neutral Camel API
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
@@ -40,18 +40,18 @@ The example should run if you type:
 
 ==== Step 1: Run Server
 
-....
-mvn exec:java -PCamelServer
-....
+----
+$ mvn exec:java -PCamelServer
+----
 
 ==== Step 2: Run Clients
 
-....
-mvn exec:java -PCamelClient
-Below don't work yet
-mvn exec:java -PCamelClientRemoting
-mvn exec:java -PCamelClientEndpoint
-....
+----
+$ mvn exec:java -PCamelClient
+----
+//Below don't work yet
+//mvn exec:java -PCamelClientRemoting
+//mvn exec:java -PCamelClientEndpoint
 
 To stop the example hit ctrl+c
 
