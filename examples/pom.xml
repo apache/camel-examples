@@ -152,7 +152,7 @@
         <module>splunk</module>
         <module>spring</module>
         <module>spring-javaconfig</module>
-        <module>camel-example-spring-pulsar</module>
+        <module>spring-pulsar</module>
         <module>camel-example-spring-ws</module>
         <module>camel-example-spring-xquery</module>
         <module>camel-example-spring-security</module>

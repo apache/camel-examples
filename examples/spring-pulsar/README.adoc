@@ -22,9 +22,8 @@ The Server is required to be running when you try the clients.
 
 And for the Client we have a total of three flavors: NB only 1st one
 working at the moment - Normal use the ProducerTemplate ala Spring
-Template style - Using Spring Remoting for powerful ``Client doesn’t
-know at all its a remote call'' - And using the Message Endpoint pattern
-using the neutral Camel API
+Template style - Using Spring Remoting for powerful "Client doesn’t
+know at all it's a remote call" - And using the Message Endpoint pattern using the neutral Camel API
 
 === Build
 
