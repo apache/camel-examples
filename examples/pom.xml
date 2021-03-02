@@ -153,9 +153,9 @@
         <module>spring</module>
         <module>spring-javaconfig</module>
         <module>spring-pulsar</module>
-        <module>camel-example-spring-ws</module>
-        <module>camel-example-spring-xquery</module>
         <module>spring-security</module>
+        <module>spring-ws</module>
+        <module>camel-example-spring-xquery</module>
         <module>camel-example-swagger-cdi</module>
         <module>camel-example-telegram</module>
         <module>camel-example-transformer-cdi</module>
