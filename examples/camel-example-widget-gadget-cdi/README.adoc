@@ -25,9 +25,9 @@ container.
 
 You will need to build this example first:
 
-....
-mvn install
-....
+----
+$ mvn install
+----
 
 === Run
 
@@ -38,16 +38,16 @@ http://activemq.apache.org/[ActiveMQ website].
 
 Then extract the download such as (the .tar)
 
-....
-tar xf ~/Downloads/apache-activemq-5.13.0-bin.tar.gz
-....
+----
+$ tar xf ~/Downloads/apache-activemq-5.13.0-bin.tar.gz
+----
 
 Then the broker can be started with
 
-....
-cd apache-activemq-5.13.0
-bin/activemq console
-....
+----
+$ cd apache-activemq-5.13.0
+$ bin/activemq console
+----
 
 And then Broker is running (you can press ctrl+c in the shell to stop
 the broker).
@@ -59,17 +59,17 @@ The Camel application connects to the remote broker on url:
 When the ActiveMQ broker is running, then you can run this example
 using:
 
-....
-mvn compile camel:run
-....
+----
+$ mvn compile camel:run
+----
 
 When the Camel application runs, you should see 2 orders being processed
 and logged to the console, such as:
 
-....
+----
 2016-01-11 12:53:53,978 [sumer[newOrder]] INFO  widget                         - Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: <order>  <customerId>123</customerId>  <product>widget</product>  <amount>2</amount></order>]
 2016-01-11 12:53:54,005 [sumer[newOrder]] INFO  gadget                         - Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: <order>  <customerId>456</customerId>  <product>gadget</product>  <amount>3</amount></order>]
-....
+----
 
 You can access the ActiveMQ web console using
 http://localhost:8161/admin/ and then browse the queues. You should see
