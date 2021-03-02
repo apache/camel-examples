@@ -18,17 +18,17 @@ account.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn camel:run
-....
+----
+$ mvn camel:run
+----
 
 Then open a browser to see live twitter updates in the web page
 
