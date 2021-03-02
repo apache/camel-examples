@@ -155,7 +155,7 @@
         <module>spring-pulsar</module>
         <module>camel-example-spring-ws</module>
         <module>camel-example-spring-xquery</module>
-        <module>camel-example-spring-security</module>
+        <module>spring-security</module>
         <module>camel-example-swagger-cdi</module>
         <module>camel-example-telegram</module>
         <module>camel-example-transformer-cdi</module>
