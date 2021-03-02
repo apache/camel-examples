@@ -99,7 +99,7 @@ Number of Examples: 40 (0 deprecated)
 
 | link:telegram/README.adoc[Telegram] (camel-example-telegram) | Social | An example that uses Telegram API
 
-| link:camel-example-twitter-websocket/README.adoc[Twitter Websocket] (camel-example-twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
+| link:twitter-websocket/README.adoc[Twitter Websocket] (camel-example-twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
 
 | link:spring-ws/README.adoc[Spring WebService] (camel-example-spring-ws) | WebService | An example showing how to work with Camel and Spring Web Services
 |===
