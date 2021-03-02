@@ -6,43 +6,46 @@ An example which shows how to integrate Camel with Splunk.
 
 This example requires that an Splunk Server is up and running. (For this
 example, sample data provide by Splunk was used. Steps for loading this
-data into splunk are documented here:
-http://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/GetthetutorialdataintoSplunk)
+data into splunk are documented http://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/GetthetutorialdataintoSplunk[here])
 
-This project consists of the following examples: -Random search query on
-Splunk -Saved search query on Splunk -Publish an event to Splunk
+This project consists of the following examples:
+
+* Random search query on
+Splunk
+* Saved search query on Splunk
+* Publish an event to Splunk
 
 === Build
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the random search client you type:
 
-....
-mvn compile exec:java -Psearch-client
-....
+----
+$ mvn compile exec:java -Psearch-client
+----
 
 … and response data will be printed on the console.
 
 To run the saved search client you type:
 
-....
-mvn compile exec:java -Psaved-search-client
-....
+----
+$ mvn compile exec:java -Psaved-search-client
+----
 
 … and response data will be printed on the console.
 
 To run the saved search client you type:
 
-....
-mvn compile exec:java -Ppublish-event-client
-....
+----
+$ mvn compile exec:java -Ppublish-event-client
+----
 
 … and logs will be printed on the console.
 

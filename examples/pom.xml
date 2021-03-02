@@ -142,16 +142,16 @@
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>
         <module>openapi-cdi</module>
-        <module>camel-example-pojo-messaging</module>
-        <module>camel-example-reactive-executor-vertx</module>
-        <module>camel-example-route-throttling</module>
-        <module>camel-example-routeloader</module>
-        <module>camel-example-routetemplate</module>
-        <module>camel-example-salesforce-consumer</module>
-        <module>camel-example-servlet-tomcat</module>
-        <module>camel-example-splunk</module>
-        <module>camel-example-spring</module>
-        <module>camel-example-spring-javaconfig</module>
+        <module>pojo-messaging</module>
+        <module>reactive-executor-vertx</module>
+        <module>route-throttling</module>
+        <module>routeloader</module>
+        <module>routetemplate</module>
+        <module>salesforce-consumer</module>
+        <module>servlet-tomcat</module>
+        <module>splunk</module>
+        <module>spring</module>
+        <module>spring-javaconfig</module>
         <module>camel-example-spring-pulsar</module>
         <module>camel-example-spring-ws</module>
         <module>camel-example-spring-xquery</module>

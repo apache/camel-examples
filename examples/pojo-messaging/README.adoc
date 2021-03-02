@@ -1,35 +1,28 @@
-== Spring Java Config Example
+== POJO Messaging Example
 
 === Introduction
 
-This example shows how to work with files and JMS, using Spring Java
-Config to boot up Camel and configure the routes.
-
-The example consumes messages from a queue and writes them to the file
-system.
+This example shows that you don’t need to learn Camel’s super cool DSLs
+if you don’t want to. Camel has a set of annotations that allow you to
+produce, consume or route messages to endpoints.
 
 === Build
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn exec:java
-....
+----
+$ mvn camel:run
+----
 
 To stop the example hit ctrl+c
-
-=== Configuration
-
-You can see the routing rules by looking at the java code in the
-`+src/main/java directory+`
 
 === Help and contributions
 

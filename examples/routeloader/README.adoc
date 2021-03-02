@@ -16,7 +16,9 @@ The route is loaded by Camels route loader and dynamic compiled via `camel-joor`
 
 You can run this example using
 
-    mvn camel:run
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 
