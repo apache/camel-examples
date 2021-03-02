@@ -159,7 +159,7 @@
         <module>swagger-cdi</module>
         <module>telegram</module>
         <module>transformer-cdi</module>
-        <module>camel-example-transformer-demo</module>
+        <module>transformer-demo</module>
         <module>camel-example-twitter-websocket</module>
         <module>camel-example-vertx-kafka</module>
         <module>camel-example-widget-gadget-cdi</module>

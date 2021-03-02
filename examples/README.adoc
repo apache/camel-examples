@@ -71,7 +71,7 @@ Number of Examples: 40 (0 deprecated)
 | link:transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
     
 
-| link:camel-example-transformer-demo/README.adoc[Transformer and Validator Spring XML] (camel-example-transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
+| link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (camel-example-transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
         Spring DSL
     
 
