@@ -157,7 +157,7 @@
         <module>spring-ws</module>
         <module>spring-xquery</module>
         <module>swagger-cdi</module>
-        <module>camel-example-telegram</module>
+        <module>telegram</module>
         <module>camel-example-transformer-cdi</module>
         <module>camel-example-transformer-demo</module>
         <module>camel-example-twitter-websocket</module>
