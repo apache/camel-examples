@@ -59,7 +59,7 @@
         <!-- use fast and light-weight xml parser -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-xml-io</artifactId>
+            <artifactId>camel-xml-io-dsl</artifactId>
         </dependency>
 
         <!-- and we use these components -->
