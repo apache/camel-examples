@@ -9,17 +9,17 @@ and Spring Web Services.
 
 You will need to compile this example first:
 
-....
-mvn clean install
-....
+----
+$ mvn clean install
+----
 
 === Run
 
 To run the example, you need to start up the server by typing
 
-....
-  mvn jetty:run
-....
+----
+$ mvn jetty:run
+----
 
 To stop the server hit ctrl+c
 

@@ -15,17 +15,17 @@ sends them to a queue.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example using Maven, type
 
-....
-mvn camel:run
-....
+----
+$ mvn camel:run
+----
 
 You can see the routing rules by looking at the Spring XML configuration
 at `+src/main/resources/META-INF/spring+`

@@ -9,17 +9,17 @@ validation by declaring data types.
 
 You will need to compile this example first:
 
-....
-mvn compile
-....
+----
+$ mvn compile
+----
 
 === Run
 
 To run the example type
 
-....
-mvn exec:java
-....
+----
+$ mvn exec:java
+----
 
 You can see the routing rules by looking at the Spring XML configuration
 lives in `+src/main/resources/META-INF/spring+`

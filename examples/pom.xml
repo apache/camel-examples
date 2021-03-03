@@ -151,19 +151,19 @@
         <module>splunk</module>
         <module>spring</module>
         <module>spring-javaconfig</module>
-        <module>camel-example-spring-pulsar</module>
-        <module>camel-example-spring-ws</module>
-        <module>camel-example-spring-xquery</module>
-        <module>camel-example-spring-security</module>
-        <module>camel-example-swagger-cdi</module>
-        <module>camel-example-telegram</module>
-        <module>camel-example-transformer-cdi</module>
-        <module>camel-example-transformer-demo</module>
-        <module>camel-example-twitter-websocket</module>
-        <module>camel-example-vertx-kafka</module>
-        <module>camel-example-widget-gadget-cdi</module>
-        <module>camel-example-widget-gadget-java</module>
-        <module>camel-example-widget-gadget-xml</module>
+        <module>spring-pulsar</module>
+        <module>spring-security</module>
+        <module>spring-ws</module>
+        <module>spring-xquery</module>
+        <module>swagger-cdi</module>
+        <module>telegram</module>
+        <module>transformer-cdi</module>
+        <module>transformer-demo</module>
+        <module>twitter-websocket</module>
+        <module>vertx-kafka</module>
+        <module>widget-gadget-cdi</module>
+        <module>widget-gadget-java</module>
+        <module>widget-gadget-xml</module>
   </modules>
 
     <properties>

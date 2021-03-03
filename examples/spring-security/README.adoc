@@ -9,9 +9,9 @@ camel endpoint.
 
 You will need to compile this example first:
 
-....
-mvn clean install
-....
+----
+$ mvn clean install
+----
 
 === Run
 

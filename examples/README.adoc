@@ -52,26 +52,26 @@ Number of Examples: 40 (0 deprecated)
 
 | link:spring-javaconfig/README.adoc[Spring Java Config] (camel-example-spring-javaconfig) | Beginner | An example showing how to work with Camel and Spring Java Config
 
-| link:camel-example-spring-xquery/README.adoc[Spring XQuery] (camel-example-spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
+| link:spring-xquery/README.adoc[Spring XQuery] (camel-example-spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
 | link:main-endpointdsl-aws2/README[Main Endpointdsl Aws2] (camel-example-main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
 | link:mongodb/README.adoc[Mongodb] (camel-example-mongodb) | Database | An example that uses Camel MongoDB component
 
-| link:route-throttling/readme.md[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
+| link:route-throttling/README.adoc[Route Throttling] (camel-example-route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages
     
 
-| link:camel-example-widget-gadget-cdi/README.adoc[Widget Gadget CDI] (camel-example-widget-gadget-cdi) | EIP | The widget and gadget example from the EIP book
+| link:widget-gadget-cdi/README.adoc[Widget Gadget CDI] (camel-example-widget-gadget-cdi) | EIP | The widget and gadget example from the EIP book
 
-| link:camel-example-widget-gadget-java/README.adoc[Widget Gadget Java] (camel-example-widget-gadget-java) | EIP | The widget and gadget example from the EIP book
+| link:widget-gadget-java/README.adoc[Widget Gadget Java] (camel-example-widget-gadget-java) | EIP | The widget and gadget example from the EIP book
 
-| link:camel-example-widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
+| link:widget-gadget-xml/README.adoc[Widget Gadget XML] (camel-example-widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
 
-| link:camel-example-transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
+| link:transformer-cdi/README.adoc[Transformer CDI] (camel-example-transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
     
 
-| link:camel-example-transformer-demo/README.adoc[Transformer and Validator Spring XML] (camel-example-transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
+| link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (camel-example-transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
         Spring DSL
     
 
@@ -83,25 +83,25 @@ Number of Examples: 40 (0 deprecated)
 
 | link:netty-custom-correlation/README.adoc[Netty Custom Correlation] (camel-example-netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
-| link:camel-example-spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
+| link:spring-pulsar/README.adoc[Spring Pulsar] (camel-example-spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
-| link:camel-example-vertx-kafka/README.adoc[Vertx Kafka] (camel-example-vertx-kafka) | Messaging | An example for Vertx Kafka
+| link:vertx-kafka/README.adoc[Vertx Kafka] (camel-example-vertx-kafka) | Messaging | An example for Vertx Kafka
 
 | link:reactive-executor-vertx/README.adoc[Reactive Executor Vertx] (camel-example-reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 
 | link:openapi-cdi/README.adoc[OpenApi CDI] (camel-example-openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
 
-| link:camel-example-swagger-cdi/README.adoc[Swagger CDI] (camel-example-swagger-cdi) | Rest | An example using REST DSL and Swagger Java with CDI
+| link:swagger-cdi/README.adoc[Swagger CDI] (camel-example-swagger-cdi) | Rest | An example using REST DSL and Swagger Java with CDI
 
-| link:camel-example-spring-security/README.adoc[Spring Security] (camel-example-spring-security) | Security | An example showing how to work with Camel and Spring Security
+| link:spring-security/README.adoc[Spring Security] (camel-example-spring-security) | Security | An example showing how to work with Camel and Spring Security
 
 | link:salesforce-consumer/README.adoc[Salesforce Consumer] (camel-example-salesforce-consumer) | Social | An example that uses Salesforce Rest Streaming API
 
-| link:camel-example-telegram/README.adoc[Telegram] (camel-example-telegram) | Social | An example that uses Telegram API
+| link:telegram/README.adoc[Telegram] (camel-example-telegram) | Social | An example that uses Telegram API
 
-| link:camel-example-twitter-websocket/README.adoc[Twitter Websocket] (camel-example-twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
+| link:twitter-websocket/README.adoc[Twitter Websocket] (camel-example-twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
 
-| link:camel-example-spring-ws/README.adoc[Spring WebService] (camel-example-spring-ws) | WebService | An example showing how to work with Camel and Spring Web Services
+| link:spring-ws/README.adoc[Spring WebService] (camel-example-spring-ws) | WebService | An example showing how to work with Camel and Spring Web Services
 |===
 // examples: END
 
