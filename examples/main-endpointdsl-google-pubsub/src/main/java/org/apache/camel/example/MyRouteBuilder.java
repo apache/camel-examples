@@ -29,9 +29,9 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
         // here we configure the time and bean endpoint
 
         from(timer("tick").repeatCount(5)).setBody(constant("Test"))
-            .to(googlePubsub("{{pubsubProjectId}}:{{pubsubTopicName}}").serviceAccountKey("{{pubsubServiceAccount}}")).startupOrder(2);
+            .to(googlePubsub("{{pubsubProjectId}}:{{pubsubTopicName}}")).startupOrder(2);
         
-        from(googlePubsub("{{pubsubProjectId}}:{{pubsubSubscriptionName}}").synchronousPull(true).serviceAccountKey("{{pubsubServiceAccount}}"))
+        from(googlePubsub("{{pubsubProjectId}}:{{pubsubSubscriptionName}}").synchronousPull(true))
             .log("From Pubsub Subscription: ${body}").startupOrder(1);
     }
 }
