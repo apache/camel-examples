@@ -25,6 +25,7 @@ public class IntegrationTest extends Assert {
     @Test
     public void testCamelRulesDeployCorrectlyInSpring() throws Exception {
         // let's boot up the Spring application context for 2 seconds to check that it works OK
-        Main.main("-duration", "2s", "-o", "target/site/cameldoc");
+        Main main = new Main();
+        main.run(new String[]{"-duration", "2s", "-o", "target/site/cameldoc"});
     }
 }
