@@ -17,10 +17,10 @@ You can run this example using
 $ mvn camel:run
 ----
 
-And then after Camel has been started up, a recording is saved to disk, where you can see
+And then after Camel has been started up, a recording is saved to disk (current directory), where you can see
 from the logs the location of the file, such as:
 
-    Flight recorder recording saved: /Users/davsclaus/camel-recording13093057117733087947.jfr
+    Flight recorder recording saved: ./camel-recording13093057117733087947.jfr
 
 You can then open this `jfr` file in JDK Mission Control and browse the information.
 In the Event Browser you can find the Camel Startup events, which can help pin-point to where
