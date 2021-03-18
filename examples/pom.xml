@@ -86,6 +86,7 @@
         <module>artemis</module>
         <module>artemis-large-messages</module>
         <module>as2</module>
+        <module>aws-secrets-manager</module>
         <module>azure-storage-blob</module>
         <module>basic</module>
         <module>billboard-aggregate</module>
