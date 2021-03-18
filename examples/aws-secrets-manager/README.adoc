@@ -1,0 +1,62 @@
+== Camel Example AWS Secrets Manager
+
+This example shows how to use AWS Secrets Manager to retrieve an API key and call a secured rest service.
+
+Also notice how you can configure Camel in the `application.properties` file.
+
+=== Setup
+
+- Store the secret
+
+Login into your AWS Account and create a secret called "finnhub_token" with the Finnhub.io token value, you retrieved from finnhub_token.
+
+- Setting up the AWS credentials
+
+Open the `application.properties` file and set the correct values for accessKey, secretKey and region 
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+Then you can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+At this point you should see:
+
+[source,sh]
+----
+07:28:51.140 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport - Auto-configuration summary
+07:28:51.142 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.main.name=AWS-secrets-manager
+07:28:51.143 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.main.jmxEnabled=false
+07:28:51.143 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.main.beanIntrospectionLoggingLevel=INFO
+07:28:51.143 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.main.fileConfigurations=src/main/data/*.properties
+07:28:51.143 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.component.aws-secrets-manager.accessKey=xxxxxx
+07:28:51.143 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.component.aws-secrets-manager.secretKey=xxxxxx
+07:28:51.143 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.component.aws-secrets-manager.region=eu-west-1
+07:28:51.699 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Routes startup summary (total:1 started:1)
+07:28:51.699 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext -     Started route1 (timer://myTimer)
+07:28:51.699 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.9.0-SNAPSHOT (AWS-secrets-manager) started in 537ms (build:27ms init:112ms start:398ms)
+07:28:53.429 [Camel (AWS-secrets-manager) thread #0 - timer://myTimer] INFO  o.a.c.component.http.HttpComponent - Created ClientConnectionManager org.apache.http.impl.conn.PoolingHttpClientConnectionManager@7d5604cb
+07:28:54.128 [Camel (AWS-secrets-manager) thread #0 - timer://myTimer] INFO  route1 - Current Amazon price: 3135.73 $
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
