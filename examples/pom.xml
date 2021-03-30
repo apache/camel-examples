@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-dependencies</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
+        <version>3.9.0</version>
     </parent>
 
     <groupId>org.apache.camel.example</groupId>
     <artifactId>examples</artifactId>
-    <version>3.9.0-SNAPSHOT</version>
+    <version>3.9.0</version>
     <packaging>pom</packaging>
 
     <name>Camel Examples</name>
@@ -127,6 +127,7 @@
         <module>loadbalancing</module>
         <module>loan-broker-jms</module>
         <module>main</module>
+        <module>main-artemis</module>
         <module>main-endpointdsl</module>
         <module>main-endpointdsl-aws2</module>
         <module>main-endpointdsl-aws2-s3</module>
