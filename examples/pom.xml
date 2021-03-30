@@ -127,6 +127,7 @@
         <module>loadbalancing</module>
         <module>loan-broker-jms</module>
         <module>main</module>
+        <module>main-artemis</module>
         <module>main-endpointdsl</module>
         <module>main-endpointdsl-aws2</module>
         <module>main-endpointdsl-aws2-s3</module>
