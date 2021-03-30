@@ -61,11 +61,8 @@ public class Application {
                     patient.setId(patientId);
                     exchange.getIn().setBody(patient);
                 })
-                // marshall to JSON for logging
-                .marshal().fhirJson("{{fhirVersion}}")
-                .log("Inserting Patient: ${body}")
                 // create Patient in our FHIR server
-                .to("fhir://create/resource?inBody=resourceAsString&serverUrl={{serverUrl}}&fhirVersion={{fhirVersion}}")
+                .to("fhir://create/resource?inBody=resource&serverUrl={{serverUrl}}&fhirVersion={{fhirVersion}}&log=true&prettyPrint=true")
                 // log the outcome
                 .log("Patient created successfully: ${body.getCreated}");
         }
