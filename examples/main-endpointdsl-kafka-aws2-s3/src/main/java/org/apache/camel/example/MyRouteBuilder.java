@@ -26,8 +26,12 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
     public void configure() throws Exception {
 
         
-        from(kafka("{{kafkaTopic}}").brokers("{{kafkaBrokers}}"))
+        from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}"))
             .log("Kafka Message is: ${body}")
-        .to(aws2S3("{{bucketName}}").streamMode(true).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic}}.txt"));
+        .to(aws2S3("{{bucketName}}").streamMode(true).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/{{kafkaTopic1}}.txt"));
+
+        from(kafka("{{kafkaTopic2}}").brokers("{{kafkaBrokers}}"))
+                .log("Kafka Message is: ${body}")
+                .to(aws2S3("{{bucketName}}").streamMode(true).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic2}}/{{kafkaTopic2}}.txt"));
     }
 }

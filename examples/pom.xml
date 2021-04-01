@@ -133,6 +133,7 @@
         <module>main-endpointdsl-aws2-s3</module>
         <module>main-endpointdsl-aws2-s3-kafka</module>
         <module>main-endpointdsl-google-pubsub</module>
+        <module>main-endpointdsl-kafka-aws2-s3</module>
         <module>main-health</module>
         <module>main-joor</module>
         <module>main-lambda</module>
