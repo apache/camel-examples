@@ -27,8 +27,8 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
 
         
         from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}"))
-            .log("Kafka Message is: ${body}")
-        .to(aws2S3("{{bucketName}}").streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/{{kafkaTopic1}}.txt"));
+              .log("Kafka Message is: ${body}")
+              .to(aws2S3("{{bucketName}}").streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/{{kafkaTopic1}}.txt"));
 
         from(kafka("{{kafkaTopic2}}").brokers("{{kafkaBrokers}}"))
                 .log("Kafka Message is: ${body}")
