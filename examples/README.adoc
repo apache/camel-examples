@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 89 (0 deprecated)
+Number of Examples: 90 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -58,6 +58,8 @@ Number of Examples: 89 (0 deprecated)
 | link:main-endpointdsl-google-pubsub/README.adoc[Main Endpointdsl Google Pubsub] (main-endpointdsl-google-pubsub) | Beginner | An example for showing standalone Camel with Endpoint DSL and Google Pubsub component
 
 | link:main-endpointdsl-kafka-aws2-s3/README.adoc[Main Endpointdsl Kafka Aws2 S3] (main-endpointdsl-kafka-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
+
+| link:main-endpointdsl-kafka-aws2-s3-restarting-policy/README.adoc[Main Endpointdsl Kafka Aws2 S3 Restarting Policy] (main-endpointdsl-kafka-aws2-s3-restarting-policy) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
 
 | link:main-health/README.adoc[Main Health] (main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
