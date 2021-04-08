@@ -86,7 +86,7 @@
         <module>artemis</module>
         <module>artemis-large-messages</module>
         <module>as2</module>
-        <module>aws-secrets-manager</module>
+        <module>aws</module>
         <module>azure-storage-blob</module>
         <module>basic</module>
         <module>billboard-aggregate</module>
@@ -129,11 +129,7 @@
         <module>main</module>
         <module>main-artemis</module>
         <module>main-endpointdsl</module>
-        <module>main-endpointdsl-aws2</module>
-        <module>main-endpointdsl-aws2-s3</module>
-        <module>main-endpointdsl-aws2-s3-kafka</module>
         <module>main-endpointdsl-google-pubsub</module>
-        <module>main-endpointdsl-kafka-aws2-s3</module>
         <module>main-health</module>
         <module>main-joor</module>
         <module>main-lambda</module>
