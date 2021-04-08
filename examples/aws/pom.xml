@@ -42,6 +42,7 @@
         <module>main-endpointdsl-aws2-s3</module>
         <module>main-endpointdsl-aws2-s3-kafka</module>
         <module>main-endpointdsl-kafka-aws2-s3</module>
+        <module>main-endpointdsl-kafka-aws2-s3-restarting-policy</module>
     </modules>
 
 </project>

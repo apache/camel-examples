@@ -1,0 +1,69 @@
+== Camel Example Main Endpoint DSL with AWS2 S3 component to Kafka with restarting policy
+
+This example shows how to use the endpoint DSL in your Camel routes
+to define endpoints using type safe fluent builders, which are Java methods
+that are compiled and it will show the AWS2-S3 stream mode.
+
+The example will poll one kafka topic s3.topic.1 and upload batch of 25 messages as single file into an s3 bucket (mycamel-1).
+
+On your bucket you'll see:
+
+s3.topic.1/partition_<partition-number>/s3.topic.1.txt
+s3.topic.1/partition_<partition-number>/s3.topic.1-1.txt
+
+and so on
+
+At the end you should have a total of 20 files.
+
+Notice how you can configure Camel in the `application.properties` file.
+
+Don't forget to add your AWS Credentials and the bucket name (already created ahead of time) and point to the correct topic.
+You'll need also a running kafka broker.
+You'll need to have kafkacat installed.
+
+This example supposed the s3.topic.1 has 1 partition only.
+
+But this should work with multiple partitions too.
+
+=== How to run
+
+You can run this example using
+
+[source,sh]
+----
+$ mvn compile
+----
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+Now run
+
+[source,sh]
+----
+$ data/burst.sh s3.topic.1 250 0 msg.txt
+----
+
+Stop the route with CTRL + C.
+
+At this point you should see an s3.topic.1/partition_0 folder, with 10 files.
+
+Restart the route and run 
+
+----
+$ data/burst.sh s3.topic.1 250 0 msg.txt
+----
+
+Now in the same s3.topic.1/partition_0 folder, you should see 20 files correctly numbered.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
