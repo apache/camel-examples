@@ -59,7 +59,7 @@ Number of Examples: 90 (0 deprecated)
 
 | link:main-endpointdsl-kafka-aws2-s3/README.adoc[Main Endpointdsl Kafka Aws2 S3] (main-endpointdsl-kafka-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
 
-| link:main-endpointdsl-kafka-aws2-s3-restarting-policy/README.adoc[Main Endpointdsl Kafka Aws2 S3 Restarting Policy] (main-endpointdsl-kafka-aws2-s3-restarting-policy) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
+| link:main-endpointdsl-kafka-aws2-s3-restarting-policy/README.adoc[Main Endpointdsl Kafka Aws2 S3 Restarting Policy] (main-endpointdsl-kafka-aws2-s3-restarting-policy) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka, AWS2-S3 streaming upload mode with restarting policy
 
 | link:main-health/README.adoc[Main Health] (main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
