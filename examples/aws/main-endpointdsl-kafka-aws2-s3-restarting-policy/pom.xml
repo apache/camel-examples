@@ -31,7 +31,7 @@
     <artifactId>camel-example-main-endpointdsl-kafka-aws2-s3-restarting-policy</artifactId>
     <packaging>jar</packaging>
     <name>Camel :: Example :: Main :: Endpoint DSL :: Kafka AWS2 S3 Restarting Policy</name>
-    <description>An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3</description>
+    <description>An example for showing standalone Camel with Endpoint DSL and Kafka, AWS2-S3 streaming upload mode with restarting policy</description>
 
     <properties>
         <category>Beginner</category>
