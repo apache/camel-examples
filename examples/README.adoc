@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 85 (0 deprecated)
+Number of Examples: 89 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -22,6 +22,8 @@ Number of Examples: 85 (0 deprecated)
 | link:any23/README.adoc[Any23 example] (any23) | Beginner | An example that uses the Any23 dataformat
 
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
+
+| link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
 
 | link:azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Beginner | Azure Storage Blob example
 
@@ -49,7 +51,13 @@ Number of Examples: 85 (0 deprecated)
 
 | link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
 
+| link:main-endpointdsl-aws2-s3/README.adoc[Main Endpointdsl Aws2 S3] (main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
+
+| link:main-endpointdsl-aws2-s3-kafka/README.adoc[Main Endpointdsl Aws2 S3 Kafka] (main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
+
 | link:main-endpointdsl-google-pubsub/README.adoc[Main Endpointdsl Google Pubsub] (main-endpointdsl-google-pubsub) | Beginner | An example for showing standalone Camel with Endpoint DSL and Google Pubsub component
+
+| link:main-endpointdsl-kafka-aws2-s3/README.adoc[Main Endpointdsl Kafka Aws2 S3] (main-endpointdsl-kafka-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
 
 | link:main-health/README.adoc[Main Health] (main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
@@ -78,8 +86,6 @@ Number of Examples: 85 (0 deprecated)
 
 | link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
-| link:aws/readme.md[Aws] (aws) | Cloud | Multiple Camel AWS examples
-
 | link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
 
 | link:cdi-kubernetes/README.adoc[CDI Kubernetes] (cdi-kubernetes) | Cloud | An example running Camel CDI on Kubernetes
@@ -87,6 +93,8 @@ Number of Examples: 85 (0 deprecated)
 | link:cdi-minio/README.adoc[CDI Minio] (cdi-minio) | Cloud | Minio CDI example
 
 | link:hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
+
+| link:main-endpointdsl-aws2/README.adoc[Main Endpointdsl Aws2] (main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
 | link:cdi-cassandraql/README.adoc[CDI Cassandra] (cdi-cassandraql) | Database | Cassandraql CDI example
 
