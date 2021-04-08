@@ -17,20 +17,21 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.apache.camel.example</groupId>
-        <artifactId>examples</artifactId>
+        <artifactId>camel-examples-aws-parent</artifactId>
         <version>3.10.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-aws-secrets-manager</artifactId>
+    <artifactId>camel-example-main-endpointdsl-aws2-s3-kafka</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: AWS Secrets Manager</name>
-    <description>An example for showing AWS Secrets Manager Camel component</description>
+    <name>Camel :: Example :: Main :: Endpoint DSL :: AWS2 S3 Kafka</name>
+    <description>An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka</description>
 
     <properties>
         <category>Beginner</category>
@@ -53,36 +54,28 @@
 
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
             <artifactId>camel-main</artifactId>
         </dependency>
+        <!-- we use the endpoint-dsl -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-aws-secrets-manager</artifactId>
+            <artifactId>camel-endpointdsl</artifactId>
+        </dependency>
+        <!-- we use these 2 camel components in this example -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-bean</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-http</artifactId>
+            <artifactId>camel-aws2-s3</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-timer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jsonpath</artifactId>
+            <artifactId>camel-kafka</artifactId>
         </dependency>
 
         <!-- logging -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2-version}</version>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -98,12 +91,12 @@
 
     <build>
         <plugins>
+            <!-- to run the application -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-maven-plugin</artifactId>
                 <version>${camel.version}</version>
                 <configuration>
-                    <logClasspath>false</logClasspath>
                     <mainClass>org.apache.camel.example.MyApplication</mainClass>
                 </configuration>
             </plugin>

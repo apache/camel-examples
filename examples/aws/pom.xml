@@ -27,9 +27,9 @@
         <version>3.10.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-main-endpointdsl-aws2</artifactId>
-    <name>Camel :: Example :: Main :: Endpoint DSL :: AWS2</name>
-    <description>An example for showing standalone Camel with multiple AWS2 components</description>
+    <artifactId>camel-examples-aws-parent</artifactId>
+    <name>Camel :: Example :: AWS :: Parent</name>
+    <description>Multiple Camel AWS examples</description>
     <packaging>pom</packaging>
 
     <properties>
@@ -37,9 +37,11 @@
     </properties>
 
     <modules>
-        <module>aws2-eventbridge-creator</module>
-        <module>aws2-sqs-consumer</module>
-        <module>aws2-s3-events-inject</module>
+        <module>aws-secrets-manager</module>
+        <module>main-endpointdsl-aws2</module>
+        <module>main-endpointdsl-aws2-s3</module>
+        <module>main-endpointdsl-aws2-s3-kafka</module>
+        <module>main-endpointdsl-kafka-aws2-s3</module>
     </modules>
 
 </project>
