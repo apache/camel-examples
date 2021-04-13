@@ -28,6 +28,6 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
         
         from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}"))
               .log("Kafka Message is: ${body}")
-              .toD(aws2S3("{{bucketName}}").streamingUploadMode(true).restartingPolicy(AWS2S3EndpointBuilderFactory.AWSS3RestartingPolicyEnum.lastPart).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/partition_${headers.kafka.PARTITION}/{{kafkaTopic1}}.txt"));
+              .toD(aws2S3("{{bucketName}}").streamingUploadMode(true).useDefaultCredentialsProvider(true).restartingPolicy(AWS2S3EndpointBuilderFactory.AWSS3RestartingPolicyEnum.lastPart).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/partition_${headers.kafka.PARTITION}/{{kafkaTopic1}}.txt"));
     }
 }
