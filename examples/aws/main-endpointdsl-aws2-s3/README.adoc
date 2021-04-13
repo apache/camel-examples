@@ -8,7 +8,9 @@ The example will poll an S3 bucket and Log the content of the file.
 
 Notice how you can configure Camel in the `application.properties` file.
 
-Don't forget to add your AWS Credentials and the bucket name.
+This example will use the AWS default credentials Provider: https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
+Set your credentials accordingly.
+Don't forget to add the bucket name.
 
 === How to run
 
