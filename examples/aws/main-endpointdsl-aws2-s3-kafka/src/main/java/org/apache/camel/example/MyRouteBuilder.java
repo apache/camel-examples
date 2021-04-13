@@ -23,7 +23,7 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from(aws2S3("{{bucketName}}").delay(1000L).deleteAfterRead(true)).startupOrder(2)
+        from(aws2S3("{{bucketName}}").delay(1000L).useDefaultCredentialsProvider(true).deleteAfterRead(true)).startupOrder(2)
             .to(kafka("{{kafkaTopic}}").brokers("{{kafkaBrokers}}"));
         
         from(kafka("{{kafkaTopic}}").brokers("{{kafkaBrokers}}")).startupOrder(1)
