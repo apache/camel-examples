@@ -26,7 +26,7 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from(aws2S3("{{bucketName}}").delay(1000L).deleteAfterRead(false))
+        from(aws2S3("{{bucketName}}").delay(1000L).useDefaultCredentialsProvider(true).deleteAfterRead(false))
             .log("The content is ${body}");
     }
 }
