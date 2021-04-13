@@ -17,7 +17,9 @@ At the end you should have a total of 20 files.
 
 Notice how you can configure Camel in the `application.properties` file.
 
-Don't forget to add your AWS Credentials and the bucket name (already created ahead of time) and point to the correct topic.
+This example will use the AWS default credentials Provider: https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
+Set your credentials accordingly.
+Don't forget to add the bucket name (already created ahead of time) and point to the correct topic.
 You'll need also a running kafka broker.
 You'll need to have kafkacat installed.
 
