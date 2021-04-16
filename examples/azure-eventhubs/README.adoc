@@ -1,0 +1,30 @@
+== Camel Example Main Endpoint DSL with Azure Eventhubs
+
+This example shows how to use the endpoint DSL in your Camel routes
+to define endpoints using type safe fluent builders, which are Java methods
+that are compiled.
+
+The example will poll an Azure Eventhub
+
+Notice how you can configure Camel in the `application.properties` file.
+
+Don't forget to correctly set the credentials options in the application properties file
+
+=== How to run
+
+You can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
