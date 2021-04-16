@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 90 (0 deprecated)
+Number of Examples: 91 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -24,6 +24,8 @@ Number of Examples: 90 (0 deprecated)
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
 | link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
+
+| link:azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Beginner | Azure Eventhubs example
 
 | link:azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Beginner | Azure Storage Blob example
 
