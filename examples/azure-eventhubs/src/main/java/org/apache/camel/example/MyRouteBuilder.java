@@ -33,7 +33,7 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
         from(azureEventhubs("{{namespaceName}}/{{eventhubName}}").sharedAccessKey("{{sharedAccessKey}}").sharedAccessName("{{sharedAccessName}}").blobAccessKey("{{blobAccessKey}}").blobAccountName("{{blobAccountName}}").blobContainerName("{{blobContainerName}}"))
                 .log("The content is ${body}");
 
-        from(timer("tick").period(1000)).setBody(constant("ciao"))
+        from(timer("tick").period(1000)).setBody(constant("Event Test"))
                 .to(azureEventhubs("{{namespaceName}}/{{eventhubName}}").sharedAccessName("{{sharedAccessName}}").sharedAccessKey("{{sharedAccessKey}}"));
     }
 }
