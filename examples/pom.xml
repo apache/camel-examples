@@ -87,6 +87,7 @@
         <module>artemis-large-messages</module>
         <module>as2</module>
         <module>aws</module>
+        <module>azure-eventhubs</module>
         <module>azure-storage-blob</module>
         <module>basic</module>
         <module>billboard-aggregate</module>
