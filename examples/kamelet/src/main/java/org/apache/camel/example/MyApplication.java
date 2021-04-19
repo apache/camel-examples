@@ -31,7 +31,7 @@ public final class MyApplication {
         Main main = new Main();
         // and add route templates via routes builder
         main.configure().addRoutesBuilder(MyRouteTemplates.class);
-        // and ass routes that will consume templates through kamelets
+        // and add routes that will consume templates through kamelets
         main.configure().addRoutesBuilder(MyRoutes.class);
 
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
