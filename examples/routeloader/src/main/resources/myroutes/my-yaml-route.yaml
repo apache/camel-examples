@@ -22,6 +22,6 @@
           simple: "Timer fired ${header.CamelTimerCounter} times"
       - to:
           uri: "log:yaml"
-          properties:
+          parameters:
             show-body-type: false
             show-exchange-pattern: false
