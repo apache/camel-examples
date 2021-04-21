@@ -71,6 +71,11 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-yaml-dsl</artifactId>
         </dependency>
+        <!-- used to dump routes as XML -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-xml-jaxb</artifactId>
+        </dependency>
 
         <!-- components -->
         <dependency>
