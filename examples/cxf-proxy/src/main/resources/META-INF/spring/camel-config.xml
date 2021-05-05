@@ -57,7 +57,8 @@
   <camelContext xmlns="http://camel.apache.org/schema/spring">
 
     <!-- property which contains port number -->
-    <propertyPlaceholder id="properties" location="classpath:incident.properties,file:target/custom.properties"/>
+    <propertyPlaceholder id="properties" location="classpath:incident.properties,file:target/custom.properties"
+                         ignoreMissingLocation="true"/>
 
     <endpoint id="callRealWebService" uri="http://localhost:${real.port}/real-webservice?throwExceptionOnFailure=false"/>
 
