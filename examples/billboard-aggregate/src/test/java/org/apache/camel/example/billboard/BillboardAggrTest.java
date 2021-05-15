@@ -19,19 +19,27 @@ package org.apache.camel.example.billboard;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import org.apache.camel.*;
+import org.apache.camel.AggregationStrategy;
+import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
+import org.apache.camel.ExtendedCamelContext;
+import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.engine.PooledExchangeFactory;
 import org.apache.camel.model.dataformat.BindyType;
-import org.apache.camel.test.junit4.CamelTestSupport;
-import org.junit.Test;
+import org.apache.camel.test.junit5.CamelTestSupport;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BillboardAggrTest extends CamelTestSupport {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BillboardAggrTest.class);
     private static final String BASE_PATH = System.getProperty("user.dir") + "/src/test/data";
 
     @Override
@@ -52,7 +60,7 @@ public class BillboardAggrTest extends CamelTestSupport {
 
         Map<String, Integer> top20 = ((MyAggregationStrategy) 
             mock.getReceivedExchanges().get(0).getIn().getHeader("myAggregation")).getTop20Artists();
-        top20.forEach((k, v) -> log.info("{}, {}", k, v));
+        top20.forEach((k, v) -> LOG.info("{}, {}", k, v));
         assertEquals(20, top20.size());
         assertEquals(35, (int) top20.get("madonna"));
         assertEquals(26, (int) top20.get("elton john"));
