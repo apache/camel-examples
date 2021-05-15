@@ -19,38 +19,35 @@ package org.apache.camel.example.billboard;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import org.apache.camel.AggregationStrategy;
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Message;
+import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.impl.engine.PooledExchangeFactory;
 import org.apache.camel.model.dataformat.BindyType;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
 public class BillboardAggrTest extends CamelTestSupport {
 
-    private static final String BASEPATH = System.getProperty("user.dir") + "/src/test/data";
+    private static final String BASE_PATH = System.getProperty("user.dir") + "/src/test/data";
 
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext ctx = super.createCamelContext();
+        ctx.adapt(ExtendedCamelContext.class).setExchangeFactory(new PooledExchangeFactory());
+        ctx.adapt(ExtendedCamelContext.class).getExchangeFactory().setStatisticsEnabled(true);
         ctx.disableJMX();
         return ctx;
-    }
-
-    @Override
-    protected int getShutdownTimeout() {
-        return 300;
     }
 
     @Test
     public void test() throws Exception {
         MockEndpoint mock = context.getEndpoint("mock:result", MockEndpoint.class);
         mock.expectedMessageCount(1);
+
         mock.assertIsSatisfied();
 
         Map<String, Integer> top20 = ((MyAggregationStrategy) 
@@ -67,7 +64,7 @@ public class BillboardAggrTest extends CamelTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file:" + BASEPATH + "?noop=true&idempotent=true")
+                from("file:" + BASE_PATH + "?noop=true&idempotent=true")
                     .split(body().tokenize("\n")).streaming().parallelProcessing()
                         // skip first line with headers
                         .choice().when(simple("${exchangeProperty.CamelSplitIndex} > 0"))
@@ -78,7 +75,7 @@ public class BillboardAggrTest extends CamelTestSupport {
                                 // malformed record trace
                                 .setBody(simple("${exchangeProperty.CamelSplitIndex}:${body}"))
                                 .transform(body().append("\n")) 
-                                .to("file:" + BASEPATH + "?fileName=waste.log&fileExist=append")
+                                .to("file:" + BASE_PATH + "?fileName=waste.log&fileExist=append")
                             .end();
 
                 from("seda:aggregate?concurrentConsumers=10")
