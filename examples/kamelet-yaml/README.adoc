@@ -1,0 +1,44 @@
+== Camel Example Kamelet YAML
+
+=== Introduction
+
+This example shows how to use ready to use Kamelets you can find at the
+https://camel.apache.org/camel-kamelets/latest/[Camel Kamelet Catalog].
+
+We are using the _Earthquake Source_ Kamelet which we have downloaded and stored
+in the `src/main/resources/kamelet` directory.
+
+Then we added the needed Camel components (you can find the list inside the kamelet YAML file).
+
+A Camel routes is _coded_ in the `my-camel.yaml` file using the YAML DSL that uses the kamelet,
+and log the result from the kamelet to the console.
+
+The example has no Java code at all, and is started via Camel's own `Main` class from `camel-main` JAR.
+
+=== Build
+
+You will need to compile this example first:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== Run
+
+You can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
