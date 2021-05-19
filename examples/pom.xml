@@ -123,6 +123,7 @@
         <module>jooq</module>
         <module>kafka</module>
         <module>kamelet</module>
+        <module>kamelet-yaml</module>
         <module>kotlin</module>
         <module>loan-broker-cxf</module>
         <module>loadbalancing</module>
