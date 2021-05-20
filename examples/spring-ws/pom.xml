@@ -56,6 +56,11 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring-ws</artifactId>
         </dependency>
+        <!--  Required to avoid org.apache.camel.NoSuchLanguageException for "simple" -->
+       <dependency>
+    		<groupId>org.apache.camel</groupId>
+    		<artifactId>camel-core-languages</artifactId>
+ 	    </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jaxb</artifactId>
@@ -63,13 +68,6 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring-xml</artifactId>
-        </dependency>
-
-        <!-- for running inside a servlet container -->
-        <dependency>
-            <groupId>org.springframework.ws</groupId>
-            <artifactId>spring-ws-core</artifactId>
-            <version>${spring-ws-version}</version>
         </dependency>
         <dependency>
             <groupId>wsdl4j</groupId>
@@ -146,5 +144,34 @@
         </plugins>
 
     </build>
+    <profiles>
+      <profile>
+            <id>jdk9s-build</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+        
+            <dependencies>
+                <dependency>
+                    <groupId>javax.xml.ws</groupId>
+                    <artifactId>jaxws-api</artifactId>
+                    <version>2.3.0</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.sun.xml.messaging.saaj</groupId>
+                    <artifactId>saaj-impl</artifactId>
+                    <version>1.3.28</version>
+                    <scope>runtime</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>javax.xml.soap</groupId>
+                            <artifactId>javax.xml.soap-api</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+      </profiles>
 
 </project>
