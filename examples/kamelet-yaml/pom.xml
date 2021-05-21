@@ -52,28 +52,10 @@
 
     <dependencies>
 
+        <!-- easy way to boostrap and run Kamelet in standalone mode -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-main</artifactId>
-        </dependency>
-        <!-- use YAML DSL for defining Camel routes -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-yaml-dsl</artifactId>
-        </dependency>
-        <!-- Kamelet support -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-kamelet</artifactId>
-        </dependency>
-        <!-- to automatic download kamelet from github -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-resourceresolver-github</artifactId>
+            <artifactId>camel-kamelet-main</artifactId>
         </dependency>
 
         <!-- earthquake-source Kamelet dependencies that is manually added -->
@@ -127,7 +109,7 @@
                 <version>${camel.version}</version>
                 <configuration>
                     <logClasspath>false</logClasspath>
-                    <mainClass>org.apache.camel.main.Main</mainClass>
+                    <mainClass>org.apache.camel.main.KameletMain</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -148,7 +130,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.apache.camel.main.Main</mainClass>
+                            <mainClass>org.apache.camel.main.KameletMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
