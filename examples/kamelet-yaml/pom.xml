@@ -60,16 +60,24 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-main</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-kamelet</artifactId>
-        </dependency>
+        <!-- use YAML DSL for defining Camel routes -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-yaml-dsl</artifactId>
         </dependency>
+        <!-- Kamelet support -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-kamelet</artifactId>
+        </dependency>
+        <!-- to automatic download kamelet from github -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-resourceresolver-github</artifactId>
+        </dependency>
 
-        <!-- earthquake-source kamelet -->
+        <!-- earthquake-source Kamelet dependencies that is manually added -->
+        <!-- see inside the kamelet yaml source file where the dependencies are listed -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-caffeine</artifactId>
