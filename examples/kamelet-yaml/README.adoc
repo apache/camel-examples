@@ -5,20 +5,16 @@
 This example shows how to use ready to use Kamelets you can find at the
 https://camel.apache.org/camel-kamelets/latest/[Camel Kamelet Catalog].
 
-We are using the _Earthquake Source_ Kamelet which we load from github at startup
-with the `camel-resourceresolver-github` JAR.
-
-You can also download the Kamelet YAML file from github and save into `src/main/resources/kamelets` folder,
-which the `camel-kamelet` component would automatic load from. If you do that then remove the
-`camel.component.kamelet.location=github:apache:camel-kamelets` from the `application.properties` file.
+The application is run with `KameletMain` class from camel-kamalet-main JAR.
+This makes it easy to run Camel standalone with Kamelet that can be automatic
+downloaded from github, and to use YAML DSL for creating Camel routes that use the Kamelets.
+The example has no Java code at all.
 
 Before the Kamelet is ready to use, we must add the needed Camel components
 (you can find the list inside the kamelet YAML file) to the Maven `pom.xml` file.
 
 A Camel routes is _coded_ in the `my-route.yaml` file using the YAML DSL that uses the Kamelet,
 and log the result from the Kamelet to the console.
-
-The example has no Java code at all, and is started via Camel's own `Main` class from `camel-main` JAR.
 
 === Build
 
