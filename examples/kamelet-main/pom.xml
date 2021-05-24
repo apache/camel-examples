@@ -28,10 +28,10 @@
         <version>3.11.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-kamelet-yaml</artifactId>
+    <artifactId>camel-example-kamelet-main</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Kamelet YAML</name>
-    <description>How to use Kamelets with YAML DSL</description>
+    <name>Camel :: Example :: Kamelet Main</name>
+    <description>How to easily run Kamelets</description>
 
     <properties>
         <category>Beginner</category>
@@ -57,10 +57,6 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-kamelet-main</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jackson</artifactId>
         </dependency>
 
         <!-- logging -->
