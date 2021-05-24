@@ -49,7 +49,7 @@ Number of Examples: 92 (0 deprecated)
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
 
-| link:kamelet-yaml/README.adoc[Kamelet Yaml] (kamelet-yaml) | Beginner | How to use Kamelets with YAML DSL
+| link:kamelet-main/README.adoc[Kamelet Main] (kamelet-main) | Beginner | How to easily run Kamelets
 
 | link:main/README.adoc[Main] (main) | Beginner | An example for showing standalone Camel
 
