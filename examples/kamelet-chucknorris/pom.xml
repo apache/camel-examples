@@ -99,14 +99,11 @@
 
     <build>
         <plugins>
+            <!-- to run via mvn camel:run -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-maven-plugin</artifactId>
                 <version>${camel.version}</version>
-                <configuration>
-                    <logClasspath>false</logClasspath>
-                    <mainClass>org.apache.camel.main.KameletMain</mainClass>
-                </configuration>
             </plugin>
         </plugins>
     </build>
