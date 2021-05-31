@@ -1,0 +1,48 @@
+== Camel Example Kamelet Chuck Norris
+
+=== Introduction
+
+This example shows how you can build a simple Kamelet and use with your Camel applications.
+
+The kamelet is created as a YAML file in the `src/main/resources/kamelets' directory.
+We have developed a Chuck Norris Kamelet that periodically gets a joke from the Chuck Norris internet database.
+
+A Camel routes is _coded_ in the `my-route.xml` file using the XML DSL that uses the Kamelet,
+and log the result from the Kamelet to the console.
+
+=== Build
+
+You will need to compile this example first:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== Run
+
+You can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+The application is also built as a _fat jar_ (see `pom.xml`), which you can run with
+
+[source,sh]
+----
+$ mvn package
+$ java -jar target/camel-example-kamelet-yaml-3.11.0-jar-with-dependencies.jar
+----
+
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!

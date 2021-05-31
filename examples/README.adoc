@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 92 (0 deprecated)
+Number of Examples: 93 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -48,6 +48,8 @@ Number of Examples: 92 (0 deprecated)
 | link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
+
+| link:kamelet-chucknorris/README.adoc[Kamelet Chucknorris] (kamelet-chucknorris) | Beginner | How easy it is to create your own Kamelets
 
 | link:kamelet-main/README.adoc[Kamelet Main] (kamelet-main) | Beginner | How to easily run Kamelets
 
