@@ -17,9 +17,13 @@
     limitations under the License.
 
 -->
-<routes xmlns="http://camel.apache.org/schema/spring">
-    <route>
-        <from uri="timer:xml?period=5s"/>
-        <log message="I am XML"/>
-    </route>
-</routes>
+
+<!--
+    if you want to have multiple routes, you can either have multiple files with 1 <route> per file or
+    you can use <routes> as root tag, such as <routes><route>...</route><route>...</route></routes>
+-->
+
+<route>
+    <from uri="timer:xml?period=5s"/>
+    <log message="I am XML"/>
+</route>
