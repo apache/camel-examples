@@ -15,6 +15,7 @@ spec:
     title: "Chuck Norris Source"
     description: |-
       Gets peridically Chuck Norris jokes from http://www.icndb.com/
+    type: object
     properties:
       period:
         title: Period
@@ -25,6 +26,7 @@ spec:
     out:
       mediaType: text/plain
   dependencies:
+    - "camel:kamelet"
     - "camel:timer"
     - "camel:http"
     - "camel:jsonpath"
