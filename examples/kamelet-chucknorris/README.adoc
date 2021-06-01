@@ -28,15 +28,6 @@ You can run this example using
 $ mvn camel:run
 ----
 
-The application is also built as a _fat jar_ (see `pom.xml`), which you can run with
-
-[source,sh]
-----
-$ mvn package
-$ java -jar target/camel-example-kamelet-yaml-3.11.0-jar-with-dependencies.jar
-----
-
-
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
