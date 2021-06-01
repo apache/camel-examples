@@ -21,7 +21,7 @@ spec:
         title: Period
         description: The interval (msec) to wait before getting the next joke
         type: integer
-        default: 5000
+        default: 10000
   types:
     out:
       mediaType: text/plain
