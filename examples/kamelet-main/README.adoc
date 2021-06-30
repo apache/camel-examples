@@ -36,7 +36,7 @@ The application is also built as a _fat jar_ (see `pom.xml`), which you can run 
 [source,sh]
 ----
 $ mvn package
-$ java -jar target/camel-example-kamelet-yaml-3.11.0-jar-with-dependencies.jar
+$ java -jar target/camel-example-kamelet-yaml-3.11.1-SNAPSHOT-jar-with-dependencies.jar
 ----
 
 
