@@ -34,7 +34,7 @@
 
         <!-- START SNIPPET: e2 -->
         <camel:dataFormats>
-            <camel:json id="jsondf" library="Jackson" unmarshalTypeName="org.apache.camel.example.transformer.demo.Order"/>
+            <camel:json id="jsondf" library="Jackson" unmarshalType="org.apache.camel.example.transformer.demo.Order"/>
         </camel:dataFormats>
         <!-- END SNIPPET: e2 -->
 
