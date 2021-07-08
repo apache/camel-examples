@@ -1,0 +1,26 @@
+== Camel Example Routes Configuration
+
+This example shows how Camel is capable of loading routes during startup using the new route loader system.
+The route loader has support for loading routes in XML, Java and YAML (other languages to be added).
+
+In this example the focus is on how you can use global _routes configuration_ with the DSL to seperate
+error handling (and other cross routes functionality) from all your routes.
+
+
+=== How to run
+
+You can run this example using
+
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!

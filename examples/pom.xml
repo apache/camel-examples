@@ -149,6 +149,7 @@
         <module>route-throttling</module>
         <module>routeloader</module>
         <module>routetemplate</module>
+        <module>routes-configuration</module>
         <module>salesforce-consumer</module>
         <module>servlet-tomcat</module>
         <module>splunk</module>
