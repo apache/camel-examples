@@ -3,8 +3,13 @@
 This example shows how Camel is capable of loading routes during startup using the new route loader system.
 The route loader has support for loading routes in XML, Java and YAML (other languages to be added).
 
-In this example the focus is on how you can use global _routes configuration_ with the DSL to seperate
+In this example the focus is on how you can use global _routes configuration_ with the DSL to separate
 error handling (and other cross routes functionality) from all your routes.
+
+This example has one route in Java, XML and YAML. Each of those routes refer to a
+specific route configuration, which is also _coded_ in the same language as the route.
+But this is not required, you can use Java to code your route configurations for
+advanced error handling, and then _code_ your routes in other languages such as XML or YAML.
 
 
 === How to run

@@ -18,13 +18,10 @@
 
 -->
 
-<!--
-    if you want to have multiple routes, you can either have multiple files with 1 <route> per file or
-    you can use <routes> as root tag, such as <routes><route>...</route><route>...</route></routes>
--->
-
-<route>
-    <from uri="timer:xml?period=5s"/>
-    <log message="I am XML"/>
-    <throwException exceptionType="java.lang.Exception" message="Some kind of XML error"/>
-</route>
+<routeConfiguration id="xmlError">
+    <onException>
+        <exception>java.lang.Exception</exception>
+        <handled><constant>true</constant></handled>
+        <log message="XML WARN: ${exception.message}"/>
+    </onException>
+</routeConfiguration>
