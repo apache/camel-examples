@@ -14,24 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import java.util.Random;
+package org.apache.camel.example;
 
-import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.builder.RouteConfigurationBuilder;
 
-public class MyJavaRouteBuilder extends RouteBuilder {
+/**
+ * Route configuration for error handling.
+ */
+public class MyJavaErrorHandler extends RouteConfigurationBuilder {
 
     @Override
-    public void configure() throws Exception {
-        from("timer:java?period=2s")
-            // refer to the route configuration by the id to use for this route
-            .routeConfiguration("javaError")
-            .setBody(method(MyJavaRouteBuilder.class, "randomNumber"))
-            .log("Random number ${body}")
-            .filter(simple("${body} < 30"))
-                .throwException(new IllegalArgumentException("The number is too low"));
-    }
-
-    public static int randomNumber() {
-        return new Random().nextInt(100);
+    public void configuration() throws Exception {
+        routeConfiguration("javaError")
+            .onException(Exception.class).handled(true)
+            .log("Java WARN: ${exception.message}");
     }
 }

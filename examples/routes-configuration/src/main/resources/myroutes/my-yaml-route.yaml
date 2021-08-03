@@ -17,7 +17,7 @@
 
 - route:
     # refer to the route configuration by the id to use for this route
-    route-configuration: "yamlError"
+    route-configuration-id: "yamlError"
     from: "timer:yaml?period=3s"
     steps:
       - set-body:

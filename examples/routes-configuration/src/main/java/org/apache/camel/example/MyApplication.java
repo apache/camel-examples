@@ -20,9 +20,6 @@ import org.apache.camel.main.Main;
 
 /**
  * Main class that boot the Camel application.
- *
- * This class has been added to make it easy to run the application from a Java editor.
- * However you can start this application by running org.apache.camel.main.Main directory (see Maven pom.xml)
  */
 public final class MyApplication {
 
@@ -32,6 +29,8 @@ public final class MyApplication {
     public static void main(String[] args) throws Exception {
         // use Camels Main class
         Main main = new Main();
+        // add Java route classes
+        main.configure().addRoutesBuilder(MyJavaRouteBuilder.class, MyJavaErrorHandler.class);
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
     }

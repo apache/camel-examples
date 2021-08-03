@@ -24,7 +24,7 @@
 -->
 
 <!-- refer to the route configuration by the id to use for this route -->
-<route routeConfiguration="xmlError">
+<route routeConfigurationId="xmlError">
     <from uri="timer:xml?period=5s"/>
     <log message="I am XML"/>
     <throwException exceptionType="java.lang.Exception" message="Some kind of XML error"/>

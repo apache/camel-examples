@@ -56,11 +56,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-main</artifactId>
         </dependency>
-        <!-- joor with java route loader -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-java-joor-dsl</artifactId>
-        </dependency>
         <!-- xml-io with fast xml route loader -->
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -119,7 +114,7 @@
                 <version>${camel.version}</version>
                 <configuration>
                     <logClasspath>false</logClasspath>
-                    <mainClass>org.apache.camel.main.Main</mainClass>
+                    <mainClass>org.apache.camel.example.MyApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
