@@ -23,8 +23,8 @@
     you can use <routes> as root tag, such as <routes><route>...</route><route>...</route></routes>
 -->
 
-<!-- refer to the route configuration by the id to use for this route -->
-<route routeConfigurationId="xmlError">
+<!-- refer to the route configuration by the id (wildcard) to use for this route -->
+<route routeConfigurationId="xml*">
     <from uri="timer:xml?period=5s"/>
     <log message="I am XML"/>
     <throwException exceptionType="java.lang.Exception" message="Some kind of XML error"/>
