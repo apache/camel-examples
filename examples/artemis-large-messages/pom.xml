@@ -81,6 +81,12 @@
             <artifactId>geronimo-jms_2.0_spec</artifactId>
             <version>${geronimo-jms2-spec-version}</version>
         </dependency>
+        <!-- pooled connection -->
+        <dependency>
+            <groupId>org.messaginghub</groupId>
+            <artifactId>pooled-jms</artifactId>
+            <version>2.0.1</version>
+        </dependency>
 
         <!-- logging -->
         <dependency>

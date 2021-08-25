@@ -26,11 +26,23 @@
   <!-- setup ActiveMQ Artemis connection factory -->
   <bean id="artemisConnectionFactory" class="org.apache.activemq.artemis.jms.client.ActiveMQJMSConnectionFactory">
     <constructor-arg index="0" value="tcp://localhost:61616"/>
+    <!-- setup for allowing to compress large messages with Artemis -->
+    <property name="minLargeMessageSize" value="10240"/>
+    <property name="compressLargeMessage" value="true"/>
+  </bean>
+
+  <!-- use pooled connection factory -->
+  <bean id="pooledCF" class="org.messaginghub.pooled.jms.JmsPoolConnectionFactory">
+    <property name="connectionFactory" ref="artemisConnectionFactory"/>
+    <property name="maxConnections" value="1"/>
+    <property name="maxSessionsPerConnection" value="10"/>
   </bean>
 
   <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
     <!-- specify connection factory on JMS component -->
-    <property name="connectionFactory" ref="artemisConnectionFactory"/>
+    <property name="connectionFactory" ref="pooledCF"/>
+    <!-- turn on support for using Artemis streaming mode -->
+    <property name="artemisStreamingEnabled" value="true"/>
   </bean>
 
   <camelContext id="myCamel" xmlns="http://camel.apache.org/schema/spring">
