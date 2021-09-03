@@ -17,12 +17,13 @@
 import java.util.Random;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 
-public class MyRouteBuilder extends RouteBuilder {
+public class MyRouteBuilder extends EndpointRouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer:java?period=2s")
+        from(timer("java").period(2000))
             .setBody(method(MyRouteBuilder.class, "randomNumber"))
             .log("Random number ${body}");
     }
