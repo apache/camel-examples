@@ -1,0 +1,61 @@
+== Camel Example Main Endpoint DSL with AWS2 S3 component to Kafka
+
+This example shows how to use the endpoint DSL in your Camel routes
+to define endpoints using type safe fluent builders, which are Java methods
+that are compiled and it will show the AWS2-S3 stream mode.
+
+The example will poll two kafka topics (s3.topic.1 and s3.topic.2) and upload batch of 25 messages as single file into an s3 bucket (mycamel-1).
+
+On your bucket you'll see:
+
+s3.topic.1/s3.topic.1.txt
+s3.topic.1/s3.topic.1-1.txt
+
+s3.topic.2/s3.topic.2.txt
+s3.topic.2/s3.topic.2-1.txt
+
+and so on
+
+At the end you should have a total of 80 files.
+
+Notice how you can configure Camel in the `application.properties` file.
+
+This example will use the AWS default credentials Provider: https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
+Set your credentials accordingly.
+Don't forget to add the bucket name (already created ahead of time) and point to the correct topic.
+You'll need also a running kafka broker.
+You'll need to have kafkacat installed.
+
+=== How to run
+
+You can run this example using
+
+[source,sh]
+----
+$ mvn compile
+----
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+Now run
+
+[source,sh]
+----
+$ data/burst.sh s3.topic.1 1000 msg.txt
+$ data/burst.sh s3.topic.2 1000 msg.txt
+----
+
+You should see the bucket populated.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
