@@ -24,14 +24,14 @@
 
     <parent>
         <groupId>org.apache.camel.example</groupId>
-        <artifactId>examples</artifactId>
+        <artifactId>camel-examples-aws-parent</artifactId>
         <version>3.13.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-azure-eventhubs</artifactId>
+    <artifactId>camel-example-main-kafka-azure-storage-blob</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Azure Eventhubs</name>
-    <description>Azure Eventhubs example</description>
+    <name>Camel :: Example :: Main :: Kafka Azure Storage Blob</name>
+    <description>An example for showing standalone Camel with Kafka and Azure Storage Blob</description>
 
     <properties>
         <category>Beginner</category>
@@ -64,11 +64,15 @@
         <!-- we use these 2 camel components in this example -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-timer</artifactId>
+            <artifactId>camel-bean</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-azure-eventhubs</artifactId>
+            <artifactId>camel-azure-storage-blob</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-kafka</artifactId>
         </dependency>
 
         <!-- logging -->

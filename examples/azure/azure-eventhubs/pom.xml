@@ -17,20 +17,21 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.apache.camel.example</groupId>
-        <artifactId>examples</artifactId>
+        <artifactId>camel-examples-aws-parent</artifactId>
         <version>3.13.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-azure-storage-blob</artifactId>
+    <artifactId>camel-example-azure-eventhubs</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Azure Storage Blob</name>
-    <description>Azure Storage Blob example</description>
+    <name>Camel :: Example :: Azure Eventhubs</name>
+    <description>Azure Eventhubs example</description>
 
     <properties>
         <category>Beginner</category>
@@ -53,51 +54,49 @@
 
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
+            <artifactId>camel-main</artifactId>
         </dependency>
-
+        <!-- we use the endpoint-dsl -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-azure-storage-blob</artifactId>
+            <artifactId>camel-endpointdsl</artifactId>
+        </dependency>
+        <!-- we use these 2 camel components in this example -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-timer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-azure-eventhubs</artifactId>
         </dependency>
 
         <!-- logging -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <scope>runtime</scope>
-            <version>${log4j2-version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <scope>runtime</scope>
-            <version>${log4j2-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <scope>runtime</scope>
-            <version>${log4j2-version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-version}</version>
         </dependency>
 
     </dependencies>
 
     <build>
         <plugins>
-
-            <!-- Allows the routes to be run via 'mvn camel:run' -->
+            <!-- to run the application -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-maven-plugin</artifactId>
                 <version>${camel.version}</version>
                 <configuration>
-                    <mainClass>org.apache.camel.example.azurestorageblob.Application</mainClass>
+                    <mainClass>org.apache.camel.example.MyApplication</mainClass>
                 </configuration>
             </plugin>
-
         </plugins>
-
     </build>
 
 </project>
