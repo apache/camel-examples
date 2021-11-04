@@ -1,30 +1,12 @@
-== Camel Example Main Endpoint DSL with AWS2 S3 component to Kafka
+== Camel Main Example Kafka to Azure Storage Blob
 
-This example shows how to use the endpoint DSL in your Camel routes
-to define endpoints using type safe fluent builders, which are Java methods
-that are compiled and it will show the AWS2-S3 stream mode.
+This example shows how to use the Camel Main module
+to define a route from Kafka to Azure Storage blob
 
-The example will poll two kafka topics (s3.topic.1 and s3.topic.2) and upload batch of 25 messages as single file into an s3 bucket (mycamel-1).
+The example will poll one kafka topic and upload single message as blob into an Azure Storage Blob Container.
 
-On your bucket you'll see:
-
-s3.topic.1/s3.topic.1.txt
-s3.topic.1/s3.topic.1-1.txt
-
-s3.topic.2/s3.topic.2.txt
-s3.topic.2/s3.topic.2-1.txt
-
-and so on
-
-At the end you should have a total of 80 files.
-
-Notice how you can configure Camel in the `application.properties` file.
-
-This example will use the AWS default credentials Provider: https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
-Set your credentials accordingly.
-Don't forget to add the bucket name (already created ahead of time) and point to the correct topic.
+Set your application.properties options correctly.
 You'll need also a running kafka broker.
-You'll need to have kafkacat installed.
 
 === How to run
 
@@ -40,15 +22,9 @@ $ mvn compile
 $ mvn camel:run
 ----
 
-Now run
+Now send a message to your Kafka broker direct to the Kafka topic set in application.properties
 
-[source,sh]
-----
-$ data/burst.sh s3.topic.1 1000 msg.txt
-$ data/burst.sh s3.topic.2 1000 msg.txt
-----
-
-You should see the bucket populated.
+You should see the container populated.
 
 === Help and contributions
 
