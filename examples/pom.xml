@@ -122,6 +122,7 @@
         <module>jmx</module>
         <module>jooq</module>
         <module>kafka</module>
+        <module>kafka-azure</module>
         <module>kamelet</module>
         <module>kamelet-chucknorris</module>
         <module>kamelet-main</module>
