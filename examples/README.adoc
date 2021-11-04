@@ -47,7 +47,7 @@ Number of Examples: 95 (0 deprecated)
 
 | link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
 
-| link:kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and Azure Storage Blob
+| link:kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Beginner | An example for showing standalone Camel with Kafka and Azure Storage Blob
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
 
