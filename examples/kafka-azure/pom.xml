@@ -28,10 +28,10 @@
         <version>3.13.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-main-endpointdsl-kafka-azure-storage-blob</artifactId>
+    <artifactId>camel-example-main-kafka-azure-storage-blob</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Main :: Endpoint DSL :: Kafka Azure Storage Blob</name>
-    <description>An example for showing standalone Camel with Endpoint DSL and Kafka and Azure Storage Blob</description>
+    <name>Camel :: Example :: Main :: Kafka Azure Storage Blob</name>
+    <description>An example for showing standalone Camel with Kafka and Azure Storage Blob</description>
 
     <properties>
         <category>Beginner</category>
