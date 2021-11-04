@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 93 (0 deprecated)
+Number of Examples: 95 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -46,6 +46,8 @@ Number of Examples: 93 (0 deprecated)
 | link:ftp/README.adoc[FTP] (ftp) | Beginner | An example for showing Camel FTP integration
 
 | link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
+
+| link:kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and Azure Storage Blob
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
 
@@ -83,6 +85,8 @@ Number of Examples: 93 (0 deprecated)
     
 
 | link:routeloader/README.adoc[Routeloader] (routeloader) | Beginner | Example loading and compiling Java routes on startup
+
+| link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
 
 | link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
 
