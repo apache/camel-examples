@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 93 (0 deprecated)
+Number of Examples: 95 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -24,6 +24,10 @@ Number of Examples: 93 (0 deprecated)
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
 | link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
+
+| link:azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Beginner | Azure Eventhubs example
+
+| link:azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Beginner | Azure Storage Blob example
 
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 
@@ -42,6 +46,8 @@ Number of Examples: 93 (0 deprecated)
 | link:ftp/README.adoc[FTP] (ftp) | Beginner | An example for showing Camel FTP integration
 
 | link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
+
+| link:kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Beginner | An example for showing standalone Camel with Kafka and Azure Storage Blob
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
 
@@ -91,8 +97,6 @@ Number of Examples: 93 (0 deprecated)
 | link:spring-javaconfig/README.adoc[Spring Java Config] (spring-javaconfig) | Beginner | An example showing how to work with Camel and Spring Java Config
 
 | link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
-
-| link:azure/readme.md[Azure] (azure) | Cloud | Multiple Camel Azure examples
 
 | link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
 
