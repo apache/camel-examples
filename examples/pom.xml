@@ -104,6 +104,7 @@
         <module>cdi-test</module>
         <module>cdi-xml</module>
         <module>console</module>
+        <module>couchbase-log</module>
         <module>csimple</module>
         <module>csimple-joor</module>
         <module>cxf</module>
