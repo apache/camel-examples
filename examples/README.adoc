@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 95 (0 deprecated)
+Number of Examples: 96 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -38,6 +38,8 @@ Number of Examples: 95 (0 deprecated)
 | link:cdi-xml/README.adoc[CDI Camel XML] (cdi-xml) | Beginner | CDI and Camel XML example
 
 | link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
+
+| link:couchbase-log/README.adoc[Couchbase Log] (couchbase-log) | Beginner | An example for showing standalone Camel with Couchbase
 
 | link:csimple/readme.adoc[Csimple] (csimple) | Beginner | Shows using compiled simple language
 
