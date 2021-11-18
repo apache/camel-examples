@@ -1,11 +1,14 @@
 == Camel Example Main XML
 
 This example shows how to run Camel standalone (XML routes) via the built-in Main class.
-The example also demonstrates how you can configure the Camel application
-via Camel built-in dependency-injection that supports binding via the
-`@BindToRegistry`, `@BeanInject` and `@PropertyInject` annotations.
 
-Also notice how you can configure Camel in the `application.properties` file.
+The route is located in `src/main/resources/routes` as an XML file.
+
+This example has been enabled with live reload, so while the Camel
+application is running, then you can edit the route in the XML file,
+and when saved Camel will auto update the route(s).
+
+The application is configured in the `application.properties` file.
 
 === How to run
 
