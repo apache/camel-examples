@@ -138,6 +138,7 @@
         <module>main-lambda</module>
         <module>main-tiny</module>
         <module>main-xml</module>
+        <module>main-yaml</module>
         <module>management</module>
         <module>micrometer</module>
         <module>mongodb</module>

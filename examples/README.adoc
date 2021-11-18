@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 96 (0 deprecated)
+Number of Examples: 97 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -80,6 +80,8 @@ Number of Examples: 96 (0 deprecated)
 | link:main-tiny/README.adoc[Main Tiny] (main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
 
 | link:main-xml/README.adoc[Main Xml] (main-xml) | Beginner | An example for showing standalone Camel using XML
+
+| link:main-yaml/README.adoc[Main Yaml] (main-yaml) | Beginner | An example for showing standalone Camel using YAML
 
 | link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
 
