@@ -32,8 +32,8 @@ public final class MyApplication {
         // lets use a configuration class (you can specify multiple classes)
         // (properties are automatic loaded from application.properties)
         main.configure().addConfigurationClass(MyConfiguration.class);
-        // and add all the XML routes
-        main.configure().withRoutesIncludePattern("routes/*.xml");
+        // and add all the YAML routes
+        main.configure().withRoutesIncludePattern("routes/*.yaml");
         // turn on reloading routes on code-changes
         main.configure().withRoutesReloadEnabled(true);
         main.configure().withRoutesReloadDirectory("src/main/resources");
