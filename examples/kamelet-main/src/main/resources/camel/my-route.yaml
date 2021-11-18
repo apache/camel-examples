@@ -1,4 +1,5 @@
 - route:
+    id: "earthquake"
     from: "kamelet:earthquake-source"
     steps:
       - unmarshal:
