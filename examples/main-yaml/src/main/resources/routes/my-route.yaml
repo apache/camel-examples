@@ -1,0 +1,10 @@
+from:
+  route-id: "foo"
+  uri: "quartz:foo"
+  parameters:
+    cron: "{{period}}"
+  steps:
+    - to: "bean:myBean.hello"
+    - log: "${body}"
+    - to: "bean:myBean.bye"
+    - log: "${body}"
