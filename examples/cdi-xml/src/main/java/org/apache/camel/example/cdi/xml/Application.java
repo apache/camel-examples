@@ -25,6 +25,7 @@ import javax.inject.Named;
 
 import org.apache.camel.Body;
 import org.apache.camel.CamelException;
+import org.apache.camel.Exchange;
 import org.apache.camel.Handler;
 import org.apache.camel.Processor;
 import org.apache.camel.cdi.ImportResource;
@@ -50,7 +51,7 @@ public class Application {
     @Named
     @Produces
     Processor tracer = exchange -> exchange.getIn()
-        .setHeader("location", simple("${exchangeProperty.CamelFailureRouteId}"));
+        .setHeader("location", exchange.getProperty(Exchange.FAILURE_ROUTE_ID));
 
     void login(@Observes @Initialized(ApplicationScoped.class) Object event) {
         System.out.println(
