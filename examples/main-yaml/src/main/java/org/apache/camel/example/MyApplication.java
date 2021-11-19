@@ -38,6 +38,7 @@ public final class MyApplication {
         main.configure().withRoutesReloadEnabled(true);
         main.configure().withRoutesReloadDirectory("src/main/resources");
         main.configure().withRoutesReloadPattern("routes/*.yaml");
+        main.configure().withRoutesReloadRemoveAllRoutes(true);
 
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
