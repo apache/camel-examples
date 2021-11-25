@@ -3,7 +3,7 @@
 === Introduction
 
 This example shows how to use ready to use Kamelets you can find at the
-https://camel.apache.org/camel-kamelets/latest/[Camel Kamelet Catalog].
+https://camel.apache.org/camel-kamelets/next/[Camel Kamelet Catalog].
 
 The application is run with `KameletMain` class from camel-kamalet-main JAR.
 This makes it easy to run Camel standalone with Kamelet that can be automatic
@@ -36,7 +36,7 @@ The application is also built as a _fat jar_ (see `pom.xml`), which you can run 
 [source,sh]
 ----
 $ mvn package
-$ java -jar target/camel-example-kamelet-yaml-3.11.0-jar-with-dependencies.jar
+$ java -jar target/camel-example-kamelet-yaml-3.13.0-jar-with-dependencies.jar
 ----
 
 
