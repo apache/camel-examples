@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.apache.camel.health.HealthCheckResultBuilder;
 import org.apache.camel.impl.health.AbstractHealthCheck;
+import org.apache.camel.spi.annotations.HealthCheck;
 
 /**
  * A chaos monkey health check that reports UP or DOWN in a chaotic way.
@@ -28,11 +29,12 @@ import org.apache.camel.impl.health.AbstractHealthCheck;
  * which is automatic discovered if bound in the {@link org.apache.camel.spi.Registry} and
  * used as part of Camel's health-check system.
  */
+@HealthCheck("monkey-check")
 public class MonkeyHealthCheck extends AbstractHealthCheck {
 
     private boolean up = true;
 
-    protected MonkeyHealthCheck() {
+    public MonkeyHealthCheck() {
         super("custom", "monkey");
     }
 

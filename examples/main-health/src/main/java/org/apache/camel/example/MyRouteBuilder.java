@@ -16,17 +16,20 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.BeanInject;
+import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.health.HealthCheck;
+import org.apache.camel.health.HealthCheckResolver;
 
 public class MyRouteBuilder extends RouteBuilder {
 
-    // we can inject the bean via this annotation
-    @BeanInject("monkey")
-    MonkeyHealthCheck monkey;
-
     @Override
     public void configure() throws Exception {
+        // to trigger the health check to flip between UP and DOWN then lets call it as a Java bean from
+        // a route, and therefore we need to lookup and resolve the monkey-check
+        HealthCheckResolver resolver = getCamelContext().adapt(ExtendedCamelContext.class).getHealthCheckResolver();
+        final HealthCheck monkey = resolver.resolveHealthCheck("monkey");
+
         from("timer:foo?period={{myPeriod}}").routeId("timer")
             .bean(monkey, "chaos")
             .log("${body}");
