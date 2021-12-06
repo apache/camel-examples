@@ -101,7 +101,8 @@
                 <artifactId>camel-maven-plugin</artifactId>
                 <version>${camel.version}</version>
                 <configuration>
-                    <logClasspath>false</logClasspath>
+                    <!-- use built-in logging, instead of logback -->
+                    <logLevel>INFO</logLevel>
                     <mainClass>org.apache.camel.example.MyApplication</mainClass>
                 </configuration>
             </plugin>
