@@ -76,6 +76,11 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-xml-jaxb</artifactId>
         </dependency>
+        <!-- jmx management -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-management</artifactId>
+        </dependency>
 
         <!-- components -->
         <dependency>
