@@ -95,12 +95,6 @@
         <module>cafe-endpointdsl</module>
         <module>cassandra-kubernetes</module>
         <module>cdi</module>
-        <module>cdi-cassandraql</module>
-        <module>cdi-kubernetes</module>
-        <module>cdi-metrics</module>
-        <module>cdi-minio</module>
-        <module>cdi-properties</module>
-        <module>cdi-rest-servlet</module>
         <module>cdi-test</module>
         <module>cdi-xml</module>
         <module>console</module>
@@ -144,7 +138,6 @@
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>
-        <module>openapi-cdi</module>
         <module>pojo-messaging</module>
         <module>reactive-executor-vertx</module>
         <module>route-throttling</module>
@@ -160,13 +153,10 @@
         <module>spring-security</module>
         <module>spring-ws</module>
         <module>spring-xquery</module>
-        <module>swagger-cdi</module>
         <module>telegram</module>
-        <module>transformer-cdi</module>
         <module>transformer-demo</module>
         <module>twitter-websocket</module>
         <module>vertx-kafka</module>
-        <module>widget-gadget-cdi</module>
         <module>widget-gadget-java</module>
         <module>widget-gadget-xml</module>
   </modules>
