@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 97 (0 deprecated)
+Number of Examples: 87 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -32,8 +32,6 @@ Number of Examples: 97 (0 deprecated)
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 
 | link:cdi/README.adoc[CDI] (cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
-
-| link:cdi-properties/README.adoc[CDI Properties] (cdi-properties) | Beginner | DeltaSpike configuration properties CDI example
 
 | link:cdi-xml/README.adoc[CDI Camel XML] (cdi-xml) | Beginner | CDI and Camel XML example
 
@@ -104,15 +102,9 @@ Number of Examples: 97 (0 deprecated)
 
 | link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
 
-| link:cdi-kubernetes/README.adoc[CDI Kubernetes] (cdi-kubernetes) | Cloud | An example running Camel CDI on Kubernetes
-
-| link:cdi-minio/README.adoc[CDI Minio] (cdi-minio) | Cloud | Minio CDI example
-
 | link:hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
 
 | link:main-endpointdsl-aws2/README.adoc[Main Endpointdsl Aws2] (main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
-
-| link:cdi-cassandraql/README.adoc[CDI Cassandra] (cdi-cassandraql) | Database | Cassandraql CDI example
 
 | link:debezium/README.adoc[Debezium] (debezium) | Database | An example for Debezium Component
 
@@ -148,22 +140,15 @@ Number of Examples: 97 (0 deprecated)
         route dynamically based on the flow of messages
     
 
-| link:widget-gadget-cdi/README.adoc[Widget Gadget CDI] (widget-gadget-cdi) | EIP | The widget and gadget example from the EIP book
-
 | link:widget-gadget-java/README.adoc[Widget Gadget Java] (widget-gadget-java) | EIP | The widget and gadget example from the EIP book
 
 | link:widget-gadget-xml/README.adoc[Widget Gadget XML] (widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
 
 | link:fhir/README.adoc[FHIR] (fhir) | Health Care | An example running Camel FHIR using Camel CDI
 
-| link:transformer-cdi/README.adoc[Transformer CDI] (transformer-cdi) | Input/Output Type Contract | An example demonstrating declarative transformation along data type declaration using Java DSL and CDI
-    
-
 | link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
         Spring DSL
     
-
-| link:cdi-metrics/README.adoc[CDI Metrics] (cdi-metrics) | Management and Monitoring | Dropwizard Metrics CDI example
 
 | link:flight-recorder/README.adoc[Flight Recorder] (flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
 
@@ -194,12 +179,6 @@ Number of Examples: 97 (0 deprecated)
 | link:kotlin/README.adoc[Kotlin] (kotlin) | Other Languages | A Camel route using Kotlin
 
 | link:reactive-executor-vertx/README.adoc[Reactive Executor Vertx] (reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
-
-| link:cdi-rest-servlet/README.adoc[CDI Rest] (cdi-rest-servlet) | Rest | Rest DSL using Servlet with CDI example
-
-| link:openapi-cdi/README.adoc[OpenApi CDI] (openapi-cdi) | Rest | An example using REST DSL and OpenApi Java with CDI
-
-| link:swagger-cdi/README.adoc[Swagger CDI] (swagger-cdi) | Rest | An example using REST DSL and Swagger Java with CDI
 
 | link:spring-security/README.adoc[Spring Security] (spring-security) | Security | An example showing how to work with Camel and Spring Security
 
