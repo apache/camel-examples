@@ -17,17 +17,21 @@
 package org.apache.camel.example;
 
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
-import org.apache.camel.builder.endpoint.dsl.AWS2S3EndpointBuilderFactory;
-import software.amazon.awssdk.regions.Region;
+import org.apache.camel.component.aws2.s3.stream.AWSS3NamingStrategyEnum;
+import org.apache.camel.component.aws2.s3.stream.AWSS3RestartingPolicyEnum;
 
 public class MyRouteBuilder extends EndpointRouteBuilder {
 
     @Override
     public void configure() throws Exception {
 
-        
         from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}"))
               .log("Kafka Message is: ${body}")
-              .toD(aws2S3("{{bucketName}}").streamingUploadMode(true).useDefaultCredentialsProvider(true).restartingPolicy(AWS2S3EndpointBuilderFactory.AWSS3RestartingPolicyEnum.lastPart).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/partition_${headers.kafka.PARTITION}/{{kafkaTopic1}}.txt"));
+              .toD(aws2S3("{{bucketName}}")
+                      .streamingUploadMode(true)
+                      .useDefaultCredentialsProvider(true)
+                      .restartingPolicy(AWSS3RestartingPolicyEnum.lastPart)
+                      .batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive)
+                      .keyName("{{kafkaTopic1}}/partition_${headers.kafka.PARTITION}/{{kafkaTopic1}}.txt"));
     }
 }

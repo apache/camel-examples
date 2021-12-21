@@ -17,21 +17,19 @@
 package org.apache.camel.example;
 
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
-import org.apache.camel.builder.endpoint.dsl.AWS2S3EndpointBuilderFactory;
-import software.amazon.awssdk.regions.Region;
+import org.apache.camel.component.aws2.s3.stream.AWSS3NamingStrategyEnum;
 
 public class MyRouteBuilder extends EndpointRouteBuilder {
 
     @Override
     public void configure() throws Exception {
 
-        
         from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}"))
               .log("Kafka Message is: ${body}")
-              .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/{{kafkaTopic1}}.txt"));
+              .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/{{kafkaTopic1}}.txt"));
 
         from(kafka("{{kafkaTopic2}}").brokers("{{kafkaBrokers}}"))
                 .log("Kafka Message is: ${body}")
-                .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWS2S3EndpointBuilderFactory.AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic2}}/{{kafkaTopic2}}.txt"));
+                .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic2}}/{{kafkaTopic2}}.txt"));
     }
 }

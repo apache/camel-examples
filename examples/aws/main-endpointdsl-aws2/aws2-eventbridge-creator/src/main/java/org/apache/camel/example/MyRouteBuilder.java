@@ -19,12 +19,9 @@ package org.apache.camel.example;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
-import org.apache.camel.builder.endpoint.dsl.EventbridgeEndpointBuilderFactory.EventbridgeOperations;
 import org.apache.camel.component.aws2.eventbridge.EventbridgeConstants;
-
+import org.apache.camel.component.aws2.eventbridge.EventbridgeOperations;
 import software.amazon.awssdk.services.eventbridge.model.Target;
 
 /**
@@ -34,26 +31,20 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
         from(timer("fire").repeatCount("1"))
-        .setHeader(EventbridgeConstants.RULE_NAME, constant("s3-events-rule"))
-        .to(aws2Eventbridge("default")
+            .setHeader(EventbridgeConstants.RULE_NAME, constant("s3-events-rule"))
+            .to(aws2Eventbridge("default")
         		.operation(EventbridgeOperations.putRule)
         		.eventPatternFile("file:src/main/resources/eventpattern.json"))
-        .process(new Processor() {
-
-            @Override
-            public void process(Exchange exchange) throws Exception {
-                exchange.getIn().setHeader(EventbridgeConstants.RULE_NAME, "s3-events-rule");
-                Target target = Target.builder().id("sqs-queue").arn("arn:aws:sqs:eu-west-1:780410022472:camel-connector-test")
-                        .build();
-                List<Target> targets = new ArrayList<Target>();
+            .process(exchange -> {
+                exchange.getMessage().setHeader(EventbridgeConstants.RULE_NAME, "s3-events-rule");
+                Target target = Target.builder().id("sqs-queue").arn("arn:aws:sqs:eu-west-1:780410022472:camel-connector-test").build();
+                List<Target> targets = new ArrayList<>();
                 targets.add(target);
-                exchange.getIn().setHeader(EventbridgeConstants.TARGETS, targets);
-            }
-        })
-        .to(aws2Eventbridge("default")
+                exchange.getMessage().setHeader(EventbridgeConstants.TARGETS, targets);
+            })
+            .to(aws2Eventbridge("default")
         		.operation(EventbridgeOperations.putTargets))
-        .log("All set, enjoy!");
+            .log("All set, enjoy!");
     }
 }
