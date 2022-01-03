@@ -17,9 +17,10 @@
 
 - route:
     id: "foo"
-    from: "quartz:foo?cron={{myCron}}"
-    steps:
-      - to: "bean:myBean?method=hello"
-      - log: "${body}"
-      - to: "bean:myBean?method=bye"
-      - log: "${body}"
+    from:
+      uri: "quartz:foo?cron={{myCron}}"
+      steps:
+        - to: "bean:myBean?method=hello"
+        - log: "${body}"
+        - to: "bean:myBean?method=bye"
+        - log: "${body}"
