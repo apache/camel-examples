@@ -148,7 +148,6 @@
         <module>servlet-tomcat</module>
         <module>splunk</module>
         <module>spring</module>
-        <module>spring-javaconfig</module>
         <module>spring-pulsar</module>
         <module>spring-security</module>
         <module>spring-ws</module>
