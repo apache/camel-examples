@@ -96,7 +96,6 @@
         <module>cassandra-kubernetes</module>
         <module>cdi</module>
         <module>cdi-test</module>
-        <module>cdi-xml</module>
         <module>console</module>
         <module>couchbase-log</module>
         <module>csimple</module>
@@ -134,7 +133,6 @@
         <module>main-xml</module>
         <module>main-yaml</module>
         <module>management</module>
-        <module>micrometer</module>
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>

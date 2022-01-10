@@ -11,13 +11,11 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 87 (0 deprecated)
+Number of Examples: 85 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
-
-| link:micrometer/README.adoc[Micrometer] (micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
 
 | link:any23/README.adoc[Any23 example] (any23) | Beginner | An example that uses the Any23 dataformat
 
@@ -95,8 +93,6 @@ Number of Examples: 87 (0 deprecated)
 | link:servlet-tomcat/README.adoc[Servlet Tomcat] (servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
 
 | link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
-
-| link:spring-javaconfig/README.adoc[Spring Java Config] (spring-javaconfig) | Beginner | An example showing how to work with Camel and Spring Java Config
 
 | link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
