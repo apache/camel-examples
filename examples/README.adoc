@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 85 (0 deprecated)
+Number of Examples: 84 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -30,8 +30,6 @@ Number of Examples: 85 (0 deprecated)
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 
 | link:cdi/README.adoc[CDI] (cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
-
-| link:cdi-xml/README.adoc[CDI Camel XML] (cdi-xml) | Beginner | CDI and Camel XML example
 
 | link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
 
