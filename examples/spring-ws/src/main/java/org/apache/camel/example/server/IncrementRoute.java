@@ -29,7 +29,7 @@ public class IncrementRoute extends RouteBuilder {
     public void configure() throws Exception {
         JaxbDataFormat jaxb = new JaxbDataFormat(IncrementRequest.class.getPackage().getName());
         
-        from("spring-ws:rootqname:{http://camel.apache.org/example/increment}incrementRequest?endpointMapping=#endpointMapping")
+        from("spring-ws:rootqname:{http://camel.apache.org/example/increment}incrementRequest?endpointMapping=#bean:endpointMapping")
             .unmarshal(jaxb)
             .process(new IncrementProcessor())
             .marshal(jaxb);
