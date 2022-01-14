@@ -63,6 +63,10 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-quartz</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-debug</artifactId>
+        </dependency>
 
         <!-- logging -->
         <dependency>
@@ -97,5 +101,19 @@
             </plugin>
         </plugins>
     </build>
+
+	<repositories>
+		<repository>
+			<id>apache.snapshots</id>
+			<name>Apache Development Snapshot Repository</name>
+			<url>https://repository.apache.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 </project>
