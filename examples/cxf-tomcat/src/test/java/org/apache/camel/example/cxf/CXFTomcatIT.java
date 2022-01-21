@@ -16,7 +16,11 @@
  */
 package org.apache.camel.example.cxf;
 
-import org.apache.camel.example.cxf.incident.*;
+import org.apache.camel.example.cxf.incident.IncidentService;
+import org.apache.camel.example.cxf.incident.InputReportIncident;
+import org.apache.camel.example.cxf.incident.InputStatusIncident;
+import org.apache.camel.example.cxf.incident.OutputReportIncident;
+import org.apache.camel.example.cxf.incident.OutputStatusIncident;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
