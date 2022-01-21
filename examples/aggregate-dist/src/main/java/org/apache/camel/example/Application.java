@@ -38,7 +38,13 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.UUID;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -94,7 +100,7 @@ public final class Application {
         return CompletableFuture.supplyAsync(this::launch);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         new Application().launch();
     }
 
@@ -192,6 +198,7 @@ public final class Application {
             executor.shutdown();
             executor.awaitTermination(60, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
             LOG.error("Termination interrupted");
         } finally {
             if (executor.isTerminated()) {
