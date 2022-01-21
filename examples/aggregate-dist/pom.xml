@@ -103,6 +103,14 @@
             <version>${log4j2-version}</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- for testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter-version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

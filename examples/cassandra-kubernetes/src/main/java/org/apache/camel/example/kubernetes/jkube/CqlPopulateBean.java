@@ -26,14 +26,13 @@ public class CqlPopulateBean {
     private static final Logger log = LoggerFactory.getLogger(CqlPopulateBean.class);
 
     public void populate() {
-        Cluster cluster = Cluster.builder().addContactPoint("cassandra").build();
-        Session session = cluster.connect();
-        session.execute("CREATE KEYSPACE IF NOT EXISTS test WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor':1};");
-        session.execute("CREATE TABLE IF NOT EXISTS test.users ( id int primary key, name text );");
-        session.execute("INSERT INTO test.users (id,name) VALUES (1, 'oscerd') IF NOT EXISTS;");
-        session.execute("INSERT INTO test.users (id,name) VALUES (2, 'not-a-bot') IF NOT EXISTS;");
-        session.close();
-        cluster.close();
+        try (Cluster cluster = Cluster.builder().addContactPoint("cassandra").build();
+            Session session = cluster.connect()) {
+            session.execute("CREATE KEYSPACE IF NOT EXISTS test WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor':1};");
+            session.execute("CREATE TABLE IF NOT EXISTS test.users ( id int primary key, name text );");
+            session.execute("INSERT INTO test.users (id,name) VALUES (1, 'oscerd') IF NOT EXISTS;");
+            session.execute("INSERT INTO test.users (id,name) VALUES (2, 'not-a-bot') IF NOT EXISTS;");
+        }
         log.info("Cassandra was populated with sample values for test.users table");
     }
 

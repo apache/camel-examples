@@ -30,12 +30,13 @@ $ mvn package
 Which will create a `.war` file in the target directly.
 
 You can then deploy this `.war` file in any web container such as
-Apache Tomcat, by copying the `.war` file to its `/webapp`
-directory manually or via the following command:
+Apache Tomcat, by copying the `.war` file to its `/webapps`
+directory manually or via the following command (assuming that the
+environment variable `TOMCAT_HOME` has been set properly):
 
 [source,sh]
 ----
-$ mv target/camel-example-activemq-tomcat.war src/main/webapp/
+$ mv target/camel-example-activemq-tomcat.war ${TOMCAT_HOME}/webapps/
 ----
 
 === Configuration

@@ -47,7 +47,7 @@ public final class ArtemisMain {
         main.run();
     }
 
-    private static JmsComponent createArtemisComponent() {
+    static JmsComponent createArtemisComponent() {
         // Sets up the Artemis core protocol connection factory
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 

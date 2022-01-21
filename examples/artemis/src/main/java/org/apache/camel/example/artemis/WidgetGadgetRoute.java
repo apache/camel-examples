@@ -32,10 +32,10 @@ public class WidgetGadgetRoute extends RouteBuilder {
         // it is more common to inline the endpoints and predicates in the route
         // as shown in the CreateOrderRoute
 
-        Endpoint newOrder = endpoint("jms:queue:newOrder");
+        Endpoint newOrder = getContext().getEndpoint("jms:queue:newOrder");
         Predicate isWidget = xpath("/order/product = 'widget'");
-        Endpoint widget = endpoint("jms:queue:widget");
-        Endpoint gadget = endpoint("jms:queue:gadget");
+        Endpoint widget = getContext().getEndpoint("jms:queue:widget");
+        Endpoint gadget = getContext().getEndpoint("jms:queue:gadget");
 
         from(newOrder)
             .choice()

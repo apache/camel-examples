@@ -34,55 +34,71 @@ import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Application {
+public final class Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    protected static final int THREADS = 20;
-    protected static final int END = 100;
+    private static final int THREADS = 20;
+    private static final int END = 100;
 
     private static final String CID_HEADER = "corrId";
     private static final String DB_URL = "jdbc:derby:target/testdb;create=true";
     private static final String DB_USER = "admin";
     private static final String DB_PASS = "admin";
 
-    private static String correlationId;
-    private static String expectedResult;
-    private static Queue<Integer> inputQueue;
-    private static CountDownLatch latch;
+    private final String correlationId;
+    private final String expectedResult;
+    private final Queue<Integer> inputQueue;
+    private final CountDownLatch latch;
+    private final ExecutorService executor;
 
-    public static void main(String[] args) throws Exception {
-        // init
-        correlationId = UUID.randomUUID().toString();
-        expectedResult = IntStream.rangeClosed(1, END)
+    public Application() {
+        this.correlationId = UUID.randomUUID().toString();
+        this.expectedResult = IntStream.rangeClosed(1, END)
                 .mapToObj(Integer::toString).collect(Collectors.joining("."));
-        inputQueue = new ConcurrentLinkedQueue<>();
-        IntStream.rangeClosed(1, END).forEach(inputQueue::add);
-        latch = new CountDownLatch(THREADS);
-
-        // test
-        ExecutorService executor = Executors.newFixedThreadPool(THREADS);
-        for (int i = 0; i < THREADS; i++) {
-            executor.execute(Application::startCamel);
-        }
-
-        // wait
-        latch.await();
-        stop(executor);
+        this.inputQueue = new ConcurrentLinkedQueue<>();
+        this.latch = new CountDownLatch(THREADS);
+        this.executor = Executors.newFixedThreadPool(THREADS);
     }
 
-    private static void startCamel() {
+    public boolean launch() {
+        try {
+            // init
+            IntStream.rangeClosed(1, END).forEach(inputQueue::add);
+
+            // test
+            for (int i = 0; i < THREADS; i++) {
+                executor.execute(this::startCamel);
+            }
+
+            // wait
+            latch.await();
+            stop();
+            return true;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LOG.error("The test has been interrupted", e);
+        }
+        return false;
+    }
+
+    public Future<Boolean> asyncLaunch() {
+        return CompletableFuture.supplyAsync(this::launch);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Application().launch();
+    }
+
+    private void startCamel() {
         try {
             Main camel = new Main();
             camel.configure().addRoutesBuilder(new RouteBuilder() {
@@ -95,8 +111,8 @@ public class Application {
                     from("direct:aggregator")
                             .filter(body().isNotNull())
                             .aggregate().header(CID_HEADER)
-                            .aggregationStrategy(Application::aggregationStrategy)
-                            .completionPredicate(Application::completionPredicate)
+                            .aggregationStrategy(Application.this::aggregationStrategy)
+                            .completionPredicate(Application.this::completionPredicate)
                             .aggregationRepository(getAggregationRepository())
                             .optimisticLocking()
                             .log(LoggingLevel.INFO, "Result: ${body}");
@@ -116,15 +132,15 @@ public class Application {
     private static AggregationRepository getAggregationRepository() {
         SingleConnectionDataSource ds = new SingleConnectionDataSource(DB_URL, DB_USER, DB_PASS, true);
         ds.setAutoCommit(false);
-        try {
-            Connection conn = ds.getConnection();
-            conn.createStatement().execute(
+        try (Connection conn = ds.getConnection();
+             Statement statement = conn.createStatement()){
+            statement.execute(
                     "create table aggregation("
                             + "id varchar(255) not null primary key,"
                             + "exchange blob not null,"
                             + "version bigint not null"
                             + ")");
-            conn.createStatement().execute(
+            statement.execute(
                     "create table aggregation_completed("
                             + "id varchar(255) not null primary key,"
                             + "exchange blob not null,"
@@ -143,7 +159,7 @@ public class Application {
         return repo;
     }
 
-    private static Exchange aggregationStrategy(Exchange oldExchange, Exchange newExchange) {
+    private Exchange aggregationStrategy(Exchange oldExchange, Exchange newExchange) {
         if (oldExchange == null) {
             return newExchange;
         }
@@ -155,7 +171,7 @@ public class Application {
         return oldExchange;
     }
 
-    private static boolean completionPredicate(Exchange exchange) {
+    private boolean completionPredicate(Exchange exchange) {
         boolean isComplete = false;
         final String body = exchange.getIn().getBody(String.class);
         if (body != null && !body.isEmpty()) {
@@ -171,7 +187,7 @@ public class Application {
         return isComplete;
     }
 
-    private static void stop(ExecutorService executor) {
+    private void stop() {
         try {
             executor.shutdown();
             executor.awaitTermination(60, TimeUnit.SECONDS);
@@ -187,7 +203,7 @@ public class Application {
         }
     }
 
-    static class MyProducerBean {
+    class MyProducerBean {
         public void run(Exchange exchange) {
             CamelContext context = exchange.getContext();
             try (ProducerTemplate template = context.createProducerTemplate()) {

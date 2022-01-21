@@ -23,11 +23,11 @@ public class MyRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer:foo?period={{myPeriod}}")
-            .transform().csimple("${random(20)}")
+            .transform(csimple("${random(20)}"))
             .choice()
-                .when().csimple("${body} > 10")
+                .when(csimple("${bodyAs(int)} > 10"))
                     .log("high ${body}")
-                .when().csimple("${body} > 5")
+                .when(csimple("${bodyAs(int)} > 5"))
                     .log("med ${body}")
                 .otherwise()
                     .log("low ${body}");

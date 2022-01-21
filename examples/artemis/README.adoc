@@ -7,7 +7,7 @@ Integration Patterns book. It is similar to the other Widget and Gadget
 example, but uses Apache ActiveMQ Artemis, the next generation message
 broker from ActiveMQ.
 
-The example provides a simple order system, where incoming orders, is
+The example provides a simple order system, where incoming orders are
 routed to either a widget or gadget inventory system, for further
 processing. The example uses the most famous pattern from the EIP book,
 which is the Content Based Router.

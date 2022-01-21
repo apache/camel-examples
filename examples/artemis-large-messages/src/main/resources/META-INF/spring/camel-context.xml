@@ -55,7 +55,7 @@
     </route>
 
     <!-- turn on stream caching so we can stream big messages from Artemis
-         to spool disk to avoid reading into memory -->
+         to spool disk to avoid reading from memory -->
     <route streamCache="true">
       <from uri="jms:queue:data"/>
       <log message="Received data from Artemis"/>
