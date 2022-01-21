@@ -30,7 +30,7 @@ import java.util.Set;
 
 public class Any23RouteBuilder extends RouteBuilder {
 
-    private static final String BASEURI = "http://mock.foo/bar";
+    private static final String BASE_URI = "http://mock.foo/bar";
 
     @Override
     public void configure() {
@@ -38,17 +38,17 @@ public class Any23RouteBuilder extends RouteBuilder {
         from("direct:start")
                 .log("Querying dbpedia:Ecuador ")
                 .to("http://dbpedia.org/page/Ecuador")
-                .unmarshal().any23(BASEURI)
+                .unmarshal().any23(BASE_URI)
                 .process(exchange -> {
                     ValueFactory vf = SimpleValueFactory.getInstance();
                     Model model = exchange.getIn().getBody(Model.class);
 
                     // Selecting the leaders of Ecuador
-                    IRI propertyLeader = vf.createIRI("http://dbpedia.org/ontology/leader");
+                    IRI propertyLeader = vf.createIRI("http://dbpedia.org/property/leaderName");
                     Set<Value> leadersResources = model.filter(null, propertyLeader, null).objects();
                     List<String> leadersList = new ArrayList<>();
                     for (Value leader : leadersResources) {
-                        // Transform the leader resource (URI) into an browsable URL.
+                        // Transform the leader resource (URI) into a browsable URL.
                         // For instance:
                         // http://dbpedia.org/resource/Oswaldo_Guayasam%C3%ADn -->
                         // http://dbpedia.org/page/Oswaldo_Guayasam%C3%ADn
@@ -65,10 +65,11 @@ public class Any23RouteBuilder extends RouteBuilder {
                 .to("direct:extractMoreData");
 
         from("direct:extractMoreData")
+                .id("result")
                 .log("Split ${body}")
                 .toD("${body}").unmarshal()
                 // Extract RDF data of the leaders as JSONLD
-                .any23(BASEURI, Any23Type.JSONLD)
+                .any23(BASE_URI, Any23Type.JSONLD)
                 .log(" Result : ${body} ")
                 .to("log:result");
     }

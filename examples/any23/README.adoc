@@ -3,7 +3,7 @@
 === Introduction
 
 This example shows how to extract data from a page with RDF content using Apache Any23. In this example the Dbpedia webpage of a country (Ecuador) is processed with the camel-any23 data format as a RDF4J Model.
-The extracted information is filtered in order to select the URIS of the country's leaders through the Dbpedia property http://dbpedia.org/ontology/leader.
+The extracted information is filtered in order to select the URIS of the country's leaders through the Dbpedia property http://dbpedia.org/property/leaderName.
 Afterwards, the information of each leader is requested and presented in JSON-LD format.
 
 === How to run

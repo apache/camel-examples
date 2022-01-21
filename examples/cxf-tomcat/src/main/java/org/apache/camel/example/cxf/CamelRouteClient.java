@@ -28,7 +28,7 @@ public class CamelRouteClient {
     private static final String URL = "http://localhost:8080/camel-example-cxf-tomcat/webservices/incident";
     
     protected static IncidentService createCXFClient() {
-        // we use CXF to create a client for us as its easier than JAXWS and works
+        // we use CXF to create a client for us as it is easier than JAXWS and works
         ClientProxyFactoryBean factory = new ClientProxyFactoryBean();
         factory.setServiceClass(IncidentService.class);
         factory.setAddress(URL);
@@ -43,15 +43,7 @@ public class CamelRouteClient {
     protected void runTest() throws Exception {
        
         // create input parameter
-        InputReportIncident input = new InputReportIncident();
-        input.setIncidentId("123");
-        input.setIncidentDate("2008-08-18");
-        input.setGivenName("Claus");
-        input.setFamilyName("Ibsen");
-        input.setSummary("Bla");
-        input.setDetails("Bla bla");
-        input.setEmail("davsclaus@apache.org");
-        input.setPhone("0045 2962 7576");
+        InputReportIncident input = createInputReportIncident();
 
         // create the webservice client and send the request
         IncidentService client = createCXFClient();
@@ -62,6 +54,19 @@ public class CamelRouteClient {
         OutputStatusIncident outStatus = client.statusIncident(inStatus);
         System.out.println(outStatus.getStatus());
        
+    }
+
+    protected static InputReportIncident createInputReportIncident() {
+        InputReportIncident input = new InputReportIncident();
+        input.setIncidentId("123");
+        input.setIncidentDate("2008-08-18");
+        input.setGivenName("Claus");
+        input.setFamilyName("Ibsen");
+        input.setSummary("Bla");
+        input.setDetails("Bla bla");
+        input.setEmail("davsclaus@apache.org");
+        input.setPhone("0045 2962 7576");
+        return input;
     }
 
 }

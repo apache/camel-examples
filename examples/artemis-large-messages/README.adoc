@@ -10,7 +10,7 @@ You should be able to run Camel and Artemis in JVMs with lower memory
 such as 256/512mb etc, and still be able to send messages in GB of sizes
 between them.
 
-This works by spool big messages to disk. Artemis spool large messages
+This works by spooling big messages to disk. Artemis spools large messages
 to its `data/large-messages` directory, and Camel uses stream caching
 to spool to a temporary directory during routing.
 
