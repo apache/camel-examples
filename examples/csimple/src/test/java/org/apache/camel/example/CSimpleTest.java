@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -33,9 +34,7 @@ class CSimpleTest extends CamelTestSupport {
 
     @Override
     protected Properties useOverridePropertiesWithPropertiesComponent() {
-        Properties properties = new Properties();
-        properties.put("myPeriod", 500);
-        return properties;
+        return asProperties("myPeriod", Integer.toString(500));
     }
 
     @Test
