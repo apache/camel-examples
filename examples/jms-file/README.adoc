@@ -22,11 +22,11 @@ The example should run if you type
 
 [source,sh]
 ----
-$ mvn exec:java -PExample
+$ mvn exec:java
 ----
 
 After the example is complete, then there should be 10 files written in
-the test directory.
+the directory `target/messages`.
 
 === Help and contributions
 

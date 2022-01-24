@@ -35,8 +35,8 @@ public final class DebeziumMySqlConsumerToKinesis {
 
     private static final Logger LOG = LoggerFactory.getLogger(DebeziumMySqlConsumerToKinesis.class);
 
-    // use Camel Main to setup and run Camel
-    private static Main main = new Main();
+    // use Camel Main to set up and run Camel
+    private static final Main MAIN = new Main();
 
     private DebeziumMySqlConsumerToKinesis() {
     }
@@ -46,11 +46,11 @@ public final class DebeziumMySqlConsumerToKinesis {
         LOG.debug("About to run Debezium integration...");
 
         // add route
-        main.configure().addRoutesBuilder(new RouteBuilder() {
+        MAIN.configure().addRoutesBuilder(new RouteBuilder() {
             public void configure() {
-                // Initial Debezium route that will run and listens to the changes,
-                // first it will perform an initial snapshot using (select * from) in case there are no offsets
-                // exists for the connector and then it will listens to MySQL binlogs for any DB events such as (UPDATE, INSERT and DELETE)
+                // Initial Debezium route that will run and listen to the changes,
+                // first it will perform an initial snapshot using (select * from) in case no offset
+                // exists for the connector, and then it will listen to MySQL binlogs for any DB events such as (UPDATE, INSERT and DELETE)
                 from("debezium-mysql:{{debezium.mysql.name}}?"
                         + "databaseServerId={{debezium.mysql.databaseServerId}}"
                         + "&databaseHostname={{debezium.mysql.databaseHostName}}"
@@ -74,7 +74,7 @@ public final class DebeziumMySqlConsumerToKinesis {
                             final Map value = exchange.getMessage().getBody(Map.class);
                             // Also, we need the operation in order to determine when an INSERT, UPDATE or DELETE happens
                             final String operation = (String) exchange.getMessage().getHeader(DebeziumConstants.HEADER_OPERATION);
-                            // We we will put everything as nested Map in order to utilize Camel's Type Format
+                            // We will put everything as nested Map in order to utilize Camel's Type Format
                             final Map<String, Object> kinesisBody = new HashMap<>();
 
                             kinesisBody.put("key", key);
@@ -101,7 +101,7 @@ public final class DebeziumMySqlConsumerToKinesis {
         });
 
         // start and run Camel (block)
-        main.run();
+        MAIN.run();
     }
 
 }

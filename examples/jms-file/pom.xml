@@ -122,17 +122,13 @@
             <scope>runtime</scope>
             <version>${log4j2-version}</version>
         </dependency>
-
+        <!-- for testing -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>Example</id>
-            <properties>
-                <target.main.class>org.apache.camel.example.jmstofile.CamelJmsToFileExample</target.main.class>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
         <plugins>
@@ -141,7 +137,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>${target.main.class}</mainClass>
+                    <mainClass>org.apache.camel.example.jmstofile.CamelJmsToFileExample</mainClass>
                     <includePluginDependencies>false</includePluginDependencies>
                 </configuration>
             </plugin>

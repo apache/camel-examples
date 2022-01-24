@@ -4,7 +4,7 @@
 
 This example shows how to use JOOQ library with Camel to build type safe SQL queries through its API.
 
-Example project contains SQL script to create database.
+Example project contains an SQL script to create database.
 Database is generated every time when Maven `generate-sources` phase is triggered.
 JOOQ classes are generated inside `target/generated-sources/jooq` directory by `jooq-codegen-maven` plugin.
 
@@ -13,7 +13,7 @@ You will need to compile this example first:
 
 [source,sh]
 ----
-$ mvn clean install
+$ mvn compile
 ----
 
 This command will generate the database and JOOQ classes.

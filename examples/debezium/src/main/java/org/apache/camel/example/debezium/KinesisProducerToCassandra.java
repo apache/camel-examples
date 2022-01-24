@@ -33,8 +33,8 @@ public final class KinesisProducerToCassandra {
 
     private static final Logger LOG = LoggerFactory.getLogger(KinesisProducerToCassandra.class);
 
-    // use Camel Main to setup and run Camel
-    private static Main main = new Main();
+    // use Camel Main to set up and run Camel
+    private static final Main MAIN = new Main();
 
     private KinesisProducerToCassandra() {
     }
@@ -44,7 +44,7 @@ public final class KinesisProducerToCassandra {
         LOG.debug("About to run Kinesis to Cassandra integration...");
 
         // add route
-        main.configure().addRoutesBuilder(new RouteBuilder() {
+        MAIN.configure().addRoutesBuilder(new RouteBuilder() {
             public void configure() {
                 // We set the CQL templates we need, note that an UPDATE in Cassandra means an UPSERT which is what we need
                 final String cqlUpdate = "update products set name = ?, description = ?, weight = ? where id = ?";
@@ -58,11 +58,11 @@ public final class KinesisProducerToCassandra {
                         .convertBodyTo(String.class)
                         // Unmarshal our body, it will convert it from JSON to Map
                         .unmarshal().json(JsonLibrary.Jackson)
-                        // In order not to lose the operation that we set in Debezium, we set it as a property or you can as
-                        // as well set it to a header
+                        // In order not to lose the operation that we set in Debezium, we set it as a property or as
+                        // a header
                         .setProperty("DBOperation", simple("${body[operation]}"))
                         .choice()
-                            // If we have a INSERT or UPDATE, we will need to set the body with with the CQL query parameters since we are using
+                            // If we have a INSERT or UPDATE, we will need to set the body with the CQL query parameters since we are using
                             // camel-cassandraql component
                             .when(exchangeProperty("DBOperation").in("c", "u"))
                                 .setBody(exchange -> {
@@ -100,7 +100,7 @@ public final class KinesisProducerToCassandra {
         });
 
         // start and run Camel (block)
-        main.run();
+        MAIN.run();
     }
 
 }

@@ -47,7 +47,7 @@ Run the consumer first in separate shell
 $ mvn compile exec:java -Pkafka-consumer
 ----
 
-Run the message producer in the seperate shell
+Run the message producer in the separate shell
 
 [source,sh]
 ----
