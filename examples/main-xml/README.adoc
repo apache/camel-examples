@@ -10,11 +10,23 @@ and when saved Camel will auto update the route(s).
 
 The application is configured in the `application.properties` file.
 
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
 === How to run
 
 You can run this example using
 
-    mvn camel:run
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 

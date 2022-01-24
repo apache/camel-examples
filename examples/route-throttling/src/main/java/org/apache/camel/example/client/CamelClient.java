@@ -22,8 +22,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.util.IOHelper;
-import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -43,38 +42,37 @@ public final class CamelClient {
     public static void main(final String[] args) throws Exception {
         System.out.println("Notice this client requires that the CamelServer is already running!");
 
-        AbstractApplicationContext context = new ClassPathXmlApplicationContext("camel-client.xml");
+        try (ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("camel-client.xml")) {
 
-        // get the camel template for Spring template style sending of messages (= producer)
-        final ProducerTemplate producer = context.getBean("camelTemplate", ProducerTemplate.class);
+            // get the camel template for Spring template style sending of messages (= producer)
+            try (final ProducerTemplate producer = context.getBean("camelTemplate", ProducerTemplate.class)) {
 
-        // now send a lot of messages
-        System.out.println("Sending ...");
+                // now send a lot of messages
+                System.out.println("Sending ...");
 
-        final CountDownLatch latch = new CountDownLatch(POOL);
+                final CountDownLatch latch = new CountDownLatch(POOL);
 
-        ExecutorService executors = Executors.newFixedThreadPool(POOL);
-        for (int i = 0; i < POOL; i++) {
-            final int idx = i;
-            executors.execute(new Runnable() {
-                public void run() {
-                    try {
-                        for (int j = 0; j < SIZE / POOL; j++) {
-                            producer.sendBody("jms:queue:inbox", "Message " + idx * j + j);
+                ExecutorService executors = Executors.newFixedThreadPool(POOL);
+                for (int i = 0; i < POOL; i++) {
+                    final int idx = i;
+                    executors.execute(new Runnable() {
+                        public void run() {
+                            try {
+                                for (int j = 0; j < SIZE / POOL; j++) {
+                                    producer.sendBody("jms:queue:inbox", "Message " + idx * j + j);
+                                }
+                            } finally {
+                                latch.countDown();
+                            }
                         }
-                    } finally {
-                        latch.countDown();
-                    }
+                    });
                 }
-            });
+
+                latch.await(300, TimeUnit.SECONDS);
+                System.out.println("... Send " + SIZE + " message to JMS broker");
+                executors.shutdownNow();
+            }
         }
-
-        latch.await(300, TimeUnit.SECONDS);
-        System.out.println("... Send " + SIZE + " message to JMS broker");
-        executors.shutdownNow();
-
-        // we're done so let's properly close the application context
-        IOHelper.close(context);
     }
 
 }

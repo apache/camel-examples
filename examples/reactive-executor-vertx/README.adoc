@@ -1,8 +1,16 @@
 == Camel Example Reactive Executor VertX
 
 This example uses VertX as the reactive executor for routing messages with Camel.
-By default Camel uses its own reactive engine for routing messages, but you can plugin
+By default, Camel uses its own reactive engine for routing messages, but you can plug in
 different engines via a SPI interface. This example uses VertX as the engine.
+
+=== Build
+
+You will need to compile this example first:
+
+----
+$ mvn compile
+----
 
 === How to run
 

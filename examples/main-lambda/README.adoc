@@ -12,9 +12,18 @@ The `LambdaRouteBuilder` is a functional interface that makes defining routes wi
 easy. All you need to do is to create a method that returns `LambdaRouteBuilder` and mark
 the method with `@BindToRegistry` or if using Spring Boot `@Bean` or `@Produce` for CDI/Quarkus.
 
-See the `MyConfiguration.java` for the configuration and Camel routes are setup.
+See the `MyConfiguration.java` for the configuration and Camel routes are set up.
 
 Multiple routes can be defined by having multiple methods.
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
 
 === How to run
 

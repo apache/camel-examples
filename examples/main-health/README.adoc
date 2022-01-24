@@ -10,10 +10,19 @@ causes the custom health check to be in either UP or DOWN state.
 The 2nd route is on purpose made to fail on startup by configuring netty to an unknown host.
 Camel supervising route controller will attempt to restart the route up till 10 times before exhausting.
 
-The routes health check will therefore report this route as DOWN until its exhausted
+The route's health check will therefore report this route as DOWN until its exhausted
 where the states are changed to UNKNOWN.
 
 The details can be seen at runtime via JMX.
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
 
 === How to run
 
@@ -26,8 +35,8 @@ $ mvn camel:run
 
 === JMX Management
 
-You can from JMX see the health-check status in the Camel tree under health and
-find the DefaultHealthCheck MBean.
+You can see from JMX the health-check status in the Camel tree under `health` and
+find the `DefaultHealthCheck` MBean.
 
 === Help and contributions
 

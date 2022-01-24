@@ -18,8 +18,7 @@ package org.apache.camel.example.client;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.util.IOHelper;
-import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -34,22 +33,20 @@ public final class CamelFileClient {
     }
 
     public static void main(final String[] args) throws Exception {
-        AbstractApplicationContext context = new ClassPathXmlApplicationContext("camel-file-client.xml");
+        try (ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("camel-file-client.xml")) {
+            // get the camel template for Spring template style sending of messages (= producer)
+            try (final ProducerTemplate producer = context.getBean("camelTemplate", ProducerTemplate.class)) {
 
-        // get the camel template for Spring template style sending of messages (= producer)
-        final ProducerTemplate producer = context.getBean("camelTemplate", ProducerTemplate.class);
+                // now send a lot of messages
+                System.out.println("Writing files ...");
 
-        // now send a lot of messages
-        System.out.println("Writing files ...");
+                for (int i = 0; i < SIZE; i++) {
+                    producer.sendBodyAndHeader("file:target//inbox", "File " + i, Exchange.FILE_NAME, i + ".txt");
+                }
 
-        for (int i = 0; i < SIZE; i++) {
-            producer.sendBodyAndHeader("file:target//inbox", "File " + i, Exchange.FILE_NAME, i + ".txt");
+                System.out.println("... Wrote " + SIZE + " files");
+            }
         }
-
-        System.out.println("... Wrote " + SIZE + " files");
-
-        // we're done so let's properly close the application context
-        IOHelper.close(context);
     }
 
 }

@@ -1,7 +1,16 @@
 == Camel Example Main jOOR
 
 This example shows using the new jOOR language in the Camel DSL.
-The jOOR language is very performant, as it is compiled to Java code once during startup (runtime).
+The jOOR language is very performant, as it is compiled once to Java code during startup (runtime).
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
 
 === How to run
 
