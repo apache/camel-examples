@@ -1,0 +1,64 @@
+== Camel Example JBang
+
+This example shows how to run Camel using JBang.
+
+=== Install JBang
+
+First install JBang according to https://www.jbang.dev/
+And if JBang is installed then you should be able to run from a shell:
+
+[source,sh]
+----
+$ jbang --version
+----
+
+This will output the version of JBang.
+
+To run this example you can then install Camel on JBang via:
+
+[source,sh]
+----
+$ jbang app install camel@apache/camel
+----
+
+=== How to run
+
+Then you can run this example using:
+
+[source,sh]
+----
+$ camel run Hey.java
+----
+
+=== Live reload
+
+You can run the example with reload enabled which allows you to edit the example,
+and hot-reload when the file is saved.
+
+[source,sh]
+----
+$ camel run Hey.java --reload
+----
+
+=== Developer Web Console
+
+You can enable the developer console via `--console` flag as show:
+
+[source,sh]
+----
+$ camel run Hey.java --console
+----
+
+Then you can browse: http://localhost:8080/dev
+To introspect the running Camel applicaton.
+
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
