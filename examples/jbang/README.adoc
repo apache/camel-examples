@@ -4,8 +4,9 @@ This example shows how to run Camel using JBang.
 
 === Install JBang
 
-First install JBang according to https://www.jbang.dev/
-And if JBang is installed then you should be able to run from a shell:
+First install JBang according to https://www.jbang.dev
+
+When JBang is installed then you should be able to run from a shell:
 
 [source,sh]
 ----
@@ -14,12 +15,14 @@ $ jbang --version
 
 This will output the version of JBang.
 
-To run this example you can then install Camel on JBang via:
+To run this example you can either install Camel on JBang via:
 
 [source,sh]
 ----
 $ jbang app install camel@apache/camel
 ----
+
+Which allows to run CamelJBang with `camel` as shown below.
 
 === How to run
 
@@ -28,6 +31,13 @@ Then you can run this example using:
 [source,sh]
 ----
 $ camel run Hey.java
+----
+
+Or run with JBang using the longer command line (without installing camel as app in JBang):
+
+[source,sh]
+----
+$ jbang camel@apache/camel run Hey.java
 ----
 
 === Live reload
@@ -49,8 +59,7 @@ You can enable the developer console via `--console` flag as show:
 $ camel run Hey.java --console
 ----
 
-Then you can browse: http://localhost:8080/dev
-To introspect the running Camel applicaton.
+Then you can browse: http://localhost:8080/dev to introspect the running Camel applicaton.
 
 
 === Help and contributions
