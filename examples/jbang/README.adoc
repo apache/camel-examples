@@ -40,6 +40,29 @@ Or run with JBang using the longer command line (without installing camel as app
 $ jbang camel@apache/camel run Hey.java
 ----
 
+=== Run directly from github
+
+The example can also be run directly by referring to the github URL as shown:
+
+[source,sh]
+----
+$ jbang camel@apache/camel run https://github.com/apache/camel-examples/tree/main/examples/jbang
+----
+
+You can even try other examples such as the polyglot example from Camel K:
+
+[source,sh]
+----
+$ jbang camel@apache/camel run https://github.com/apache/camel-k/tree/main/examples/polyglot
+----
+
+Or the Kotlin route(s) (you can use wildcards):
+
+[source,sh]
+----
+$ jbang camel@apache/camel run https://github.com/apache/camel-k/tree/main/examples/languages/*.kts
+----
+
 === Live reload
 
 You can run the example with reload enabled which allows you to edit the example,
