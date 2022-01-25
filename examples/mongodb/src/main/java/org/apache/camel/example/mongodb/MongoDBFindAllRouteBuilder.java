@@ -16,10 +16,7 @@
  */
 package org.apache.camel.example.mongodb;
 
-import com.mongodb.client.model.Filters;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.mongodb.MongoDbConstants;
-import org.bson.types.ObjectId;
 
 public class MongoDBFindAllRouteBuilder extends RouteBuilder {
 
