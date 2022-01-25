@@ -12,22 +12,43 @@ This project consists of the following examples:
 
 === Preparing Kafka
 
-This example requires that Kafka Server is up and running.
+This example requires that Kafka Server is up and running. For this, assuming that environment variable `KAFKA` has been
+set to the home directory of the Kafka distribution, you will need to start ZooKeeper and a Kafka Broker thanks to
+the next commands:
 
-    $ ${KAFKA}/bin/zookeeper-server-start.sh ${KAFKA}/config/zookeeper.properties
-    $ ${KAFKA}/bin/kafka-server-start.sh ${KAFKA}/config/server.properties
+On Windows run
+
+[source,sh]
+----
+$ %KAFKA%\bin\windows\zookeeper-server-start.bat ${KAFKA}/config/zookeeper.properties
+$ %KAFKA%\bin\windows\kafka-server-start.bat ${KAFKA}/config/server.properties
+----
+
+On linux run
+
+[source,sh]
+----
+$ ${KAFKA}/bin/zookeeper-server-start.sh ${KAFKA}/config/zookeeper.properties
+$ ${KAFKA}/bin/kafka-server-start.sh ${KAFKA}/config/server.properties
+----
 
 You will need to create following topics before you run the examples.
 
-On windows run
+On Windows run
 
-    $ ${KAFKA}/bin/kafka-topics.bat --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 2 --topic TestLog
-    $ ${KAFKA}/bin/kafka-topics.bat --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 1 --topic AccessLog
+[source,sh]
+----
+$ %KAFKA%\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 2 --topic TestLog
+$ %KAFKA%\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic AccessLog
+----
 
 On linux run
-    
-    $ ${KAFKA}/bin/kafka-topics.sh --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 2 --topic TestLog
-    $ ${KAFKA}/bin/kafka-topics.sh --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 1 --topic AccessLog
+
+[source,sh]
+----
+$ ${KAFKA}/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 2 --topic TestLog
+$ ${KAFKA}/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic AccessLog
+----
 
 === Build
 
@@ -40,18 +61,18 @@ $ mvn compile
 
 === Run
 
-Run the consumer first in separate shell 
+Run the consumer first in a shell
 
 [source,sh]
 ----
-$ mvn compile exec:java -Pkafka-consumer
+$ mvn exec:java -Pkafka-consumer
 ----
 
-Run the message producer in the separate shell
+Run the message producer in a separate shell
 
 [source,sh]
 ----
-$ mvn compile exec:java -Pkafka-producer
+$ mvn exec:java -Pkafka-producer
 ----
 
 Initially, some messages are sent programmatically. 
