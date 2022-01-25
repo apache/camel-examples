@@ -35,16 +35,16 @@ public final class MyServer {
         main.run(args);
     }
 
-    private static class MyRouteBuilder extends RouteBuilder {
+    static class MyRouteBuilder extends RouteBuilder {
 
         @Override
         public void configure() throws Exception {
-            from("netty:tcp://localhost:4444?sync=true&encoders=#bean:myEncoder&decoders=#bean:myDecoder")
+            from("netty:tcp://localhost:4444?sync=true&encoders=#bean:myEncoder&decoders=#bean:myDecoder").id("server")
                 .log("Request:  ${id}:${body}")
                 .filter(simple("${body} contains 'beer'"))
                     // use some delay when its beer to make responses interleaved
                     // and make the delay asynchronous
-                    .delay(simple("${random(1000,9000)}")).asyncDelayed().end()
+                    .delay(simple("${random(1000,2000)}")).asyncDelayed().end()
                 .end()
                 .transform(simple("${body}-Echo"))
                 .log("Response: ${id}:${body}");

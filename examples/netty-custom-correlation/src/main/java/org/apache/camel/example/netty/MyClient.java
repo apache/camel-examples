@@ -35,12 +35,7 @@ public final class MyClient {
         Main main = new Main();
         main.configure().addRoutesBuilder(new MyRouteBuilder());
 
-        // setup correlation manager and its timeout (when a request has not received a response within the given time millis)
-        MyCorrelationManager manager = new MyCorrelationManager();
-        // set timeout for each request message that did not receive a reply message
-        manager.setTimeout(5000);
-        // set the logging level when a timeout was hit, ny default its DEBUG
-        manager.setTimeoutLoggingLevel(LoggingLevel.INFO);
+        MyCorrelationManager manager = createCorrelationManager();
 
         main.bind("myEncoder", new MyCodecEncoderFactory());
         main.bind("myDecoder", new MyCodecDecoderFactory());
@@ -48,18 +43,28 @@ public final class MyClient {
         main.run(args);
     }
 
-    public static class MyRouteBuilder extends RouteBuilder {
+    static MyCorrelationManager createCorrelationManager() {
+        // setup correlation manager and its timeout (when a request has not received a response within the given time millis)
+        MyCorrelationManager manager = new MyCorrelationManager();
+        // set timeout for each request message that did not receive a reply message
+        manager.setTimeout(5000);
+        // set the logging level when a timeout was hit, ny default its DEBUG
+        manager.setTimeoutLoggingLevel(LoggingLevel.INFO);
+        return manager;
+    }
 
-        private String[] words = new String[]{"foo", "bar", "baz", "beer", "wine", "cheese"};
+    static class MyRouteBuilder extends RouteBuilder {
+
+        private static final String[] WORDS = new String[]{"foo", "bar", "baz", "beer", "wine", "cheese"};
         private int counter;
+        private final Random random = new Random();
 
         public int increment() {
             return ++counter;
         }
 
         public String word() {
-            int ran = new Random().nextInt(words.length);
-            return words[ran];
+            return WORDS[random.nextInt(WORDS.length)];
         }
 
         @Override
@@ -71,7 +76,7 @@ public final class MyClient {
                 // after it has built this special timeout error message body
                 .setBody(simple("#${header.corId}:${header.word}-Time out error!!!"));
 
-            from("timer:trigger")
+            from("timer:trigger").id("client")
                 // set correlation id as unique incrementing number
                 .setHeader("corId", method(this, "increment"))
                 // set random word to use in request
@@ -81,7 +86,7 @@ public final class MyClient {
                 // log request before
                 .log("Request:  ${id}:${body}")
                 // call netty server using a single shared connection and using custom correlation manager
-                // to ensure we can correltly map the request and response pairs
+                // to ensure we can correctly map the request and response pairs
                 .to("netty:tcp://localhost:4444?sync=true&encoders=#bean:myEncoder&decoders=#bean:myDecoder"
                     + "&producerPoolEnabled=false&correlationManager=#bean:myManager")
                 // log response after
