@@ -4,7 +4,7 @@ This example shows how to use the Camel Main module
 to define a route from Couchbase to Log.
 
 Set your application.properties options correctly.
-You'll need also a running kafka broker.
+You'll need also a running couchbase server.
 
 === Setting up the Couchbase Container
 
@@ -12,23 +12,27 @@ First run the container
 
 [source,sh]
 ----
-docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase:6.5.1
+docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase:7.0.3
 ----
 
 Now go to localhost:8091 and create a new cluster with username/password admin/password
 
 Use the sample bucket beer-sample to populate the bucket.
 
-Now you're ready to run the example.
+=== Build
 
-=== How to run
-
-You can run this example using
+You will need to compile this example first:
 
 [source,sh]
 ----
 $ mvn compile
 ----
+
+Now you're ready to run the example.
+
+=== How to run
+
+You can run this example using
 
 [source,sh]
 ----
