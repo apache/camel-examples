@@ -16,21 +16,30 @@
  */
 package org.apache.camel.example.oaipmh;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.RoutesBuilder;
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.test.junit5.CamelTestSupport;
+import org.junit.jupiter.api.Test;
 
-public final class Application {
-    
-    private Application() {
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * A unit test checking that Camel can extract data using OAI-PMH.
+ */
+class OAIPMHTest extends CamelTestSupport {
+
+    @Test
+    void should_extract_title_publications() {
+        NotifyBuilder notify = new NotifyBuilder(context).wereSentTo("log:titles").whenCompleted(1).create();
+        assertTrue(
+            notify.matches(30, TimeUnit.SECONDS), "at least 1 message should be completed"
+        );
     }
 
-    public static void main(String[] args) throws Exception {
-        try (CamelContext context = new DefaultCamelContext()) {
-            context.addRoutes(new OAIPMHRouteBuilder());
-            context.start();
-            // so run for 10 seconds
-            Thread.sleep(10_000);
-        }
+    @Override
+    protected RoutesBuilder createRouteBuilder() {
+        return new OAIPMHRouteBuilder();
     }
-
 }
