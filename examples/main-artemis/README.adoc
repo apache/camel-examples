@@ -15,9 +15,12 @@ First install https://activemq.apache.org/components/artemis/[Apache ActiveMQ Ar
 and create a broker, such as `mybroker`, and create the admin user as `admin` as username
 and `admin` as password:
 
-    bin/artemis create mybroker
-    cd mybroker
-    bin/artemis run
+[source,sh]
+----
+$ bin/artemis create mybroker
+$ cd mybroker
+$ bin/artemis run
+----
 
 Then you can run this example using
 

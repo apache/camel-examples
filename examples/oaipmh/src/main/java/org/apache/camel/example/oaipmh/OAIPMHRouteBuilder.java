@@ -16,16 +16,10 @@
  */
 package org.apache.camel.example.oaipmh;
 
-
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.support.builder.Namespaces;
 
-
-
-
 public class OAIPMHRouteBuilder extends RouteBuilder {
-
-    
 
     @Override
     public void configure() {
@@ -41,9 +35,7 @@ public class OAIPMHRouteBuilder extends RouteBuilder {
                         new Namespaces("default", "http://www.openarchives.org/OAI/2.0/"))
                 .to ("direct:ListRecords");
                 
-                
-                
-                from("direct:ListRecords")
+        from("direct:ListRecords")
                 .setHeader("CamelOaimphSet", xpath("/default:set/default:setSpec/text()",
                          new Namespaces("default", "http://www.openarchives.org/OAI/2.0/")))
                 //Prevent error message by request overload

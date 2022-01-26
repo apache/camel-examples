@@ -82,6 +82,18 @@
             <version>${log4j2-version}</version>
         </dependency>
 
+        <!-- for testing -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ftpserver</groupId>
+            <artifactId>ftpserver-core</artifactId>
+            <version>${ftpserver-version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>

@@ -45,42 +45,12 @@ public final class MessagePublisherClient {
         String testKafkaMessage = "Test Message from  MessagePublisherClient " + Calendar.getInstance().getTime();
 
         try (CamelContext camelContext = new DefaultCamelContext()) {
-
+            // Set the location of the configuration
+            camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
+            // Set up the Kafka component
+            setUpKafkaComponent(camelContext);
             // Add route to send messages to Kafka
-
-            camelContext.addRoutes(new RouteBuilder() {
-                public void configure() {
-                    camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
-
-                    // setup kafka component with the brokers
-                    ComponentsBuilderFactory.kafka()
-                            .brokers("{{kafka.host}}:{{kafka.port}}")
-                            .register(camelContext, "kafka");
-
-                    from(DIRECT_KAFKA_START).routeId("DirectToKafka")
-                            .to("kafka:{{producer.topic}}").log(HEADERS);
-
-                    // Topic can be set in header as well.
-
-                    from("direct:kafkaStartNoTopic").routeId("kafkaStartNoTopic")
-                            .to("kafka:dummy")
-                            .log(HEADERS);
-
-                    // Use custom partitioner based on the key.
-
-                    from(DIRECT_KAFKA_START_WITH_PARTITIONER).routeId("kafkaStartWithPartitioner")
-                            .to("kafka:{{producer.topic}}?partitioner={{producer.partitioner}}")
-                            .log(HEADERS);
-
-
-                    // Takes input from the command line.
-
-                    from("stream:in").setHeader(KafkaConstants.PARTITION_KEY, simple("0"))
-                            .setHeader(KafkaConstants.KEY, simple("1")).to(DIRECT_KAFKA_START);
-
-                }
-
-            });
+            camelContext.addRoutes(createRouteBuilder());
 
             try (ProducerTemplate producerTemplate = camelContext.createProducerTemplate()) {
                 camelContext.start();
@@ -115,9 +85,42 @@ public final class MessagePublisherClient {
             System.out.println("Enter text on the line below : [Press Ctrl-C to exit.] ");
 
             Thread.sleep(5L * 60 * 1000);
-
-            camelContext.stop();
         }
+    }
+
+    static RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
+            public void configure() {
+            from(DIRECT_KAFKA_START).routeId("DirectToKafka")
+                    .to("kafka:{{producer.topic}}").log(HEADERS);
+
+            // Topic can be set in header as well.
+
+            from("direct:kafkaStartNoTopic").routeId("kafkaStartNoTopic")
+                    .to("kafka:dummy")
+                    .log(HEADERS);
+
+            // Use custom partitioner based on the key.
+
+            from(DIRECT_KAFKA_START_WITH_PARTITIONER).routeId("kafkaStartWithPartitioner")
+                    .to("kafka:{{producer.topic}}?partitioner={{producer.partitioner}}")
+                    .log(HEADERS);
+
+
+            // Takes input from the command line.
+
+            from("stream:in").id("input").setHeader(KafkaConstants.PARTITION_KEY, simple("0"))
+                    .setHeader(KafkaConstants.KEY, simple("1")).to(DIRECT_KAFKA_START);
+
+            }
+        };
+    }
+
+    static void setUpKafkaComponent(CamelContext camelContext) {
+        // setup kafka component with the brokers
+        ComponentsBuilderFactory.kafka()
+                .brokers("{{kafka.host}}:{{kafka.port}}")
+                .register(camelContext, "kafka");
     }
 
 }

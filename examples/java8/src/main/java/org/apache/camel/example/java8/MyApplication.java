@@ -38,7 +38,7 @@ public final class MyApplication {
         main.run(args);
     }
 
-    private static class MyRouteBuilder extends RouteBuilder {
+    static class MyRouteBuilder extends RouteBuilder {
         @Override
         public void configure() throws Exception {
             from("timer:simple?period=503")
@@ -54,14 +54,11 @@ public final class MyApplication {
                         .body(Integer.class, b -> (b & 1) == 0)
                         .log("Received even number")
                     .when()
-                        .body(Integer.class, (b, h) -> h.containsKey("skip") ? false : (b & 1) == 0)
+                        .body(Integer.class, b -> (b & 1) != 0)
                         .log("Received odd number")
                     .when()
                         .body(Objects::isNull)
                         .log("Received null body")
-                    .when()
-                        .body(Integer.class, b -> (b & 1) != 0)
-                        .log("Received odd number")
                 .endChoice();
         }
 

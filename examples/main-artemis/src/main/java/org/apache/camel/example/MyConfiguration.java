@@ -23,7 +23,7 @@ public class MyConfiguration {
 
     /**
      * Creates the Artemis JMS ConnectionFactory and bind it to the Camel registry
-     * so we can do autowiring on the Camel JMS component.
+     * so we can do auto-wiring on the Camel JMS component.
      * See more details in the application.properties file.
      */
 //    @BindToRegistry

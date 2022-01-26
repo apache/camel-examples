@@ -80,7 +80,7 @@ Run the Kinesis producer first
 $ mvn compile exec:java -Pkinesis-producer
 ----
 
-Run the Debezium consumer in the seperate shell
+Run the Debezium consumer in the separate shell
 
 [source,sh]
 ----

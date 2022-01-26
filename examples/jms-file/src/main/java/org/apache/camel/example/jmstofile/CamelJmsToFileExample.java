@@ -26,7 +26,7 @@ import org.apache.camel.impl.DefaultCamelContext;
 import static java.util.Collections.singletonList;
 
 /**
- * An example class for demonstrating some of the basics behind Camel. This
+ * An example class for demonstrating some basics behind Camel. This
  * example sends some text messages on to a JMS Queue, consumes them and
  * persists them to disk
  */
@@ -41,28 +41,20 @@ public final class CamelJmsToFileExample {
             // end::e1[]
             // Set up the ActiveMQ JMS Components
             // tag::e2[]
-            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
-            connectionFactory.setTrustAllPackages(false);
-            connectionFactory.setTrustedPackages(singletonList("org.apache.camel.example.jmstofile"));
-
-
-            // Note we can explicit name the component
+            ActiveMQConnectionFactory connectionFactory = createActiveMQConnectionFactory();
+            // Note we can explicitly name the component
             context.addComponent("test-jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
             // end::e2[]
             // Add some configuration by hand ...
             // tag::e3[]
-            context.addRoutes(new RouteBuilder() {
-                public void configure() {
-                    from("test-jms:queue:test.queue").to("file://test");
-                }
-            });
+            context.addRoutes(new MyRouteBuilder());
             // end::e3[]
+            // Now everything is set up - lets start the context
+            context.start();
             // Camel template - a handy class for kicking off exchanges
             // tag::e4[]
             try (ProducerTemplate template = context.createProducerTemplate()) {
                 // end::e4[]
-                // Now everything is set up - lets start the context
-                context.start();
                 // Now send some test text to a component - for this case a JMS Queue
                 // The text get converted to JMS messages - and sent to the Queue
                 // test.queue
@@ -81,7 +73,21 @@ public final class CamelJmsToFileExample {
 
             // wait a bit and then stop
             Thread.sleep(1000);
-            context.stop();
+        }
+    }
+
+    static ActiveMQConnectionFactory createActiveMQConnectionFactory() {
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
+        connectionFactory.setTrustAllPackages(false);
+        connectionFactory.setTrustedPackages(singletonList("org.apache.camel.example.jmstofile"));
+        return connectionFactory;
+    }
+
+    static class MyRouteBuilder extends RouteBuilder {
+
+        @Override
+        public void configure() {
+            from("test-jms:queue:test.queue").to("file:target/messages");
         }
     }
 }

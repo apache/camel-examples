@@ -25,14 +25,12 @@ public final class Application {
     }
 
     public static void main(String[] args) throws Exception {
-        CamelContext context = new DefaultCamelContext();
-        context.addRoutes(new OAIPMHRouteBuilder());
-        context.start();
-        // so run for 10 seconds
-        Thread.sleep(10000);
-
-        // and then stop nicely
-        context.stop();
+        try (CamelContext context = new DefaultCamelContext()) {
+            context.addRoutes(new OAIPMHRouteBuilder());
+            context.start();
+            // so run for 10 seconds
+            Thread.sleep(10_000);
+        }
     }
 
 }

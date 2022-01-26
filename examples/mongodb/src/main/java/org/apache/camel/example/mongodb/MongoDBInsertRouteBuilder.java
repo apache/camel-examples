@@ -17,7 +17,6 @@
 package org.apache.camel.example.mongodb;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.bson.types.ObjectId;
 
 public class MongoDBInsertRouteBuilder extends RouteBuilder {
 

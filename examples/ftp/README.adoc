@@ -50,11 +50,14 @@ $ mvn compile exec:java -Pclient
 
 To run the server you type:
 
-	mvn compile exec:java -Pserver
+[source,sh]
+----
+$ mvn compile exec:java -Pserver
+----
 
 ... and instructions will be printed on the console.
 
-You can enable verbose logging by adjustung the `src/main/resources/log4j.properties` file as documented in the file.
+You can enable verbose logging by adjusting the `src/main/resources/log4j.properties` file as documented in the file.
 
 === Help and contributions
 
