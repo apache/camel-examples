@@ -25,18 +25,14 @@
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-  <bean id="service" class="org.apache.camel.example.service.Reporting"/>
+  <bean id="reporting" class="org.apache.camel.example.service.Reporting"/>
+
+  <!-- import the route from another XML file -->
+  <import resource="camel-route-context-mina2.xml"/>
 
   <camelContext xmlns="http://camel.apache.org/schema/spring">
-
-    <route id="mina2">
-      <from uri="mina:tcp://localhost:9992"/>
-      <setHeader name="minaServer">
-        <constant>localhost:9992</constant>
-      </setHeader>
-      <bean ref="service" method="updateReport"/>
-    </route>
-
+    <!-- refer to a given route to be used -->
+    <routeContextRef ref="routes-mina2"/>
   </camelContext>
 
 </beans>

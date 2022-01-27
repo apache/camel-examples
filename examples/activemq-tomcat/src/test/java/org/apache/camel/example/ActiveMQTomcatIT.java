@@ -48,6 +48,7 @@ public class ActiveMQTomcatIT {
             .addAsResource("log4j2.properties")
             .addAsResource("broker.xml")
             .addAsResource("camel-config.xml")
+            .addAsResource("test-application.properties", "application.properties")
             .addAsLibraries(
                 Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve()
                     .withTransitivity().asFile()

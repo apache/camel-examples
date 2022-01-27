@@ -12,6 +12,14 @@ See the `MyApplication.java` where you can change the source to use java instead
 
 The example runs standalone via Camel Main in the `MyApplication.java` source file.
 
+=== Build
+
+You will need to compile this example first:
+
+----
+$ mvn compile
+----
+
 === How to run
 
 You can run this example using

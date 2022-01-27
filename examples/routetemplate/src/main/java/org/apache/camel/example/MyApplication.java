@@ -31,7 +31,7 @@ public final class MyApplication {
         Main main = new Main();
         // and add route templates via routes builder
         main.configure().addRoutesBuilder(MyRouteTemplates.class);
-        // add configuration class which setup the routes from the route templates
+        // add configuration class which set up the routes from the route templates
 
         // to configure route templates we can use java code as below from a template builder class,
         // gives more power as its java code.

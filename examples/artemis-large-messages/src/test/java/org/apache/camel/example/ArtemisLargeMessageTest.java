@@ -53,6 +53,9 @@ class ArtemisLargeMessageTest {
     static void init() throws Exception {
         Configuration config = new ConfigurationImpl();
         config.addAcceptorConfiguration("tcp", "tcp://localhost:61616");
+        config.setJournalDirectory("target/artemis-data/journal");
+        config.setBindingsDirectory("target/artemis-data/bindings");
+        config.setLargeMessagesDirectory("target/artemis-data/largemessages");
         config.setSecurityEnabled(false);
         SERVER = new ActiveMQServerImpl(config);
         SERVER.start();
