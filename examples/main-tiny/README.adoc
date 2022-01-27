@@ -7,6 +7,15 @@ This example shows how to run Camel standalone via the built-in Main class.
 
 Notice how you can configure Camel in the `application.properties` file.
 
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
 === How to run
 
 You can run this example using

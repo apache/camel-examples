@@ -56,6 +56,11 @@ class KafkaTest extends CamelTestSupport {
     }
 
     @Override
+    public boolean isUseAdviceWith() {
+        return true;
+    }
+
+    @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
         // Set the location of the configuration

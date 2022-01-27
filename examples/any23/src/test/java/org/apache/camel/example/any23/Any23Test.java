@@ -26,6 +26,11 @@ import org.junit.jupiter.api.Test;
  */
 class Any23Test extends CamelTestSupport {
 
+    @Override
+    public boolean isUseAdviceWith() {
+        return true;
+    }
+
     @Test
     void should_extract_data_from_rdf() throws Exception {
         // Mock the endpoint log:result

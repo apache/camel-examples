@@ -22,7 +22,7 @@ public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer:foo?period=2s")
+        from("timer:foo?period={{myPeriod}}")
             .bean(UserFactoryBean.class, "createUser")
             .choice()
                 .when(joor("var user = bodyAs(MyUser); return user.getName() != null && user.getAge() > 21"))
