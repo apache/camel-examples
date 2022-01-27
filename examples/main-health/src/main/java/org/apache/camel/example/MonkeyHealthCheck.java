@@ -32,7 +32,7 @@ import org.apache.camel.spi.annotations.HealthCheck;
 @HealthCheck("monkey-check")
 public class MonkeyHealthCheck extends AbstractHealthCheck {
 
-    private boolean up = true;
+    private static boolean up = true;
 
     public MonkeyHealthCheck() {
         super("custom", "monkey");
@@ -48,7 +48,7 @@ public class MonkeyHealthCheck extends AbstractHealthCheck {
          }
     }
 
-    public String chaos() {
+    public static String chaos() {
         up = !up;
         return up ? "All is okay" : "Chaos monkey was here";
     }
