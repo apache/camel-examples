@@ -69,7 +69,12 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
         </dependency>
-
+        <!-- for testing -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-cdi</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

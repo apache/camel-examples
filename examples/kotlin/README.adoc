@@ -6,19 +6,23 @@ little Camel route.
 The Camel route listen on HTTP port 8080 and return back a constant
 response.
 
-=== How to run
+=== Build
 
-To build this project use
+You will need to compile this example first:
 
-....
-$ mvn install
-....
+[source,sh]
+----
+$ mvn compile
+----
 
-To run this project
+=== Run
 
-....
-$ mvn exec:java
-....
+To run the example, type:
+
+[source,sh]
+----
+$ mvn camel:run
+----
 
 You can then open the following url from a web browser:
 http://localhost:8080

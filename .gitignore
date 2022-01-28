@@ -25,6 +25,3 @@ components/camel-cxf/activemq-data
 *.swp
 .flattened-pom.xml
 .java-version
-examples/activemq-tomcat/activemq-data
-examples/artemis-large-messages/data
-examples/artemis/data

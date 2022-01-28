@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    ">
+
+    <routeContext id="routes-mina2" xmlns="http://camel.apache.org/schema/spring">
+        <route id="mina2">
+            <from uri="mina:tcp://localhost:9992"/>
+            <setHeader name="minaServer">
+                <constant>localhost:9992</constant>
+            </setHeader>
+            <bean ref="reporting" method="updateReport"/>
+        </route>
+    </routeContext>
+
+</beans>

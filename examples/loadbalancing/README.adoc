@@ -24,12 +24,11 @@ will automatic failover to the next server.
 
 === Build
 
-To compile and install the project in your maven repo, execute the
-following command on the root of the project
+You will need to compile this example first:
 
 [source,sh]
 ----
-$ mvn clean install
+$ mvn compile
 ----
 
 === Run

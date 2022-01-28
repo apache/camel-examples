@@ -8,9 +8,17 @@ part of Camel.
 
 The example has the following routes in the `src/main/resources/myroutes` directory:
 
-- `MyRouteBuilder.java` which a java file, but the file is not part of the regular source code and is therefore not compiled with the regular Java compiler. The route is loaded by Camels route loader and dynamic compiled via `camel-java-joor-dsl` during startup of Camel.
+- `MyRouteBuilder.java` which is a java file, but the file is not part of the regular source code and is therefore not compiled with the regular Java compiler. The route is loaded by Camel's route loader and dynamically compiled via `camel-java-joor-dsl` during startup of Camel.
 - `my-yaml-route.yaml` which is loaded by the new `camel-yaml-dsl` engine. 
 - `cheese-route.xml` which is loaded by the `camel-xml-io-dsl` engine.
+
+=== Build
+
+You will need to compile this example first:
+
+----
+$ mvn compile
+----
 
 === How to run
 

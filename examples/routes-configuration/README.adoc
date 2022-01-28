@@ -11,6 +11,13 @@ specific route configuration, which is also _coded_ in the same language as the 
 But this is not required, you can use Java to code your route configurations for
 advanced error handling, and then _code_ your routes in other languages such as XML or YAML.
 
+=== Build
+
+You will need to compile this example first:
+
+----
+$ mvn compile
+----
 
 === How to run
 
