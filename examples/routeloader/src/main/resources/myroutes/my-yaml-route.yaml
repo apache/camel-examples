@@ -16,12 +16,13 @@
 ## ---------------------------------------------------------------------------
 
 - route:
-    from: "timer:yaml?period=3s"
-    steps:
-      - set-body:
-          simple: "Timer fired ${header.CamelTimerCounter} times"
-      - to:
-          uri: "log:yaml"
-          parameters:
-            show-body-type: false
-            show-exchange-pattern: false
+    from:
+      uri: "timer:yaml?period=3s"
+      steps:
+        - set-body:
+            simple: "Timer fired ${header.CamelTimerCounter} times"
+        - to:
+            uri: "log:yaml"
+            parameters:
+              show-body-type: false
+              show-exchange-pattern: false
