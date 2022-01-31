@@ -15,6 +15,6 @@
     limitations under the License.
 :)
 <employee id="{person/@user}">
- <name>{/person/firstName} {/person/lastName}</name>
- <location>{/person/city}</location>
+ <name>{/person/firstName/text()}&#32;{/person/lastName/text()}</name>
+ <location>{/person/city/text()}</location>
 </employee>
