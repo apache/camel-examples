@@ -34,7 +34,7 @@ import java.io.RandomAccessFile;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import static org.jgroups.util.Util.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test allowing to ensure that Camel and Artemis can both support large files that cannot fit
@@ -79,13 +79,12 @@ class ArtemisLargeMessageTest {
         NotifyBuilder notify = new NotifyBuilder(context).from("jms:queue:data").whenCompleted(1).create();
 
         assertTrue(
-            "The big file should be processed with success",
-            notify.matches(40, TimeUnit.SECONDS)
+            notify.matches(40, TimeUnit.SECONDS), "The big file should be processed with success"
         );
 
         assertTrue(
-            "The big file should be available in the target/outbox directory",
-            new File(String.format("target/outbox/%s", fileName)).exists()
+            new File(String.format("target/outbox/%s", fileName)).exists(),
+            "The big file should be available in the target/outbox directory"
         );
     }
 }

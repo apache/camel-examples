@@ -32,7 +32,7 @@ public class IncrementRequest {
         return input;
     }
 
-    public void setInpu(int input) {
+    public void setInput(int input) {
         this.input = input;
     }
 }

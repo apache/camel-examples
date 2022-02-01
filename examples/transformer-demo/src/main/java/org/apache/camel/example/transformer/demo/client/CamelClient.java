@@ -16,9 +16,10 @@
  */
 package org.apache.camel.example.transformer.demo.client;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -29,6 +30,7 @@ import org.apache.camel.spi.DataType;
 import org.apache.camel.spi.DataTypeAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -51,58 +53,44 @@ public final class CamelClient {
         
         // START SNIPPET: e1
         LOG.info("---> Starting 'order' camel route...");
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/camel-context.xml");
-        context.start();
-        CamelContext camelContext = context.getBean("order", CamelContext.class);
-        ProducerTemplate producer = camelContext.createProducerTemplate();
-        // END SNIPPET: e1
-        Thread.sleep(1000);
-        
-        Order order = new Order()
-            .setOrderId("Order-Java-0001")
-            .setItemId("MILK")
-            .setQuantity(3);
-        LOG.info("---> Sending '{}' to 'direct:java'", order);
-        OrderResponse response = producer.requestBody("direct:java", order, OrderResponse.class);
-        Thread.sleep(1000);
-        LOG.info("---> Received '{}'", response);
-        LOG.info("---> CSV log now contains:{}", getCsvLog());
-        Thread.sleep(1000);
-        
-        String orderXml = "<order orderId=\"Order-XML-0001\" itemId=\"MIKAN\" quantity=\"365\"/>";
-        LOG.info("---> Sending '{}' to 'direct:xml'", orderXml);
-        Exchange answerXml = producer.send("direct:xml", ex -> {
-            ((DataTypeAware)ex.getIn()).setBody(orderXml, new DataType("xml:XMLOrder"));
-        });
-        Thread.sleep(1000);
-        LOG.info("---> Received '{}'", answerXml.getOut().getBody(String.class));
-        LOG.info("---> CSV log now contains:{}", getCsvLog());
-        Thread.sleep(1000);
-        
-        String orderJson = "{\"orderId\":\"Order-JSON-0001\", \"itemId\":\"MIZUYO-KAN\", \"quantity\":\"16350\"}";
-        LOG.info("---> Sending '{}' to 'direct:json'", orderJson);
-        Exchange answerJson = producer.send("direct:json", ex -> {
-            ((DataTypeAware)ex.getIn()).setBody(orderJson, new DataType("json"));
-        });
-        Thread.sleep(1000);
-        LOG.info("---> Received '{}'", answerJson.getOut().getBody(String.class));
-        LOG.info("---> CSV log now contains:{}", getCsvLog());
-        Thread.sleep(1000);
-        
-        context.stop();
+        try (ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/camel-context.xml")) {
+            context.start();
+            CamelContext camelContext = context.getBean("order", CamelContext.class);
+            try (ProducerTemplate producer = camelContext.createProducerTemplate()) {
+                // END SNIPPET: e1
+                Thread.sleep(1000);
+
+                Order order = new Order()
+                        .setOrderId("Order-Java-0001")
+                        .setItemId("MILK")
+                        .setQuantity(3);
+                LOG.info("---> Sending '{}' to 'direct:java'", order);
+                OrderResponse response = producer.requestBody("direct:java", order, OrderResponse.class);
+                logResponse(response);
+
+                String orderXml = "<order orderId=\"Order-XML-0001\" itemId=\"MIKAN\" quantity=\"365\"/>";
+                LOG.info("---> Sending '{}' to 'direct:xml'", orderXml);
+                Exchange answerXml = producer.send("direct:xml",
+                    ex -> ((DataTypeAware) ex.getIn()).setBody(orderXml, new DataType("xml:XMLOrder"))
+                );
+                logResponse(answerXml.getIn().getBody(String.class));
+
+                String orderJson = "{\"orderId\":\"Order-JSON-0001\", \"itemId\":\"MIZUYO-KAN\", \"quantity\":\"16350\"}";
+                LOG.info("---> Sending '{}' to 'direct:json'", orderJson);
+                Exchange answerJson = producer.send("direct:json", ex -> ((DataTypeAware) ex.getIn()).setBody(orderJson, new DataType("json")));
+                logResponse(answerJson.getIn().getBody(String.class));
+            }
+        }
     }
 
-    public static String getCsvLog() throws Exception {
-        BufferedReader reader = new BufferedReader(new FileReader(new File(CSV_PATH)));
-        try {
-            StringBuilder buf = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                buf.append(System.lineSeparator()).append(line);
-            }
-            return buf.toString();
-        } finally {
-            reader.close();
-        }
+    private static void logResponse(Object response) throws Exception {
+        Thread.sleep(1000);
+        LOG.info("---> Received '{}'", response);
+        LOG.info("---> CSV log now contains:\n{}", getCsvLog());
+        Thread.sleep(1000);
+    }
+
+    public static String getCsvLog() throws IOException {
+        return Files.readString(Paths.get(CSV_PATH));
     }
 }

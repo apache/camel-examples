@@ -15,14 +15,16 @@ This project consists of the following examples:
 The easiest way to get Kafka up and running for _dev_ environment, is to use Confluent Local Community setup, you can set it up using the instructions https://docs.confluent.io/platform/current/quickstart/ce-quickstart.html#ce-quickstart[here].
 
 Once you have done with the setup, start Kafka using this command:
-```
-confluent local services start
-```
+
+----
+$ confluent local services start
+----
 
 When you are done from the example, you can stop kafka with this command:
-```
-confluent local services stop
-```
+
+----
+$ confluent local services stop
+----
 
 We don't need to create the topics here as the Confluent dev environment configured to create topics automatically once the producer has started to produce messages to Kafka.
 
@@ -30,17 +32,23 @@ We don't need to create the topics here as the Confluent dev environment configu
 
 You will need to compile this example first:
 
-    $ mvn compile
+----
+$ mvn compile
+----
 
 === Run
 
-Run the consumer first in separate shell 
+Run the consumer first in separate shell
 
-    $ mvn compile exec:java -Pkafka-consumer
+----
+$ mvn exec:java -Pkafka-consumer
+----
 
-Run the message producer in the seperate shell
+Run the message producer in the separate shell
 
-    $ mvn compile exec:java -Pkafka-producer
+----
+$ mvn exec:java -Pkafka-producer
+----
 
 Initially, some messages are sent programmatically. 
 On the command prompt, type the messages. Each line is sent as one message to kafka

@@ -47,7 +47,7 @@
 
     <!-- A simple route that routes orders from the file system to the ActiveMQ newOrder queue. -->
     <route id="fileToOrder">
-      <!-- route files form src/data (noop = keep the file as-is after done, and do not pickup the same file again) -->
+      <!-- route files form src/data (noop = keep the file as-is after done, and do not pick up the same file again) -->
       <from uri="file:src/data?noop=true"/>
       <!-- route to the newOrder queue on the ActiveMQ broker -->
       <to uri="activemq:queue:newOrder"/>

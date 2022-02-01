@@ -32,6 +32,6 @@ public class OrderProcessor implements Processor {
             .setAccepted(true)
             .setOrderId(order.getOrderId())
             .setDescription(String.format("Order accepted:[item='%s' quantity='%s']", order.getItemId(), order.getQuantity()));
-        exchange.getOut().setBody(answer);
+        exchange.getIn().setBody(answer);
     }
 }

@@ -87,7 +87,19 @@
             <version>${log4j2-version}</version>
             <scope>runtime</scope>
         </dependency>
-
+        <!-- for testing -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.asynchttpclient</groupId>
+            <artifactId>async-http-client</artifactId>
+            <!-- 2.0.17 onwards has TSL/SSL problems -->
+            <version>2.11.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
