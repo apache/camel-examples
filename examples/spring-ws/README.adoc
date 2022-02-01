@@ -10,7 +10,7 @@ and Spring Web Services.
 You will need to compile this example first:
 
 ----
-$ mvn clean install
+$ mvn clean package
 ----
 
 === Run
@@ -23,9 +23,9 @@ $ mvn jetty:run
 
 To stop the server hit ctrl+c
 
-The web service endpoint address is: http://localhost:8080/increment
+The web service endpoint address is http://localhost:8080/increment
 
-The WSDL is available at: http://localhost:8080/increment/increment.wsdl
+The WSDL is available at http://localhost:8080/increment/increment.wsdl
 
 You can test the web service using for example SOAP-UI. This excellent
 tool is freely available from http://www.soapui.org. There’s a ready to

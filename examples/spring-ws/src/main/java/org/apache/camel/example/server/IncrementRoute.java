@@ -42,7 +42,7 @@ public class IncrementRoute extends RouteBuilder {
             IncrementResponse response = new IncrementResponse();
             int result = request.getInput() + 1; // increment input value
             response.setResult(result); 
-            exchange.getOut().setBody(response);
+            exchange.getIn().setBody(response);
         }
     }
    

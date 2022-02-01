@@ -29,11 +29,11 @@ public final class CamelTwitterWebSocketMain {
     // Finally, generate your access token and secret.
 
     // This uses the Twitter 'cameltweet' account for testing purposes.
-    // do NOT use this twitter account in your applications!
-    private static String consumerKey = "NMqaca1bzXsOcZhP2XlwA";
-    private static String consumerSecret = "VxNQiRLwwKVD0K9mmfxlTTbVdgRpriORypnUbHhxeQw";
-    private static String accessToken = "26693234-W0YjxL9cMJrC0VZZ4xdgFMymxIQ10LeL1K8YlbBY";
-    private static String accessTokenSecret = "BZD51BgzbOdFstWZYsqB5p5dbuuDV12vrOdatzhY4E";
+    // do NOT use this Twitter account in your applications!
+    private static final String consumerKey = "NMqaca1bzXsOcZhP2XlwA";
+    private static final String consumerSecret = "VxNQiRLwwKVD0K9mmfxlTTbVdgRpriORypnUbHhxeQw";
+    private static final String accessToken = "26693234-W0YjxL9cMJrC0VZZ4xdgFMymxIQ10LeL1K8YlbBY";
+    private static final String accessTokenSecret = "BZD51BgzbOdFstWZYsqB5p5dbuuDV12vrOdatzhY4E";
 
     private CamelTwitterWebSocketMain() {
         // to pass checkstyle we have a private constructor
@@ -50,6 +50,16 @@ public final class CamelTwitterWebSocketMain {
         // create a new Camel Main so we can easily start Camel
         Main main = new Main();
 
+        TwitterWebSocketRoute route = createTwitterWebSocketRoute("gaga", 6_000);
+
+        // add our routes to Camel
+        main.configure().addRoutesBuilder(route);
+
+        // and run, which keeps blocking until we terminate the JVM (or stop CamelContext)
+        main.run();
+    }
+
+    static TwitterWebSocketRoute createTwitterWebSocketRoute(String searchTerm, int delay) {
         TwitterWebSocketRoute route = new TwitterWebSocketRoute();
 
         // setup twitter application authentication
@@ -61,17 +71,12 @@ public final class CamelTwitterWebSocketMain {
         // poll for gaga, every 5nd second
         // twitter rate limits 180 per 15 min, so that is 0.2/sec, eg 1/5sec.
         // so to be safe we do 6 seconds
-        route.setSearchTerm("gaga");
-        route.setDelay(6000);
+        route.setSearchTerm(searchTerm);
+        route.setDelay(delay);
 
         // web socket on port 9090
         route.setPort(9090);
-
-        // add our routes to Camel
-        main.configure().addRoutesBuilder(route);
-
-        // and run, which keeps blocking until we terminate the JVM (or stop CamelContext)
-        main.run();
+        return route;
     }
 
 }

@@ -31,7 +31,7 @@ import org.apache.activemq.artemis.core.config.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.jgroups.util.Util.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that the Widget and Gadget use-case from the Enterprise Integration Patterns book works
@@ -79,8 +79,8 @@ class ArtemisTest extends CamelTestSupport {
                 .create();
 
         assertTrue(
-            "One order should be distributed to widget and and the other to gadget",
-            notify.matches(10, TimeUnit.SECONDS)
+            notify.matches(10, TimeUnit.SECONDS),
+            "One order should be distributed to widget and and the other to gadget"
         );
     }
 

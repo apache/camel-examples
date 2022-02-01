@@ -16,8 +16,8 @@
 # limitations under the License.
 #
 
-rm -rf work
-mkdir work
-POM_VERSION=$(../../../mvnw -f ../pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
-wget --http-user=jim --http-password=jimspassword --directory-prefix=work  --output-file=work/log.txt http://localhost:8080/camel-example-spring-security-$POM_VERSION/camel/admin
-cat -n work/* | less
+WORK_DIR=../target/work
+rm -rf $WORK_DIR
+mkdir -p $WORK_DIR
+wget --http-user=jim --http-password=jimspassword --directory-prefix=$WORK_DIR  --output-file=$WORK_DIR/log.txt http://localhost:8080/camel-example-spring-security/camel/admin
+cat -n $WORK_DIR/* | less

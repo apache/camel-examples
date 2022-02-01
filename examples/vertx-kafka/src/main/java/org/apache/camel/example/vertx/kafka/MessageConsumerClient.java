@@ -16,18 +16,19 @@
  */
 package org.apache.camel.example.vertx.kafka;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.builder.component.ComponentsBuilderFactory;
+import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.main.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.apache.camel.example.vertx.kafka.MessagePublisherClient.setUpKafkaComponent;
+
 public final class MessageConsumerClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(MessageConsumerClient.class);
-
-    // use Camel Main to setup and run Camel
-    private static Main main = new Main();
 
     private MessageConsumerClient() {
     }
@@ -36,30 +37,30 @@ public final class MessageConsumerClient {
 
         LOG.info("About to run Camel Vertx Kafka integration...");
 
+        try (CamelContext camelContext = new DefaultCamelContext()) {
+            // Set the location of the configuration
+            camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
+            // Set up the Kafka component
+            setUpKafkaComponent(camelContext);
+            // Add route to send messages to Kafka
 
-        // Add route to send messages to Kafka
-        main.configure().addRoutesBuilder(new RouteBuilder() {
+            camelContext.addRoutes(createRouteBuilder());
+            camelContext.start();
+            // let it run for 5 minutes before shutting down
+            Thread.sleep(5L * 60 * 1_000);
+        }
+    }
+
+    static RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
             public void configure() {
-                log.info("About to start route: Kafka Server -> Log ");
-
-                // setup kafka component with the brokers
-                ComponentsBuilderFactory.vertxKafka()
-                        .bootstrapServers("{{kafka.host}}:{{kafka.port}}")
-                        .register(main.getCamelContext(), "vertx-kafka");
-
                 from("vertx-kafka:{{consumer.topic}}"
                         + "?maxPollRecords={{consumer.maxPollRecords}}"
                         + "&seekToPosition={{consumer.seekTo}}"
                         + "&groupId={{consumer.group}}")
                         .routeId("FromKafka")
-                    .log("${body}");
+                        .log("${body}");
             }
-        });
-        main.start();
-        // let it run for 5 minutes before shutting down
-        Thread.sleep(5 * 60 * 1000);
-
-        main.stop();
+        };
     }
-
 }

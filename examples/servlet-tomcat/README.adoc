@@ -15,23 +15,11 @@ $ mvn package
 === Run
 
 To run the example deploy it in Apache Tomcat by copying the `+.war+` to
-the deploy folder of Apache Tomcat.
+the `webapps` folder of Apache Tomcat.
 
-And then hit this url from a webbrowser which has further instructions
+And then hit http://localhost:8080/camel-example-servlet-tomcat from a web browser which provides further instructions
 
-----
-http://localhost:8080/camel-example-servlet-tomcat
-----
-
-http://localhost:8080/camel-example-servlet-tomcat
-
-The servlet is located at
-
-----
-http://localhost:8080/camel-example-servlet-tomcat/camel/hello
-----
-
-http://localhost:8080/camel-example-servlet-tomcat/camel/hello
+The servlet is located at http://localhost:8080/camel-example-servlet-tomcat/camel/hello
 
 === Help and contributions
 

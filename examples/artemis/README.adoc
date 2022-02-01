@@ -64,7 +64,7 @@ example using the following command in a new shell:
 
 [source,sh]
 ----
-$ mvn compile exec:java
+$ mvn exec:java
 ----
 
 When the Camel application runs, you should see 2 orders being processed

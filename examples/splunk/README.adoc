@@ -28,7 +28,7 @@ $ mvn compile
 To run the random search client you type:
 
 ----
-$ mvn compile exec:java -Psearch-client
+$ mvn exec:java -Psearch-client
 ----
 
 … and response data will be printed on the console.
@@ -36,7 +36,7 @@ $ mvn compile exec:java -Psearch-client
 To run the saved search client you type:
 
 ----
-$ mvn compile exec:java -Psaved-search-client
+$ mvn exec:java -Psaved-search-client
 ----
 
 … and response data will be printed on the console.
@@ -44,7 +44,7 @@ $ mvn compile exec:java -Psaved-search-client
 To run the saved search client you type:
 
 ----
-$ mvn compile exec:java -Ppublish-event-client
+$ mvn exec:java -Ppublish-event-client
 ----
 
 … and logs will be printed on the console.
