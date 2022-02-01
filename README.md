@@ -14,3 +14,5 @@ Enterprise Integration Patterns with powerful bean integration.
 ### Introduction
 
 This project provides examples for Apache Camel.
+
+Dummy modif to trigger a build very close to master to check potential API break https://github.com/apache/camel/commit/31407635006759958d927c01890a4efa2cad08c8#r65772955
