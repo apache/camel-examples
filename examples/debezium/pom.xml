@@ -61,7 +61,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-debezium-mysql</artifactId>
+            <artifactId>camel-debezium-postgres</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -92,6 +92,47 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j2-version}</version>
         </dependency>
+        <!-- for testing -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>localstack</artifactId>
+            <version>${testcontainers-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${testcontainers-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>cassandra</artifactId>
+            <version>${testcontainers-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-core</artifactId>
+            <version>1.12.150</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-sql</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility-version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -106,7 +147,7 @@
         <profile>
             <id>debezium-consumer</id>
             <properties>
-                <target.main.class>org.apache.camel.example.debezium.DebeziumMySqlConsumerToKinesis</target.main.class>
+                <target.main.class>org.apache.camel.example.debezium.DebeziumPgSQLConsumerToKinesis</target.main.class>
             </properties>
         </profile>
 

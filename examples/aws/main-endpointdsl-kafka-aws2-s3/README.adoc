@@ -2,18 +2,18 @@
 
 This example shows how to use the endpoint DSL in your Camel routes
 to define endpoints using type safe fluent builders, which are Java methods
-that are compiled and it will show the AWS2-S3 stream mode.
+that are compiled, and it will show the AWS2-S3 stream mode.
 
 The example will poll two kafka topics (s3.topic.1 and s3.topic.2) and upload batch of 25 messages as single file into an s3 bucket (mycamel-1).
 
 On your bucket you'll see:
-
+```
 s3.topic.1/s3.topic.1.txt
 s3.topic.1/s3.topic.1-1.txt
 
 s3.topic.2/s3.topic.2.txt
 s3.topic.2/s3.topic.2-1.txt
-
+```
 and so on
 
 At the end you should have a total of 80 files.
@@ -26,14 +26,18 @@ Don't forget to add the bucket name (already created ahead of time) and point to
 You'll need also a running kafka broker.
 You'll need to have kafkacat installed.
 
-=== How to run
+=== Build
 
-You can run this example using
+First compile the example by executing:
 
 [source,sh]
 ----
 $ mvn compile
 ----
+
+=== How to run
+
+You can run this example using
 
 [source,sh]
 ----
@@ -44,8 +48,8 @@ Now run
 
 [source,sh]
 ----
-$ data/burst.sh s3.topic.1 1000 msg.txt
-$ data/burst.sh s3.topic.2 1000 msg.txt
+$ data/burst.sh s3.topic.1 1000 data/msg.txt
+$ data/burst.sh s3.topic.2 1000 data/msg.txt
 ----
 
 You should see the bucket populated.

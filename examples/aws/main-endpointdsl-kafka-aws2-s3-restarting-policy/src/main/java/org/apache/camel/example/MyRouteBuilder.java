@@ -25,11 +25,12 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}"))
+        from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}").seekTo("{{consumer.seekTo}}"))
               .log("Kafka Message is: ${body}")
               .toD(aws2S3("{{bucketName}}")
                       .streamingUploadMode(true)
                       .useDefaultCredentialsProvider(true)
+                      .autoCreateBucket(true)
                       .restartingPolicy(AWSS3RestartingPolicyEnum.lastPart)
                       .batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive)
                       .keyName("{{kafkaTopic1}}/partition_${headers.kafka.PARTITION}/{{kafkaTopic1}}.txt"));

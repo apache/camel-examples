@@ -17,10 +17,6 @@
 package org.apache.camel.example;
 
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
-import org.apache.camel.component.azure.eventhubs.EventHubsConstants;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * To use the endpoint DSL then we must extend EndpointRouteBuilder instead of RouteBuilder
@@ -28,7 +24,7 @@ import java.util.List;
 public class MyRouteBuilder extends EndpointRouteBuilder {
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
         from(azureEventhubs("{{namespaceName}}/{{eventhubName}}").sharedAccessKey("{{sharedAccessKey}}").sharedAccessName("{{sharedAccessName}}").blobAccessKey("{{blobAccessKey}}").blobAccountName("{{blobAccountName}}").blobContainerName("{{blobContainerName}}"))
                 .log("The content is ${body}");

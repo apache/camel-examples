@@ -24,12 +24,14 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}"))
+        from(kafka("{{kafkaTopic1}}").brokers("{{kafkaBrokers}}")
+                .seekTo("{{consumer.seekTo}}"))
               .log("Kafka Message is: ${body}")
-              .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/{{kafkaTopic1}}.txt"));
+              .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).autoCreateBucket(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic1}}/{{kafkaTopic1}}.txt"));
 
-        from(kafka("{{kafkaTopic2}}").brokers("{{kafkaBrokers}}"))
+        from(kafka("{{kafkaTopic2}}").brokers("{{kafkaBrokers}}")
+                .seekTo("{{consumer.seekTo}}"))
                 .log("Kafka Message is: ${body}")
-                .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic2}}/{{kafkaTopic2}}.txt"));
+                .to(aws2S3("{{bucketName}}").useDefaultCredentialsProvider(true).autoCreateBucket(true).streamingUploadMode(true).batchMessageNumber(25).namingStrategy(AWSS3NamingStrategyEnum.progressive).keyName("{{kafkaTopic2}}/{{kafkaTopic2}}.txt"));
     }
 }

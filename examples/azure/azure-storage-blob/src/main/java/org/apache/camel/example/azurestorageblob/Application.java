@@ -38,43 +38,44 @@ public final class Application {
 
             // add routes which can be inlined as anonymous inner class
             // (to keep all code in a single java file for this basic example)
-            camel.addRoutes(new RouteBuilder() {
-                @Override
-                public void configure() throws Exception {
-                    from("timer://runOnce?repeatCount=1&delay=0")
-                        .routeId("listBlobs")
-                        .process(exchange -> exchange.getIn()
-                            .setBody(
-                                new BlobServiceClientBuilder()
-                                    .endpoint(String.format("https://%s.blob.core.windows.net", ACCOUNT))
-                                    .credential(new StorageSharedKeyCredential(ACCOUNT, ACCESS_KEY))
-                                    .buildClient()
-                                    .getBlobContainerClient(BLOB_CONTAINER_NAME)
-                                    .listBlobs(
-                                        new ListBlobsOptions().setMaxResultsPerPage(1),
-                                        null
-                                    )
-                            )
-                        )
-                        .loopDoWhile(exchange ->
-                            exchange.getIn().getBody(Iterator.class).hasNext()
-                        )
-                        .process(exchange ->
-                            exchange.getIn().setBody(exchange.getIn().getBody(Iterator.class).next())
-                        )
-                        .log("${body.name}")
-                        .end();
-                }
-            });
+            camel.addRoutes(createRouteBuilder());
 
             // start is not blocking
             camel.start();
 
             // so run for 10 seconds
             Thread.sleep(10_000);
-
-            // and then stop nicely
-            camel.stop();
         }
+    }
+
+    static RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                from("timer://runOnce?repeatCount=1&delay=0")
+                        .routeId("listBlobs")
+                        .process(exchange -> exchange.getIn()
+                                .setBody(
+                                        new BlobServiceClientBuilder()
+                                                .endpoint(String.format("https://%s.blob.core.windows.net", ACCOUNT))
+                                                .credential(new StorageSharedKeyCredential(ACCOUNT, ACCESS_KEY))
+                                                .buildClient()
+                                                .getBlobContainerClient(BLOB_CONTAINER_NAME)
+                                                .listBlobs(
+                                                        new ListBlobsOptions().setMaxResultsPerPage(1),
+                                                        null
+                                                )
+                                )
+                        )
+                        .loopDoWhile(exchange ->
+                                exchange.getIn().getBody(Iterator.class).hasNext()
+                        )
+                        .process(exchange ->
+                                exchange.getIn().setBody(exchange.getIn().getBody(Iterator.class).next())
+                        )
+                        .log("${body.name}")
+                        .end();
+            }
+        };
     }
 }

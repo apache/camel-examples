@@ -17,17 +17,13 @@
 package org.apache.camel.example;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 
 public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
-        
         from("kafka:{{topicName}}?brokers={{brokers}}")
           .setHeader("CamelAzureStorageBlobBlobName", simple("${exchangeId}"))
           .to("azure-storage-blob://{{accountName}}/{{containerName}}/?accessKey=RAW({{accessKey}})&operation=uploadBlockBlob");
-
     }
 }

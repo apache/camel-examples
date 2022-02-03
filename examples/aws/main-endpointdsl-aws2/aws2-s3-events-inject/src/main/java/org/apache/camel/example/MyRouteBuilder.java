@@ -28,7 +28,7 @@ public class MyRouteBuilder extends EndpointRouteBuilder {
 
     	from(timer("fire").repeatCount("1"))
     	.setBody(constant("Camel rocks"))
-    	.to(aws2S3("{{bucketName}}").keyName("firstfile"))
+    	.to(aws2S3("{{bucketName}}").keyName("firstfile").autoCreateBucket(true))
     	.stop();
     }
 }

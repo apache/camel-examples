@@ -31,14 +31,14 @@ import org.slf4j.LoggerFactory;
 /**
  * A simple example to consume data from Debezium and send it to Kinesis
  */
-public final class DebeziumMySqlConsumerToKinesis {
+public final class DebeziumPgSQLConsumerToKinesis {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DebeziumMySqlConsumerToKinesis.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DebeziumPgSQLConsumerToKinesis.class);
 
     // use Camel Main to set up and run Camel
     private static final Main MAIN = new Main();
 
-    private DebeziumMySqlConsumerToKinesis() {
+    private DebeziumPgSQLConsumerToKinesis() {
     }
 
     public static void main(String[] args) throws Exception {
@@ -46,25 +46,32 @@ public final class DebeziumMySqlConsumerToKinesis {
         LOG.debug("About to run Debezium integration...");
 
         // add route
-        MAIN.configure().addRoutesBuilder(new RouteBuilder() {
+        MAIN.configure().addRoutesBuilder(createRouteBuilder());
+
+        // start and run Camel (block)
+        MAIN.run();
+    }
+
+    static RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
             public void configure() {
                 // Initial Debezium route that will run and listen to the changes,
                 // first it will perform an initial snapshot using (select * from) in case no offset
-                // exists for the connector, and then it will listen to MySQL binlogs for any DB events such as (UPDATE, INSERT and DELETE)
-                from("debezium-mysql:{{debezium.mysql.name}}?"
-                        + "databaseServerId={{debezium.mysql.databaseServerId}}"
-                        + "&databaseHostname={{debezium.mysql.databaseHostName}}"
-                        + "&databaseUser={{debezium.mysql.databaseUser}}"
-                        + "&databasePassword={{debezium.mysql.databasePassword}}"
-                        + "&databaseServerName={{debezium.mysql.databaseServerName}}"
-                        + "&databaseHistoryFileFilename={{debezium.mysql.databaseHistoryFileName}}"
-                        + "&databaseIncludeList={{debezium.mysql.databaseIncludeList}}"
-                        + "&tableIncludeList={{debezium.mysql.tableIncludeList}}"
-                        + "&offsetStorageFileName={{debezium.mysql.offsetStorageFileName}}")
-                        .routeId("FromDebeziumMySql")
-                        // We will need to prepare the data for Kinesis, however we need to mention here is that Kinesis is bit different from Kafka in terms
+                // exists for the connector, and then it will listen to postgres for any DB events such as (UPDATE, INSERT and DELETE)
+                from("debezium-postgres:{{debezium.postgres.name}}?"
+                        + "databaseHostname={{debezium.postgres.databaseHostName}}"
+                        + "&databasePort={{debezium.postgres.databasePort}}"
+                        + "&databaseUser={{debezium.postgres.databaseUser}}"
+                        + "&databasePassword={{debezium.postgres.databasePassword}}"
+                        + "&databaseServerName={{debezium.postgres.databaseServerName}}"
+                        + "&databaseDbname={{debezium.postgres.databaseDbname}}"
+                        + "&schemaIncludeList={{debezium.postgres.schemaIncludeList}}"
+                        + "&tableIncludeList={{debezium.postgres.tableIncludeList}}"
+                        + "&offsetStorageFileName={{debezium.postgres.offsetStorageFileName}}")
+                        .routeId("FromDebeziumPgSql")
+                        // We will need to prepare the data for Kinesis, however we need to mention here is that Kinesis is a bit different from Kafka in terms
                         // of the key partition which only limited to 256 byte length, depending on the size of your key, that may not be optimal. Therefore, the safer option is to hash the key
-                        // and convert it to string, but that means we need to preserve the key information into the message body in order not to lose these information downstream.
+                        // and convert it to string, but that means we need to preserve the key information into the message body in order not to lose this information downstream.
                         // Note: If you'd use Kafka, most probably you will not need these transformations as you can send the key as an object and Kafka will do
                         // the rest to hash it in the broker in order to place it in the correct topic's partition.
                         .setBody(exchange -> {
@@ -93,15 +100,12 @@ public final class DebeziumMySqlConsumerToKinesis {
                         // Marshal everything to JSON, you can use any other data format such as Avro, Protobuf..etc, but in this example we will keep it to JSON for simplicity
                         .marshal().json(JsonLibrary.Jackson)
                         // Send our data to kinesis
-                        .to("aws-kinesis:{{kinesis.streamName}}?accessKey=RAW({{kinesis.accessKey}})"
+                        .to("aws2-kinesis:{{kinesis.streamName}}?accessKey=RAW({{kinesis.accessKey}})"
                                 + "&secretKey=RAW({{kinesis.secretKey}})"
                                 + "&region={{kinesis.region}}")
                         .end();
             }
-        });
-
-        // start and run Camel (block)
-        MAIN.run();
+        };
     }
 
 }
