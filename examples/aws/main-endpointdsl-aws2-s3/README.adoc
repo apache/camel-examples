@@ -12,6 +12,15 @@ This example will use the AWS default credentials Provider: https://docs.aws.ama
 Set your credentials accordingly.
 Don't forget to add the bucket name.
 
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
 === How to run
 
 You can run this example using

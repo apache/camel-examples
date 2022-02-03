@@ -10,11 +10,23 @@ Notice how you can configure Camel in the `application.properties` file.
 
 Don't forget to add your AWS Credentials and the bucket name.
 
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
 === How to run
 
 You can run this example using
 
-    mvn camel:run   
+[source,sh]
+----
+$ mvn camel:run
+----
 
 === Help and contributions
 

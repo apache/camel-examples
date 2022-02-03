@@ -50,10 +50,11 @@ public final class DebeziumMySqlConsumerToAzureEventHubs {
             public void configure() {
                 // Initial Debezium route that will run and listens to the changes,
                 // first it will perform an initial snapshot using (select * from) in case there are no offsets
-                // exists for the connector and then it will listens to MySQL binlogs for any DB events such as (UPDATE, INSERT and DELETE)
+                // exists for the connector, and then it will listen to MySQL binlogs for any DB events such as (UPDATE, INSERT and DELETE)
                 from("debezium-mysql:{{debezium.mysql.name}}?"
                         + "databaseServerId={{debezium.mysql.databaseServerId}}"
                         + "&databaseHostname={{debezium.mysql.databaseHostName}}"
+                        + "&databasePort={{debezium.mysql.databasePort}}"
                         + "&databaseUser={{debezium.mysql.databaseUser}}"
                         + "&databasePassword={{debezium.mysql.databasePassword}}"
                         + "&databaseServerName={{debezium.mysql.databaseServerName}}"
@@ -63,7 +64,7 @@ public final class DebeziumMySqlConsumerToAzureEventHubs {
                         + "&offsetStorageFileName={{debezium.mysql.offsetStorageFileName}}")
                         .routeId("FromDebeziumMySql")
                         // We will need to prepare the data for Azure EventHubs Therefore, we will hash the key to make sure our record land on the same partition
-                        // and convert it to string, but that means we need to preserve the key information into the message body in order not to lose these information downstream.
+                        // and convert it to string, but that means we need to preserve the key information into the message body in order not to lose this information downstream.
                         // Note: If you'd use Kafka, most probably you will not need these transformations as you can send the key as an object and Kafka will do
                         // the rest to hash it in the broker in order to place it in the correct topic's partition.
                         .setBody(exchange -> {
