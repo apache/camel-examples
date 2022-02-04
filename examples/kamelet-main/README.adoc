@@ -2,11 +2,11 @@
 
 === Introduction
 
-This example shows how to use ready to use Kamelets you can find at the
+This example shows how to use ready to use Kamelets that you can find at the
 https://camel.apache.org/camel-kamelets/next/[Camel Kamelet Catalog].
 
 The application is run with `KameletMain` class from camel-kamalet-main JAR.
-This makes it easy to run Camel standalone with Kamelet that can be automatic
+This makes it easy to run Camel standalone with Kamelet that can be automatically
 downloaded from github, and to use YAML DSL for creating Camel routes that use the Kamelets.
 The example has no Java code at all.
 
@@ -35,8 +35,8 @@ The application is also built as a _fat jar_ (see `pom.xml`), which you can run 
 
 [source,sh]
 ----
-$ mvn package
-$ java -jar target/camel-example-kamelet-yaml-3.13.0-jar-with-dependencies.jar
+$ mvn package -DskipTests
+$ java -jar target/camel-example-kamelet-main-jar-with-dependencies.jar
 ----
 
 
