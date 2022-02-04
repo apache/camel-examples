@@ -31,7 +31,7 @@ public final class MyApplication {
         Main main = new Main();
         // lets use a configuration class (you can specify multiple classes)
         // (properties are automatic loaded from application.properties)
-        main.configure().addConfigurationClass(MyConfiguration.class);
+        main.configure().addConfiguration(MyConfiguration.class);
         // and add all the YAML routes
         main.configure().withRoutesIncludePattern("routes/*.yaml");
         // turn on reloading routes on code-changes

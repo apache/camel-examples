@@ -16,10 +16,13 @@
  */
 package org.apache.camel.example;
 
+import org.apache.camel.CamelConfiguration;
+import org.apache.camel.CamelContext;
+
 /**
  * Class to configure the Camel application.
  */
-public class MyConfiguration {
+public class MyConfiguration implements CamelConfiguration {
 
     /**
      * Creates the Artemis JMS ConnectionFactory and bind it to the Camel registry
@@ -34,7 +37,8 @@ public class MyConfiguration {
 //        return cf;
 //    }
 
-    public void configure() {
+    @Override
+    public void configure(CamelContext camelContext) {
         // this method is optional and can be removed if no additional configuration is needed.
     }
 
