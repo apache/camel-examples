@@ -35,9 +35,9 @@ Number of Examples: 84 (0 deprecated)
 
 | link:couchbase-log/README.adoc[Couchbase Log] (couchbase-log) | Beginner | An example for showing standalone Camel with Couchbase
 
-| link:csimple/readme.adoc[Csimple] (csimple) | Beginner | Shows using compiled simple language
+| link:csimple/README.adoc[Csimple] (csimple) | Beginner | Shows using compiled simple language
 
-| link:csimple-joor/readme.adoc[Csimple Joor] (csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
+| link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
 | link:ftp/README.adoc[FTP] (ftp) | Beginner | An example for showing Camel FTP integration
 
