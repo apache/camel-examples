@@ -125,7 +125,6 @@
         <module>main</module>
         <module>main-artemis</module>
         <module>main-endpointdsl</module>
-        <module>main-endpointdsl-google-pubsub</module>
         <module>main-health</module>
         <module>main-joor</module>
         <module>main-lambda</module>
