@@ -21,25 +21,11 @@ import org.apache.camel.main.Main;
 /**
  * Main class that boot the Camel application
  */
-public final class MyApplication {
-
-    private MyApplication() {
-    }
+public class MyApplication {
 
     public static void main(String[] args) throws Exception {
         // use Camels Main class
-        Main main = new Main();
-        // lets use a configuration class (you can specify multiple classes)
-        // (properties are automatic loaded from application.properties)
-        main.configure().addConfiguration(MyConfiguration.class);
-        // and add all the YAML routes
-        main.configure().withRoutesIncludePattern("routes/*.yaml");
-        // turn on reloading routes on code-changes
-        main.configure().withRoutesReloadEnabled(true);
-        main.configure().withRoutesReloadDirectory("src/main/resources");
-        main.configure().withRoutesReloadPattern("routes/*.yaml");
-        main.configure().withRoutesReloadRemoveAllRoutes(true);
-
+        Main main = new Main(MyApplication.class);
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
     }
