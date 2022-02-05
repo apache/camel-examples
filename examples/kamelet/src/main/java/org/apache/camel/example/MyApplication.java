@@ -28,11 +28,7 @@ public final class MyApplication {
 
     public static void main(String[] args) throws Exception {
         // use Camels Main class
-        Main main = new Main();
-        // and add route templates via routes builder
-        main.configure().addRoutesBuilder(MyRouteTemplates.class);
-        // and add routes that will consume templates through kamelets
-        main.configure().addRoutesBuilder(MyRoutes.class);
+        Main main = new Main(MyApplication.class);
 
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
