@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 83 (0 deprecated)
+Number of Examples: 84 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -85,6 +85,8 @@ Number of Examples: 83 (0 deprecated)
 | link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
 
 | link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
+
+| link:routetemplate-xml/README.adoc[Routetemplate XML] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
 
 | link:servlet-tomcat/README.adoc[Servlet Tomcat] (servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
 
