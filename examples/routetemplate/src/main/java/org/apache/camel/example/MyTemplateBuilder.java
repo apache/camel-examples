@@ -16,28 +16,23 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.builder.TemplatedRouteBuilder;
-import org.apache.camel.main.ConfigureRouteTemplates;
+import org.apache.camel.builder.RouteBuilder;
 
-public class MyTemplateBuilder implements ConfigureRouteTemplates {
+public class MyTemplateBuilder extends RouteBuilder {
 
     /**
      * Configure and adds routes from route templates.
      */
-    public void configure(CamelContext context) {
+    public void configure() {
 
         // create two routes from the template
-
-        TemplatedRouteBuilder.builder(context, "myTemplate")
+        templatedRoute("myTemplate")
             .parameter("name", "one")
-            .parameter("greeting", "Hello")
-            .add();
+            .parameter("greeting", "Hello");
 
-        TemplatedRouteBuilder.builder(context, "myTemplate")
-            .parameter("name", "two")
+        templatedRoute("myTemplate")
+            .parameter("name", "deux")
             .parameter("greeting", "Bonjour")
-            .parameter("myPeriod", "5s")
-            .add();
+            .parameter("myPeriod", "5s");
     }
 }

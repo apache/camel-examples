@@ -29,19 +29,10 @@ public final class MyApplication {
     public static void main(String[] args) throws Exception {
         // use Camels Main class
         Main main = new Main();
-        // and add route templates via routes builder
-        main.configure().addRoutesBuilder(MyRouteTemplates.class);
-        // add configuration class which set up the routes from the route templates
-
-        // to configure route templates we can use java code as below from a template builder class,
-        // gives more power as its java code.
-        // or we can configure as well from application.properties,
-        // less power as its key value pair properties
-        // and you can also use both java and properties together
-
-        // in this example we use properties by default and have disabled java
-        // main.configure().addRoutesBuilder(MyTemplateBuilder.class);
-
+        // and add all the XML templates and builders
+        // make sure that the templates are listed before the builders to prevent
+        // route creation error
+        main.configure().withRoutesIncludePattern("templates/*.xml,builders/*.xml");
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
     }

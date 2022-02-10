@@ -37,7 +37,7 @@ public class MyRouteTemplates extends RouteBuilder {
             // notice how we use {{name}} to refer to the template parameters
             // we can also use {{propertyName}} to refer to property placeholders
             .from("timer:{{name}}?period={{myPeriod}}")
-                .setBody(simple("{{greeting}} ${body}"))
+                .setBody(simple("{{greeting}} {{name}}"))
                 .log("${body}");
     }
 }
