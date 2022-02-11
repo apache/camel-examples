@@ -20,19 +20,22 @@
 <!-- START SNIPPET: e1 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:camel="http://camel.apache.org/schema/spring"
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
   <bean id="reporting" class="org.apache.camel.example.service.Reporting"/>
 
-  <!-- import the route from another XML file -->
-  <import resource="camel-route-context-mina2.xml"/>
+  <!-- import the route template from another XML file -->
+  <import resource="camel-route-template-mina.xml"/>
 
   <camelContext xmlns="http://camel.apache.org/schema/spring">
-    <!-- refer to a given route to be used -->
-    <routeContextRef ref="routes-mina2"/>
+    <!-- import the route template for mina into the camel context -->
+    <routeTemplateContextRef ref="route-template-context-mina"/>
+    <!-- instantiate the mina route from the imported template -->
+    <templatedRoute routeTemplateRef="route-template-mina" routeId="mina2">
+      <parameter name="host" value="localhost:9992"/>
+    </templatedRoute>
   </camelContext>
 
 </beans>

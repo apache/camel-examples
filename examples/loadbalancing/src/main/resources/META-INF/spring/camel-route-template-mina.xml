@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    ">
+
+    <routeTemplateContext id="route-template-context-mina" xmlns="http://camel.apache.org/schema/spring">
+        <routeTemplate id="route-template-mina">
+            <templateParameter name="host"/>
+            <route>
+                <from uri="mina:tcp://{{host}}"/>
+                <setHeader name="minaServer">
+                    <constant>{{host}}</constant>
+                </setHeader>
+                <bean ref="reporting" method="updateReport"/>
+            </route>
+        </routeTemplate>
+    </routeTemplateContext>
+</beans>

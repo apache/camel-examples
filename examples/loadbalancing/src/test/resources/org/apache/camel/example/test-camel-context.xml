@@ -28,14 +28,18 @@
   <bean id="reporting" class="org.apache.camel.example.service.Reporting"/>
   <!-- import the routes from external XML files -->
   <import resource="classpath:/META-INF/spring/camel-route-context-loadbalancer.xml"/>
-  <import resource="classpath:/META-INF/spring/camel-route-context-mina1.xml"/>
-  <import resource="classpath:/META-INF/spring/camel-route-context-mina2.xml"/>
-
+  <import resource="classpath:/META-INF/spring/camel-route-template-mina.xml"/>
   <camelContext xmlns="http://camel.apache.org/schema/spring">
-    <!-- refer to given routes to be used -->
+    <!-- import the route template for mina into the camel context -->
+    <routeTemplateContextRef ref="route-template-context-mina"/>
+    <!-- import the routes of the load balancer into the camel context -->
     <routeContextRef ref="routes-load-balancer"/>
-    <routeContextRef ref="routes-mina1"/>
-    <routeContextRef ref="routes-mina2"/>
+    <templatedRoute routeTemplateRef="route-template-mina" routeId="mina1">
+      <parameter name="host" value="localhost:9991"/>
+    </templatedRoute>
+    <templatedRoute routeTemplateRef="route-template-mina" routeId="mina2">
+      <parameter name="host" value="localhost:9992"/>
+    </templatedRoute>
   </camelContext>
 
 </beans>
