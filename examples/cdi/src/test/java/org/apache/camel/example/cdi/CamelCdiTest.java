@@ -18,31 +18,29 @@ package org.apache.camel.example.cdi;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.cdi.CamelCdiRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.cdi.CamelCdiExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.inject.Inject;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that Camel can be configured using CDI.
  */
-@RunWith(CamelCdiRunner.class)
-public class CamelCdiTest {
+@ExtendWith(CamelCdiExtension.class)
+class CamelCdiTest {
 
     @Inject
     CamelContext context;
 
     @Test
-    public void should_be_configured_using_cdi() {
+    void should_be_configured_using_cdi() {
         NotifyBuilder notify = new NotifyBuilder(context).whenCompleted(1)
             .whenAllDoneMatches(exchange -> exchange.getIn().getBody(String.class).startsWith("Saying Hello World"))
             .create();
-        assertTrue(
-            "1 message should be completed", notify.matches(20, TimeUnit.SECONDS)
-        );
+        assertTrue(notify.matches(20, TimeUnit.SECONDS), "1 message should be completed");
     }
 }

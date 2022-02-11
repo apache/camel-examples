@@ -26,18 +26,21 @@ import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.cdi.Uri;
-import org.apache.camel.test.cdi.CamelCdiRunner;
-import org.apache.camel.test.cdi.Order;
+import org.apache.camel.test.cdi.CamelCdiExtension;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.rules.Verifier;
-import org.junit.runner.RunWith;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.junit.Assert.assertThat;
 
-@RunWith(CamelCdiRunner.class)
-public class OrderTest {
+@ExtendWith(CamelCdiExtension.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class OrderTest {
 
     @ClassRule
     public static MessageVerifier verifier = new MessageVerifier();
@@ -48,19 +51,19 @@ public class OrderTest {
 
     @Test
     @Order(2)
-    public void sendMessageTwo() {
+    void sendMessageTwo() {
         producer.sendBody("two");
     }
 
     @Test
     @Order(3)
-    public void sendMessageThree() {
+    void sendMessageThree() {
         producer.sendBody("three");
     }
 
     @Test
     @Order(1)
-    public void sendMessageOne() {
+    void sendMessageOne() {
         producer.sendBody("one");
     }
 

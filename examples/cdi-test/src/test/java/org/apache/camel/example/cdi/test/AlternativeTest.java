@@ -24,18 +24,18 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.cdi.Uri;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.cdi.Beans;
-import org.apache.camel.test.cdi.CamelCdiRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.cdi.CamelCdiExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.apache.camel.component.mock.MockEndpoint.assertIsSatisfied;
 
-@RunWith(CamelCdiRunner.class)
+@ExtendWith(CamelCdiExtension.class)
 @Beans(
     alternatives = AlternativeBean.class,
     classes = TestRoute.class
 )
-public class AlternativeTest {
+class AlternativeTest {
 
     @Inject
     @Uri("mock:out")
@@ -46,7 +46,7 @@ public class AlternativeTest {
     ProducerTemplate producer;
 
     @Test
-    public void testAlternativeBean() throws InterruptedException {
+    void testAlternativeBean() throws InterruptedException {
         mock.expectedMessageCount(1);
         mock.expectedBodiesReceived("test with alternative bean!");
 
