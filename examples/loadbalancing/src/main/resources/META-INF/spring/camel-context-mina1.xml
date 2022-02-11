@@ -26,12 +26,16 @@
 
   <bean id="reporting" class="org.apache.camel.example.service.Reporting"/>
 
-  <!-- import the route from another XML file -->
-  <import resource="camel-route-context-mina1.xml"/>
+  <!-- import the route template from another XML file -->
+  <import resource="camel-route-template-mina.xml"/>
 
   <camelContext xmlns="http://camel.apache.org/schema/spring">
-    <!-- refer to a given route to be used -->
-    <routeContextRef ref="routes-mina1"/>
+    <!-- import the route template for mina into the camel context -->
+    <routeTemplateContextRef ref="route-template-context-mina"/>
+    <!-- instantiate the mina route from the imported template -->
+    <templatedRoute routeTemplateRef="route-template-mina" routeId="mina1">
+      <parameter name="host" value="localhost:9991"/>
+    </templatedRoute>
   </camelContext>
 
 </beans>

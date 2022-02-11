@@ -69,7 +69,7 @@ class ArtemisLargeMessageTest {
     }
 
     @Test
-    void should_aggregate_provided_numbers() throws Exception {
+    void should_support_large_files() throws Exception {
         String fileName = UUID.randomUUID().toString();
         // Generate a big file of 1 Go
         try (RandomAccessFile f = new RandomAccessFile(String.format("target/inbox/%s", fileName), "rw")) {

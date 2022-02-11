@@ -40,7 +40,7 @@ class LoadBalancingTest {
     ModelCamelContext context;
 
     @Test
-    void should_aggregate_provided_numbers() {
+    void should_support_load_balancing() {
         final String[] minaServers = {"localhost:9991", "localhost:9992"};
         final Predicate predicate = exchange -> {
             final Report report = exchange.getIn().getBody(Report.class);
