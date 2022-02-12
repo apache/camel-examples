@@ -28,16 +28,16 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.cdi.Uri;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.cdi.Beans;
-import org.apache.camel.test.cdi.CamelCdiRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.cdi.CamelCdiExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.apache.camel.component.mock.MockEndpoint.assertIsSatisfied;
 
 @ApplicationScoped
-@RunWith(CamelCdiRunner.class)
+@ExtendWith(CamelCdiExtension.class)
 @Beans(classes = TestRoute.class)
-public class ApplicationScopedTest {
+class ApplicationScopedTest {
 
     private static final AtomicInteger COUNTER = new AtomicInteger();
 
@@ -53,12 +53,12 @@ public class ApplicationScopedTest {
     }
 
     @Test
-    public void testOne(@Uri("mock:out") MockEndpoint mock) throws InterruptedException {
+    void testOne(@Uri("mock:out") MockEndpoint mock) throws InterruptedException {
         assertIsSatisfied(1L, TimeUnit.SECONDS, mock);
     }
 
     @Test
-    public void testTwo(@Uri("mock:out") MockEndpoint mock) throws InterruptedException {
+    void testTwo(@Uri("mock:out") MockEndpoint mock) throws InterruptedException {
         assertIsSatisfied(1L, TimeUnit.SECONDS, mock);
     }
 }

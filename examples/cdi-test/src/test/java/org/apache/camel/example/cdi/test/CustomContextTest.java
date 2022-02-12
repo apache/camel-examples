@@ -24,22 +24,22 @@ import javax.inject.Named;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.engine.DefaultManagementStrategy;
-import org.apache.camel.test.cdi.CamelCdiRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.cdi.CamelCdiExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(CamelCdiRunner.class)
-public class CustomContextTest {
+@ExtendWith(CamelCdiExtension.class)
+class CustomContextTest {
 
     @Test
-    public void testCustomContext(CamelContext context) {
-        assertEquals("Management strategy is incorrect!", context.getManagementStrategy().getClass(), DefaultManagementStrategy.class);
+    void testCustomContext(CamelContext context) {
+        assertEquals(DefaultManagementStrategy.class, context.getManagementStrategy().getClass(), "Management strategy is incorrect!");
     }
 
     @Default
-    @Named("camel-test-cdi")
+    @Named("camel-test-cdi-junit5")
     @ApplicationScoped
     static class CustomCamelContext extends DefaultCamelContext {
 
