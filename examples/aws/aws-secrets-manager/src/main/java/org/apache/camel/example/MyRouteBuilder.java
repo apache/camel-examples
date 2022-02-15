@@ -24,9 +24,7 @@ public class MyRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer://myTimer?fixedRate=true&period=10000")
-            .setHeader(SecretsManagerConstants.SECRET_ID, constant("finnhub_token"))
-            .to("aws-secrets-manager://test?operation=getSecret")
-            .toD("https://finnhub.io/api/v1/quote?symbol={{stock}}&token=${body}")
+            .toD("https://finnhub.io/api/v1/quote?symbol={{stock}}&token=${aws:finnhub_token}")
             .setBody().jsonpath("$.c", true)
             .log("Current {{stockName}} price: ${body} $");
     }
