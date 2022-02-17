@@ -14,12 +14,23 @@ Login into your AWS Account and create a secret called "finnhub_token" with the 
 
 [source,sh]
 ----
-export AWS_REGION=<region>
-export AWS_SECRET_KEY=<secretKey>
-export AWS_ACCESS_KEY=<accessKey>
+export CAMEL_VAULT_AWS_REGION=<region>
+export CAMEL_VAULT_AWS_SECRET_KEY=<secretKey>
+export CAMEL_VAULT_AWS_ACCESS_KEY=<accessKey>
 ----
 
 Now you're ready to run the example.
+
+Another possibility is adding the credentials as properties in the src/main/resources/application.properties file
+
+[source,sh]
+----
+camel.aws.vault.access.key=<accessKey>
+camel.aws.vault.secret.key=<secretKety>
+camel.aws.vault.region=<region>
+----
+
+The enviroment variables have the priority on the properties.
 
 === Build
 
