@@ -1,4 +1,4 @@
-== Camel Example Kamelet SQL
+== Camel Example Kamelet SQL and AWS Secrets Manager Properties Function
 
 === Introduction
 
@@ -91,7 +91,20 @@ The application is also built as a _fat jar_ (see `pom.xml`), which you can run 
 [source,sh]
 ----
 $ mvn package -DskipTests
-$ java -jar target/camel-example-kamelet-main-jar-with-dependencies.jar
+$ java -jar target/camel-example-kamelet-sql-jar-with-dependencies.jar
+----
+
+=== Output
+
+You should see multiple lines coming from the Database at the first run
+
+[source,sh]
+----
+18:27:31.439 [Camel (postgresql-source-kamelet) thread #1 - sql://SELECT%20*%20FROM%20accounts] INFO  info - Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: {"user_id":29996,"username":"John","city":"New York"}]
+18:27:31.440 [Camel (postgresql-source-kamelet) thread #1 - sql://SELECT%20*%20FROM%20accounts] INFO  info - Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: {"user_id":29997,"username":"John","city":"New York"}]
+18:27:31.441 [Camel (postgresql-source-kamelet) thread #1 - sql://SELECT%20*%20FROM%20accounts] INFO  info - Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: {"user_id":29998,"username":"John","city":"New York"}]
+18:27:31.442 [Camel (postgresql-source-kamelet) thread #1 - sql://SELECT%20*%20FROM%20accounts] INFO  info - Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: {"user_id":29999,"username":"John","city":"New York"}]
+18:27:31.443 [Camel (postgresql-source-kamelet) thread #1 - sql://SELECT%20*%20FROM%20accounts] INFO  info - Exchange[ExchangePattern: InOnly, BodyType: byte[], Body: {"user_id":30000,"username":"John","city":"New York"}]
 ----
 
 
