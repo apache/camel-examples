@@ -26,7 +26,7 @@ Another possibility is adding the credentials as properties in the src/main/reso
 [source,sh]
 ----
 camel.aws.vault.access.key=<accessKey>
-camel.aws.vault.secret.key=<secretKety>
+camel.aws.vault.secret.key=<secretKey>
 camel.aws.vault.region=<region>
 ----
 
