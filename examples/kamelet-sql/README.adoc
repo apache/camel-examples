@@ -13,6 +13,61 @@ The example has no Java code at all.
 A Camel routes is _coded_ in the `my-route.yaml` file using the YAML DSL that uses the Kamelet,
 and log the result from the Kamelet to the console.
 
+=== Setting up your container
+
+First of all run the command to start PostgreSQL
+
+```shell script
+docker run --name psql -e POSTGRES_PASSWORD=secret -d postgres
+```
+
+Now you need to setup Database and populate it:
+
+And run the following scripts
+
+```shell script
+docker exec -i psql psql -U postgres < script/table.sql
+docker exec -i psql psql -U postgres < script/populate.sql
+```
+
+Now the database has been populated
+
+```shell script
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' psql
+172.17.0.2
+```
+
+Take note of the container IP.
+
+=== Save the secret on AWS Secrets Manager
+
+Login into your AWS account console.
+
+Jump to AWS Secrets Manager.
+
+Create a new secret for a different database and select Postgresql.
+
+Now you can create a secret, by populating the form, or by providing a json in plain text in the text field.
+
+```shell script
+{
+  "username": "postgres",
+  "password": "secret",
+  "engine": "postgres",
+  "host": "172.17.0.2",
+  "port": "5432",
+  "dbname": "postgres"
+}
+```
+
+Save the secret by naming it postgresql.
+
+=== Set up credentials for AWS Secrets Manager
+
+In src/main/resources/application.properties, populate the camel.aws.vault.* properties correctly.
+
+Now you are ready to run this example.
+
 === Build
 
 You will need to compile this example first:

@@ -31,7 +31,7 @@
     <artifactId>camel-example-kamelet-sql</artifactId>
     <packaging>jar</packaging>
     <name>Camel :: Example :: Kamelet SQL</name>
-    <description>How to easily run Kamelets</description>
+    <description>Consume from PostgreSQL database connected through an AWS Secrets Manager Secret</description>
 
     <properties>
         <category>Beginner</category>
