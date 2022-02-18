@@ -16,24 +16,18 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.ExtendedCamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.spi.PackageScanResourceResolver;
-import org.apache.camel.spi.Resource;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that Camel can load routes dynamically.
  */
-class RouteLoaderTest extends CamelTestSupport {
+class RouteLoaderTest extends CamelMainTestSupport {
 
     @Test
     void should_load_routes_dynamically() {
@@ -44,16 +38,5 @@ class RouteLoaderTest extends CamelTestSupport {
         assertTrue(
             notify.matches(20, TimeUnit.SECONDS), "3 messages should be completed"
         );
-    }
-
-    @Override
-    protected RoutesBuilder[] createRouteBuilders() throws Exception {
-        final ExtendedCamelContext ecc = context.adapt(ExtendedCamelContext.class);
-        final PackageScanResourceResolver resolver = ecc.getPackageScanResourceResolver();
-        final List<RoutesBuilder> routesBuilders = new ArrayList<>();
-        for (Resource resource : resolver.findResources("myroutes/*")) {
-            routesBuilders.addAll(ecc.getRoutesLoader().findRoutesBuilders(resource));
-        }
-        return routesBuilders.toArray(RoutesBuilder[]::new);
     }
 }

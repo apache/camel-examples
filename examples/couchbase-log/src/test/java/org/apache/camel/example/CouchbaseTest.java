@@ -16,27 +16,26 @@
  */
 package org.apache.camel.example;
 
+import java.time.Duration;
+import java.util.Collections;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.json.JsonObject;
 import com.couchbase.client.java.manager.view.DesignDocument;
 import com.couchbase.client.java.manager.view.View;
 import com.couchbase.client.java.view.DesignDocumentNamespace;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.component.couchbase.CouchbaseConstants;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.couchbase.BucketDefinition;
 import org.testcontainers.couchbase.CouchbaseContainer;
-
-import java.time.Duration;
-import java.util.Collections;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel consume data from Couchbase.
  */
-class CouchbaseTest extends CamelTestSupport {
+class CouchbaseTest extends CamelMainTestSupport {
 
     private static final String IMAGE = "couchbase/server:7.0.3";
     private static final String BUCKET = "test-bucket-" + System.currentTimeMillis();
@@ -90,13 +89,6 @@ class CouchbaseTest extends CamelTestSupport {
     }
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
-        return camelContext;
-    }
-
-    @Override
     protected Properties useOverridePropertiesWithPropertiesComponent() {
         return asProperties(
             "couchbase.host", CONTAINER.getHost(),
@@ -122,7 +114,7 @@ class CouchbaseTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return new MyRouteBuilder();
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(MyRouteBuilder.class);
     }
 }

@@ -16,22 +16,22 @@
  */
 package org.apache.camel.example;
 
+import java.util.concurrent.TimeUnit;
+
 import io.vertx.core.Vertx;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that Camel can use VertX as reactive executor.
  */
-class VertxTest extends CamelTestSupport {
+class VertxTest extends CamelMainTestSupport {
 
     @AfterEach
     void destroy() {
@@ -42,10 +42,8 @@ class VertxTest extends CamelTestSupport {
     }
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
-        camelContext.getRegistry().bind("vertx", Vertx.vertx());
-        return camelContext;
+    protected void bindToRegistry(Registry registry) throws Exception {
+        registry.bind("vertx", Vertx.vertx());
     }
 
     @Test
@@ -57,7 +55,7 @@ class VertxTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return new MyRouteBuilder();
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(MyRouteBuilder.class);
     }
 }

@@ -19,10 +19,11 @@ package org.apache.camel.example;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.component.aws2.s3.AWS2S3Component;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 /**
  * A unit test checking that Camel can store content into an Amazon S3 bucket.
  */
-class AwsS3Test extends CamelTestSupport {
+class AwsS3Test extends CamelMainTestSupport {
 
     private static final String IMAGE = "localstack/localstack:0.13.3";
     private static LocalStackContainer CONTAINER;
@@ -63,8 +64,6 @@ class AwsS3Test extends CamelTestSupport {
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
-        // Set the location of the configuration
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
         AWS2S3Component s3 = camelContext.getComponent("aws2-s3", AWS2S3Component.class);
         s3.getConfiguration().setAmazonS3Client(
                 S3Client.builder()
@@ -89,7 +88,7 @@ class AwsS3Test extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return new MyRouteBuilder();
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(MyRouteBuilder.class);
     }
 }

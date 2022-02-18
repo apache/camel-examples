@@ -19,8 +19,8 @@ package org.apache.camel.example.websocket;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.ws.WebSocket;
@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can poll a constant feed of Twitter and publish results using WebSocket.
  */
-class CamelTwitterWebSocketTest extends CamelTestSupport {
+class CamelTwitterWebSocketTest extends CamelMainTestSupport {
 
     @Test
     void should_support_polling_twitter_publishing_websocket() throws Exception {
@@ -74,7 +74,7 @@ class CamelTwitterWebSocketTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return createTwitterWebSocketRoute("test", 100);
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(createTwitterWebSocketRoute("test", 100));
     }
 }

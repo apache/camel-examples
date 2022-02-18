@@ -16,19 +16,19 @@
  */
 package org.apache.camel.example.mongodb;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.mongodb.client.MongoClients;
 import io.restassured.response.Response;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can execute CRUD operations against MongoDB.
  */
-class MongoDBTest extends CamelTestSupport {
+class MongoDBTest extends CamelMainTestSupport {
 
     private static final String IMAGE = "mongo:5.0";
     private static MongoDBContainer CONTAINER;
@@ -59,14 +59,11 @@ class MongoDBTest extends CamelTestSupport {
     }
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
-        // Bind the MongoDB client with the host and port of the container
-        camelContext.getRegistry().bind(
+    protected void bindToRegistry(Registry registry) throws Exception {
+        registry.bind(
             "myDb",
             MongoClients.create(String.format("mongodb://%s:%d", CONTAINER.getHost(), CONTAINER.getMappedPort(27017)))
         );
-        return camelContext;
     }
 
     @Test
@@ -103,9 +100,9 @@ class MongoDBTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{
-            new MongoDBFindByIDRouteBuilder(), new MongoDBFindAllRouteBuilder(), new MongoDBInsertRouteBuilder()
-        };
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(new MongoDBFindByIDRouteBuilder());
+        configuration.addRoutesBuilder(new MongoDBFindAllRouteBuilder());
+        configuration.addRoutesBuilder(new MongoDBInsertRouteBuilder());
     }
 }

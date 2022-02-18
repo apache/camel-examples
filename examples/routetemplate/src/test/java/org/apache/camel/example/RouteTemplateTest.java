@@ -16,19 +16,19 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that Camel supports parameterized routes.
  */
-class RouteTemplateTest extends CamelTestSupport {
+class RouteTemplateTest extends CamelMainTestSupport {
 
     @Test
     void should_support_parameterized_routes() {
@@ -39,7 +39,7 @@ class RouteTemplateTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{new MyRouteTemplates(), new MyTemplateBuilder()};
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(MyRouteTemplates.class);
     }
 }

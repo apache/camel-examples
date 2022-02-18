@@ -19,12 +19,13 @@ package org.apache.camel.example.widget;
 import java.util.concurrent.TimeUnit;
 
 import javax.jms.ConnectionFactory;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.component.jms.JmsComponent;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,19 +34,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * A unit test checking that the Widget and Gadget use-case from the Enterprise Integration Patterns book works
  * properly using Apache ActiveMQ.
  */
-class WidgetGadgetTest extends CamelTestSupport {
+class WidgetGadgetTest extends CamelMainTestSupport {
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        // create CamelContext
-        CamelContext camelContext = super.createCamelContext();
+    protected void bindToRegistry(Registry registry) throws Exception {
         // connect to embedded ActiveMQ JMS broker
         ConnectionFactory connectionFactory =
                 new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
-        camelContext.addComponent("activemq",
-                JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-
-        return camelContext;
+        registry.bind("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
     }
 
     @Test
@@ -62,7 +58,8 @@ class WidgetGadgetTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{new CreateOrderRoute(), new WidgetGadgetRoute()};
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(new WidgetGadgetRoute());
+        configuration.addRoutesBuilder(new CreateOrderRoute());
     }
 }

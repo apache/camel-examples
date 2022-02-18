@@ -19,10 +19,10 @@ package org.apache.camel.example.artemis;
 import org.apache.activemq.artemis.core.config.impl.ConfigurationImpl;
 import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.core.server.impl.ActiveMQServerImpl;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * A unit test checking that the Widget and Gadget use-case from the Enterprise Integration Patterns book works
  * properly using Apache ActiveMQ Artemis.
  */
-class ArtemisTest extends CamelTestSupport {
+class ArtemisTest extends CamelMainTestSupport {
 
     private static ActiveMQServer SERVER;
 
@@ -61,13 +61,8 @@ class ArtemisTest extends CamelTestSupport {
     }
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        // create CamelContext
-        CamelContext camelContext = super.createCamelContext();
-        // connect to ActiveMQ Artemis JMS broker
-        camelContext.addComponent("jms", ArtemisMain.createArtemisComponent());
-
-        return camelContext;
+    protected void bindToRegistry(Registry registry) throws Exception {
+        registry.bind("jms", ArtemisMain.createArtemisComponent());
     }
 
     @Test
@@ -85,7 +80,11 @@ class ArtemisTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{new CreateOrderRoute(), new WidgetGadgetRoute()};
+    protected void configure(MainConfigurationProperties configuration) {
+        // add the widget/gadget route
+        configuration.addRoutesBuilder(new WidgetGadgetRoute());
+
+        // add a 2nd route that routes files from src/data to the order queue
+        configuration.addRoutesBuilder(new CreateOrderRoute());
     }
 }

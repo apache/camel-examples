@@ -16,14 +16,12 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.builder.LambdaRouteBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,36 +29,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * A unit test checking that {@code LambdaRouteBuilder} can be used to define routes
  * using lambda style.
  */
-class MainLambdaTest extends CamelTestSupport {
-
-    @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
-        return camelContext;
-    }
-
-    @Override
-    protected void postProcessTest() throws Exception {
-        super.postProcessTest();
-        context.getInjector().newInstance(MyConfiguration.class);
-    }
+class MainLambdaTest extends CamelMainTestSupport {
 
     @Test
     void should_support_routes_defined_using_a_lambda() throws Exception {
-        // We need to add the route manually for the test
-        LambdaRouteBuilder builder = context.getRegistry().findByType(LambdaRouteBuilder.class).iterator().next();
-        context.addRoutes(new RouteBuilder(context) {
-            @Override
-            public void configure() throws Exception {
-                builder.accept(this);
-            }
-        });
-        context.start();
         NotifyBuilder notify = new NotifyBuilder(context)
             .whenCompleted(1).whenBodiesDone("Bye World").create();
         assertTrue(
             notify.matches(20, TimeUnit.SECONDS), "1 message should be completed"
         );
+    }
+
+    @Override
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.withBasePackageScan(MyApplication.class.getPackageName());
     }
 }

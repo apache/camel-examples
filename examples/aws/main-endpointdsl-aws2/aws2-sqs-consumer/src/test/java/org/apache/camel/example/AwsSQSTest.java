@@ -19,11 +19,11 @@ package org.apache.camel.example;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.aws2.sqs.Sqs2Component;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -41,7 +41,7 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 /**
  * A unit test checking that Camel can consume messages from Amazon SQS.
  */
-class AwsSQSTest extends CamelTestSupport {
+class AwsSQSTest extends CamelMainTestSupport {
 
     private static final String IMAGE = "localstack/localstack:0.13.3";
     private static LocalStackContainer CONTAINER;
@@ -64,8 +64,6 @@ class AwsSQSTest extends CamelTestSupport {
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
-        // Set the location of the configuration
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
         Sqs2Component sqs = camelContext.getComponent("aws2-sqs", Sqs2Component.class);
         sqs.getConfiguration().setAmazonSQSClient(
                 SqsClient.builder()
@@ -95,8 +93,9 @@ class AwsSQSTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{new MyRouteBuilder(), new PublishMessageRouteBuilder()};
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(MyRouteBuilder.class);
+        configuration.addRoutesBuilder(new PublishMessageRouteBuilder());
     }
 
     private static class PublishMessageRouteBuilder extends RouteBuilder {

@@ -20,14 +20,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.aws2.kinesis.Kinesis2Component;
 import org.apache.camel.component.sql.SqlComponent;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -54,7 +55,7 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 /**
  * A unit test checking that Camel can propagate changes from one Database to another thanks to Debezium.
  */
-class DebeziumTest extends CamelTestSupport {
+class DebeziumTest extends CamelMainTestSupport {
 
     private static final String AWS_IMAGE = "localstack/localstack:0.13.3";
     private static final String PGSQL_IMAGE = "debezium/example-postgres:1.9";
@@ -101,8 +102,6 @@ class DebeziumTest extends CamelTestSupport {
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
-        // Set the location of the configuration
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
         Kinesis2Component component = camelContext.getComponent("aws2-kinesis", Kinesis2Component.class);
         KinesisClient kinesisClient = KinesisClient.builder()
                 .endpointOverride(AWS_CONTAINER.getEndpointOverride(KINESIS))
@@ -116,17 +115,19 @@ class DebeziumTest extends CamelTestSupport {
         // Create the stream
         kinesisClient.createStream(CreateStreamRequest.builder().streamName("camel-debezium-example").shardCount(1).build());
         component.getConfiguration().setAmazonKinesisClient(kinesisClient);
-        // Override the host and port of the broker
-        camelContext.getPropertiesComponent().setOverrideProperties(
-            asProperties(
-                "debezium.postgres.databaseHostName", PGSQL_CONTAINER.getHost(),
-                "debezium.postgres.databasePort", Integer.toString(PGSQL_CONTAINER.getMappedPort(5432)),
-                "debezium.postgres.databaseUser", SOURCE_DB_USERNAME,
-                "debezium.postgres.databasePassword", SOURCE_DB_PASSWORD,
-                "cassandra.host", String.format("%s:%d", CASSANDRA_CONTAINER.getHost(), CASSANDRA_CONTAINER.getMappedPort(9042))
-            )
-        );
         return camelContext;
+    }
+
+    @Override
+    protected Properties useOverridePropertiesWithPropertiesComponent() {
+        // Override the host and port of the broker
+        return asProperties(
+            "debezium.postgres.databaseHostName", PGSQL_CONTAINER.getHost(),
+            "debezium.postgres.databasePort", Integer.toString(PGSQL_CONTAINER.getMappedPort(5432)),
+            "debezium.postgres.databaseUser", SOURCE_DB_USERNAME,
+            "debezium.postgres.databasePassword", SOURCE_DB_PASSWORD,
+            "cassandra.host", String.format("%s:%d", CASSANDRA_CONTAINER.getHost(), CASSANDRA_CONTAINER.getMappedPort(9042))
+        );
     }
 
     @Test
@@ -161,11 +162,10 @@ class DebeziumTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{
-                DebeziumPgSQLConsumerToKinesis.createRouteBuilder(), KinesisProducerToCassandra.createRouteBuilder(),
-            new ApplyChangesToPgSQLRouteBuilder()
-        };
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(DebeziumPgSQLConsumerToKinesis.createRouteBuilder());
+        configuration.addRoutesBuilder(KinesisProducerToCassandra.createRouteBuilder());
+        configuration.addRoutesBuilder(new ApplyChangesToPgSQLRouteBuilder());
     }
 
     private static class ApplyChangesToPgSQLRouteBuilder extends RouteBuilder {

@@ -16,37 +16,19 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.ExtendedCamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.spi.PackageScanResourceResolver;
-import org.apache.camel.spi.Resource;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
 
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * A unit test checking that Camel supports YAML routes.
  */
-class MainYAMLTest extends CamelTestSupport {
-
-    @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
-        return camelContext;
-    }
-
-    @Override
-    protected void postProcessTest() throws Exception {
-        super.postProcessTest();
-        context.getInjector().newInstance(MyConfiguration.class);
-    }
+class MainYAMLTest extends CamelMainTestSupport {
 
     @Test
     void should_support_yaml_routes() {
@@ -57,13 +39,7 @@ class MainYAMLTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() throws Exception {
-        final ExtendedCamelContext ecc = context.adapt(ExtendedCamelContext.class);
-        final PackageScanResourceResolver resolver = ecc.getPackageScanResourceResolver();
-        for (Resource resource : resolver.findResources("/routes/my-route.yaml")) {
-            return ecc.getRoutesLoader().findRoutesBuilders(resource).toArray(RoutesBuilder[]::new);
-        }
-        fail("Should find the routes");
-        return null;
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.withBasePackageScan(MyApplication.class.getPackageName());
     }
 }

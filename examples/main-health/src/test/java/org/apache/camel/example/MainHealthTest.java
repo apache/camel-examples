@@ -16,14 +16,15 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.AdviceWith;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.AdviceWith;
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,26 +32,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel supports custom health-checks.
  */
-class MainHealthTest extends CamelTestSupport {
-
-    @Override
-    public boolean isUseAdviceWith() {
-        return true;
-    }
+class MainHealthTest extends CamelMainTestSupport {
 
     @Override
     protected Properties useOverridePropertiesWithPropertiesComponent() {
         return asProperties("myPeriod", Integer.toString(500));
     }
 
+    @Override
+    @BeforeEach
+    public void setUp() throws Exception {
+        // Prevent failure by replacing the failing endpoint
+        replaceRouteFromWith("netty", "direct:foo");
+        super.setUp();
+    }
+
     @Test
     void should_support_custom_health_checks() throws Exception {
-        // Prevent failure by replacing the failing endpoint
-        AdviceWith.adviceWith(context, "netty", ad -> ad.replaceFromWith("direct:foo"));
-
-        // must start Camel after we are done using advice-with
-        context.start();
-
         NotifyBuilder notify = new NotifyBuilder(context)
             .whenCompleted(2).whenBodiesDone("Chaos monkey was here", "All is okay").create();
         assertTrue(
@@ -59,7 +57,7 @@ class MainHealthTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return new MyRouteBuilder();
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(MyRouteBuilder.class);
     }
 }

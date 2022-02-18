@@ -16,9 +16,9 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that the compiled simple expressions using jooR compiler are evaluated as expected.
  */
-class CSimpleJOORTest extends CamelTestSupport {
+class CSimpleJOORTest extends CamelMainTestSupport {
 
 
     @Override
@@ -48,7 +48,7 @@ class CSimpleJOORTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return new MyRouteBuilder();
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(MyRouteBuilder.class);
     }
 }
