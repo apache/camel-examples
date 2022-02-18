@@ -20,54 +20,58 @@ import org.apache.camel.example.cxf.jaxrs.resources.Book;
 import org.apache.camel.example.cxf.jaxrs.resources.BookNotFoundFault;
 import org.apache.camel.example.cxf.jaxrs.resources.BookStore;
 import org.apache.camel.test.AvailablePortFinder;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
 import org.apache.cxf.BusFactory;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class JAXRSClientServerTest extends CamelSpringTestSupport {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+class JAXRSClientServerTest extends CamelSpringTestSupport {
     
-    @BeforeClass
+    @BeforeAll
     public static void setupPorts() {
         System.setProperty("soapEndpointPort", String.valueOf(AvailablePortFinder.getNextAvailable()));
         System.setProperty("restEndpointPort", String.valueOf(AvailablePortFinder.getNextAvailable()));
     }
     
     @Test
-    public void testJAXWSClient() throws BookNotFoundFault {
+    void testJAXWSClient() throws BookNotFoundFault {
         JAXWSClient jaxwsClient = new JAXWSClient();
         BookStore bookStore = jaxwsClient.getBookStore();
         
         bookStore.addBook(new Book("Camel User Guide", 123L));
         Book book = bookStore.getBook(123L);
-        assertNotNull("We should find the book here", book);       
+        assertNotNull(book, "We should find the book here");
       
         try {
             book = bookStore.getBook(124L);
             fail("We should not have this book");
         } catch (Exception exception) {
-            assertTrue("The exception should be BookNotFoundFault", exception instanceof BookNotFoundFault);
+            assertTrue(exception instanceof BookNotFoundFault, "The exception should be BookNotFoundFault");
         }
     }
     
     @Test
-    public void testJAXRSClient() throws BookNotFoundFault {
+    void testJAXRSClient() throws BookNotFoundFault {
         // JAXRSClient invocation
         JAXRSClient jaxrsClient = new JAXRSClient();
         BookStore bookStore =  jaxrsClient.getBookStore();
         
         bookStore.addBook(new Book("Camel User Guide", 124L));
         Book book = bookStore.getBook(124L);
-        assertNotNull("We should find the book here", book);   
+        assertNotNull(book, "We should find the book here");
         
         try {
             book = bookStore.getBook(126L);
             fail("We should not have this book");
         } catch (Exception exception) {
-            assertTrue("The exception should be BookNotFoundFault", exception instanceof BookNotFoundFault);
+            assertTrue(exception instanceof BookNotFoundFault, "The exception should be BookNotFoundFault");
         }
     }
 
@@ -77,7 +81,7 @@ public class JAXRSClientServerTest extends CamelSpringTestSupport {
     }
     
     @Override
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         super.tearDown();
         BusFactory.setDefaultBus(null);

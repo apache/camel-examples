@@ -19,7 +19,6 @@ package org.apache.camel.example.cafe;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.example.cafe.stuff.Barista;
@@ -28,21 +27,15 @@ import org.apache.camel.example.cafe.stuff.OrderSplitter;
 import org.apache.camel.example.cafe.test.TestDrinkRouter;
 import org.apache.camel.example.cafe.test.TestWaiter;
 import org.apache.camel.spi.Registry;
-import org.apache.camel.test.junit4.CamelTestSupport;
-import org.junit.Test;
+import org.apache.camel.test.junit5.CamelTestSupport;
+import org.junit.jupiter.api.Test;
 
-public class CafeRouteBuilderTest extends CamelTestSupport {
+class CafeRouteBuilderTest extends CamelTestSupport {
     protected TestWaiter waiter = new TestWaiter();
     protected TestDrinkRouter driverRouter = new TestDrinkRouter();
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext context = super.createCamelContext();
-        bindBeans(context.getRegistry());
-        return context;
-    }
-
-    protected void bindBeans(Registry registry) throws Exception {
+    protected void bindToRegistry(Registry registry) throws Exception {
         registry.bind("drinkRouter", driverRouter);
         registry.bind("orderSplitter", new OrderSplitter());
         registry.bind("barista", new Barista());
@@ -51,7 +44,7 @@ public class CafeRouteBuilderTest extends CamelTestSupport {
     }
 
     @Test
-    public void testSplitter() throws InterruptedException {
+    void testSplitter() throws InterruptedException {
         MockEndpoint coldDrinks = context.getEndpoint("mock:coldDrinks", MockEndpoint.class);
         MockEndpoint hotDrinks = context.getEndpoint("mock:hotDrinks", MockEndpoint.class);
         
@@ -68,7 +61,7 @@ public class CafeRouteBuilderTest extends CamelTestSupport {
     }
     
     @Test
-    public void testCafeRoute() throws Exception {
+    void testCafeRoute() throws Exception {
         driverRouter.setTestModel(false);
         List<Drink> drinks = new ArrayList<>();
         Order order = new Order(2);

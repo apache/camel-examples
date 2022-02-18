@@ -18,19 +18,22 @@ package org.apache.camel.example.cxf.httptojms;
 
 import java.net.MalformedURLException;
 
-import org.apache.camel.test.spring.CamelSpringTestSupport;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
 import org.apache.hello_world_soap_http.Greeter;
 import org.apache.hello_world_soap_http.PingMeFault;
 import org.apache.hello_world_soap_http.types.FaultDetail;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class CxfHttpJmsClientServerTest extends CamelSpringTestSupport {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+class CxfHttpJmsClientServerTest extends CamelSpringTestSupport {
     private static final String ROUTER_ADDRESS = "http://localhost:{{routerPort}}/SoapContext/SoapPort";
 
     @Test
-    public void testClientInvocation() throws MalformedURLException {
+    void testClientInvocation() throws MalformedURLException {
         String address = ROUTER_ADDRESS.replace("{{routerPort}}", System.getProperty("routerPort"));
         
         Client client = new Client(address + "?wsdl");
@@ -38,10 +41,10 @@ public class CxfHttpJmsClientServerTest extends CamelSpringTestSupport {
 
         String resp;
         resp = proxy.sayHi();
-        assertEquals("Get a wrong response", "Bonjour", resp);
+        assertEquals("Bonjour", resp, "Get a wrong response");
 
         resp = proxy.greetMe("Willem");
-        assertEquals("Get a wrong response", "Hello Willem", resp);
+        assertEquals("Hello Willem", resp, "Get a wrong response");
 
         proxy.greetMeOneWay(System.getProperty("user.name"));
 
@@ -50,8 +53,8 @@ public class CxfHttpJmsClientServerTest extends CamelSpringTestSupport {
             fail("exception expected but none thrown");
         } catch (PingMeFault ex) {
             FaultDetail detail = ex.getFaultInfo();
-            assertEquals("Wrong FaultDetail major:", 2, detail.getMajor());
-            assertEquals("Wrong FaultDetail minor:", 1, detail.getMinor());
+            assertEquals(2, detail.getMajor(), "Wrong FaultDetail major:");
+            assertEquals(1, detail.getMinor(), "Wrong FaultDetail minor:");
         }
     }
 

@@ -19,16 +19,16 @@ package org.apache.camel.example.cafe;
 import org.apache.camel.CamelContext;
 import org.apache.camel.example.cafe.test.TestDrinkRouter;
 import org.apache.camel.example.cafe.test.TestWaiter;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class CafeRouteSpringTest extends CafeRouteBuilderTest {
+class CafeRouteSpringTest extends CafeRouteBuilderTest {
     private AbstractApplicationContext applicationContext;
 
     @Override
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         applicationContext = new ClassPathXmlApplicationContext("META-INF/camel-routes.xml");
         setUseRouteBuilder(false);
@@ -38,7 +38,7 @@ public class CafeRouteSpringTest extends CafeRouteBuilderTest {
     }
     
     @Override
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         super.tearDown();
         if (applicationContext != null) {
