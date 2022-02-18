@@ -20,17 +20,23 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import org.apache.camel.test.AvailablePortFinder;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class LoanBrokerWSTest extends CamelSpringTestSupport {
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class LoanBrokerWSTest extends CamelSpringTestSupport {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LoanBrokerWSTest.class);
 
     private static String url;
 
-    @BeforeClass
+    @BeforeAll
     public static void setupFreePort() throws Exception {
         // find a free port number, and write that in the custom.properties file
         // which we will use for the unit tests, to avoid port number in use problems
@@ -63,10 +69,10 @@ public class LoanBrokerWSTest extends CamelSpringTestSupport {
     }
 
     @Test
-    public void testInvocation() throws Exception {
+    void testInvocation() throws Exception {
         LoanBrokerWS loanBroker = Client.getProxy(url);
         String result = loanBroker.getLoanQuote("SSN", 1000.54, 10);
-        log.info("Result: {}", result);
+        LOG.info("Result: {}", result);
         assertTrue(result.startsWith("The best rate is [ssn:SSN bank:bank"));
     }
 

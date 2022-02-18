@@ -18,19 +18,27 @@ package org.apache.camel.loanbroker;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.test.junit4.TestSupport;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.camel.test.junit5.CamelTestSupport;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class LoanBrokerQueueTest extends TestSupport {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class LoanBrokerQueueTest extends CamelTestSupport {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LoanBrokerQueueTest.class);
+
     private AbstractApplicationContext applicationContext;
     private CamelContext camelContext;
     private ProducerTemplate template;
 
-    @Before
+    @BeforeEach
     public void startServices() throws Exception {
         applicationContext = new ClassPathXmlApplicationContext("META-INF/spring/server.xml");
         camelContext = getCamelContext();
@@ -39,7 +47,7 @@ public class LoanBrokerQueueTest extends TestSupport {
         camelContext.start();
     }
 
-    @After
+    @AfterEach
     public void stopServices() throws Exception {
         if (camelContext != null) {
             camelContext.stop();
@@ -47,10 +55,10 @@ public class LoanBrokerQueueTest extends TestSupport {
     }
 
     @Test
-    public void testClientInvocation() throws Exception {
+    void testClientInvocation() throws Exception {
         String out = template.requestBodyAndHeader("jms:queue:loan", null, Constants.PROPERTY_SSN, "Client-A", String.class);
 
-        log.info("Result: {}", out);
+        LOG.info("Result: {}", out);
         assertNotNull(out);
         assertTrue(out.startsWith("The best rate is [ssn:Client-A bank:bank"));
     }

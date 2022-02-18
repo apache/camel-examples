@@ -17,33 +17,35 @@
 package org.apache.camel.example.pojo;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class CamelContextTest extends CamelSpringTestSupport {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class CamelContextTest extends CamelSpringTestSupport {
 
     @Override
-    @Before
-    public void setUp() throws Exception {
-        deleteDirectory("target/messages");
-        super.setUp();
+    protected Path testDirectory() {
+        return Paths.get("target/messages");
     }
 
     @Test
-    public void testCheckFiles() throws Exception {
+    void testCheckFiles() throws Exception {
         // wait a little for the files to be picked up and processed
         Thread.sleep(5000);
 
         File file = new File("target/messages/emea/hr_pickup");
-        assertTrue("The pickup folder should exists", file.exists());
-        assertEquals("There should be 1 dumped files", 1, file.list().length);
+        assertTrue(file.exists(), "The pickup folder should exists");
+        assertEquals(1, file.list().length, "There should be 1 dumped files");
         file = new File("target/messages/amer/hr_pickup");
-        assertTrue("The pickup folder should exists", file.exists());
-        assertEquals("There should be 2 dumped files", 2, file.list().length);
+        assertTrue(file.exists(), "The pickup folder should exists");
+        assertEquals(2, file.list().length, "There should be 2 dumped files");
     }
 
     @Override

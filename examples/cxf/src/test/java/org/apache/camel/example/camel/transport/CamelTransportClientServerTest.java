@@ -22,18 +22,21 @@ import org.apache.camel.test.AvailablePortFinder;
 import org.apache.hello_world_soap_http.Greeter;
 import org.apache.hello_world_soap_http.PingMeFault;
 import org.apache.hello_world_soap_http.types.FaultDetail;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class CamelTransportClientServerTest extends Assert {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
+class CamelTransportClientServerTest {
     static AbstractApplicationContext context;
     static int port;
     
-    @BeforeClass
+    @BeforeAll
     public static void startUpServer() throws Exception {
         if (!"true".equalsIgnoreCase(System.getProperty("skipStartingCamelContext"))) {
             port = AvailablePortFinder.getNextAvailable();
@@ -44,7 +47,7 @@ public class CamelTransportClientServerTest extends Assert {
         }
     }
     
-    @AfterClass
+    @AfterAll
     public static void shutDownServer() {
         if (context != null) {
             context.stop();
@@ -52,23 +55,23 @@ public class CamelTransportClientServerTest extends Assert {
     }
     
     @Test
-    public void testClientInvocation() throws MalformedURLException {
+    void testClientInvocation() throws MalformedURLException {
         Client client = new Client("http://localhost:" + port + "/GreeterContext/GreeterPort");
         Greeter port = client.getProxy();
         
-        assertNotNull("The proxy should not be null", port);
+        assertNotNull(port, "The proxy should not be null");
         String resp = port.sayHi();
-        assertEquals("Get a wrong response ", "Bonjour from EndpointA", resp);        
+        assertEquals("Bonjour from EndpointA", resp, "Get a wrong response ");
 
         resp = port.sayHi();
-        assertEquals("Get a wrong response ", "Bonjour from EndpointB", resp);  
+        assertEquals("Bonjour from EndpointB", resp, "Get a wrong response ");
 
        
         resp = port.greetMe("Mike");
-        assertEquals("Get a wrong response ", "Hello Mike from EndpointA", resp);
+        assertEquals("Hello Mike from EndpointA", resp, "Get a wrong response ");
         
         resp = port.greetMe("James");
-        assertEquals("Get a wrong response ", "Hello James from EndpointB", resp);  
+        assertEquals("Hello James from EndpointB", resp, "Get a wrong response ");
        
         port.greetMeOneWay(System.getProperty("user.name"));
 
@@ -76,10 +79,10 @@ public class CamelTransportClientServerTest extends Assert {
             port.pingMe("hello");
             fail("exception expected but none thrown");
         } catch (PingMeFault ex) {
-            assertEquals("Wrong exception message received", "PingMeFault raised by server EndpointB", ex.getMessage());
+            assertEquals("PingMeFault raised by server EndpointB", ex.getMessage(), "Wrong exception message received");
             FaultDetail detail = ex.getFaultInfo();
-            assertEquals("Wrong FaultDetail major:", 2, detail.getMajor());
-            assertEquals("Wrong FaultDetail minor:", 1, detail.getMinor());
+            assertEquals(2, detail.getMajor(), "Wrong FaultDetail major:");
+            assertEquals(1, detail.getMinor(), "Wrong FaultDetail minor:");
         }
 
     }

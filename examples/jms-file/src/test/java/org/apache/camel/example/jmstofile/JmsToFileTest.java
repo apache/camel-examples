@@ -16,19 +16,19 @@
  */
 package org.apache.camel.example.jmstofile;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.component.jms.JmsComponent;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.camel.RoutesBuilder;
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.component.jms.JmsComponent;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.junit5.CamelTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.camel.example.jmstofile.CamelJmsToFileExample.createActiveMQConnectionFactory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,15 +40,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class JmsToFileTest extends CamelTestSupport {
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
-        // Set up the ActiveMQ JMS Components
-        // tag::e2[]
-        ActiveMQConnectionFactory connectionFactory = createActiveMQConnectionFactory();
-        // Note we can explicitly name the component
-        camelContext.addComponent("test-jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-
-        return camelContext;
+    protected void bindToRegistry(Registry registry) throws Exception {
+        registry.bind("test-jms", JmsComponent.jmsComponentAutoAcknowledge(createActiveMQConnectionFactory()));
     }
 
     @Test

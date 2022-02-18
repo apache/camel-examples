@@ -22,13 +22,19 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.test.junit4.CamelTestSupport;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.apache.camel.test.junit5.CamelTestSupport;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class XmlTokenizerTest extends CamelTestSupport {
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    @BeforeClass
+class XmlTokenizerTest extends CamelTestSupport {
+
+    private static final Logger LOG = LoggerFactory.getLogger(XmlTokenizerTest.class);
+
+    @BeforeAll
     public static void beforeClass() throws Exception {
         TestUtils.buildTestXml();
     }
@@ -46,11 +52,11 @@ public class XmlTokenizerTest extends CamelTestSupport {
     }
 
     @Test
-    public void test() throws Exception {
+    void test() throws Exception {
         NotifyBuilder notify = new NotifyBuilder(context).whenDone(TestUtils.getNumOfRecords()).create();
         boolean matches = notify.matches(TestUtils.getMaxWaitTime(), TimeUnit.MILLISECONDS);
-        log.info("Processed XML file with {} records", TestUtils.getNumOfRecords());
-        assertTrue("Test completed", matches);
+        LOG.info("Processed XML file with {} records", TestUtils.getNumOfRecords());
+        assertTrue(matches, "Test completed");
     }
 
     @Override

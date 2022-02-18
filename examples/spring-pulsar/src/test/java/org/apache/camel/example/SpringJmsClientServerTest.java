@@ -24,15 +24,17 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Producer;
 import org.apache.camel.test.AvailablePortFinder;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class SpringJmsClientServerTest extends CamelSpringTestSupport {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    @BeforeClass
+class SpringJmsClientServerTest extends CamelSpringTestSupport {
+
+    @BeforeAll
     public static void setupFreePort() throws Exception {
         // find a free port number, and write that in the custom.properties file
         // which we will use for the unit tests, to avoid port number in use problems
@@ -51,14 +53,14 @@ public class SpringJmsClientServerTest extends CamelSpringTestSupport {
     }
     
     @Test
-    public void testCamelClientInvocation() {
+    void testCamelClientInvocation() {
         // as opposed to the CamelClientRemoting example we need to define the service URI in this java code
         int response = template.requestBody("jms:queue:numbers", 22, Integer.class);
-        assertEquals("Get a wrong response", 66, response);
+        assertEquals(66, response, "Get a wrong response");
     }
     
     @Test
-    public void testCamelEndpointInvocation() throws Exception {
+    void testCamelEndpointInvocation() throws Exception {
         // get the endpoint from the camel context
         Endpoint endpoint = context.getEndpoint("jms:queue:numbers");
 
@@ -78,9 +80,9 @@ public class SpringJmsClientServerTest extends CamelSpringTestSupport {
         producer.process(exchange);
 
         // get the response from the out body and cast it to an integer
-        int response = exchange.getOut().getBody(Integer.class);
+        int response = exchange.getIn().getBody(Integer.class);
         
-        assertEquals("Get a wrong response.", 33, response);
+        assertEquals(33, response, "Get a wrong response.");
 
         // stop the producer after usage
         producer.stop();

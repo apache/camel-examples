@@ -23,22 +23,23 @@ import org.apache.camel.spring.Main;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.util.FileUtil;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit test of our routes
  */
-public class ReportIncidentRoutesTest {
+class ReportIncidentRoutesTest {
 
     // should be the same address as we have in our route
     private static String url;
 
     protected Main main;
 
-    @BeforeClass
+    @BeforeAll
     public static void setupFreePort() throws Exception {
         // find a free port number, and write that in the custom.properties file
         // which we will use for the unit tests, to avoid port number in use problems
@@ -57,13 +58,13 @@ public class ReportIncidentRoutesTest {
         url = "http://localhost:" + port + "/camel-example-cxf-proxy/webservices/incident";
     }
 
-    @AfterClass
+    @AfterAll
     public static void cleanup() {
         File custom = new File("target/custom.properties");
         FileUtil.deleteFile(custom);
     }
 
-    protected void startCamel() throws Exception {
+    protected void startCamel() {
         if (!"true".equalsIgnoreCase(System.getProperty("skipStartingCamelContext"))) {
             main = new Main();
             main.setApplicationContextUri("META-INF/spring/camel-config.xml");
@@ -73,7 +74,7 @@ public class ReportIncidentRoutesTest {
         }
     }
     
-    protected void stopCamel() throws Exception {
+    protected void stopCamel() {
         if (main != null) {
             main.stop();
         }
@@ -88,7 +89,7 @@ public class ReportIncidentRoutesTest {
     }
 
     @Test
-    public void testReportIncident() throws Exception {
+    void testReportIncident() {
         // start camel
         startCamel();
 
@@ -98,7 +99,7 @@ public class ReportIncidentRoutesTest {
         stopCamel();
     }
     
-    protected void runTest() throws Exception {
+    protected void runTest() {
        
         // create input parameter
         InputReportIncident input = new InputReportIncident();
@@ -117,6 +118,6 @@ public class ReportIncidentRoutesTest {
         OutputReportIncident out = client.reportIncident(input);
 
         // assert we got a OK back
-        Assert.assertEquals("OK;456", out.getCode());
+        assertEquals("OK;456", out.getCode());
     }
 }

@@ -18,23 +18,25 @@ package org.apache.camel.example.provider;
 
 import org.apache.camel.example.cxf.provider.Client;
 import org.apache.camel.test.AvailablePortFinder;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.Test;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ProviderClientServerTest extends CamelSpringTestSupport {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class ProviderClientServerTest extends CamelSpringTestSupport {
     
     int port;
     
-    @Test 
-    public void testClientInvocation() throws Exception {
+    @Test
+    void testClientInvocation() throws Exception {
         // set the client's service access point
         Client client = new Client("http://localhost:" + port + "/GreeterContext/SOAPMessageService");
         // invoke the services
         String response = client.invoke();
         
-        assertEquals("Get a wrong response", "Greetings from Apache Camel!!!! Request was  Hello Camel!!", response);
+        assertEquals("Greetings from Apache Camel!!!! Request was  Hello Camel!!", response, "Get a wrong response");
     }
 
     @Override

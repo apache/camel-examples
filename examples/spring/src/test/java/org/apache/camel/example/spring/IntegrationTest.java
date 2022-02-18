@@ -17,13 +17,12 @@
 package org.apache.camel.example.spring;
 
 import org.apache.camel.spring.Main;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class IntegrationTest extends Assert {
+class IntegrationTest {
 
     @Test
-    public void testCamelRulesDeployCorrectlyInSpring() throws Exception {
+    void testCamelRulesDeployCorrectlyInSpring() throws Exception {
         // let's boot up the Spring application context for 2 seconds to check that it works OK
         Main main = new Main();
         main.run(new String[]{"-duration", "2s"});

@@ -21,12 +21,14 @@ import java.util.Set;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.Test;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ManagementExampleTest extends CamelSpringTestSupport {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class ManagementExampleTest extends CamelSpringTestSupport {
 
     @Override
     protected AbstractXmlApplicationContext createApplicationContext() {
@@ -34,7 +36,7 @@ public class ManagementExampleTest extends CamelSpringTestSupport {
     }
 
     @Test
-    public void testManagementExample() throws Exception {
+    void testManagementExample() throws Exception {
         // Give it a bit of time to run
         Thread.sleep(2000);
 

@@ -16,19 +16,19 @@
  */
 package org.apache.camel.example.kafka;
 
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.test.junit5.CamelTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.utility.DockerImageName;
-
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import static org.apache.camel.example.kafka.MessagePublisherClient.setUpKafkaComponent;
 import static org.apache.camel.util.PropertiesHelper.asProperties;
@@ -56,11 +56,6 @@ class KafkaTest extends CamelTestSupport {
     }
 
     @Override
-    public boolean isUseAdviceWith() {
-        return true;
-    }
-
-    @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
         // Set the location of the configuration
@@ -76,14 +71,15 @@ class KafkaTest extends CamelTestSupport {
         return camelContext;
     }
 
+    @BeforeEach
+    public void setUp() throws Exception {
+        // Replace the from endpoint to send messages easily
+        replaceRouteFromWith("input", "direct:in");
+        super.setUp();
+    }
+
     @Test
     void should_exchange_messages_with_a_kafka_broker() throws Exception {
-        // Replace the from endpoint to send messages easily
-        AdviceWith.adviceWith(context, "input", ad -> ad.replaceFromWith("direct:in"));
-
-        // must start Camel after we are done using advice-with
-        context.start();
-
         String message = UUID.randomUUID().toString();
         template.sendBody("direct:in", message);
         NotifyBuilder notify = new NotifyBuilder(context).fromRoute("FromKafka")
