@@ -16,24 +16,19 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.ExtendedCamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.spi.PackageScanResourceResolver;
-import org.apache.camel.spi.Resource;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that Camel supports parameterized routes in XML.
  */
-class RouteTemplateXMLTest extends CamelTestSupport {
+class RouteTemplateXMLTest extends CamelMainTestSupport {
 
     @Test
     void should_support_parameterized_routes() {
@@ -44,15 +39,7 @@ class RouteTemplateXMLTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() throws Exception {
-        final ExtendedCamelContext ecc = context.adapt(ExtendedCamelContext.class);
-        final PackageScanResourceResolver resolver = ecc.getPackageScanResourceResolver();
-        final List<RoutesBuilder> routesBuilders = new ArrayList<>();
-        for (String location : List.of("templates/*","builders/*")) {
-            for (Resource resource : resolver.findResources(location)) {
-                routesBuilders.addAll(ecc.getRoutesLoader().findRoutesBuilders(resource));
-            }
-        }
-        return routesBuilders.toArray(RoutesBuilder[]::new);
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.withRoutesIncludePattern("templates/*.xml,builders/*.xml");
     }
 }

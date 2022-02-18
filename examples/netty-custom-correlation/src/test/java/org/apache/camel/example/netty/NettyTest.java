@@ -16,14 +16,14 @@
  */
 package org.apache.camel.example.netty;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Predicate;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.Predicate;
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.camel.example.netty.MyClient.createCorrelationManager;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,17 +31,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can communicate over TCP with Netty using a custom codec.
  */
-class NettyTest extends CamelTestSupport {
+class NettyTest extends CamelMainTestSupport {
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
+    protected void bindToRegistry(Registry registry) throws Exception {
         // Bind the Correlation Manager to use for the test
-        camelContext.getRegistry().bind("myManager", createCorrelationManager());
+        registry.bind("myManager", createCorrelationManager());
         // Bind the custom codec
-        camelContext.getRegistry().bind("myEncoder", new MyCodecEncoderFactory());
-        camelContext.getRegistry().bind("myDecoder", new MyCodecDecoderFactory());
-        return camelContext;
+        registry.bind("myEncoder", new MyCodecEncoderFactory());
+        registry.bind("myDecoder", new MyCodecDecoderFactory());
     }
 
     @Test
@@ -56,7 +54,8 @@ class NettyTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{new MyServer.MyRouteBuilder(), new MyClient.MyRouteBuilder()};
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(new MyServer.MyRouteBuilder());
+        configuration.addRoutesBuilder(new MyClient.MyRouteBuilder());
     }
 }

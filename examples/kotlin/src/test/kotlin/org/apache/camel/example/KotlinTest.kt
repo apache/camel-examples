@@ -19,8 +19,8 @@ package org.apache.camel.example
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
-import org.apache.camel.RoutesBuilder
-import org.apache.camel.test.junit5.CamelTestSupport
+import org.apache.camel.main.MainConfigurationProperties
+import org.apache.camel.test.main.junit5.CamelMainTestSupport
 import org.apache.http.HttpStatus
 import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test
 /**
  * A unit test checking that Camel supports Kotlin.
  */
-class KotlinTest: CamelTestSupport() {
+class KotlinTest: CamelMainTestSupport() {
 
     @Test
     fun `should support kotlin`() {
@@ -42,7 +42,7 @@ class KotlinTest: CamelTestSupport() {
         }
     }
 
-    override fun createRouteBuilder(): RoutesBuilder {
-        return MyRouteBuilder()
+    override fun configure(configuration: MainConfigurationProperties) {
+        configuration.addRoutesBuilder(MyRouteBuilder())
     }
 }

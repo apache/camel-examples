@@ -16,34 +16,19 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that Camel supports binding via annotations.
  */
-class MainTest extends CamelTestSupport {
-
-    @Override
-    protected CamelContext createCamelContext() throws Exception {
-        CamelContext camelContext = super.createCamelContext();
-        camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
-        camelContext.getPropertiesComponent().addLocation("file:src/main/data/foo.properties");
-        return camelContext;
-    }
-
-    @Override
-    protected void postProcessTest() throws Exception {
-        super.postProcessTest();
-        context.getInjector().newInstance(MyConfiguration.class);
-    }
+class MainTest extends CamelMainTestSupport {
 
     @Test
     void should_support_binding_via_annotations() {
@@ -55,7 +40,7 @@ class MainTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return new MyRouteBuilder();
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.withBasePackageScan(MyApplication.class.getPackageName());
     }
 }

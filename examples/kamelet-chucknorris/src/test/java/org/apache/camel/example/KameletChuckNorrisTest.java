@@ -16,24 +16,19 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.ExtendedCamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.spi.PackageScanResourceResolver;
-import org.apache.camel.spi.Resource;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A unit test checking that Camel can use a simple Kamelet.
  */
-class KameletChuckNorrisTest extends CamelTestSupport {
+class KameletChuckNorrisTest extends CamelMainTestSupport {
 
     @Test
     void should_use_a_simple_kamelet() {
@@ -44,13 +39,7 @@ class KameletChuckNorrisTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() throws Exception {
-        final ExtendedCamelContext ecc = context.adapt(ExtendedCamelContext.class);
-        final PackageScanResourceResolver resolver = ecc.getPackageScanResourceResolver();
-        final List<RoutesBuilder> routesBuilders = new ArrayList<>();
-        for (Resource resource : resolver.findResources("camel/*")) {
-            routesBuilders.addAll(ecc.getRoutesLoader().findRoutesBuilders(resource));
-        }
-        return routesBuilders.toArray(RoutesBuilder[]::new);
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.withRoutesIncludePattern("camel/*");
     }
 }

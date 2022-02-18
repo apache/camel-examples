@@ -16,9 +16,9 @@
  */
 package org.apache.camel.example.java8;
 
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel supports properly lambda expressions and method references.
  */
-class Java8Test extends CamelTestSupport {
+class Java8Test extends CamelMainTestSupport {
 
     @Test
     void should_be_evaluated() {
@@ -40,7 +40,7 @@ class Java8Test extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{new MyApplication.MyRouteBuilder()};
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addRoutesBuilder(new MyApplication.MyRouteBuilder());
     }
 }

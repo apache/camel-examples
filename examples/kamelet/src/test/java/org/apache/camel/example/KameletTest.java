@@ -16,9 +16,9 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can build routes thanks to Kamelet.
  */
-class KameletTest extends CamelTestSupport {
+class KameletTest extends CamelMainTestSupport {
 
     @Test
     void should_build_routes_from_kamelets() {
@@ -40,7 +40,7 @@ class KameletTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder[] createRouteBuilders() {
-        return new RoutesBuilder[]{new MyRouteTemplates(), new MyRoutes()};
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.withBasePackageScan(MyApplication.class.getPackageName());
     }
 }

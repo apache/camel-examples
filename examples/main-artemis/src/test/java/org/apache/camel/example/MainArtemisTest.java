@@ -16,24 +16,23 @@
  */
 package org.apache.camel.example;
 
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.config.impl.ConfigurationImpl;
 import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.core.server.impl.ActiveMQServerImpl;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
-import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.spi.Registry;
+import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import org.apache.activemq.artemis.core.config.Configuration;
-
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can send and consume messages to/from Apache ActiveMQ Artemis.
  */
-class MainArtemisTest extends CamelTestSupport {
+class MainArtemisTest extends CamelMainTestSupport {
 
     private static ActiveMQServer SERVER;
 
@@ -70,9 +69,7 @@ class MainArtemisTest extends CamelTestSupport {
     }
 
     @Override
-    protected CamelContext createCamelContext() throws Exception {
-        // create CamelContext
-        CamelContext camelContext = super.createCamelContext();
+    protected void bindToRegistry(Registry registry) throws Exception {
         // Sets up the Artemis core protocol connection factory
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 
@@ -80,9 +77,7 @@ class MainArtemisTest extends CamelTestSupport {
         configuration.setConnectionFactory(connectionFactory);
 
         // connect to ActiveMQ Artemis JMS broker
-        camelContext.addComponent("jms", new JmsComponent(configuration));
-
-        return camelContext;
+        registry.bind("jms", new JmsComponent(configuration));
     }
 
     @Test
@@ -99,7 +94,8 @@ class MainArtemisTest extends CamelTestSupport {
     }
 
     @Override
-    protected RoutesBuilder createRouteBuilder() {
-        return new MyRouteBuilder();
+    protected void configure(MainConfigurationProperties configuration) {
+        configuration.addConfiguration(MyConfiguration.class);
+        configuration.addRoutesBuilder(MyRouteBuilder.class);
     }
 }
