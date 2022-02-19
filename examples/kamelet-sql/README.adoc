@@ -64,7 +64,7 @@ Save the secret by naming it postgresql.
 
 === Set up credentials for AWS Secrets Manager
 
-In src/main/resources/application.properties, populate the camel.aws.vault.* properties correctly.
+In src/main/resources/application.properties, populate the camel.vault.aws.* properties correctly.
 
 Now you are ready to run this example.
 
