@@ -37,6 +37,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static org.apache.camel.test.junit5.TestSupport.createDirectory;
+import static org.apache.camel.test.junit5.TestSupport.deleteDirectory;
 import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -67,7 +69,7 @@ class FtpTest extends CamelMainTestSupport {
         serverFactory.setFileSystem(fsf);
 
         // Create the admin home
-        new File("./target/ftp-server").mkdirs();
+        createDirectory("./target/ftp-server");
 
         SERVER = serverFactory.createServer();
         // start the server
@@ -76,14 +78,12 @@ class FtpTest extends CamelMainTestSupport {
 
     @AfterAll
     static void destroy() {
+        // Delete directories
+        deleteDirectory("./target/ftp-server");
+        deleteDirectory("./target/upload");
         if (SERVER != null) {
             SERVER.stop();
         }
-    }
-
-    @Override
-    protected String getPropertyPlaceholderLocations() {
-        return "classpath:ftp.properties";
     }
 
     @Override
