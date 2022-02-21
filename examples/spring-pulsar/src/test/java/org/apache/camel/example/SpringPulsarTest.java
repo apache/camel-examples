@@ -1,0 +1,72 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.camel.example;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.testcontainers.containers.PulsarContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
+
+import static org.apache.camel.example.pulsar.client.CamelClient.ENDPOINT_URI;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ *  A unit test checking that Camel can exchange messages with Apache Pulsar.
+ */
+@Testcontainers
+class SpringPulsarTest extends CamelSpringTestSupport {
+
+    private static final String IMAGE = "apachepulsar/pulsar";
+
+    @Container
+    private final PulsarContainer container = new PulsarContainer(DockerImageName.parse(IMAGE));
+
+    @Override
+    protected void setupResources() throws Exception {
+        super.setupResources();
+        final String fileContent = String.format(
+            "serviceUrl=%s%nbrokerUrl=%s%n", container.getHttpServiceUrl(),
+            container.getPulsarBrokerUrl()
+        );
+        Files.writeString(Paths.get("target/custom.properties"), fileContent);
+    }
+
+    @Override
+    protected AbstractApplicationContext createApplicationContext() {
+        return new ClassPathXmlApplicationContext("/META-INF/spring/camel-server.xml");
+    }
+
+    @Test
+    void should_exchange_messages() {
+        template.sendBody(ENDPOINT_URI, 22);
+
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .whenCompleted(1).wereSentTo("log:*").whenBodiesDone(66).create();
+        assertTrue(
+                notify.matches(20, TimeUnit.SECONDS), "1 message should be completed"
+        );
+    }
+}

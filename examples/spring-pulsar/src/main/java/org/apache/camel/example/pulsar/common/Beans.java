@@ -14,15 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.pulsar.server;
+package org.apache.camel.example.pulsar.common;
 
-import org.apache.camel.Converter;
+import org.apache.pulsar.client.admin.PulsarAdmin;
+import org.apache.pulsar.client.api.PulsarClientException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-public class TypeConverters implements org.apache.camel.TypeConverters {
+/**
+ * The class holding all the beans required to access to Apache Pulsar that are not easy to create from
+ * a pure XML configuration.
+ */
+@Configuration
+public class Beans {
 
-    @Converter
-    public int intFromByteArray(byte[] bytes) {
-        return 22;
+    @Bean
+    public PulsarAdmin pulsarAdmin(@Value("#{pulsarAdminHost}") String pulsarAdminHost) throws PulsarClientException {
+        return PulsarAdmin.builder().serviceHttpUrl(pulsarAdminHost).build();
     }
-
 }

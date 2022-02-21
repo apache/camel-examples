@@ -30,7 +30,6 @@
     <description>An example using Spring XML to talk to the Pulsar server from different kind of client techniques</description>
 
     <properties>
-        <skipTests>true</skipTests>
         <category>Messaging</category>
     </properties>
 
@@ -98,7 +97,18 @@
             <artifactId>camel-test-spring-junit5</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>pulsar</artifactId>
+            <version>${testcontainers-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainers-version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -115,20 +125,6 @@
             <properties>
                 <!-- we start using our own class to control what we do in the main -->
                 <target.main.class>org.apache.camel.example.pulsar.client.CamelClient</target.main.class>
-            </properties>
-        </profile>
-        <profile>
-            <id>CamelClientRemoting</id>
-            <properties>
-                <!-- we start using our own class to control what we do in the main -->
-                <target.main.class>org.apache.camel.example.pulsar.client.CamelClientRemoting</target.main.class>
-            </properties>
-        </profile>
-        <profile>
-            <id>CamelClientEndpoint</id>
-            <properties>
-                <!-- we start using our own class to control what we do in the main -->
-                <target.main.class>org.apache.camel.example.pulsar.client.CamelClientEndpoint</target.main.class>
             </properties>
         </profile>
     </profiles>
