@@ -19,7 +19,6 @@ package org.apache.camel.example;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +39,7 @@ class MainTest extends CamelMainTestSupport {
     }
 
     @Override
-    protected void configure(MainConfigurationProperties configuration) {
-        configuration.withBasePackageScan(MyApplication.class.getPackageName());
+    protected Class<?> getMainClass() {
+        return MyApplication.class;
     }
 }
