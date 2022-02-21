@@ -24,11 +24,11 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.aws2.sqs.Sqs2Component;
 import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.localstack.LocalStackContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -41,25 +41,15 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 /**
  * A unit test checking that Camel can consume messages from Amazon SQS.
  */
+@Testcontainers
 class AwsSQSTest extends CamelMainTestSupport {
 
     private static final String IMAGE = "localstack/localstack:0.13.3";
-    private static LocalStackContainer CONTAINER;
 
-    @BeforeAll
-    static void init() {
-        CONTAINER = new LocalStackContainer(DockerImageName.parse(IMAGE))
-                .withServices(SQS)
-                .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));;
-        CONTAINER.start();
-    }
-
-    @AfterAll
-    static void destroy() {
-        if (CONTAINER != null) {
-            CONTAINER.stop();
-        }
-    }
+    @Container
+    private final LocalStackContainer container = new LocalStackContainer(DockerImageName.parse(IMAGE))
+            .withServices(SQS)
+            .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));
 
     @Override
     protected CamelContext createCamelContext() throws Exception {
@@ -67,13 +57,13 @@ class AwsSQSTest extends CamelMainTestSupport {
         Sqs2Component sqs = camelContext.getComponent("aws2-sqs", Sqs2Component.class);
         sqs.getConfiguration().setAmazonSQSClient(
                 SqsClient.builder()
-                .endpointOverride(CONTAINER.getEndpointOverride(SQS))
+                .endpointOverride(container.getEndpointOverride(SQS))
                 .credentialsProvider(
                     StaticCredentialsProvider.create(
-                        AwsBasicCredentials.create(CONTAINER.getAccessKey(), CONTAINER.getSecretKey())
+                        AwsBasicCredentials.create(container.getAccessKey(), container.getSecretKey())
                     )
                 )
-                .region(Region.of(CONTAINER.getRegion()))
+                .region(Region.of(container.getRegion()))
                 .build()
         );
         return camelContext;
@@ -82,9 +72,7 @@ class AwsSQSTest extends CamelMainTestSupport {
     @Test
     void should_poll_sqs_queue() {
         // Add a message first
-        template.send("direct:publishMessage", exchange -> {
-            exchange.getIn().setBody("Camel rocks!");
-        });
+        template.send("direct:publishMessage", exchange -> exchange.getIn().setBody("Camel rocks!"));
 
         NotifyBuilder notify = new NotifyBuilder(context).from("aws2-sqs:*").whenCompleted(1).create();
         assertTrue(

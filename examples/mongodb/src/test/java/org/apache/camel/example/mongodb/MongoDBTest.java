@@ -24,10 +24,10 @@ import io.restassured.response.Response;
 import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.spi.Registry;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import static io.restassured.RestAssured.given;
@@ -38,31 +38,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can execute CRUD operations against MongoDB.
  */
+@Testcontainers
 class MongoDBTest extends CamelMainTestSupport {
 
     private static final String IMAGE = "mongo:5.0";
-    private static MongoDBContainer CONTAINER;
 
     private static final String BASE_URI = "http://localhost:8081";
 
-    @BeforeAll
-    static void init() {
-        CONTAINER = new MongoDBContainer(DockerImageName.parse(IMAGE));
-        CONTAINER.start();
-    }
-
-    @AfterAll
-    static void destroy() {
-        if (CONTAINER != null) {
-            CONTAINER.stop();
-        }
-    }
+    @Container
+    private final MongoDBContainer container = new MongoDBContainer(DockerImageName.parse(IMAGE));
 
     @Override
     protected void bindToRegistry(Registry registry) throws Exception {
         registry.bind(
             "myDb",
-            MongoClients.create(String.format("mongodb://%s:%d", CONTAINER.getHost(), CONTAINER.getMappedPort(27017)))
+            MongoClients.create(String.format("mongodb://%s:%d", container.getHost(), container.getMappedPort(27017)))
         );
     }
 

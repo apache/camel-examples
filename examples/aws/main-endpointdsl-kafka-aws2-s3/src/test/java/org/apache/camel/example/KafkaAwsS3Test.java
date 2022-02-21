@@ -25,12 +25,12 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.aws2.s3.AWS2S3Component;
 import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.localstack.LocalStackContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -44,32 +44,18 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 /**
  * A unit test checking that Camel can poll data from a Kafka topic and put it into an Amazon S3 bucket.
  */
+@Testcontainers
 class KafkaAwsS3Test extends CamelMainTestSupport {
 
     private static final String AWS_IMAGE = "localstack/localstack:0.13.3";
     private static final String KAFKA_IMAGE = "confluentinc/cp-kafka:6.2.2";
-    private static LocalStackContainer AWS_CONTAINER;
-    private static KafkaContainer KAFKA_CONTAINER;
 
-    @BeforeAll
-    static void init() {
-        AWS_CONTAINER = new LocalStackContainer(DockerImageName.parse(AWS_IMAGE))
-                .withServices(S3)
-                .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));
-        AWS_CONTAINER.start();
-        KAFKA_CONTAINER = new KafkaContainer(DockerImageName.parse(KAFKA_IMAGE));
-        KAFKA_CONTAINER.start();
-    }
-
-    @AfterAll
-    static void destroy() {
-        if (AWS_CONTAINER != null) {
-            AWS_CONTAINER.stop();
-        }
-        if (KAFKA_CONTAINER != null) {
-            KAFKA_CONTAINER.stop();
-        }
-    }
+    @Container
+    private final LocalStackContainer awsContainer = new LocalStackContainer(DockerImageName.parse(AWS_IMAGE))
+            .withServices(S3)
+            .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));
+    @Container
+    private final KafkaContainer kafkaContainer = new KafkaContainer(DockerImageName.parse(KAFKA_IMAGE));
 
     @Override
     protected CamelContext createCamelContext() throws Exception {
@@ -77,13 +63,13 @@ class KafkaAwsS3Test extends CamelMainTestSupport {
         AWS2S3Component s3 = camelContext.getComponent("aws2-s3", AWS2S3Component.class);
         s3.getConfiguration().setAmazonS3Client(
                 S3Client.builder()
-                .endpointOverride(AWS_CONTAINER.getEndpointOverride(S3))
+                .endpointOverride(awsContainer.getEndpointOverride(S3))
                 .credentialsProvider(
                     StaticCredentialsProvider.create(
-                        AwsBasicCredentials.create(AWS_CONTAINER.getAccessKey(), AWS_CONTAINER.getSecretKey())
+                        AwsBasicCredentials.create(awsContainer.getAccessKey(), awsContainer.getSecretKey())
                     )
                 )
-                .region(Region.of(AWS_CONTAINER.getRegion()))
+                .region(Region.of(awsContainer.getRegion()))
                 .build()
         );
         return camelContext;
@@ -92,7 +78,7 @@ class KafkaAwsS3Test extends CamelMainTestSupport {
     @Override
     protected Properties useOverridePropertiesWithPropertiesComponent() {
         return asProperties(
-            "kafkaBrokers", String.format("%s:%d", KAFKA_CONTAINER.getHost(), KAFKA_CONTAINER.getMappedPort(9093))
+            "kafkaBrokers", String.format("%s:%d", kafkaContainer.getHost(), kafkaContainer.getMappedPort(9093))
         );
     }
 

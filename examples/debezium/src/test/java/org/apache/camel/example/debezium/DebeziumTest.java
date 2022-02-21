@@ -29,14 +29,15 @@ import org.apache.camel.component.aws2.kinesis.Kinesis2Component;
 import org.apache.camel.component.sql.SqlComponent;
 import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.localstack.LocalStackContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -55,48 +56,34 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 /**
  * A unit test checking that Camel can propagate changes from one Database to another thanks to Debezium.
  */
+@Testcontainers
 class DebeziumTest extends CamelMainTestSupport {
 
     private static final String AWS_IMAGE = "localstack/localstack:0.13.3";
     private static final String PGSQL_IMAGE = "debezium/example-postgres:1.9";
     private static final String CASSANDRA_IMAGE = "cassandra:4.0.1";
-    private static LocalStackContainer AWS_CONTAINER;
-    private static PostgreSQLContainer<?> PGSQL_CONTAINER;
-    private static CassandraContainer<?> CASSANDRA_CONTAINER;
 
     private static final String SOURCE_DB_NAME = "debezium-db";
     private static final String SOURCE_DB_SCHEMA = "inventory";
     private static final String SOURCE_DB_USERNAME = "pgsql-user";
     private static final String SOURCE_DB_PASSWORD = "pgsql-pw";
 
-    @BeforeAll
-    static void init() throws IOException {
-        Files.deleteIfExists(Path.of("target/offset-01.data"));
-        AWS_CONTAINER = new LocalStackContainer(DockerImageName.parse(AWS_IMAGE))
-                .withServices(KINESIS)
-                .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));
-        AWS_CONTAINER.start();
-        PGSQL_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse(PGSQL_IMAGE).asCompatibleSubstituteFor("postgres"))
-                .withDatabaseName(SOURCE_DB_NAME)
-                .withUsername(SOURCE_DB_USERNAME)
-                .withPassword(SOURCE_DB_PASSWORD);
-        PGSQL_CONTAINER.start();
-        CASSANDRA_CONTAINER = new CassandraContainer<>(CASSANDRA_IMAGE)
-                .withInitScript("org/apache/camel/example/debezium/db-init.cql");
-        CASSANDRA_CONTAINER.start();
-    }
+    @Container
+    private final LocalStackContainer awsContainer = new LocalStackContainer(DockerImageName.parse(AWS_IMAGE))
+            .withServices(KINESIS)
+            .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));
+    @Container
+    private final PostgreSQLContainer<?> pgsqlContainer = new PostgreSQLContainer<>(DockerImageName.parse(PGSQL_IMAGE).asCompatibleSubstituteFor("postgres"))
+            .withDatabaseName(SOURCE_DB_NAME)
+            .withUsername(SOURCE_DB_USERNAME)
+            .withPassword(SOURCE_DB_PASSWORD);
+    @Container
+    private final CassandraContainer<?> cassandraContainer = new CassandraContainer<>(CASSANDRA_IMAGE)
+            .withInitScript("org/apache/camel/example/debezium/db-init.cql");
 
-    @AfterAll
-    static void destroy() {
-        if (AWS_CONTAINER != null) {
-            AWS_CONTAINER.stop();
-        }
-        if (PGSQL_CONTAINER != null) {
-            PGSQL_CONTAINER.stop();
-        }
-        if (CASSANDRA_CONTAINER != null) {
-            CASSANDRA_CONTAINER.stop();
-        }
+    @BeforeEach
+    void init() throws IOException {
+        Files.deleteIfExists(Path.of("target/offset-01.data"));
     }
 
     @Override
@@ -104,13 +91,13 @@ class DebeziumTest extends CamelMainTestSupport {
         CamelContext camelContext = super.createCamelContext();
         Kinesis2Component component = camelContext.getComponent("aws2-kinesis", Kinesis2Component.class);
         KinesisClient kinesisClient = KinesisClient.builder()
-                .endpointOverride(AWS_CONTAINER.getEndpointOverride(KINESIS))
+                .endpointOverride(awsContainer.getEndpointOverride(KINESIS))
                 .credentialsProvider(
                         StaticCredentialsProvider.create(
-                                AwsBasicCredentials.create(AWS_CONTAINER.getAccessKey(), AWS_CONTAINER.getSecretKey())
+                                AwsBasicCredentials.create(awsContainer.getAccessKey(), awsContainer.getSecretKey())
                         )
                 )
-                .region(Region.of(AWS_CONTAINER.getRegion()))
+                .region(Region.of(awsContainer.getRegion()))
                 .build();
         // Create the stream
         kinesisClient.createStream(CreateStreamRequest.builder().streamName("camel-debezium-example").shardCount(1).build());
@@ -122,11 +109,11 @@ class DebeziumTest extends CamelMainTestSupport {
     protected Properties useOverridePropertiesWithPropertiesComponent() {
         // Override the host and port of the broker
         return asProperties(
-            "debezium.postgres.databaseHostName", PGSQL_CONTAINER.getHost(),
-            "debezium.postgres.databasePort", Integer.toString(PGSQL_CONTAINER.getMappedPort(5432)),
+            "debezium.postgres.databaseHostName", pgsqlContainer.getHost(),
+            "debezium.postgres.databasePort", Integer.toString(pgsqlContainer.getMappedPort(5432)),
             "debezium.postgres.databaseUser", SOURCE_DB_USERNAME,
             "debezium.postgres.databasePassword", SOURCE_DB_PASSWORD,
-            "cassandra.host", String.format("%s:%d", CASSANDRA_CONTAINER.getHost(), CASSANDRA_CONTAINER.getMappedPort(9042))
+            "cassandra.host", String.format("%s:%d", cassandraContainer.getHost(), cassandraContainer.getMappedPort(9042))
         );
     }
 
@@ -165,17 +152,29 @@ class DebeziumTest extends CamelMainTestSupport {
     protected void configure(MainConfigurationProperties configuration) {
         configuration.addRoutesBuilder(DebeziumPgSQLConsumerToKinesis.createRouteBuilder());
         configuration.addRoutesBuilder(KinesisProducerToCassandra.createRouteBuilder());
-        configuration.addRoutesBuilder(new ApplyChangesToPgSQLRouteBuilder());
+        configuration.addRoutesBuilder(
+            new ApplyChangesToPgSQLRouteBuilder(
+                pgsqlContainer.getHost(), pgsqlContainer.getMappedPort(5432)
+            )
+        );
     }
 
     private static class ApplyChangesToPgSQLRouteBuilder extends RouteBuilder {
+
+        private final String hostname;
+        private final int port;
+
+        ApplyChangesToPgSQLRouteBuilder(String hostname, int port) {
+            this.hostname = hostname;
+            this.port = port;
+        }
 
         @Override
         public void configure() {
             // required for the sql component
             PGSimpleDataSource db = new PGSimpleDataSource();
-            db.setServerNames(new String[]{PGSQL_CONTAINER.getHost()});
-            db.setPortNumbers(new int[]{PGSQL_CONTAINER.getMappedPort(5432)});
+            db.setServerNames(new String[]{hostname});
+            db.setPortNumbers(new int[]{port});
             db.setUser(SOURCE_DB_USERNAME);
             db.setPassword(SOURCE_DB_PASSWORD);
             db.setDatabaseName(SOURCE_DB_NAME);

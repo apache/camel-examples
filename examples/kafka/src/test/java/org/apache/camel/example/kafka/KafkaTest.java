@@ -23,11 +23,11 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import static org.apache.camel.example.kafka.MessagePublisherClient.setUpKafkaComponent;
@@ -37,23 +37,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can produce and consume messages to / from a Kafka broker.
  */
+@Testcontainers
 class KafkaTest extends CamelTestSupport {
 
     private static final String IMAGE = "confluentinc/cp-kafka:6.2.2";
-    private static KafkaContainer CONTAINER;
 
-    @BeforeAll
-    static void init() {
-        CONTAINER = new KafkaContainer(DockerImageName.parse(IMAGE));
-        CONTAINER.start();
-    }
-
-    @AfterAll
-    static void destroy() {
-        if (CONTAINER != null) {
-            CONTAINER.stop();
-        }
-    }
+    @Container
+    private final KafkaContainer container = new KafkaContainer(DockerImageName.parse(IMAGE));
 
     @Override
     protected CamelContext createCamelContext() throws Exception {
@@ -63,8 +53,8 @@ class KafkaTest extends CamelTestSupport {
         // Override the host and port of the broker
         camelContext.getPropertiesComponent().setOverrideProperties(
             asProperties(
-                "kafka.host", CONTAINER.getHost(),
-                "kafka.port", Integer.toString(CONTAINER.getMappedPort(9093))
+                "kafka.host", container.getHost(),
+                "kafka.port", Integer.toString(container.getMappedPort(9093))
             )
         );
         setUpKafkaComponent(camelContext);
