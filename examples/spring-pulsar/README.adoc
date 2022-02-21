@@ -10,20 +10,18 @@ received message.
 You can run the Pulsar cluster through docker:
 
 ----
-$ docker run -it \
+$ docker run --rm -it \
   -p 6650:6650 \
   -p 8080:8080 \
-  -v $PWD/data:/pulsar/data \
-  apachepulsar/pulsar:latest \
+  -v $PWD/target/data:/pulsar/data \
+  apachepulsar/pulsar \
   bin/pulsar standalone
 ----
 
-The Server is required to be running when you try the clients.
+The Server is required to be running when you try the client.
 
-And for the Client we have a total of three flavors: NB only 1st one
-working at the moment - Normal use the ProducerTemplate ala Spring
-Template style - Using Spring Remoting for powerful "Client doesn’t
-know at all it's a remote call" - And using the Message Endpoint pattern using the neutral Camel API
+And for the Client we use the ProducerTemplate ala Spring
+Template style.
 
 === Build
 
@@ -48,9 +46,6 @@ $ mvn exec:java -PCamelServer
 ----
 $ mvn exec:java -PCamelClient
 ----
-//Below don't work yet
-//mvn exec:java -PCamelClientRemoting
-//mvn exec:java -PCamelClientEndpoint
 
 To stop the example hit ctrl+c
 

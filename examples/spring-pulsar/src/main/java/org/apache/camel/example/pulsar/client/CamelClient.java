@@ -16,9 +16,10 @@
  */
 package org.apache.camel.example.pulsar.client;
 
+import java.util.Random;
+
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.util.IOHelper;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -29,6 +30,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public final class CamelClient {
 
+    public static final String ENDPOINT_URI = "pulsar:non-persistent://tn1/ns1/cameltest?producerName=clientProd";
+
     private CamelClient() {
         // Helper class
     }
@@ -36,16 +39,16 @@ public final class CamelClient {
     public static void main(final String[] args) throws Exception {
         System.out.println("Notice this client requires that the CamelServer is already running!");
 
-        AbstractApplicationContext context = new ClassPathXmlApplicationContext("camel-client.xml");
+        try (AbstractApplicationContext context = new ClassPathXmlApplicationContext("camel-client.xml")) {
+            // get the camel template for Spring template style sending of messages (= producer)
+            ProducerTemplate camelTemplate = context.getBean("camelTemplate", ProducerTemplate.class);
 
-        // get the camel template for Spring template style sending of messages (= producer)
-        ProducerTemplate camelTemplate = context.getBean("camelTemplate", ProducerTemplate.class);
-
-        System.out.println("Invoking the multiply with 22");
-        camelTemplate.sendBody("pulsar:non-persistent://tn1/ns1/cameltest?producerName=clientProd", ExchangePattern.InOnly, 22);
-
-        // we're done so let's properly close the application context
-        IOHelper.close(context);
+            for (int i=0; i<10;i++) {
+                int input = new Random().nextInt(100);
+                System.out.printf("Invoking the multiply with %d%n", input);
+                camelTemplate.sendBody(ENDPOINT_URI, ExchangePattern.InOnly, input);
+            }
+        }
     }
 
 }
