@@ -23,49 +23,28 @@ import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.aws2.sqs.Sqs2Component;
 import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.infra.aws.common.services.AWSService;
+import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
+import org.apache.camel.test.infra.aws2.services.AWSServiceFactory;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.localstack.LocalStackContainer;
-import org.testcontainers.containers.wait.strategy.Wait;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.sqs.SqsClient;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.testcontainers.containers.localstack.LocalStackContainer.Service.SQS;
 
 /**
  * A unit test checking that Camel can consume messages from Amazon SQS.
  */
-@Testcontainers
 class AwsSQSTest extends CamelMainTestSupport {
 
-    private static final String IMAGE = "localstack/localstack:0.13.3";
-
-    @Container
-    private final LocalStackContainer container = new LocalStackContainer(DockerImageName.parse(IMAGE))
-            .withServices(SQS)
-            .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));
+    @RegisterExtension
+    private static final AWSService AWS_SERVICE = AWSServiceFactory.createSQSService();
 
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
         Sqs2Component sqs = camelContext.getComponent("aws2-sqs", Sqs2Component.class);
-        sqs.getConfiguration().setAmazonSQSClient(
-                SqsClient.builder()
-                .endpointOverride(container.getEndpointOverride(SQS))
-                .credentialsProvider(
-                    StaticCredentialsProvider.create(
-                        AwsBasicCredentials.create(container.getAccessKey(), container.getSecretKey())
-                    )
-                )
-                .region(Region.of(container.getRegion()))
-                .build()
-        );
+        sqs.getConfiguration().setAmazonSQSClient(AWSSDKClientUtils.newSQSClient());
         return camelContext;
     }
 

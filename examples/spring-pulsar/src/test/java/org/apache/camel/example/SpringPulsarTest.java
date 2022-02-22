@@ -16,19 +16,16 @@
  */
 package org.apache.camel.example;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.test.infra.pulsar.services.PulsarService;
+import org.apache.camel.test.infra.pulsar.services.PulsarServiceFactory;
 import org.apache.camel.test.spring.junit5.CamelSpringTestSupport;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testcontainers.containers.PulsarContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 import static org.apache.camel.example.pulsar.client.CamelClient.ENDPOINT_URI;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -36,23 +33,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  *  A unit test checking that Camel can exchange messages with Apache Pulsar.
  */
-@Testcontainers
 class SpringPulsarTest extends CamelSpringTestSupport {
 
-    private static final String IMAGE = "apachepulsar/pulsar";
-
-    @Container
-    private final PulsarContainer container = new PulsarContainer(DockerImageName.parse(IMAGE));
-
-    @Override
-    protected void setupResources() throws Exception {
-        super.setupResources();
-        final String fileContent = String.format(
-            "serviceUrl=%s%nbrokerUrl=%s%n", container.getHttpServiceUrl(),
-            container.getPulsarBrokerUrl()
-        );
-        Files.writeString(Paths.get("target/custom.properties"), fileContent);
-    }
+    @RegisterExtension
+    private static final PulsarService SERVICE = PulsarServiceFactory.createService();
 
     @Override
     protected AbstractApplicationContext createApplicationContext() {

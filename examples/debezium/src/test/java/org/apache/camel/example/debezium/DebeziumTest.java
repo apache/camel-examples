@@ -28,20 +28,21 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.aws2.kinesis.Kinesis2Component;
 import org.apache.camel.component.sql.SqlComponent;
 import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.infra.aws.common.services.AWSService;
+import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
+import org.apache.camel.test.infra.aws2.services.AWSServiceFactory;
+import org.apache.camel.test.infra.cassandra.services.CassandraLocalContainerService;
+import org.apache.camel.test.infra.cassandra.services.CassandraService;
+import org.apache.camel.test.infra.postgres.services.PostgresLocalContainerService;
+import org.apache.camel.test.infra.postgres.services.PostgresService;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.containers.localstack.LocalStackContainer;
-import org.testcontainers.containers.wait.strategy.Wait;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.CreateStreamRequest;
 
@@ -51,15 +52,12 @@ import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.testcontainers.containers.localstack.LocalStackContainer.Service.KINESIS;
 
 /**
  * A unit test checking that Camel can propagate changes from one Database to another thanks to Debezium.
  */
-@Testcontainers
 class DebeziumTest extends CamelMainTestSupport {
 
-    private static final String AWS_IMAGE = "localstack/localstack:0.13.3";
     private static final String PGSQL_IMAGE = "debezium/example-postgres:1.9";
     private static final String CASSANDRA_IMAGE = "cassandra:4.0.1";
 
@@ -68,18 +66,21 @@ class DebeziumTest extends CamelMainTestSupport {
     private static final String SOURCE_DB_USERNAME = "pgsql-user";
     private static final String SOURCE_DB_PASSWORD = "pgsql-pw";
 
-    @Container
-    private final LocalStackContainer awsContainer = new LocalStackContainer(DockerImageName.parse(AWS_IMAGE))
-            .withServices(KINESIS)
-            .waitingFor(Wait.forLogMessage(".*Ready\\.\n", 1));
-    @Container
-    private final PostgreSQLContainer<?> pgsqlContainer = new PostgreSQLContainer<>(DockerImageName.parse(PGSQL_IMAGE).asCompatibleSubstituteFor("postgres"))
-            .withDatabaseName(SOURCE_DB_NAME)
-            .withUsername(SOURCE_DB_USERNAME)
-            .withPassword(SOURCE_DB_PASSWORD);
-    @Container
-    private final CassandraContainer<?> cassandraContainer = new CassandraContainer<>(CASSANDRA_IMAGE)
-            .withInitScript("org/apache/camel/example/debezium/db-init.cql");
+    @RegisterExtension
+    private static final AWSService AWS_SERVICE = AWSServiceFactory.createKinesisService();
+    @RegisterExtension
+    private static final PostgresService POSTGRES_SERVICE = new PostgresLocalContainerService(
+        new PostgreSQLContainer<>(DockerImageName.parse(PGSQL_IMAGE).asCompatibleSubstituteFor("postgres"))
+                .withDatabaseName(SOURCE_DB_NAME)
+                .withUsername(SOURCE_DB_USERNAME)
+                .withPassword(SOURCE_DB_PASSWORD)
+    );
+    @RegisterExtension
+    private static final CassandraService CASSANDRA_SERVICE = new CassandraLocalContainerService(
+        new CassandraContainer<>(CASSANDRA_IMAGE)
+            .withInitScript("org/apache/camel/example/debezium/db-init.cql")
+    );
+
 
     @BeforeEach
     void init() throws IOException {
@@ -90,18 +91,19 @@ class DebeziumTest extends CamelMainTestSupport {
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
         Kinesis2Component component = camelContext.getComponent("aws2-kinesis", Kinesis2Component.class);
-        KinesisClient kinesisClient = KinesisClient.builder()
-                .endpointOverride(awsContainer.getEndpointOverride(KINESIS))
-                .credentialsProvider(
-                        StaticCredentialsProvider.create(
-                                AwsBasicCredentials.create(awsContainer.getAccessKey(), awsContainer.getSecretKey())
-                        )
-                )
-                .region(Region.of(awsContainer.getRegion()))
-                .build();
+        KinesisClient kinesisClient = AWSSDKClientUtils.newKinesisClient();
         // Create the stream
         kinesisClient.createStream(CreateStreamRequest.builder().streamName("camel-debezium-example").shardCount(1).build());
         component.getConfiguration().setAmazonKinesisClient(kinesisClient);
+        // required for the sql component
+        PGSimpleDataSource db = new PGSimpleDataSource();
+        db.setServerNames(new String[]{POSTGRES_SERVICE.host()});
+        db.setPortNumbers(new int[]{POSTGRES_SERVICE.port()});
+        db.setUser(SOURCE_DB_USERNAME);
+        db.setPassword(SOURCE_DB_PASSWORD);
+        db.setDatabaseName(SOURCE_DB_NAME);
+
+        camelContext.getComponent("sql", SqlComponent.class).setDataSource(db);
         return camelContext;
     }
 
@@ -109,11 +111,11 @@ class DebeziumTest extends CamelMainTestSupport {
     protected Properties useOverridePropertiesWithPropertiesComponent() {
         // Override the host and port of the broker
         return asProperties(
-            "debezium.postgres.databaseHostName", pgsqlContainer.getHost(),
-            "debezium.postgres.databasePort", Integer.toString(pgsqlContainer.getMappedPort(5432)),
+            "debezium.postgres.databaseHostName", POSTGRES_SERVICE.host(),
+            "debezium.postgres.databasePort", Integer.toString(POSTGRES_SERVICE.port()),
             "debezium.postgres.databaseUser", SOURCE_DB_USERNAME,
             "debezium.postgres.databasePassword", SOURCE_DB_PASSWORD,
-            "cassandra.host", String.format("%s:%d", cassandraContainer.getHost(), cassandraContainer.getMappedPort(9042))
+            "cassandra.node", String.format("%s:%d", CASSANDRA_SERVICE.getCassandraHost(), CASSANDRA_SERVICE.getCQL3Port())
         );
     }
 
@@ -152,39 +154,18 @@ class DebeziumTest extends CamelMainTestSupport {
     protected void configure(MainConfigurationProperties configuration) {
         configuration.addRoutesBuilder(DebeziumPgSQLConsumerToKinesis.createRouteBuilder());
         configuration.addRoutesBuilder(KinesisProducerToCassandra.createRouteBuilder());
-        configuration.addRoutesBuilder(
-            new ApplyChangesToPgSQLRouteBuilder(
-                pgsqlContainer.getHost(), pgsqlContainer.getMappedPort(5432)
-            )
-        );
+        configuration.addRoutesBuilder(new ApplyChangesToPgSQLRouteBuilder());
     }
 
     private static class ApplyChangesToPgSQLRouteBuilder extends RouteBuilder {
 
-        private final String hostname;
-        private final int port;
-
-        ApplyChangesToPgSQLRouteBuilder(String hostname, int port) {
-            this.hostname = hostname;
-            this.port = port;
-        }
-
         @Override
         public void configure() {
-            // required for the sql component
-            PGSimpleDataSource db = new PGSimpleDataSource();
-            db.setServerNames(new String[]{hostname});
-            db.setPortNumbers(new int[]{port});
-            db.setUser(SOURCE_DB_USERNAME);
-            db.setPassword(SOURCE_DB_PASSWORD);
-            db.setDatabaseName(SOURCE_DB_NAME);
-
-            getContext().getComponent("sql", SqlComponent.class).setDataSource(db);
             from("direct:select").toF("sql:select * from %s.products", SOURCE_DB_SCHEMA).to("mock:query");
             from("direct:insert").toF("sql:insert into %s.products (id, name, description, weight) values (#, #, #, #)", SOURCE_DB_SCHEMA).to("mock:insert");
             from("direct:update").toF("sql:update %s.products set name=# where id=#", SOURCE_DB_SCHEMA).to("mock:update");
             from("direct:delete").toF("sql:delete from %s.products where id=#", SOURCE_DB_SCHEMA).to("mock:delete");
-            from("direct:result").to("cql://{{cassandra.host}}/{{cassandra.keyspace}}?cql=select * from dbzSink.products").to("mock:result");
+            from("direct:result").to("cql:{{cassandra.node}}/{{cassandra.keyspace}}?cql=select * from dbzSink.products").to("mock:result");
         }
     }
 }

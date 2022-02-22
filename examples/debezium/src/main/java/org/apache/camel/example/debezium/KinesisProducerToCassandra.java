@@ -101,7 +101,7 @@ public final class KinesisProducerToCassandra {
                         // We just make sure we ONLY handle INSERT, UPDATE and DELETE and nothing else
                         .when(exchangeProperty("DBOperation").in("c", "u", "d"))
                         // Send query to Cassandra
-                        .recipientList(simple("cql:{{cassandra.host}}/{{cassandra.keyspace}}?cql=RAW(${header.CQLQuery})"))
+                        .recipientList(simple("cql:{{cassandra.node}}/{{cassandra.keyspace}}?cql=RAW(${header.CQLQuery})"))
                         .end();
             }
         };
