@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 84 (0 deprecated)
+Number of Examples: 85 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -51,6 +51,8 @@ Number of Examples: 84 (0 deprecated)
 
 | link:kamelet-main/README.adoc[Kamelet Main] (kamelet-main) | Beginner | How to easily run Kamelets
 
+| link:kamelet-sql/README.adoc[Kamelet Sql] (kamelet-sql) | Beginner | Consume from PostgreSQL database connected through an AWS Secrets Manager Secret
+
 | link:main/README.adoc[Main] (main) | Beginner | An example for showing standalone Camel
 
 | link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
@@ -86,7 +88,7 @@ Number of Examples: 84 (0 deprecated)
 
 | link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
 
-| link:routetemplate-xml/README.adoc[Routetemplate XML] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
+| link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
 
 | link:servlet-tomcat/README.adoc[Servlet Tomcat] (servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
 
