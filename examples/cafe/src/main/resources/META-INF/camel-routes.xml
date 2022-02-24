@@ -57,7 +57,7 @@
 
     <route>
       <from uri="direct:deliveries"/>
-      <aggregate strategyRef="aggregatorStrategy" completionTimeout="5000">
+      <aggregate aggregationStrategy="aggregatorStrategy" completionTimeout="5000">
         <correlationExpression>
           <method ref="waiter" method="checkOrder"/>
         </correlationExpression>

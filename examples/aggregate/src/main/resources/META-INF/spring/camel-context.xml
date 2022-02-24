@@ -36,7 +36,7 @@
       <!-- ask user to enter a number -->
       <from uri="stream:in?promptMessage=Enter a number to be added (enter STOP to end, and Ctrl-C to shutdown Camel): &amp;promptDelay=1000"/>
       <!-- aggregate the input, use eagerCheckCompletion to let the completionPredicate easily detect the STOP command -->
-      <aggregate strategyRef="myStrategy" aggregationRepositoryRef="myRepo" eagerCheckCompletion="true">
+      <aggregate aggregationStrategy="myStrategy" aggregationRepository="myRepo" eagerCheckCompletion="true">
         <!-- aggregate all messages into the same group -->
         <correlationExpression>
           <constant>true</constant>
