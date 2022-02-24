@@ -3,12 +3,12 @@
     from:
       uri: "kamelet:postgresql-source"
       parameters:
-        serverName: "{{aws:postgresql:host}}"
-        username: "{{aws:postgresql:username}}"
-        password: "{{aws:postgresql:password}}"
+        serverName: "{{aws:postgresql/host}}"
+        username: "{{aws:postgresql/username}}"
+        password: "{{aws:postgresql/password}}"
         query: 'SELECT * FROM accounts'
-        port: "{{aws:postgresql:port}}"
-        databaseName: "{{aws:postgresql:dbname}}"
+        port: "{{aws:postgresql/port}}"
+        databaseName: "{{aws:postgresql/dbname}}"
         consumedQuery: 'delete from accounts where user_id = :#user_id'
       steps:
         - to: 
