@@ -119,7 +119,7 @@ public final class MessagePublisherClient {
     static void setUpKafkaComponent(CamelContext camelContext) {
         // setup kafka component with the brokers
         ComponentsBuilderFactory.kafka()
-                .brokers("{{kafka.host}}:{{kafka.port}}")
+                .brokers("{{kafka.brokers}}")
                 .register(camelContext, "kafka");
     }
 

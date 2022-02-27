@@ -24,20 +24,21 @@ import java.util.concurrent.TimeUnit;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.json.JsonObject;
+import com.couchbase.client.java.manager.bucket.BucketSettings;
+import com.couchbase.client.java.manager.bucket.BucketType;
 import com.couchbase.client.java.manager.view.DesignDocument;
 import com.couchbase.client.java.manager.view.View;
 import com.couchbase.client.java.view.DesignDocumentNamespace;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.component.couchbase.CouchbaseConstants;
 import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.infra.couchbase.services.CouchbaseService;
+import org.apache.camel.test.infra.couchbase.services.CouchbaseServiceFactory;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.couchbase.BucketDefinition;
-import org.testcontainers.couchbase.CouchbaseContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,28 +46,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel consume data from Couchbase.
  */
-@Testcontainers
 class CouchbaseTest extends CamelMainTestSupport {
 
-    private static final String IMAGE = "couchbase/server:7.0.3";
     private static final String BUCKET = "test-bucket-" + System.currentTimeMillis();
 
-    @Container
-    private final CouchbaseContainer container = new CouchbaseContainer(IMAGE) {
-        {
-            // Camel component tries to use the default port of the KV Service, so we need to fix it
-            final int kvPort = 11210;
-            addFixedExposedPort(kvPort, kvPort);
-        }
-    }.withBucket(new BucketDefinition(BUCKET));
-    private Cluster cluster;
+    @RegisterExtension
+    private static final CouchbaseService SERVICE = CouchbaseServiceFactory.createService();
+    private static Cluster CLUSTER;
 
-    @BeforeEach
-    void init() {
-        cluster = Cluster.connect(
-            container.getConnectionString(),
-            container.getUsername(),
-            container.getPassword()
+    @BeforeAll
+    static void init() {
+        CLUSTER = Cluster.connect(
+            SERVICE.getConnectionString(), SERVICE.getUsername(), SERVICE.getPassword()
         );
         DesignDocument designDoc = new DesignDocument(
             CouchbaseConstants.DEFAULT_DESIGN_DOCUMENT_NAME,
@@ -75,30 +66,33 @@ class CouchbaseTest extends CamelMainTestSupport {
                 new View("function (doc, meta) {  emit(meta.id, doc);}")
             )
         );
-        cluster.bucket(BUCKET).viewIndexes().upsertDesignDocument(designDoc, DesignDocumentNamespace.PRODUCTION);
+        CLUSTER.buckets().createBucket(
+                BucketSettings.create(BUCKET).bucketType(BucketType.COUCHBASE).flushEnabled(true));
+        CLUSTER.bucket(BUCKET).viewIndexes().upsertDesignDocument(designDoc, DesignDocumentNamespace.PRODUCTION);
     }
 
-    @AfterEach
-    void destroy() {
-        if (cluster != null) {
-            cluster.disconnect();
+    @AfterAll
+    static void destroy() {
+        if (CLUSTER != null) {
+            CLUSTER.buckets().dropBucket(BUCKET);
+            CLUSTER.disconnect();
         }
     }
 
     @Override
     protected Properties useOverridePropertiesWithPropertiesComponent() {
         return asProperties(
-            "couchbase.host", container.getHost(),
-            "couchbase.port", Integer.toString(container.getBootstrapHttpDirectPort()),
-            "couchbase.username", container.getUsername(),
-            "couchbase.password", container.getPassword(),
+            "couchbase.host", SERVICE.getHostname(),
+            "couchbase.port", Integer.toString(SERVICE.getPort()),
+            "couchbase.username", SERVICE.getUsername(),
+            "couchbase.password", SERVICE.getPassword(),
             "couchbase.bucket", BUCKET
         );
     }
 
     @Test
     void should_consume_bucket() {
-        Bucket bucket = cluster.bucket(BUCKET);
+        Bucket bucket = CLUSTER.bucket(BUCKET);
         bucket.waitUntilReady(Duration.ofSeconds(10L));
         for (int i = 0; i < 10; i++) {
             bucket.defaultCollection().upsert("my-doc-" + i, JsonObject.create().put("name", "My Name " + i));

@@ -29,10 +29,8 @@
     <!-- let Spring do its IoC stuff in this package -->
     <context:component-scan base-package="org.apache.camel.example.pulsar.common"/>
 
-    <!-- spring property placeholder, ignore resource not found as the file resource is for unit testing -->
-    <context:property-placeholder location="file:target/custom.properties"
-                                  ignore-resource-not-found="true"/>
-
+    <!-- Allow using placeholders -->
+    <bean id="placeholder" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
     <bean id="myTypeConverters" class="org.apache.camel.example.pulsar.common.TypeConverters"/>
 
     <!-- pulsar configurations -->
@@ -40,14 +38,14 @@
         <value>standalone</value>
     </util:set>
     <bean id="pulsarAdminHost" class="java.lang.String">
-        <constructor-arg value="${serviceUrl:http://localhost:8080}"/>
+        <constructor-arg value="${pulsar.admin.url:http://localhost:8080}"/>
     </bean>
     <bean id="autoconfig" class="org.apache.camel.component.pulsar.utils.AutoConfiguration">
         <constructor-arg ref="pulsarAdmin"/>
         <constructor-arg ref="clusters"/>
     </bean>
     <bean id="pulsarClientConfig" class="org.apache.pulsar.client.impl.conf.ClientConfigurationData">
-        <property name="serviceUrl" value="${brokerUrl:pulsar://localhost:6650}"/>
+        <property name="serviceUrl" value="${pulsar.broker.url:pulsar://localhost:6650}"/>
     </bean>
     <bean id="pulsarClientBuilder" class="org.apache.pulsar.client.impl.ClientBuilderImpl">
         <constructor-arg ref="pulsarClientConfig"/>

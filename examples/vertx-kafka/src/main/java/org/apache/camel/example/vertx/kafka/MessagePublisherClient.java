@@ -112,7 +112,7 @@ public final class MessagePublisherClient {
     static void setUpKafkaComponent(CamelContext camelContext) {
         // setup kafka component with the brokers using component DSL
         ComponentsBuilderFactory.vertxKafka()
-                .bootstrapServers("{{kafka.host}}:{{kafka.port}}")
+                .bootstrapServers("{{kafka.brokers}}")
                 .register(camelContext, "vertx-kafka");
     }
 }

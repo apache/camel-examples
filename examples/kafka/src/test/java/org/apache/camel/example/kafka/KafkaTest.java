@@ -22,13 +22,12 @@ import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.test.infra.kafka.services.KafkaService;
+import org.apache.camel.test.infra.kafka.services.KafkaServiceFactory;
 import org.apache.camel.test.junit5.CamelTestSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.apache.camel.example.kafka.MessagePublisherClient.setUpKafkaComponent;
 import static org.apache.camel.util.PropertiesHelper.asProperties;
@@ -37,24 +36,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A unit test checking that Camel can produce and consume messages to / from a Kafka broker.
  */
-@Testcontainers
 class KafkaTest extends CamelTestSupport {
 
-    private static final String IMAGE = "confluentinc/cp-kafka:6.2.2";
-
-    @Container
-    private final KafkaContainer container = new KafkaContainer(DockerImageName.parse(IMAGE));
+    @RegisterExtension
+    private static final KafkaService SERVICE = KafkaServiceFactory.createService();
 
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
         // Set the location of the configuration
         camelContext.getPropertiesComponent().setLocation("classpath:application.properties");
+
         // Override the host and port of the broker
         camelContext.getPropertiesComponent().setOverrideProperties(
             asProperties(
-                "kafka.host", container.getHost(),
-                "kafka.port", Integer.toString(container.getMappedPort(9093))
+                "kafka.brokers", SERVICE.getBootstrapServers()
             )
         );
         setUpKafkaComponent(camelContext);
