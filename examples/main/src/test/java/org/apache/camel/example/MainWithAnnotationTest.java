@@ -18,16 +18,23 @@ package org.apache.camel.example;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.camel.BeanInject;
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.test.main.junit5.CamelMainTest;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * A unit test using the legacy approach checking that Camel supports binding via annotations.
+ * A unit test using the annotation based approach checking that Camel supports binding via annotations.
  */
-class MainTest extends CamelMainTestSupport {
+@CamelMainTest(mainClass = MyApplication.class)
+class MainWithAnnotationTest {
+
+    @BeanInject
+    CamelContext context;
 
     @Test
     void should_support_binding_via_annotations() {
@@ -36,10 +43,5 @@ class MainTest extends CamelMainTestSupport {
         assertTrue(
             notify.matches(20, TimeUnit.SECONDS), "1 message should be completed"
         );
-    }
-
-    @Override
-    protected Class<?> getMainClass() {
-        return MyApplication.class;
     }
 }
