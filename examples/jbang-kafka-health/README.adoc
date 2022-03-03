@@ -1,0 +1,88 @@
+== Camel Example JBang with Kafka and Health Checks
+
+This example shows how to run Camel connecting to a local Apache Kafka broker
+and have Camel health-checks report status as either UP or DOWN depending
+on stopping and starting the Kafka broker.
+
+=== Running Kafka broker
+
+You need Docker to run the local Kafka broker which can run via docker compose.
+
+[source,sh]
+----
+$ docker-compose up -d
+----
+
+And then you can stop and start the broker to make Camel health check report
+as either UP or DOWN.
+
+[source,sh]
+----
+$ docker-compose stop
+----
+
+and to start it again
+
+[source,sh]
+----
+$ docker-compose stop
+----
+
+And to shutdown when you no longer need the broker.
+
+[source,sh]
+----
+$ docker-compose down
+----
+
+
+=== Install JBang
+
+First install JBang according to https://www.jbang.dev
+
+When JBang is installed then you should be able to run from a shell:
+
+[source,sh]
+----
+$ jbang --version
+----
+
+This will output the version of JBang.
+
+To run this example you can either install Camel on JBang via:
+
+[source,sh]
+----
+$ jbang app install camel@apache/camel
+----
+
+Which allows to run CamelJBang with `camel` as shown below.
+
+=== How to run
+
+Then you can run this example using:
+
+[source,sh]
+----
+$ camel run kafka-health.yaml --health
+----
+
+Or run with JBang using the longer command line (without installing camel as app in JBang):
+
+[source,sh]
+----
+$ jbang camel@apache/camel run kafka-health.yaml --health
+----
+
+Then you can access `http://localhost:8080/health` from a web browser to see the health status.
+
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
