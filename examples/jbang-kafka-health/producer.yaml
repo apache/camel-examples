@@ -4,4 +4,4 @@
     uri: "kamelet:chuck-norris-source"
     steps:
     - log: "${body}"
-    - to: "kamelet:kafka-not-secured-sink?topic=foobar&bootstrapServers=localhost:29092"
+    - to: "kamelet:kafka-not-secured-sink?topic=foobar&bootstrapServers=localhost:9092"
