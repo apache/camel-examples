@@ -71,7 +71,7 @@ Or run with JBang using the longer command line (without installing camel as app
 
 [source,sh]
 ----
-$ jbang camel@apache/camel run kafka-health.yaml --health
+$ jbang camel@apache/camel run consumer.yaml producer.yaml --health
 ----
 
 Then you can access `http://localhost:8080/health` from a web browser to see the health status.

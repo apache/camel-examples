@@ -1,0 +1,7 @@
+# camel-k: language=yaml
+
+- from:
+    uri: "kamelet:chuck-norris-source"
+    steps:
+    - log: "${body}"
+    - to: "kamelet:kafka-not-secured-sink?topic=foobar&bootstrapServers=localhost:29092"
