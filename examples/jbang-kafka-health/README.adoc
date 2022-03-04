@@ -25,7 +25,7 @@ and to start it again
 
 [source,sh]
 ----
-$ docker-compose stop
+$ docker-compose start
 ----
 
 And to shutdown when you no longer need the broker.
@@ -64,7 +64,7 @@ Then you can run this example using:
 
 [source,sh]
 ----
-$ camel run kafka-health.yaml --health
+$ camel run consumer.yaml producer.yaml --health
 ----
 
 Or run with JBang using the longer command line (without installing camel as app in JBang):
