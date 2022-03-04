@@ -76,6 +76,10 @@ $ jbang camel@apache/camel run kafka-health.yaml --health
 
 Then you can access `http://localhost:8080/health` from a web browser to see the health status.
 
+Notice how you can check either the readiness or liveness health by invoking: `http://localhost:8080/health/live` and
+`http://localhost:8080/ready`. When the kafka brokers are not running then the liveness check should still be UP but
+readiness should be DOWN.
+
 
 === Help and contributions
 
