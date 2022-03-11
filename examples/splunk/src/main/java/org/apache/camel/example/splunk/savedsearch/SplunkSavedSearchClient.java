@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.splunk.savedsearch;
 
 import org.apache.camel.main.Main;
 import org.slf4j.Logger;
@@ -29,8 +29,7 @@ public final class SplunkSavedSearchClient {
 
     public static void main(String[] args) throws Exception {
         LOG.info("About to run splunk-camel integration...");
-        Main main = new Main();
-        main.configure().addRoutesBuilder(new SplunkSavedSearchRouteBuilder());
+        Main main = new Main(SplunkSavedSearchClient.class);
         main.run();
     }
 }

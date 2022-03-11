@@ -27,8 +27,7 @@ public final class MyFtpClient {
     }
 
     public static void main(String[] args) throws Exception {
-        Main main = new Main();
-        main.configure().addRoutesBuilder(new MyFtpClientRouteBuilder());
+        Main main = new Main(MyFtpClient.class);
         main.run();
     }
 

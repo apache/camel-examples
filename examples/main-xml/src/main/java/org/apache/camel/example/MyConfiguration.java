@@ -18,12 +18,14 @@ package org.apache.camel.example;
 
 import org.apache.camel.BindToRegistry;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Configuration;
 import org.apache.camel.PropertyInject;
 import org.apache.camel.CamelConfiguration;
 
 /**
  * Class to configure the Camel application.
  */
+@Configuration
 public class MyConfiguration implements CamelConfiguration {
 
     @BindToRegistry

@@ -14,32 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.debezium.eventhubs.blob.consumer;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.ProducerTemplate;
-import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.main.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class SplunkPublishEventClient {
+/**
+ * A simple example to consume data from Debezium and send it to Azure EventHubs
+ */
+public final class DebeziumMySqlConsumerToAzureEventHubs {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SplunkPublishEventClient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DebeziumMySqlConsumerToAzureEventHubs.class);
 
-    private SplunkPublishEventClient() {
+    private DebeziumMySqlConsumerToAzureEventHubs() {
     }
 
     public static void main(String[] args) throws Exception {
-        LOG.info("About to run splunk-camel integration...");
-
-        CamelContext camelContext = new DefaultCamelContext();
-        camelContext.addRoutes(new SplunkPublishEventRouteBuilder());
-        ProducerTemplate eventProducer = camelContext.createProducerTemplate();
-        camelContext.start();
-        eventProducer.request("direct:start", new SplunkEventProcessor());
-
-        LOG.info("Successfully published event to Splunk.");
-
-        camelContext.stop();
+        LOG.debug("About to run Debezium integration...");
+        // use Camels Main class
+        Main main = new Main(DebeziumMySqlConsumerToAzureEventHubs.class);
+        // start and run Camel (block)
+        main.run();
     }
+
 }

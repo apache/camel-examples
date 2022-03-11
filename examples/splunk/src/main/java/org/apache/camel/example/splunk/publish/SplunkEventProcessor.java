@@ -14,24 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.splunk.publish;
 
-import org.apache.camel.main.Main;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+import org.apache.camel.component.splunk.event.SplunkEvent;
 
-public final class SplunkSearchClient {
+public class SplunkEventProcessor implements Processor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SplunkSearchClient.class);
+    @Override
+    public void process(Exchange exchange) throws Exception {
+        SplunkEvent splunkEvent = new SplunkEvent();
 
-    private SplunkSearchClient() {
+        splunkEvent.addPair("ERRORKEY", "AVUA123");
+        splunkEvent.addPair("ERRORMSG", "Service ABC Failed");
+        splunkEvent.addPair("ERRORDESC", "BusinessException: Username and password don't match");
+        splunkEvent.addPair(SplunkEvent.COMMON_START_TIME, "Thu Aug 15 2014 00:15:06");
+
+        exchange.getIn().setBody(splunkEvent, SplunkEvent.class);
     }
-
-    public static void main(String[] args) throws Exception {
-        LOG.info("About to run splunk-camel integration...");
-        Main main = new Main();
-        main.configure().addRoutesBuilder(new SplunkSearchRouteBuilder());
-        main.run();
-    }
-
 }

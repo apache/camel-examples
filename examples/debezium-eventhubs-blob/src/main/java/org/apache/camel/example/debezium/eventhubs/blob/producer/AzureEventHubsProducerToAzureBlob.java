@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.debezium.eventhubs.blob;
+package org.apache.camel.example.debezium.eventhubs.blob.producer;
 
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.main.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,31 +27,13 @@ public final class AzureEventHubsProducerToAzureBlob {
 
     private static final Logger LOG = LoggerFactory.getLogger(AzureEventHubsProducerToAzureBlob.class);
 
-    // use Camel Main to setup and run Camel
-    private static Main main = new Main();
-
     private AzureEventHubsProducerToAzureBlob() {
     }
 
     public static void main(String[] args) throws Exception {
-
         LOG.debug("About to run Event Hubs to Storage Blob integration..");
-
-        // add route
-        main.configure().addRoutesBuilder(new RouteBuilder() {
-            public void configure() {
-                from("azure-eventhubs:?connectionString=RAW({{eventhubs.connectionString}})"
-                        + "&blobContainerName={{blob.containerName}}"
-                        + "&blobAccountName={{blob.accountName}}"
-                        + "&blobAccessKey=RAW({{blob.accessKey}})")
-                        // write our data to Azure Blob Storage but committing to an existing append blob
-                        .to("azure-storage-blob://{{blob.accountName}}/{{blob.containerName}}?operation=commitAppendBlob"
-                                + "&accessKey=RAW({{blob.accessKey}})"
-                                + "&blobName={{blob.blobName}}")
-                        .end();
-            }
-        });
-
+        // use Camels Main class
+        Main main = new Main(AzureEventHubsProducerToAzureBlob.class);
         // start and run Camel (block)
         main.run();
     }

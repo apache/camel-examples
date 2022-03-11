@@ -48,10 +48,7 @@ public final class CamelTwitterWebSocketMain {
         System.out.println("\n\n\n\n");
 
         // create a new Camel Main so we can easily start Camel
-        Main main = new Main();
-
-        // add our routes to Camel
-        main.configure().addRoutesBuilder(createTwitterWebSocketRoute("gaga", 6_000));
+        Main main = new Main(CamelTwitterWebSocketMain.class);
 
         // and run, which keeps blocking until we terminate the JVM (or stop CamelContext)
         main.run();

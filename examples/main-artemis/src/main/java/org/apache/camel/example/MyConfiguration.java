@@ -17,11 +17,12 @@
 package org.apache.camel.example;
 
 import org.apache.camel.CamelConfiguration;
-import org.apache.camel.CamelContext;
+import org.apache.camel.Configuration;
 
 /**
  * Class to configure the Camel application.
  */
+@Configuration
 public class MyConfiguration implements CamelConfiguration {
 
     /**
@@ -36,10 +37,4 @@ public class MyConfiguration implements CamelConfiguration {
 //        cf.setPassword("admin");
 //        return cf;
 //    }
-
-    @Override
-    public void configure(CamelContext camelContext) {
-        // this method is optional and can be removed if no additional configuration is needed.
-    }
-
 }

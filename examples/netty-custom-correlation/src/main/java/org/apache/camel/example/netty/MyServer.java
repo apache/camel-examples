@@ -16,7 +16,11 @@
  */
 package org.apache.camel.example.netty;
 
+import org.apache.camel.BindToRegistry;
+import org.apache.camel.Configuration;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.netty.DefaultChannelHandlerFactory;
 import org.apache.camel.main.Main;
 
 /**
@@ -28,14 +32,25 @@ public final class MyServer {
     }
 
     public static void main(String[] args) throws Exception {
-        Main main = new Main();
-        main.configure().addRoutesBuilder(new MyRouteBuilder());
-        main.bind("myEncoder", new MyCodecEncoderFactory());
-        main.bind("myDecoder", new MyCodecDecoderFactory());
+        Main main = new Main(MyServer.class);
         main.run(args);
     }
 
-    static class MyRouteBuilder extends RouteBuilder {
+    @Configuration
+    public static class MyServerConfiguration {
+
+        @BindToRegistry("myEncoder")
+        public DefaultChannelHandlerFactory myCodecEncoderFactory() {
+            return new MyCodecEncoderFactory();
+        }
+
+        @BindToRegistry("myDecoder")
+        public DefaultChannelHandlerFactory myCodecDecoderFactory() {
+            return new MyCodecDecoderFactory();
+        }
+    }
+
+    public static class MyRouteBuilder extends RouteBuilder {
 
         @Override
         public void configure() throws Exception {

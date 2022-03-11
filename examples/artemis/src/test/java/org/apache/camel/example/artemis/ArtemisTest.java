@@ -21,7 +21,6 @@ import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.core.server.impl.ActiveMQServerImpl;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.main.MainConfigurationProperties;
-import org.apache.camel.spi.Registry;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -60,11 +59,6 @@ class ArtemisTest extends CamelMainTestSupport {
         }
     }
 
-    @Override
-    protected void bindToRegistry(Registry registry) throws Exception {
-        registry.bind("jms", ArtemisMain.createArtemisComponent());
-    }
-
     @Test
     void should_distribute_orders() {
 
@@ -81,10 +75,7 @@ class ArtemisTest extends CamelMainTestSupport {
 
     @Override
     protected void configure(MainConfigurationProperties configuration) {
-        // add the widget/gadget route
-        configuration.addRoutesBuilder(new WidgetGadgetRoute());
-
-        // add a 2nd route that routes files from src/data to the order queue
-        configuration.addRoutesBuilder(new CreateOrderRoute());
+        // CreateOrderRoute, WidgetGadgetRoute and configuration will be auto-discovered
+        configuration.setBasePackageScan(ArtemisMain.class.getPackageName());
     }
 }

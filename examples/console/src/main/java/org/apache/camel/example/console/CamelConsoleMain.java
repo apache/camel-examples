@@ -27,10 +27,8 @@ public final class CamelConsoleMain {
     }
 
     public static void main(String[] args) throws Exception {
-        // Main makes it easier to run a Spring application
+        // Main makes it easier to run a Spring application (default context 'META-INF/spring/*.xml' will be scanned)
         Main main = new Main();
-        // configure the location of the Spring XML file
-        main.setApplicationContextUri("META-INF/spring/camel-context.xml");
         // run and block until Camel is stopped (or JVM terminated)
         main.run();
     }

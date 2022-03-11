@@ -14,22 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.splunk.search;
 
 import org.apache.camel.builder.RouteBuilder;
 
-public class SplunkSavedSearchRouteBuilder extends RouteBuilder {
+public class SplunkSearchRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        log.info("About to setup Splunk 'saved-search' route:Splunk Server --> log{results}");
+
+        log.info("About to setup Splunk search route: Splunk Server --> log{results}");
 
         // configure properties component
         getContext().getPropertiesComponent().setLocation("classpath:application.properties");
 
-        from("splunk://savedsearch?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
+        from("splunk://normal?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
                 + "&username={{splunk.username}}&password={{splunk.password}}&initEarliestTime=08/17/13 08:35:46:456"
-                + "&savedSearch=failed_password")
+                + "&sourceType=access_combined_wcookie&search=search Code=D | head 5")
                 .log("${body}");
     }
 }

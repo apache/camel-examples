@@ -17,7 +17,11 @@
 package org.apache.camel.example;
 
 import io.vertx.core.Vertx;
+import org.apache.camel.BindToRegistry;
+import org.apache.camel.CamelContext;
+import org.apache.camel.Configuration;
 import org.apache.camel.main.Main;
+import org.apache.camel.support.LifecycleStrategySupport;
 
 /**
  * Main class that boot the Camel application
@@ -28,19 +32,30 @@ public final class MyApplication {
     }
 
     public static void main(String[] args) throws Exception {
-        Vertx vertx = Vertx.vertx();
-
         // use Camels Main class
-        Main main = new Main();
-        // register existing vertx which should be used by Camel
-        main.bind("vertx", vertx);
-        // and add the routes (you can specify multiple classes)
-        main.configure().addRoutesBuilder(MyRouteBuilder.class);
+        Main main = new Main(MyApplication.class);
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
         main.run(args);
+    }
 
-        // stop vertx
-        vertx.close();
+    @Configuration
+    static class MyConfiguration {
+
+        @BindToRegistry(value = "vertx", beanPostProcess = true)
+        public Vertx vertx(CamelContext camelContext) {
+            // register existing vertx which should be used by Camel
+            final Vertx vertx = Vertx.vertx();
+            // register 'vertx' bean stop lifecycle hook
+            camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
+                @Override
+                public void onContextStopped(CamelContext context) {
+                    super.onContextStopped(context);
+                    // stop vertx
+                    vertx.close();
+                }
+            });
+            return vertx;
+        }
     }
 
 }
