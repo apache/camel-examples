@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 85 (0 deprecated)
+Number of Examples: 86 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -131,6 +131,8 @@ Number of Examples: 85 (0 deprecated)
 | link:loan-broker-cxf/README.adoc[Loan Broker WebService] (loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
 
 | link:loan-broker-jms/README.adoc[Loan Broker JMS] (loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
+
+| link:resume-api/README.md[Resume Api] (resume-api) | EIP | Multiple Resume API examples
 
 | link:route-throttling/README.adoc[Route Throttling] (route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
         route dynamically based on the flow of messages

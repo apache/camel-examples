@@ -137,6 +137,7 @@
         <module>oaipmh</module>
         <module>pojo-messaging</module>
         <module>reactive-executor-vertx</module>
+        <module>resume-api</module>
         <module>route-throttling</module>
         <module>routeloader</module>
         <module>routetemplate</module>
@@ -156,7 +157,7 @@
         <module>vertx-kafka</module>
         <module>widget-gadget-java</module>
         <module>widget-gadget-xml</module>
-  </modules>
+    </modules>
 
     <properties>
         <!-- unify the encoding for all the modules -->
