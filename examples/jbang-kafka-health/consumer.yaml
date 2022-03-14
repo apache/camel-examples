@@ -1,9 +1,0 @@
-# camel-k: language=yaml
-
-- from:
-    uri: "kamelet:kafka-not-secured-source"
-    parameters:
-      topic: "foobar"
-      bootstrapServers: 'localhost:9092'
-    steps:
-    - to: "log:info?showAll=true&multiline=true"
