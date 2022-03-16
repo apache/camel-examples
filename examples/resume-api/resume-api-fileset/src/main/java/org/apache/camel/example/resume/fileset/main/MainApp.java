@@ -24,9 +24,9 @@ import org.apache.camel.example.resume.clients.kafka.DefaultConsumerPropertyFact
 import org.apache.camel.example.resume.clients.kafka.DefaultProducerPropertyFactory;
 import org.apache.camel.example.resume.clients.kafka.FileDeserializer;
 import org.apache.camel.example.resume.clients.kafka.FileSerializer;
-import org.apache.camel.example.resume.fileset.strategies.KafkaFileSetResumeStrategy;
-import org.apache.camel.example.resume.fileset.strategies.LargeDirectoryRouteBuilder;
-import org.apache.camel.example.resume.fileset.strategies.MultiItemCache;
+import org.apache.camel.example.resume.strategies.kafka.fileset.KafkaFileSetResumeStrategy;
+import org.apache.camel.example.resume.strategies.kafka.fileset.LargeDirectoryRouteBuilder;
+import org.apache.camel.example.resume.strategies.kafka.fileset.MultiItemCache;
 import org.apache.camel.main.Main;
 
 /**

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.camel.example.resume.fileset.strategies;
+package org.apache.camel.example.resume.strategies.kafka.fileset;
 
 import java.util.ArrayList;
 import java.util.List;

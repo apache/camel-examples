@@ -39,8 +39,9 @@
 
     <modules>
         <module>resume-api-common</module>
-        <module>resume-api-fileset</module>
         <module>resume-api-file-offset</module>
+        <module>resume-api-fileset</module>
+        <module>resume-api-fileset-clusterized</module>
     </modules>
 
     <dependencyManagement>

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.camel.example.resume.fileset.strategies;
+package org.apache.camel.example.resume.strategies.kafka.fileset;
 
 import java.io.File;
 
@@ -76,5 +76,13 @@ public class KafkaFileSetResumeStrategy<K, V> extends AbstractKafkaResumeStrateg
     @Override
     public void resume() {
         throw new UnsupportedOperationException("Cannot perform blind resume");
+    }
+
+    protected MultiItemCache<K, V> getCache() {
+        return cache;
+    }
+
+    protected String getTopic() {
+        return topic;
     }
 }
