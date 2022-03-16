@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.camel.example.resume.file.offset.strategies;
+package org.apache.camel.example.resume.strategies.kafka.file;
 
 import java.util.Optional;
 

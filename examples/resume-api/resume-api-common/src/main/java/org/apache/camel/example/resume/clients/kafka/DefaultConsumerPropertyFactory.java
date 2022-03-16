@@ -36,6 +36,7 @@ public class DefaultConsumerPropertyFactory implements ConsumerPropertyFactory {
     private String valueDeserializer = StringDeserializer.class.getName();
     private String keyDeserializer = StringDeserializer.class.getName();
     private String offsetReset = "earliest";
+    private String groupId = UUID.randomUUID().toString();
 
     /**
      * Constructs the properties using the given bootstrap server
@@ -59,11 +60,19 @@ public class DefaultConsumerPropertyFactory implements ConsumerPropertyFactory {
         this.offsetReset = offsetReset;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public Properties getProperties() {
         Properties props = new Properties();
         props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-        props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
+        props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 
         props.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, keyDeserializer);
         props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, valueDeserializer);
