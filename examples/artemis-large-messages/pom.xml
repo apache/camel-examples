@@ -85,7 +85,7 @@
         <dependency>
             <groupId>org.messaginghub</groupId>
             <artifactId>pooled-jms</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.4</version>
         </dependency>
 
         <!-- logging -->
