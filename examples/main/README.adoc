@@ -41,6 +41,13 @@ Several IDEs are providing support for Camel Textual Route debugging. To enable 
 $ mvn camel:run -Pcamel.debug
 ----
 
+This profile can also be activated with camel.debug property set to true. For instance, by setting the property from command-line:
+
+[source,sh]
+----
+$ mvn camel:run -Dcamel.debug=true
+----
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
