@@ -32,6 +32,15 @@ Then you can run this example using
 $ mvn camel:run
 ----
 
+=== How to configure for Camel Textual Route debugging
+
+Several IDEs are providing support for Camel Textual Route debugging. To enable this possibility, you need to launch this example with the profile `camel.debug`.
+
+[source,sh]
+----
+$ mvn camel:run -Pcamel.debug
+----
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
