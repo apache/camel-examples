@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-dependencies</artifactId>
-        <version>3.16.0-SNAPSHOT</version>
+        <version>3.16.0</version>
     </parent>
 
     <groupId>org.apache.camel.example</groupId>
     <artifactId>examples</artifactId>
-    <version>3.16.0-SNAPSHOT</version>
+    <version>3.16.0</version>
     <packaging>pom</packaging>
 
     <name>Camel Examples</name>
@@ -168,7 +168,7 @@
         <jdk.version>11</jdk.version>
         <compiler.fork>false</compiler.fork>
 
-        <camel.version>3.16.0-SNAPSHOT</camel.version>
+        <camel.version>3.16.0</camel.version>
 
         <!-- Versions -->
         <arquillian-version>1.7.0.Alpha10</arquillian-version>

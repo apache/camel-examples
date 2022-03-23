@@ -64,7 +64,7 @@ At this point you should see:
 07:28:51.143 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     camel.component.aws-secrets-manager.region=eu-west-1
 07:28:51.699 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Routes startup summary (total:1 started:1)
 07:28:51.699 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext -     Started route1 (timer://myTimer)
-07:28:51.699 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.16.0-SNAPSHOT (AWS-secrets-manager) started in 537ms (build:27ms init:112ms start:398ms)
+07:28:51.699 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.16.0 (AWS-secrets-manager) started in 537ms (build:27ms init:112ms start:398ms)
 07:28:53.429 [Camel (AWS-secrets-manager) thread #0 - timer://myTimer] INFO  o.a.c.component.http.HttpComponent - Created ClientConnectionManager org.apache.http.impl.conn.PoolingHttpClientConnectionManager@7d5604cb
 07:28:54.128 [Camel (AWS-secrets-manager) thread #0 - timer://myTimer] INFO  route1 - Current Amazon price: 3135.73 $
 ----
