@@ -14,23 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.splunk.savedsearch;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
-import org.apache.camel.component.splunk.event.SplunkEvent;
+import org.apache.camel.builder.RouteBuilder;
 
-public class SplunkEventProcessor implements Processor {
+public class SplunkSavedSearchRouteBuilder extends RouteBuilder {
 
     @Override
-    public void process(Exchange exchange) throws Exception {
-        SplunkEvent splunkEvent = new SplunkEvent();
+    public void configure() throws Exception {
+        log.info("About to setup Splunk 'saved-search' route:Splunk Server --> log{results}");
 
-        splunkEvent.addPair("ERRORKEY", "AVUA123");
-        splunkEvent.addPair("ERRORMSG", "Service ABC Failed");
-        splunkEvent.addPair("ERRORDESC", "BusinessException: Username and password don't match");
-        splunkEvent.addPair(SplunkEvent.COMMON_START_TIME, "Thu Aug 15 2014 00:15:06");
+        // configure properties component
+        getContext().getPropertiesComponent().setLocation("classpath:application.properties");
 
-        exchange.getIn().setBody(splunkEvent, SplunkEvent.class);
+        from("splunk://savedsearch?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
+                + "&username={{splunk.username}}&password={{splunk.password}}&initEarliestTime=08/17/13 08:35:46:456"
+                + "&savedSearch=failed_password")
+                .log("${body}");
     }
 }

@@ -14,22 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.artemis;
 
-import org.apache.camel.builder.RouteBuilder;
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.apache.camel.BindToRegistry;
+import org.apache.camel.Configuration;
+import org.apache.camel.component.jms.JmsComponent;
+import org.apache.camel.component.jms.JmsConfiguration;
 
-public class SplunkSavedSearchRouteBuilder extends RouteBuilder {
+@Configuration
+public class ArtemisConfiguration {
 
-    @Override
-    public void configure() throws Exception {
-        log.info("About to setup Splunk 'saved-search' route:Splunk Server --> log{results}");
+    @BindToRegistry("jms")
+    public JmsComponent createArtemisComponent() {
+        // Sets up the Artemis core protocol connection factory
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 
-        // configure properties component
-        getContext().getPropertiesComponent().setLocation("classpath:application.properties");
+        JmsConfiguration configuration = new JmsConfiguration();
+        configuration.setConnectionFactory(connectionFactory);
 
-        from("splunk://savedsearch?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
-                + "&username={{splunk.username}}&password={{splunk.password}}&initEarliestTime=08/17/13 08:35:46:456"
-                + "&savedSearch=failed_password")
-                .log("${body}");
+        return new JmsComponent(configuration);
     }
 }

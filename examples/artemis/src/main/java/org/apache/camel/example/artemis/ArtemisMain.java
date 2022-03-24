@@ -17,6 +17,7 @@
 package org.apache.camel.example.artemis;
 
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.apache.camel.BindToRegistry;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
 import org.apache.camel.main.Main;
@@ -26,35 +27,15 @@ import org.apache.camel.main.Main;
  */
 public final class ArtemisMain {
 
-    // use Camel Main to setup and run Camel
-    private static Main main = new Main();
-
     private ArtemisMain() {
         // to comply with checkstyle
     }
 
     public static void main(String[] args) throws Exception {
-        // create the ActiveMQ Artemis component
-        main.bind("jms", createArtemisComponent());
-
-        // add the widget/gadget route
-        main.configure().addRoutesBuilder(new WidgetGadgetRoute());
-
-        // add a 2nd route that routes files from src/data to the order queue
-        main.configure().addRoutesBuilder(new CreateOrderRoute());
-
+        // use Camels Main class
+        Main main = new Main(ArtemisMain.class);
         // start and run Camel (block)
         main.run();
-    }
-
-    static JmsComponent createArtemisComponent() {
-        // Sets up the Artemis core protocol connection factory
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
-
-        JmsConfiguration configuration = new JmsConfiguration();
-        configuration.setConnectionFactory(connectionFactory);
-
-        return new JmsComponent(configuration);
     }
 
 }

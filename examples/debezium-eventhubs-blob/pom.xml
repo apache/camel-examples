@@ -99,14 +99,14 @@
         <profile>
             <id>eventhubs-producer</id>
             <properties>
-                <target.main.class>org.apache.camel.example.debezium.eventhubs.blob.AzureEventHubsProducerToAzureBlob</target.main.class>
+                <target.main.class>org.apache.camel.example.debezium.eventhubs.blob.producer.AzureEventHubsProducerToAzureBlob</target.main.class>
             </properties>
         </profile>
 
         <profile>
             <id>debezium-consumer</id>
             <properties>
-                <target.main.class>org.apache.camel.example.debezium.eventhubs.blob.DebeziumMySqlConsumerToAzureEventHubs</target.main.class>
+                <target.main.class>org.apache.camel.example.debezium.eventhubs.blob.consumer.DebeziumMySqlConsumerToAzureEventHubs</target.main.class>
             </properties>
         </profile>
 

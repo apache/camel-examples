@@ -33,9 +33,7 @@ class FlightRecorderTest {
     void should_launch_flight_recorder() throws Exception {
         long before = Files.list(Paths.get(".")).filter(p -> p.toString().endsWith(".jfr")).count();
         // use Camels Main class
-        Main main = new Main();
-        // and add the routes (you can specify multiple classes)
-        main.configure().addRoutesBuilder(MyRouteBuilder.class);
+        Main main = new Main(FlightRecorderTest.class);
         try {
             main.start();
         } finally {

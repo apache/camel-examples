@@ -33,12 +33,12 @@ public final class MyApplication {
     }
 
     public static void main(String[] args) throws Exception {
-        Main main = new Main();
-        main.configure().addRoutesBuilder(new MyRouteBuilder());
+        Main main = new Main(MyApplication.class);
         main.run(args);
     }
 
     static class MyRouteBuilder extends RouteBuilder {
+
         @Override
         public void configure() throws Exception {
             from("timer:simple?period=503")

@@ -14,27 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example;
+package org.apache.camel.example.splunk.publish;
 
-import org.apache.camel.CamelConfiguration;
-import org.apache.camel.Configuration;
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.splunk.event.SplunkEvent;
 
-/**
- * Class to configure the Camel application.
- */
-@Configuration
-public class MyConfiguration implements CamelConfiguration {
+public class SplunkPublishEventRouteBuilder extends RouteBuilder {
 
-    /**
-     * Creates the Artemis JMS ConnectionFactory and bind it to the Camel registry
-     * so we can do auto-wiring on the Camel JMS component.
-     * See more details in the application.properties file.
-     */
-//    @BindToRegistry
-//    public ConnectionFactory myArtemisClient(@PropertyInject("artemisBroker") String brokerUrl) {
-//        ActiveMQConnectionFactory cf = new ActiveMQJMSConnectionFactory(brokerUrl);
-//        cf.setUser("admin");
-//        cf.setPassword("admin");
-//        return cf;
-//    }
+    @Override
+    public void configure() throws Exception {
+        log.info("About to start route: direct --> Splunk Server");
+
+        // configure properties component
+        getContext().getPropertiesComponent().setLocation("classpath:application.properties");
+
+        from("direct:start")
+                .convertBodyTo(SplunkEvent.class)
+                .to("splunk://submit?host={{splunk.host}}&port={{splunk.port}}"
+                    + "&username={{splunk.username}}&password={{splunk.password}}&sourceType=secure&source=myAppName");
+    }
 }

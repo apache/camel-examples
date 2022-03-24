@@ -14,23 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.splunk.search;
 
-import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.main.Main;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class SplunkSearchRouteBuilder extends RouteBuilder {
+public final class SplunkSearchClient {
 
-    @Override
-    public void configure() throws Exception {
+    private static final Logger LOG = LoggerFactory.getLogger(SplunkSearchClient.class);
 
-        log.info("About to setup Splunk search route: Splunk Server --> log{results}");
-
-        // configure properties component
-        getContext().getPropertiesComponent().setLocation("classpath:application.properties");
-
-        from("splunk://normal?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
-                + "&username={{splunk.username}}&password={{splunk.password}}&initEarliestTime=08/17/13 08:35:46:456"
-                + "&sourceType=access_combined_wcookie&search=search Code=D | head 5")
-                .log("${body}");
+    private SplunkSearchClient() {
     }
+
+    public static void main(String[] args) throws Exception {
+        LOG.info("About to run splunk-camel integration...");
+        Main main = new Main(SplunkSearchClient.class);
+        main.run();
+    }
+
 }

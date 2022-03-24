@@ -16,6 +16,8 @@
  */
 package org.apache.camel.example.widget;
 
+import org.apache.camel.BindToRegistry;
+import org.apache.camel.Configuration;
 import org.apache.camel.component.activemq.ActiveMQComponent;
 import org.apache.camel.main.Main;
 
@@ -24,40 +26,13 @@ import org.apache.camel.main.Main;
  */
 public final class WidgetMain {
 
-    // use Camel Main to setup and run Camel
-    private static Main main = new Main();
-
     private WidgetMain() {
         // to comply with checkstyle
     }
 
     public static void main(String[] args) throws Exception {
-        // create the ActiveMQ component
-        main.bind("activemq", createActiveMQComponent());
-
-        // add the widget/gadget route
-        main.configure().addRoutesBuilder(new WidgetGadgetRoute());
-
-        // add a 2nd route that routes files from src/main/data to the order queue
-        main.configure().addRoutesBuilder(new CreateOrderRoute());
-
+        Main main = new Main(WidgetMain.class);
         // start and run Camel (block)
         main.run();
     }
-
-    public static ActiveMQComponent createActiveMQComponent() {
-        // you can set other options but this is the basic just needed
-
-        ActiveMQComponent amq = new ActiveMQComponent();
-
-        // The ActiveMQ Broker allows anonymous connection by default
-        // amq.setUserName("admin");
-        // amq.setPassword("admin");
-
-        // the url to the remote ActiveMQ broker
-        amq.setBrokerURL("tcp://localhost:61616");
-
-        return amq;
-    }
-
 }

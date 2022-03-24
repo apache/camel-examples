@@ -28,10 +28,9 @@ public final class LoanBroker {
     }
 
     public static void main(String... args) throws Exception {
-        // create a new main which will boot the Spring XML file
+        // create a main which will boot the Spring XML file (default context 'META-INF/spring/*.xml' will be scanned)
         Main main = new Main();
-        main.setApplicationContext(new ClassPathXmlApplicationContext("META-INF/spring/webServiceCamelContext.xml"));
+        // run and block until Camel is stopped (or JVM terminated)
         main.run();
     }
-
 }

@@ -29,8 +29,9 @@ public final class MyMain {
     }
 
     public static void main(String[] args) throws Exception {
+        // Main makes it easier to run a Spring application (default context 'META-INF/spring/*.xml' will be scanned)
         Main main = new Main();
-        main.setApplicationContextUri("META-INF/spring/camel-config.xml");
+        // start the application
         main.start();
     }
 }

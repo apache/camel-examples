@@ -13,24 +13,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
-package org.apache.camel.example.splunk;
+package org.apache.camel.example.widget;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.splunk.event.SplunkEvent;
+import org.apache.camel.BindToRegistry;
+import org.apache.camel.Configuration;
+import org.apache.camel.component.activemq.ActiveMQComponent;
 
-public class SplunkPublishEventRouteBuilder extends RouteBuilder {
+@Configuration
+public class WidgetConfiguration {
 
-    @Override
-    public void configure() throws Exception {
-        log.info("About to start route: direct --> Splunk Server");
+    @BindToRegistry("activemq")
+    public ActiveMQComponent activeMQComponent() {
+        ActiveMQComponent amq = new ActiveMQComponent();
 
-        // configure properties component
-        getContext().getPropertiesComponent().setLocation("classpath:application.properties");
+        // The ActiveMQ Broker allows anonymous connection by default
+        // amq.setUserName("admin");
+        // amq.setPassword("admin");
 
-        from("direct:start")
-                .convertBodyTo(SplunkEvent.class)
-                .to("splunk://submit?host={{splunk.host}}&port={{splunk.port}}"
-                    + "&username={{splunk.username}}&password={{splunk.password}}&sourceType=secure&source=myAppName");
+        // the url to the remote ActiveMQ broker
+        amq.setBrokerURL("tcp://localhost:61616");
+
+        return amq;
     }
 }

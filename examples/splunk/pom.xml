@@ -95,7 +95,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <configuration>
-                            <mainClass>org.apache.camel.example.splunk.SplunkSearchClient</mainClass>
+                            <mainClass>org.apache.camel.example.splunk.search.SplunkSearchClient</mainClass>
                             <includePluginDependencies>false</includePluginDependencies>
                         </configuration>
                     </plugin>
@@ -112,7 +112,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <configuration>
-                            <mainClass>org.apache.camel.example.splunk.SplunkSavedSearchClient</mainClass>
+                            <mainClass>org.apache.camel.example.splunk.savedsearch.SplunkSavedSearchClient</mainClass>
                             <includePluginDependencies>false</includePluginDependencies>
                         </configuration>
                     </plugin>
@@ -129,7 +129,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <configuration>
-                            <mainClass>org.apache.camel.example.splunk.SplunkPublishEventClient</mainClass>
+                            <mainClass>org.apache.camel.example.splunk.publish.SplunkPublishEventClient</mainClass>
                             <includePluginDependencies>false</includePluginDependencies>
                         </configuration>
                     </plugin>

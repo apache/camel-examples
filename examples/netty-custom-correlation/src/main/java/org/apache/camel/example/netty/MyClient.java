@@ -18,9 +18,12 @@ package org.apache.camel.example.netty;
 
 import java.util.Random;
 
+import org.apache.camel.BindToRegistry;
+import org.apache.camel.Configuration;
 import org.apache.camel.ExchangeTimedOutException;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.netty.DefaultChannelHandlerFactory;
 import org.apache.camel.main.Main;
 
 /**
@@ -32,15 +35,28 @@ public final class MyClient {
     }
 
     public static void main(String[] args) throws Exception {
-        Main main = new Main();
-        main.configure().addRoutesBuilder(new MyRouteBuilder());
+        Main main = new Main(MyClient.class);
 
-        MyCorrelationManager manager = createCorrelationManager();
-
-        main.bind("myEncoder", new MyCodecEncoderFactory());
-        main.bind("myDecoder", new MyCodecDecoderFactory());
-        main.bind("myManager", manager);
         main.run(args);
+    }
+
+    @Configuration
+    public static class MyClientConfiguration {
+
+        @BindToRegistry("myEncoder")
+        public DefaultChannelHandlerFactory myCodecEncoderFactory() {
+            return new MyCodecEncoderFactory();
+        }
+
+        @BindToRegistry("myDecoder")
+        public DefaultChannelHandlerFactory myCodecDecoderFactory() {
+            return new MyCodecDecoderFactory();
+        }
+
+        @BindToRegistry("myManager")
+        public MyCorrelationManager myCorrelationManager() {
+            return createCorrelationManager();
+        }
     }
 
     static MyCorrelationManager createCorrelationManager() {
@@ -53,7 +69,7 @@ public final class MyClient {
         return manager;
     }
 
-    static class MyRouteBuilder extends RouteBuilder {
+    public static class MyRouteBuilder extends RouteBuilder {
 
         private static final String[] WORDS = new String[]{"foo", "bar", "baz", "beer", "wine", "cheese"};
         private int counter;

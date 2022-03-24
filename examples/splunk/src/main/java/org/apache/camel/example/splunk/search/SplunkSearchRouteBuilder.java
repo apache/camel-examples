@@ -14,27 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example;
+package org.apache.camel.example.splunk.search;
 
-import org.apache.camel.CamelConfiguration;
-import org.apache.camel.Configuration;
+import org.apache.camel.builder.RouteBuilder;
 
-/**
- * Class to configure the Camel application.
- */
-@Configuration
-public class MyConfiguration implements CamelConfiguration {
+public class SplunkSearchRouteBuilder extends RouteBuilder {
 
-    /**
-     * Creates the Artemis JMS ConnectionFactory and bind it to the Camel registry
-     * so we can do auto-wiring on the Camel JMS component.
-     * See more details in the application.properties file.
-     */
-//    @BindToRegistry
-//    public ConnectionFactory myArtemisClient(@PropertyInject("artemisBroker") String brokerUrl) {
-//        ActiveMQConnectionFactory cf = new ActiveMQJMSConnectionFactory(brokerUrl);
-//        cf.setUser("admin");
-//        cf.setPassword("admin");
-//        return cf;
-//    }
+    @Override
+    public void configure() throws Exception {
+
+        log.info("About to setup Splunk search route: Splunk Server --> log{results}");
+
+        // configure properties component
+        getContext().getPropertiesComponent().setLocation("classpath:application.properties");
+
+        from("splunk://normal?host={{splunk.host}}&port={{splunk.port}}&delay=10000"
+                + "&username={{splunk.username}}&password={{splunk.password}}&initEarliestTime=08/17/13 08:35:46:456"
+                + "&sourceType=access_combined_wcookie&search=search Code=D | head 5")
+                .log("${body}");
+    }
 }
