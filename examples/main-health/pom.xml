@@ -30,7 +30,7 @@
 
     <artifactId>camel-example-main-health</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Main Health</name>
+    <name>Camel :: Example :: Main :: Health</name>
     <description>An example for showing standalone Camel with Health Checks</description>
 
     <properties>
