@@ -14,7 +14,7 @@ Building the demo
 To build the demo and the containers:
 
 ```shell
-mvn clean package && docker-compose build && 
+mvn clean package && docker-compose build
 ```
 
 
