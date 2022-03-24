@@ -154,7 +154,6 @@
         <module>telegram</module>
         <module>transformer-demo</module>
         <module>twitter-websocket</module>
-        <module>vertx-kafka</module>
         <module>widget-gadget-java</module>
         <module>widget-gadget-xml</module>
     </modules>
