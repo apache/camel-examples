@@ -20,18 +20,17 @@ package org.apache.camel.example.resume.strategies.kafka.fileset;
 import java.io.File;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.Resumable;
-import org.apache.camel.UpdatableConsumerResumeStrategy;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
 import org.apache.camel.resume.Resumables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LargeDirectoryRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeDirectoryRouteBuilder.class);
-    private UpdatableConsumerResumeStrategy<File, File, Resumable<File, File>> testResumeStrategy;
+    private KafkaResumeStrategy<File, File> testResumeStrategy;
 
-    public LargeDirectoryRouteBuilder(UpdatableConsumerResumeStrategy resumeStrategy) {
+    public LargeDirectoryRouteBuilder(KafkaResumeStrategy resumeStrategy) {
         this.testResumeStrategy = resumeStrategy;
     }
 
@@ -40,7 +39,7 @@ public class LargeDirectoryRouteBuilder extends RouteBuilder {
         LOG.debug("Processing {}", path.getPath());
         exchange.getMessage().setHeader(Exchange.OFFSET, Resumables.of(path.getParentFile(), path));
 
-        // Put a dealy to simulate slow processing
+        // Put a delay to simulate slow processing
         Thread.sleep(50);
     }
 

@@ -20,10 +20,14 @@ package org.apache.camel.example.resume.strategies.kafka.file;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.Reader;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.Resumable;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.file.consumer.GenericFileResumeAdapter;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
+import org.apache.camel.resume.Resumable;
 import org.apache.camel.resume.Resumables;
 import org.apache.camel.util.IOHelper;
 import org.slf4j.Logger;
@@ -35,14 +39,17 @@ import org.slf4j.LoggerFactory;
 public class LargeFileRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeFileRouteBuilder.class);
 
-    private KafkaFileOffsetResumeStrategy<File> testResumeStrategy;
+    private KafkaResumeStrategy testResumeStrategy;
     private long lastOffset;
     private int batchSize;
+    private final CountDownLatch latch;
 
-    public LargeFileRouteBuilder(KafkaFileOffsetResumeStrategy resumeStrategy) {
+    public LargeFileRouteBuilder(KafkaResumeStrategy resumeStrategy, CountDownLatch latch) {
         this.testResumeStrategy = resumeStrategy;
         String tmp = System.getProperty("resume.batch.size", "30");
         this.batchSize = Integer.valueOf(tmp);
+
+        this.latch = latch;
     }
 
     private void process(Exchange exchange) throws Exception {
@@ -52,7 +59,8 @@ public class LargeFileRouteBuilder extends RouteBuilder {
         File path = exchange.getMessage().getHeader("CamelFilePath", File.class);
         LOG.debug("Path: {} ", path);
 
-        lastOffset = testResumeStrategy.getLastOffset(path).orElse(0L);
+        final GenericFileResumeAdapter adapter = testResumeStrategy.getAdapter(GenericFileResumeAdapter.class);
+        lastOffset = adapter.getLastOffset(path).orElse(0L);
         LOG.debug("Starting to read at offset {}", lastOffset);
 
         String line = br.readLine();
@@ -80,8 +88,8 @@ public class LargeFileRouteBuilder extends RouteBuilder {
         }
 
         if (count == batchSize) {
-            getCamelContext().stop();
-            System.exit(0);
+            exchange.setRouteStop(true);
+            latch.countDown();
         }
     }
 
@@ -93,6 +101,7 @@ public class LargeFileRouteBuilder extends RouteBuilder {
 
         from("file:{{input.dir}}?noop=true&fileName={{input.file}}")
                 .resumable("testResumeStrategy")
+                .routeId("largeFileRoute")
                 .convertBodyTo(Reader.class)
                 .process(this::process);
 

@@ -20,14 +20,16 @@ package org.apache.camel.example.resume.fileset.main;
 import java.io.File;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.caffeine.resume.multi.CaffeineCache;
+import org.apache.camel.component.file.consumer.FileSetResumeAdapter;
+import org.apache.camel.component.file.consumer.adapters.DefaultFileSetResumeAdapter;
 import org.apache.camel.example.resume.clients.kafka.DefaultConsumerPropertyFactory;
 import org.apache.camel.example.resume.clients.kafka.DefaultProducerPropertyFactory;
 import org.apache.camel.example.resume.clients.kafka.FileDeserializer;
 import org.apache.camel.example.resume.clients.kafka.FileSerializer;
-import org.apache.camel.example.resume.strategies.kafka.fileset.KafkaFileSetResumeStrategy;
 import org.apache.camel.example.resume.strategies.kafka.fileset.LargeDirectoryRouteBuilder;
-import org.apache.camel.example.resume.strategies.kafka.fileset.MultiItemCache;
 import org.apache.camel.main.Main;
+import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 
 /**
  * A Camel Application
@@ -40,14 +42,14 @@ public class MainApp {
     public static void main(String... args) throws Exception {
         Main main = new Main();
 
-        KafkaFileSetResumeStrategy resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
+        SingleNodeKafkaResumeStrategy<File, File> resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
         RouteBuilder routeBuilder = new LargeDirectoryRouteBuilder(resumeStrategy);
 
         main.configure().addRoutesBuilder(routeBuilder);
         main.run(args);
     }
 
-    private static KafkaFileSetResumeStrategy getUpdatableConsumerResumeStrategyForSet() {
+    private static SingleNodeKafkaResumeStrategy<File, File> getUpdatableConsumerResumeStrategyForSet() {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
@@ -62,9 +64,11 @@ public class MainApp {
         producerPropertyFactory.setKeySerializer(FileSerializer.class.getName());
         producerPropertyFactory.setValueSerializer(FileSerializer.class.getName());
 
-        MultiItemCache<File, File> cache = new MultiItemCache<>();
+        CaffeineCache<File, File> cache = new CaffeineCache<>(10000);
+        FileSetResumeAdapter fileSetResumeAdapter = new DefaultFileSetResumeAdapter(cache);
 
-        return new KafkaFileSetResumeStrategy(kafkaTopic, cache, producerPropertyFactory, consumerPropertyFactory);
+        return new SingleNodeKafkaResumeStrategy<>(kafkaTopic, cache, fileSetResumeAdapter,
+                producerPropertyFactory.getProperties(), consumerPropertyFactory.getProperties());
     }
 
 }
