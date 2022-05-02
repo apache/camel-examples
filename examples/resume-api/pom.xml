@@ -67,12 +67,10 @@
             <artifactId>camel-file</artifactId>
         </dependency>
 
-
         <!-- caching -->
         <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
-            <version>${caffeine-version}</version>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-caffeine</artifactId>
         </dependency>
 
         <!-- logging -->

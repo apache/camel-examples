@@ -26,7 +26,7 @@ sleep 10s
 
 for i in $(seq 0 ${ITERATIONS}) ; do
   echo "********************************************************************************"
-  echo "Running the iteration ${i} of ${ITERATIONS} with a batch of ${BATCH_SIZE} files"
+  echo "Running the iteration ${i} of ${ITERATIONS} with a batch of ${BATCH_SIZE} offsets"
   echo "********************************************************************************"
   java -Dinput.dir=${DATA_DIR} \
     -Doutput.dir=/tmp/out \

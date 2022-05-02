@@ -18,16 +18,20 @@
 package org.apache.camel.example.resume.file.offset.main;
 
 import java.io.File;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.caffeine.resume.single.CaffeineCache;
+import org.apache.camel.component.file.consumer.GenericFileResumeAdapter;
+import org.apache.camel.component.file.consumer.adapters.DefaultGenericFileResumeAdapter;
 import org.apache.camel.example.resume.clients.kafka.DefaultConsumerPropertyFactory;
 import org.apache.camel.example.resume.clients.kafka.DefaultProducerPropertyFactory;
 import org.apache.camel.example.resume.clients.kafka.FileDeserializer;
 import org.apache.camel.example.resume.clients.kafka.FileSerializer;
-import org.apache.camel.example.resume.strategies.kafka.file.KafkaFileOffsetResumeStrategy;
 import org.apache.camel.example.resume.strategies.kafka.file.LargeFileRouteBuilder;
-import org.apache.camel.example.resume.strategies.kafka.file.SingleItemCache;
 import org.apache.camel.main.Main;
+import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.LongSerializer;
 
@@ -42,14 +46,18 @@ public class MainApp {
     public static void main(String... args) throws Exception {
         Main main = new Main();
 
-        KafkaFileOffsetResumeStrategy<File> resumeStrategy = getUpdatableConsumerResumeStrategy();
+        CountDownLatch latch = new CountDownLatch(1);
+        SingleNodeKafkaResumeStrategy<File, File> resumeStrategy = getUpdatableConsumerResumeStrategy();
 
-        RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy);
+        RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, latch);
         main.configure().addRoutesBuilder(routeBuilder);
+
+        Executors.newSingleThreadExecutor().submit(() -> waitForStop(main, latch));
+
         main.run(args);
     }
 
-    private static KafkaFileOffsetResumeStrategy<File> getUpdatableConsumerResumeStrategy() {
+    private static SingleNodeKafkaResumeStrategy<File, File> getUpdatableConsumerResumeStrategy() {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
@@ -58,16 +66,29 @@ public class MainApp {
         consumerPropertyFactory.setKeyDeserializer(FileDeserializer.class.getName());
         consumerPropertyFactory.setValueDeserializer(LongDeserializer.class.getName());
 
-        consumerPropertyFactory.setOffsetReset("earliest");
+        // In this case, we want to consume only the most recent offset
+        consumerPropertyFactory.setOffsetReset("latest");
 
         final DefaultProducerPropertyFactory producerPropertyFactory = new DefaultProducerPropertyFactory(bootStrapAddress);
 
         producerPropertyFactory.setKeySerializer(FileSerializer.class.getName());
         producerPropertyFactory.setValueSerializer(LongSerializer.class.getName());
 
-        SingleItemCache<String> cache = new SingleItemCache<>();
+        CaffeineCache<File,Long> cache = new CaffeineCache<>(1);
 
-        return new KafkaFileOffsetResumeStrategy(kafkaTopic, cache, producerPropertyFactory, consumerPropertyFactory);
+        GenericFileResumeAdapter adapter = new DefaultGenericFileResumeAdapter(cache);
+
+        return new SingleNodeKafkaResumeStrategy(kafkaTopic, cache, adapter, producerPropertyFactory.getProperties(),
+                consumerPropertyFactory.getProperties());
+    }
+
+    private static void waitForStop(Main main, CountDownLatch latch) {
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        main.stop();
     }
 
 
