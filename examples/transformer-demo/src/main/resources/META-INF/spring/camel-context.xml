@@ -29,13 +29,6 @@
     <!-- END SNIPPET: e1 -->
 
     <camel:camelContext id="order">
-
-        <!-- START SNIPPET: e2 -->
-        <camel:dataFormats>
-            <camel:json id="jsondf" library="Jackson" unmarshalType="org.apache.camel.example.transformer.demo.Order"/>
-        </camel:dataFormats>
-        <!-- END SNIPPET: e2 -->
-
         <!-- START SNIPPET: e3 -->
         <camel:transformers>
             <!-- specifying from&to data type for the Java-CSV transformation -->
@@ -47,7 +40,9 @@
                 <camel:jaxb id="xmldf" contextPath="org.apache.camel.example.transformer.demo"/>
             </camel:dataFormatTransformer>
             <!--  for all the Java-JSON transformation, referring to already defined DataFormat -->
-            <camel:dataFormatTransformer ref="jsondf" scheme="json"/>
+            <camel:dataFormatTransformer scheme="json">
+                <camel:json library="Jackson" unmarshalType="org.apache.camel.example.transformer.demo.Order"/>
+            </camel:dataFormatTransformer>
         </camel:transformers>
         <!-- END SNIPPET: e3 -->
         <!-- START SNIPPET: e8 -->

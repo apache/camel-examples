@@ -30,7 +30,7 @@ spec:
     - "camel:timer"
     - "camel:http"
     - "camel:jsonpath"
-  flow:
+  template:
     from:
       uri: "timer:chuck"
       parameters:

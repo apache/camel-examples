@@ -34,7 +34,7 @@ class OAIPMHTest extends CamelTestSupport {
     void should_extract_title_publications() {
         NotifyBuilder notify = new NotifyBuilder(context).wereSentTo("log:titles").whenCompleted(1).create();
         assertTrue(
-            notify.matches(30, TimeUnit.SECONDS), "at least 1 message should be completed"
+            notify.matches(40, TimeUnit.SECONDS), "at least 1 message should be completed"
         );
     }
 

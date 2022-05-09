@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.camel.CamelConfiguration;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.main.MainConfigurationProperties;
@@ -35,13 +36,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * properly using Apache ActiveMQ.
  */
 class WidgetGadgetTest extends CamelMainTestSupport {
+    public static class BrokerConfiguration implements CamelConfiguration {
 
-    @Override
-    protected void bindToRegistry(Registry registry) throws Exception {
-        // connect to embedded ActiveMQ JMS broker
-        ConnectionFactory connectionFactory =
-                new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
-        registry.bind("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+        @org.apache.camel.BindToRegistry("activemq")
+        public JmsComponent createActiveMQbroker() throws Exception {
+            ConnectionFactory connectionFactory =
+                    new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
+            return JmsComponent.jmsComponentAutoAcknowledge(connectionFactory);
+        }
     }
 
     @Test
@@ -59,6 +61,7 @@ class WidgetGadgetTest extends CamelMainTestSupport {
 
     @Override
     protected void configure(MainConfigurationProperties configuration) {
+        configuration.addConfiguration(BrokerConfiguration.class);
         configuration.addRoutesBuilder(new WidgetGadgetRoute());
         configuration.addRoutesBuilder(new CreateOrderRoute());
     }
