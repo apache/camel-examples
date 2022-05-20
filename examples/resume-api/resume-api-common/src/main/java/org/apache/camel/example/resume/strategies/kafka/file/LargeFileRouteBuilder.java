@@ -21,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.Reader;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executors;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
