@@ -22,9 +22,6 @@ COPY src/main/scripts/run.sh /deployments/run.sh
 ENV JAVA_HOME /etc/alternatives/jre
 ENV DATA_DIR /data/source
 
-RUN mkdir -p ${DATA_DIR} && \
-    cd ${DATA_DIR} && \
-    for dir in $(seq 1 5) ; do mkdir $dir && (cd $dir && (for file in $(seq 1 100) ; do echo $RANDOM > $file ; done) ; cd ..) ; done && \
-    chmod +x /deployments/*.sh
+RUN chmod +x /deployments/*.sh
 WORKDIR /deployments/
 CMD [ "sh", "-c", "/deployments/run.sh" ]

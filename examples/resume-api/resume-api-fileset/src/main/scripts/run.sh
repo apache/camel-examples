@@ -16,17 +16,27 @@
 #
 echo "The test will process the following directory tree:"
 
-sleep 2s
-tree ${DATA_DIR} | pv -q -L 512
-sleep 8s
+mkdir -p ${DATA_DIR}
 
 ITERATIONS=${1:-5}
 BATCH_SIZE=${2:-50}
+FILE_COUNT=${3:-100}
 
 for i in $(seq 0 ${ITERATIONS}) ; do
+  mkdir -p ${DATA_DIR}/${i}
+
   echo "********************************************************************************"
   echo "Running the iteration ${i} of ${ITERATIONS} with a batch of ${BATCH_SIZE} files"
   echo "********************************************************************************"
+
+  echo "Appending ${FILE_COUNT} files to the data directory (files from the previous execution remain there)"
+  for file in $(seq 1 100) ; do
+    echo ${RANDOM} > ${DATA_DIR}/${i}/${file}
+  done
+
+  echo "Only the following files should processed in this execution:"
+  tree ${DATA_DIR}/${i} | pv -q -L 1014
+
   java -Dinput.dir=${DATA_DIR} \
     -Doutput.dir=/tmp/out \
     -Dresume.type=kafka \
