@@ -16,22 +16,18 @@
  */
 package org.apache.camel.example.resume.fileset.clusterized.main;
 
-import java.io.File;
+import java.util.Properties;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.caffeine.resume.multi.CaffeineCache;
-import org.apache.camel.component.file.consumer.FileSetResumeAdapter;
-import org.apache.camel.component.file.consumer.adapters.DefaultFileSetResumeAdapter;
 import org.apache.camel.component.zookeeper.cluster.ZooKeeperClusterService;
-import org.apache.camel.example.resume.clients.kafka.DefaultConsumerPropertyFactory;
-import org.apache.camel.example.resume.clients.kafka.DefaultProducerPropertyFactory;
-import org.apache.camel.example.resume.clients.kafka.FileDeserializer;
-import org.apache.camel.example.resume.clients.kafka.FileSerializer;
 import org.apache.camel.example.resume.fileset.clusterized.strategies.ClusterizedLargeDirectoryRouteBuilder;
 import org.apache.camel.main.BaseMainSupport;
 import org.apache.camel.main.MainListener;
 import org.apache.camel.processor.resume.kafka.MultiNodeKafkaResumeStrategy;
+import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
+import org.apache.camel.resume.Resumable;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,7 +56,7 @@ class ClusterizedListener implements MainListener {
             main.getCamelContext().addService(clusterService);
 
             LOG.trace("Creating the strategy");
-            MultiNodeKafkaResumeStrategy<File,File> resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
+            MultiNodeKafkaResumeStrategy<Resumable> resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
             main.getCamelContext().getRegistry().bind("testResumeStrategy", resumeStrategy);
 
             LOG.trace("Creating the route");
@@ -98,25 +94,14 @@ class ClusterizedListener implements MainListener {
         System.exit(0);
     }
 
-    private static MultiNodeKafkaResumeStrategy<File,File> getUpdatableConsumerResumeStrategyForSet() {
+    private static MultiNodeKafkaResumeStrategy<Resumable> getUpdatableConsumerResumeStrategyForSet() {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
-        final DefaultConsumerPropertyFactory consumerPropertyFactory = new DefaultConsumerPropertyFactory(bootStrapAddress);
+        final Properties consumerProperties = SingleNodeKafkaResumeStrategy.createConsumer(bootStrapAddress);
+        consumerProperties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-        consumerPropertyFactory.setKeyDeserializer(FileDeserializer.class.getName());
-        consumerPropertyFactory.setValueDeserializer(FileDeserializer.class.getName());
-        consumerPropertyFactory.setOffsetReset("earliest");
-
-        final DefaultProducerPropertyFactory producerPropertyFactory = new DefaultProducerPropertyFactory(bootStrapAddress);
-
-        producerPropertyFactory.setKeySerializer(FileSerializer.class.getName());
-        producerPropertyFactory.setValueSerializer(FileSerializer.class.getName());
-
-        CaffeineCache<File, File> cache = new CaffeineCache<>(10000);
-        FileSetResumeAdapter adapter = new DefaultFileSetResumeAdapter(cache);
-
-        return new MultiNodeKafkaResumeStrategy(kafkaTopic, cache, adapter, producerPropertyFactory.getProperties(),
-                consumerPropertyFactory.getProperties());
+        final Properties producerProperties = SingleNodeKafkaResumeStrategy.createProducer(bootStrapAddress);
+        return new MultiNodeKafkaResumeStrategy(kafkaTopic, producerProperties, consumerProperties);
     }
 }

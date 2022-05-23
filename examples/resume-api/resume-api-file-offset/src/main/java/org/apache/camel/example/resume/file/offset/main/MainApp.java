@@ -17,23 +17,17 @@
 
 package org.apache.camel.example.resume.file.offset.main;
 
-import java.io.File;
+import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.caffeine.resume.single.CaffeineCache;
-import org.apache.camel.component.file.consumer.GenericFileResumeAdapter;
-import org.apache.camel.component.file.consumer.adapters.DefaultGenericFileResumeAdapter;
-import org.apache.camel.example.resume.clients.kafka.DefaultConsumerPropertyFactory;
-import org.apache.camel.example.resume.clients.kafka.DefaultProducerPropertyFactory;
-import org.apache.camel.example.resume.clients.kafka.FileDeserializer;
-import org.apache.camel.example.resume.clients.kafka.FileSerializer;
+import org.apache.camel.component.caffeine.resume.CaffeineCache;
 import org.apache.camel.example.resume.strategies.kafka.file.LargeFileRouteBuilder;
 import org.apache.camel.main.Main;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.kafka.common.serialization.LongDeserializer;
-import org.apache.kafka.common.serialization.LongSerializer;
+import org.apache.camel.resume.Resumable;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 
 /**
  * A Camel Application
@@ -47,9 +41,9 @@ public class MainApp {
         Main main = new Main();
 
         CountDownLatch latch = new CountDownLatch(1);
-        SingleNodeKafkaResumeStrategy<File, File> resumeStrategy = getUpdatableConsumerResumeStrategy();
+        SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = getUpdatableConsumerResumeStrategy();
 
-        RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, latch);
+        RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, new CaffeineCache<>(100), latch);
         main.configure().addRoutesBuilder(routeBuilder);
 
         Executors.newSingleThreadExecutor().submit(() -> waitForStop(main, latch));
@@ -57,38 +51,27 @@ public class MainApp {
         main.run(args);
     }
 
-    private static SingleNodeKafkaResumeStrategy<File, File> getUpdatableConsumerResumeStrategy() {
+    private static SingleNodeKafkaResumeStrategy<Resumable> getUpdatableConsumerResumeStrategy() {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
-        final DefaultConsumerPropertyFactory consumerPropertyFactory = new DefaultConsumerPropertyFactory(bootStrapAddress);
-
-        consumerPropertyFactory.setKeyDeserializer(FileDeserializer.class.getName());
-        consumerPropertyFactory.setValueDeserializer(LongDeserializer.class.getName());
+        final Properties consumerProperties = SingleNodeKafkaResumeStrategy.createConsumer(bootStrapAddress);
 
         // In this case, we want to consume only the most recent offset
-        consumerPropertyFactory.setOffsetReset("latest");
+        consumerProperties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
 
-        final DefaultProducerPropertyFactory producerPropertyFactory = new DefaultProducerPropertyFactory(bootStrapAddress);
+        final Properties producerProperties = SingleNodeKafkaResumeStrategy.createProducer(bootStrapAddress);
 
-        producerPropertyFactory.setKeySerializer(FileSerializer.class.getName());
-        producerPropertyFactory.setValueSerializer(LongSerializer.class.getName());
-
-        CaffeineCache<File,Long> cache = new CaffeineCache<>(1);
-
-        GenericFileResumeAdapter adapter = new DefaultGenericFileResumeAdapter(cache);
-
-        return new SingleNodeKafkaResumeStrategy(kafkaTopic, cache, adapter, producerPropertyFactory.getProperties(),
-                consumerPropertyFactory.getProperties());
+        return new SingleNodeKafkaResumeStrategy(kafkaTopic, producerProperties, consumerProperties);
     }
 
     private static void waitForStop(Main main, CountDownLatch latch) {
         try {
             latch.await();
+            System.exit(0);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.exit(1);
         }
-        main.stop();
     }
 
 

@@ -22,16 +22,20 @@ import java.io.File;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
+import org.apache.camel.resume.Resumable;
+import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LargeDirectoryRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeDirectoryRouteBuilder.class);
-    private KafkaResumeStrategy<File, File> testResumeStrategy;
+    private final KafkaResumeStrategy<Resumable> testResumeStrategy;
+    private final ResumeCache<File> cache;
 
-    public LargeDirectoryRouteBuilder(KafkaResumeStrategy resumeStrategy) {
+    public LargeDirectoryRouteBuilder(KafkaResumeStrategy resumeStrategy, ResumeCache<File> cache) {
         this.testResumeStrategy = resumeStrategy;
+        this.cache = cache;
     }
 
     private void process(Exchange exchange) throws Exception {
@@ -48,6 +52,7 @@ public class LargeDirectoryRouteBuilder extends RouteBuilder {
      */
     public void configure() {
         getCamelContext().getRegistry().bind("testResumeStrategy", testResumeStrategy);
+        getCamelContext().getRegistry().bind("resumeCache", cache);
 
         from("file:{{input.dir}}?noop=true&recursive=true")
                 .resumable("testResumeStrategy")
