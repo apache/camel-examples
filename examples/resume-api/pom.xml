@@ -42,6 +42,7 @@
         <module>resume-api-file-offset</module>
         <module>resume-api-fileset</module>
         <module>resume-api-fileset-clusterized</module>
+        <module>resume-api-aws2-kinesis</module>
     </modules>
 
     <dependencyManagement>
