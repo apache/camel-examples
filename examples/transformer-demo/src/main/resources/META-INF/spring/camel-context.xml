@@ -57,7 +57,7 @@
         <!-- END SNIPPET: e8 -->
 
         <!-- START SNIPPET: e4 -->
-        <camel:route id="xml">
+        <camel:route id="xml" streamCache="false">
             <camel:from uri="direct:xml"/>
             <!--  This route expects XML as an input/output type -->
             <camel:inputType urn="xml:XMLOrder" validate="true"/>
