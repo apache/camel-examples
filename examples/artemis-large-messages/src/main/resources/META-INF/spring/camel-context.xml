@@ -46,7 +46,7 @@
   </bean>
 
   <camelContext id="myCamel" xmlns="http://camel.apache.org/schema/spring">
-
+    <streamCaching id="myCacheConfig" spoolEnabled="true" bufferSize="2048" spoolDirectory="target/cachedir" spoolThreshold="8192"/>
     <route>
       <from uri="file:target/inbox"/>
       <log message="Sending file ${file:name} to Artemis"/>
