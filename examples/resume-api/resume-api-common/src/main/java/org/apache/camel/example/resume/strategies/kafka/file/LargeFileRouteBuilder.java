@@ -65,7 +65,7 @@ public class LargeFileRouteBuilder extends RouteBuilder {
         FileOffset offsetContainer = cache.get(path, FileOffset.class);
 
         if (offsetContainer != null) {
-            lastOffset = offsetContainer.offset();
+            lastOffset = offsetContainer.getValue();
         } else {
             lastOffset = 0;
         }
