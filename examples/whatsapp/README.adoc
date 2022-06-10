@@ -1,0 +1,29 @@
+== Whatsapp API Example
+
+This example shows how to use Whatsapp API.
+
+=== How to run
+
+You can run this example using
+
+----
+$ mvn compile exec:java
+----
+
+=== Custom chat and authorization token
+
+You can specify your "phone number id", "authorization token", "recipient phone number" and "webhook verify token" in "application.properties" file.
+
+In order to use the webhook and configure it on whatsapp-business interface you can use https://ngrok.com/  in order to expose your localhost to the internet, by default the webhook is exposed on /camel-whatsapp/webhook
+
+To configure the webhook on whatsapp-business, you can follow this guide https://developers.facebook.com/docs/whatsapp/cloud-api/guides/set-up-webhooks.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
