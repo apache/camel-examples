@@ -17,19 +17,16 @@
 
 package org.apache.camel.example.resume.strategies.kafka.file;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.Reader;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.file.consumer.adapters.FileOffset;
+import org.apache.camel.component.file.FileConstants;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
 import org.apache.camel.resume.Resumable;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
-import org.apache.camel.util.IOHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,64 +40,41 @@ public class LargeFileRouteBuilder extends RouteBuilder {
     private final ResumeCache<File> cache;
 
     private long lastOffset;
-    private int batchSize;
+    private long lineCount = 0;
+
     private final CountDownLatch latch;
 
     public LargeFileRouteBuilder(KafkaResumeStrategy resumeStrategy, ResumeCache<File> cache, CountDownLatch latch) {
         this.testResumeStrategy = resumeStrategy;
         this.cache = cache;
-        String tmp = System.getProperty("resume.batch.size", "30");
-        this.batchSize = Integer.valueOf(tmp);
-
         this.latch = latch;
     }
 
-    private void process(Exchange exchange) throws Exception {
-        Reader reader = exchange.getIn().getBody(Reader.class);
-        BufferedReader br = IOHelper.buffered(reader);
+    private void process(Exchange exchange) {
+        final String body = exchange.getMessage().getBody(String.class);
+        final String filePath = exchange.getMessage().getHeader(Exchange.FILE_PATH, String.class);
+        final File file = new File(filePath);
 
-        File path = exchange.getMessage().getHeader("CamelFilePath", File.class);
-        LOG.debug("Path: {} ", path);
+        // Get the initial offset and use it to update the last offset when reading the first line
+        final Resumable resumable = exchange.getMessage().getHeader(FileConstants.INITIAL_OFFSET, Resumable.class);
+        final Long value = resumable.getLastOffset().getValue(Long.class);
 
-        FileOffset offsetContainer = cache.get(path, FileOffset.class);
-
-        if (offsetContainer != null) {
-            lastOffset = offsetContainer.getValue();
-        } else {
-            lastOffset = 0;
+        if (lineCount == 0) {
+            lastOffset += value;
         }
 
-        LOG.debug("Starting to read at offset {}", lastOffset);
+        // It sums w/ 1 in order to account for the newline that is removed by readLine
+        lastOffset += body.length() + 1;
+        lineCount++;
 
-        String line = br.readLine();
-        int count = 0;
-        while (count < batchSize) {
-            if (line == null || line.isEmpty()) {
-                LOG.debug("End of file");
-                // EOF, therefore reset the offset
-                final Resumable resumable = Resumables.of(path, 0L);
-                exchange.getMessage().setHeader(Exchange.OFFSET, resumable);
+        exchange.getMessage().setHeader(Exchange.OFFSET, Resumables.of(file, lastOffset));
 
-                break;
-            }
-
-            LOG.debug("Read line at offset {} from the file: {}", lastOffset, line);
-            testResumeStrategy.updateLastOffset(Resumables.of(path, lastOffset));
-
-            // It sums w/ 1 in order to account for the newline that is removed by readLine
-            lastOffset += line.length() + 1;
-            // Simulate slow processing
-            Thread.sleep(50);
-            count++;
-
-            line = br.readLine();
-        }
-
-        if (count == batchSize) {
-            LOG.info("Reached the last offset in the batch. Stopping ...");
+        LOG.info("Read data: {} / offset key: {} / offset value: {}", body, filePath, lastOffset);
+        if (latch.getCount() == 1) {
             exchange.setRouteStop(true);
-            latch.countDown();
         }
+
+        latch.countDown();
     }
 
     /**
@@ -111,10 +85,15 @@ public class LargeFileRouteBuilder extends RouteBuilder {
         getCamelContext().getRegistry().bind("resumeCache", cache);
 
         from("file:{{input.dir}}?noop=true&fileName={{input.file}}")
-                .resumable("testResumeStrategy")
                 .routeId("largeFileRoute")
-                .convertBodyTo(Reader.class)
-                .process(this::process);
+                .convertBodyTo(String.class)
+                .split(body().tokenize("\n"))
+                    .streaming()
+                    .stopOnException()
+                .resumable()
+                    .resumeStrategy("testResumeStrategy")
+                    .intermittent(true)
+                    .process(this::process);
 
     }
 

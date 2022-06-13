@@ -40,15 +40,18 @@ public class MainApp {
     public static void main(String... args) throws Exception {
         Main main = new Main();
 
-        CountDownLatch latch = new CountDownLatch(1);
+        String tmp = System.getProperty("resume.batch.size", "30");
+        int batchSize = Integer.valueOf(tmp);
+
+        CountDownLatch latch = new CountDownLatch(batchSize);
         SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = getUpdatableConsumerResumeStrategy();
 
-        RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, new CaffeineCache<>(100), latch);
+        RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, new CaffeineCache<>(1), latch);
         main.configure().addRoutesBuilder(routeBuilder);
 
         Executors.newSingleThreadExecutor().submit(() -> waitForStop(main, latch));
 
-        main.run(args);
+        main.start();
     }
 
     private static SingleNodeKafkaResumeStrategy<Resumable> getUpdatableConsumerResumeStrategy() {
@@ -68,6 +71,14 @@ public class MainApp {
     private static void waitForStop(Main main, CountDownLatch latch) {
         try {
             latch.await();
+
+            main.stop();
+            int shutdownWait = 10;
+            while (!main.isStopped() && shutdownWait > 0) {
+                Thread.sleep(1000);
+                shutdownWait--;
+            }
+
             System.exit(0);
         } catch (InterruptedException e) {
             System.exit(1);
