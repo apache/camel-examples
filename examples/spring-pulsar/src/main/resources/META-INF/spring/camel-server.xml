@@ -29,7 +29,7 @@
     <import resource="classpath:camel-common.xml"/>
     <!-- declare a camel context that scans for classes that is RouteBuilder
          in the package org.apache.camel.example.server -->
-    <camel:camelContext id="camel-server">
+    <camel:camelContext id="camel-server" typeConverterExists="Override">
         <camel:package>org.apache.camel.example.pulsar.server</camel:package>
         <!-- enable JMX connector so we can connect to the server and browse mbeans -->
         <!-- Camel will log at INFO level the service URI to use for connecting with jconsole -->

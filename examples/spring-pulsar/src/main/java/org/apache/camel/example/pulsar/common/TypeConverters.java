@@ -22,14 +22,18 @@ import org.apache.camel.Converter;
 
 public class TypeConverters implements org.apache.camel.TypeConverters {
 
-    @Converter
+    // In Camel 3.17 and later, this will not be called because overridden by
+    // built-in Bulk Converter which handles byte array to Integer conversion
+    // by first converting the byte array to a String
+    // @Converter
     public int intFromByteArray(byte[] bytes) {
         return ByteBuffer.wrap(bytes).getInt();
     }
 
     @Converter
     public byte[] intToByteArray(Integer value) {
-        return ByteBuffer.allocate(4).putInt(value).array();
+        // Write it as a string since that is how Bulk Converter will handle it
+        return value.toString().getBytes();
     }
 
 }
