@@ -98,6 +98,11 @@
             <artifactId>camel-http</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-resourceresolver-github</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
