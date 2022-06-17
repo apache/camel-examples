@@ -16,18 +16,16 @@
  */
 package org.apache.camel.example.resume.fileset.clusterized.main;
 
-import java.util.Properties;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.zookeeper.cluster.ZooKeeperClusterService;
 import org.apache.camel.example.resume.fileset.clusterized.strategies.ClusterizedLargeDirectoryRouteBuilder;
 import org.apache.camel.main.BaseMainSupport;
 import org.apache.camel.main.MainListener;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.MultiNodeKafkaResumeStrategy;
-import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 import org.apache.camel.resume.Resumable;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +54,7 @@ class ClusterizedListener implements MainListener {
             main.getCamelContext().addService(clusterService);
 
             LOG.trace("Creating the strategy");
-            MultiNodeKafkaResumeStrategy<Resumable> resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
+            MultiNodeKafkaResumeStrategy<Resumable> resumeStrategy = newResumeStrategy();
             main.getCamelContext().getRegistry().bind("testResumeStrategy", resumeStrategy);
 
             LOG.trace("Creating the route");
@@ -94,14 +92,16 @@ class ClusterizedListener implements MainListener {
         System.exit(0);
     }
 
-    private static MultiNodeKafkaResumeStrategy<Resumable> getUpdatableConsumerResumeStrategyForSet() {
+    private static MultiNodeKafkaResumeStrategy<Resumable> newResumeStrategy() {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
-        final Properties consumerProperties = SingleNodeKafkaResumeStrategy.createConsumer(bootStrapAddress);
-        consumerProperties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        KafkaResumeStrategyConfiguration resumeStrategyConfiguration =
+                KafkaResumeStrategyConfigurationBuilder.newBuilder()
+                        .withBootstrapServers(bootStrapAddress)
+                        .withTopic(kafkaTopic)
+                        .build();
 
-        final Properties producerProperties = SingleNodeKafkaResumeStrategy.createProducer(bootStrapAddress);
-        return new MultiNodeKafkaResumeStrategy(kafkaTopic, producerProperties, consumerProperties);
+        return new MultiNodeKafkaResumeStrategy(resumeStrategyConfiguration);
     }
 }
