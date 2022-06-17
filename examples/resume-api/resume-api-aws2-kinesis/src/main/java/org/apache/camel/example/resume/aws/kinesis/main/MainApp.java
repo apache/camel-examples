@@ -17,18 +17,19 @@
 
 package org.apache.camel.example.resume.aws.kinesis.main;
 
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
 import org.apache.camel.main.Main;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
+import org.apache.camel.resume.Cacheable;
 import org.apache.camel.resume.Resumable;
 import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
 import org.apache.camel.test.infra.aws2.clients.KinesisUtils;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 
 /**
@@ -39,7 +40,7 @@ public class MainApp {
     /**
      * A main() so we can easily run these routing rules in our IDE
      */
-    public static void main(String... args) throws Exception {
+    public static void main(String... args) {
         Main main = new Main();
 
         String streamName = System.getProperty("aws.kinesis.streamName", "aws-kinesis-test");
@@ -68,11 +69,14 @@ public class MainApp {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
-        final Properties consumerProperties = SingleNodeKafkaResumeStrategy.createConsumer(bootStrapAddress);
-        consumerProperties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        KafkaResumeStrategyConfiguration resumeStrategyConfiguration =
+                KafkaResumeStrategyConfigurationBuilder.newBuilder()
+                        .withCacheFillPolicy(Cacheable.FillPolicy.MAXIMIZING)
+                        .withBootstrapServers(bootStrapAddress)
+                        .withTopic(kafkaTopic)
+                        .build();
 
-        final Properties producerProperties = SingleNodeKafkaResumeStrategy.createProducer(bootStrapAddress);
-        return new SingleNodeKafkaResumeStrategy<>(kafkaTopic, producerProperties, consumerProperties);
+        return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
     }
 
     private static void loadData(KinesisClient client, String streamName, int recordCount) {

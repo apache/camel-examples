@@ -17,17 +17,16 @@
 
 package org.apache.camel.example.resume.file.offset.main;
 
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
+import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.example.resume.strategies.kafka.file.LargeFileRouteBuilder;
 import org.apache.camel.main.Main;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 import org.apache.camel.resume.Resumable;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 
 /**
  * A Camel Application
@@ -37,14 +36,14 @@ public class MainApp {
     /**
      * A main() so we can easily run these routing rules in our IDE
      */
-    public static void main(String... args) throws Exception {
+    public static void main(String... args) {
         Main main = new Main();
 
         String tmp = System.getProperty("resume.batch.size", "30");
         int batchSize = Integer.valueOf(tmp);
 
         CountDownLatch latch = new CountDownLatch(batchSize);
-        SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = getUpdatableConsumerResumeStrategy();
+        SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = KafkaUtil.getMinimizingStrategy();
 
         RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, new CaffeineCache<>(1), latch);
         main.configure().addRoutesBuilder(routeBuilder);
@@ -52,20 +51,6 @@ public class MainApp {
         Executors.newSingleThreadExecutor().submit(() -> waitForStop(main, latch));
 
         main.start();
-    }
-
-    private static SingleNodeKafkaResumeStrategy<Resumable> getUpdatableConsumerResumeStrategy() {
-        String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
-        String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
-
-        final Properties consumerProperties = SingleNodeKafkaResumeStrategy.createConsumer(bootStrapAddress);
-
-        // In this case, we want to consume only the most recent offset
-        consumerProperties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-
-        final Properties producerProperties = SingleNodeKafkaResumeStrategy.createProducer(bootStrapAddress);
-
-        return new SingleNodeKafkaResumeStrategy(kafkaTopic, producerProperties, consumerProperties);
     }
 
     private static void waitForStop(Main main, CountDownLatch latch) {
