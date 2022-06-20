@@ -22,7 +22,6 @@ import org.apache.camel.BeanInject;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.test.main.junit5.CamelMainTest;
-import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
