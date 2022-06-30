@@ -18,8 +18,8 @@ package org.apache.camel.example.cxf.httptojms;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cxf.CxfComponent;
-import org.apache.camel.component.cxf.CxfEndpoint;
+import org.apache.camel.component.cxf.jaxws.CxfComponent;
+import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.hello_world_soap_http.Greeter;
