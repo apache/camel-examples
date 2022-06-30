@@ -78,15 +78,15 @@ public class CassandraRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        bindToRegistry("testResumeStrategy", resumeStrategy);
-        bindToRegistry("resumeCache", resumeCache);
+        bindToRegistry(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
+        bindToRegistry(ResumeCache.DEFAULT_NAME, resumeCache);
         bindToRegistry(CassandraConstants.CASSANDRA_RESUME_ACTION, new CustomResumeAction(client.newExampleDao()));
 
         fromF("cql:{{cassandra.host}}:{{cassandra.cql3.port}}/camel_ks?cql=%s&resultSetConversionStrategy=#class:%s",
                 ExampleDao.getSelectStatement(batchSize), ExampleResultSetConversionStrategy.class.getName())
                 .split(body()) // We receive a list of records so, for each
                 .resumable()
-                    .resumeStrategy("testResumeStrategy")
+                    .resumeStrategy(ResumeStrategy.DEFAULT_NAME)
                     .intermittent(true) // Set to ignore empty data sets that will generate exchanges w/ no offset information
                 .process(this::addResumeInfo);
 

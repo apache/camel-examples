@@ -23,6 +23,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
 import org.apache.camel.resume.Resumable;
+import org.apache.camel.resume.ResumeStrategy;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
@@ -51,11 +52,11 @@ public class LargeDirectoryRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
-        getCamelContext().getRegistry().bind("testResumeStrategy", testResumeStrategy);
-        getCamelContext().getRegistry().bind("resumeCache", cache);
+        getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, testResumeStrategy);
+        getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
 
         from("file:{{input.dir}}?noop=true&recursive=true")
-                .resumable("testResumeStrategy")
+                .resumable(ResumeStrategy.DEFAULT_NAME)
                 .process(this::process)
                 .to("file:{{output.dir}}");
     }

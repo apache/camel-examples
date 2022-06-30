@@ -25,6 +25,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.file.FileConstants;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
 import org.apache.camel.resume.Resumable;
+import org.apache.camel.resume.ResumeStrategy;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
@@ -81,8 +82,8 @@ public class LargeFileRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
-        getCamelContext().getRegistry().bind("testResumeStrategy", testResumeStrategy);
-        getCamelContext().getRegistry().bind("resumeCache", cache);
+        getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, testResumeStrategy);
+        getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
 
         from("file:{{input.dir}}?noop=true&fileName={{input.file}}")
                 .routeId("largeFileRoute")
@@ -91,7 +92,7 @@ public class LargeFileRouteBuilder extends RouteBuilder {
                     .streaming()
                     .stopOnException()
                 .resumable()
-                    .resumeStrategy("testResumeStrategy")
+                    .resumeStrategy(ResumeStrategy.DEFAULT_NAME)
                     .intermittent(true)
                     .process(this::process);
 
