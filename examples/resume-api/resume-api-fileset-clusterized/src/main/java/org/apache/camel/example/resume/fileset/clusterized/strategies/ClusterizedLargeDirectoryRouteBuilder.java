@@ -22,6 +22,8 @@ import java.io.File;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
+import org.apache.camel.resume.ResumeStrategy;
+import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,14 +48,14 @@ public class ClusterizedLargeDirectoryRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
-        getCamelContext().getRegistry().bind("resumeCache", new CaffeineCache<>(10000));
+        getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, new CaffeineCache<>(10000));
 
         from("timer:heartbeat?period=10000")
                 .routeId("heartbeat")
                 .log("HeartBeat route (timer) ...");
 
         from("master:resume-ns:file:{{input.dir}}?noop=true&recursive=true")
-                .resumable("testResumeStrategy")
+                .resumable(ResumeStrategy.DEFAULT_NAME)
                 .routeId("clustered")
                 .process(this::process)
                 .to("file:{{output.dir}}");

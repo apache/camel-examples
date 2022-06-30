@@ -26,6 +26,7 @@ import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.MultiNodeKafkaResumeStrategy;
 import org.apache.camel.resume.Resumable;
+import org.apache.camel.resume.ResumeStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +56,7 @@ class ClusterizedListener implements MainListener {
 
             LOG.trace("Creating the strategy");
             MultiNodeKafkaResumeStrategy<Resumable> resumeStrategy = newResumeStrategy();
-            main.getCamelContext().getRegistry().bind("testResumeStrategy", resumeStrategy);
+            main.getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
 
             LOG.trace("Creating the route");
             RouteBuilder routeBuilder = new ClusterizedLargeDirectoryRouteBuilder();
