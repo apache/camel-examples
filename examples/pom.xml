@@ -167,7 +167,7 @@
         <jdk.version>11</jdk.version>
         <compiler.fork>false</compiler.fork>
 
-        <camel.version>3.18.0-SNAPSHOT</camel.version>
+        <camel.version>3.19.0-SNAPSHOT</camel.version>
 
         <!-- Versions -->
         <arquillian-version>1.7.0.Alpha10</arquillian-version>
