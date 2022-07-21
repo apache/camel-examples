@@ -118,6 +118,7 @@
         <module>kamelet</module>
         <module>kamelet-chucknorris</module>
         <module>kamelet-main</module>
+        <module>kamelet-sql</module>
         <module>kotlin</module>
         <module>loan-broker-cxf</module>
         <module>loadbalancing</module>
