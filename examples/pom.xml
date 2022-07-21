@@ -157,6 +157,7 @@
         <module>twitter-websocket</module>
         <module>widget-gadget-java</module>
         <module>widget-gadget-xml</module>
+        <module>whatsapp</module>
     </modules>
 
     <properties>
