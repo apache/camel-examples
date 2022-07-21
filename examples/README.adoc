@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 85 (0 deprecated)
+Number of Examples: 86 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -183,6 +183,8 @@ Number of Examples: 85 (0 deprecated)
 | link:telegram/README.adoc[Telegram] (telegram) | Social | An example that uses Telegram API
 
 | link:twitter-websocket/README.adoc[Twitter Websocket] (twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
+
+| link:whatsapp/README.adoc[Whatsapp] (whatsapp) | Social | An example that uses Whatsapp API
 
 | link:cdi-test/README.adoc[CDI Test] (cdi-test) | Testing | An example illustrating Camel CDI testing features
 
