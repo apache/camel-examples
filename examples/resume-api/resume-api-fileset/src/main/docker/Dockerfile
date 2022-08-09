@@ -21,6 +21,7 @@ COPY src/main/scripts/run.sh /deployments/run.sh
 
 ENV JAVA_HOME /etc/alternatives/jre
 ENV DATA_DIR /data/source
+ENV OUTPUT_DIR /data/output
 
 RUN chmod +x /deployments/*.sh
 WORKDIR /deployments/
