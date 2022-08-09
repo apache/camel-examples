@@ -39,13 +39,10 @@ public class LargeDirectoryRouteBuilder extends RouteBuilder {
         this.cache = cache;
     }
 
-    private void process(Exchange exchange) throws Exception {
+    private void process(Exchange exchange) {
         File path = exchange.getMessage().getHeader("CamelFilePath", File.class);
         LOG.debug("Processing {}", path.getPath());
         exchange.getMessage().setHeader(Exchange.OFFSET, Resumables.of(path.getParentFile(), path));
-
-        // Put a delay to simulate slow processing
-        Thread.sleep(50);
     }
 
     /**
