@@ -20,7 +20,6 @@ package org.apache.camel.example.resume.strategies.kafka;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.camel.resume.Cacheable;
 import org.apache.camel.resume.Resumable;
 
 public final class KafkaUtil {
@@ -37,20 +36,6 @@ public final class KafkaUtil {
                         .withBootstrapServers(bootStrapAddress)
                         .withTopic(kafkaTopic)
                         .withProducerProperty("max.block.ms", "10000")
-                        .build();
-
-        return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
-    }
-
-    public static SingleNodeKafkaResumeStrategy<Resumable> getMinimizingStrategy() {
-        String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
-        String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
-
-        KafkaResumeStrategyConfiguration resumeStrategyConfiguration =
-                KafkaResumeStrategyConfigurationBuilder.newBuilder()
-                        .withCacheFillPolicy(Cacheable.FillPolicy.MINIMIZING)
-                        .withBootstrapServers(bootStrapAddress)
-                        .withTopic(kafkaTopic)
                         .build();
 
         return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
