@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.file.FileConstants;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
@@ -37,6 +38,7 @@ import org.slf4j.LoggerFactory;
 public class LargeFileRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeFileRouteBuilder.class);
 
+    private ProducerTemplate producerTemplate;
     private KafkaResumeStrategy testResumeStrategy;
     private final ResumeCache<File> cache;
 
@@ -70,6 +72,7 @@ public class LargeFileRouteBuilder extends RouteBuilder {
 
         exchange.getMessage().setHeader(Exchange.OFFSET, Resumables.of(file, lastOffset));
 
+        producerTemplate.sendBody("direct:summary", String.valueOf(lastOffset));
         LOG.info("Read data: {} / offset key: {} / offset value: {}", body, filePath, lastOffset);
         if (latch.getCount() == 1) {
             exchange.setRouteStop(true);
@@ -82,6 +85,8 @@ public class LargeFileRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
+        producerTemplate = getContext().createProducerTemplate();
+
         getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, testResumeStrategy);
         getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
 
@@ -95,6 +100,9 @@ public class LargeFileRouteBuilder extends RouteBuilder {
                     .resumeStrategy(ResumeStrategy.DEFAULT_NAME)
                     .intermittent(true)
                     .process(this::process);
+
+        from("direct:summary")
+                .to("file:{{output.dir}}?fileName=summary.txt&fileExist=Append&appendChars=\n");
 
     }
 
