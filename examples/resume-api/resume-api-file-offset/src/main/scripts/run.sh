@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -14,6 +15,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+function checkResults() {
+#  expectedItems=$((ITERATIONS * BATCH_SIZE))
+#  processedRecords=$(cat ${OUTPUT_DIR}/summary.txt | wc -l)
+#  repeated=$(cat ${OUTPUT_DIR}/summary.txt | sort | uniq --count --repeated | wc -l)
+
+  expectedOffset=0
+  dataSize=11
+  errors=0
+  echo "###**************************************************************************###"
+  for line in $(cat ${OUTPUT_DIR}/summary.txt) ; do
+    expectedOffset=$((dataSize + expectedOffset))
+
+    offsetValue=$(echo $line | sed 's/^[ ]*//')
+
+    if [[ "${expectedOffset}" != "${offsetValue}" ]] ; then
+      errors=$(( errors++ ))
+      echo "Results: offset value with error = ${offsetValue} | expectedOffset = ${expectedOffset}."
+      echo "Error count: ${errors}"
+    fi
+  done
+
+  echo "Results: number of items with errors: ${errors}"
+  echo "###**************************************************************************###"
+  echo "Resume simulation completed"
+  echo "###**************************************************************************###"
+
+}
+
+trap checkResults exit SIGINT SIGABRT SIGHUP
+
+
 ITERATIONS=${1:-5}
 BATCH_SIZE=${2:-50}
 
@@ -29,7 +61,7 @@ for i in $(seq 0 ${ITERATIONS}) ; do
   echo "Running the iteration ${i} of ${ITERATIONS} with a batch of ${BATCH_SIZE} offsets"
   echo "********************************************************************************"
   java -Dinput.dir=${DATA_DIR} \
-    -Doutput.dir=/tmp/out \
+    -Doutput.dir=${OUTPUT_DIR} \
     -Dinput.file=${DATA_FILE} \
     -Dresume.type=kafka \
     -Dresume.type.kafka.topic=file-offsets \
@@ -42,7 +74,4 @@ for i in $(seq 0 ${ITERATIONS}) ; do
     sleep 2s
 done
 
-echo "###**************************************************************************###"
-echo "Resume simulation completed"
-echo "###**************************************************************************###"
 exit 0

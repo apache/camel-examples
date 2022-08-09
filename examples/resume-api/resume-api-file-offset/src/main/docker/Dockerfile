@@ -15,7 +15,7 @@
 FROM fedora:35 as resume-api-file-offset
 LABEL maintainer="orpiske@apache.org"
 
-
+ENV OUTPUT_DIR /data/output
 ENV DATA_DIR /data/source
 ENV DATA_FILE data.txt
 ENV DEPLOYMENT_DIR /deployments
