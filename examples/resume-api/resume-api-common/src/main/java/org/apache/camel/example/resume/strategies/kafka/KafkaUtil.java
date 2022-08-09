@@ -36,6 +36,7 @@ public final class KafkaUtil {
                 KafkaResumeStrategyConfigurationBuilder.newBuilder()
                         .withBootstrapServers(bootStrapAddress)
                         .withTopic(kafkaTopic)
+                        .withProducerProperty("max.block.ms", "10000")
                         .build();
 
         return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
