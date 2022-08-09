@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -14,13 +15,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+function checkResults() {
+  expectedItems=$((ITERATIONS * BATCH_SIZE))
+  processedRecords=$(cat ${OUTPUT_DIR}/summary.txt | wc -l)
+  repeated=$(cat ${OUTPUT_DIR}/summary.txt | sort | uniq --count --repeated | wc -l)
+
+  echo "###**************************************************************************###"
+  echo "Results: repeated items: ${repeated}"
+  echo "Results: processed items: ${processedRecords} (expected ${expectedItems})"
+  echo "###**************************************************************************###"
+  echo "Resume simulation completed"
+  echo "###**************************************************************************###"
+
+}
+
+trap checkResults exit SIGINT SIGABRT SIGHUP
+
 echo "The test will process the following directory tree:"
 
 mkdir -p ${DATA_DIR}
 
 ITERATIONS=${1:-5}
-BATCH_SIZE=${2:-50}
+BATCH_SIZE=${2:-100}
 FILE_COUNT=${3:-100}
+MAX_IDLE=5
 
 for i in $(seq 0 ${ITERATIONS}) ; do
   mkdir -p ${DATA_DIR}/${i}
@@ -35,22 +54,28 @@ for i in $(seq 0 ${ITERATIONS}) ; do
   done
 
   echo "Only the following files should processed in this execution:"
-  tree ${DATA_DIR}/${i} | pv -q -L 1014
+  find ${DATA_DIR}/${i} -type f | pv -q -L 1014
 
   java -Dinput.dir=${DATA_DIR} \
-    -Doutput.dir=/tmp/out \
+    -Doutput.dir=${OUTPUT_DIR} \
     -Dresume.type=kafka \
     -Dresume.type.kafka.topic=dir-offsets \
     -Dbootstrap.address=kafka:9092 \
     -jar /deployments/example.jar \
-    -dm ${BATCH_SIZE}
+    -di ${MAX_IDLE}
     echo "********************************************************************************"
     echo "Finished the iteration ${i}"
     echo "********************************************************************************"
     sleep 2s
+
+    if [[ -f ${OUTPUT_DIR}/summary.txt ]] ; then
+      processedRecords=$(cat ${OUTPUT_DIR}/summary.txt | wc -l)
+      echo "Processed ${processedRecords} so far"
+    fi
+
+
 done
 
-echo "###**************************************************************************###"
-echo "Resume simulation completed"
-echo "###**************************************************************************###"
+
+
 exit 0
