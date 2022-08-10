@@ -54,7 +54,7 @@ public class ClusterizedLargeDirectoryRouteBuilder extends RouteBuilder {
                 .routeId("heartbeat")
                 .log("HeartBeat route (timer) ...");
 
-        from("master:resume-ns:file:{{input.dir}}?noop=true&recursive=true")
+        from("master:resume-ns:file:{{input.dir}}?noop=true&recursive=true&repeatCount=1")
                 .resumable(ResumeStrategy.DEFAULT_NAME)
                 .routeId("clustered")
                 .process(this::process)

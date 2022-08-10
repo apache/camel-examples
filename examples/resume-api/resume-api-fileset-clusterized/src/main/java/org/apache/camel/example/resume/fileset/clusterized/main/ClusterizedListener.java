@@ -20,10 +20,9 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.zookeeper.cluster.ZooKeeperClusterService;
 import org.apache.camel.example.resume.fileset.clusterized.strategies.ClusterizedLargeDirectoryRouteBuilder;
+import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.main.BaseMainSupport;
 import org.apache.camel.main.MainListener;
-import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
-import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 import org.apache.camel.resume.Resumable;
 import org.apache.camel.resume.ResumeStrategy;
@@ -55,7 +54,7 @@ class ClusterizedListener implements MainListener {
             main.getCamelContext().addService(clusterService);
 
             LOG.trace("Creating the strategy");
-            SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = newResumeStrategy();
+            SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = KafkaUtil.getDefaultStrategy();
             main.getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
 
             LOG.trace("Creating the route");
@@ -89,20 +88,7 @@ class ClusterizedListener implements MainListener {
 
     @Override
     public void afterStop(BaseMainSupport main) {
-        main.shutdown();
-        System.exit(0);
-    }
-
-    private static SingleNodeKafkaResumeStrategy<Resumable> newResumeStrategy() {
-        String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
-        String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
-
-        KafkaResumeStrategyConfiguration resumeStrategyConfiguration =
-                KafkaResumeStrategyConfigurationBuilder.newBuilder()
-                        .withBootstrapServers(bootStrapAddress)
-                        .withTopic(kafkaTopic)
-                        .build();
-
-        return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
+//        main.shutdown();
+//        System.exit(0);
     }
 }
