@@ -17,6 +17,8 @@
 
 package org.apache.camel.example.resume.strategies.kafka;
 
+import java.time.Duration;
+
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
@@ -36,6 +38,7 @@ public final class KafkaUtil {
                         .withBootstrapServers(bootStrapAddress)
                         .withTopic(kafkaTopic)
                         .withProducerProperty("max.block.ms", "10000")
+                        .withMaxInitializationDuration(Duration.ofSeconds(5))
                         .build();
 
         return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
