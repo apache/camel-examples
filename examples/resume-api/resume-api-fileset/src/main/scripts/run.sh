@@ -23,7 +23,7 @@ function checkResults() {
 
   echo "###**************************************************************************###"
   echo "Results: repeated items: ${repeated}"
-  echo "Results: processed items: ${processedRecords} (expected ${expectedItems})"
+  echo "Results: processed items: ${processedRecords} (expected at least ${expectedItems})"
   echo "###**************************************************************************###"
   echo "Resume simulation completed"
   echo "###**************************************************************************###"
@@ -39,7 +39,7 @@ mkdir -p ${DATA_DIR}
 ITERATIONS=${1:-5}
 BATCH_SIZE=${2:-100}
 FILE_COUNT=${3:-100}
-MAX_IDLE=5
+MAX_IDLE=10
 
 for i in $(seq 0 ${ITERATIONS}) ; do
   mkdir -p ${DATA_DIR}/${i}
