@@ -40,8 +40,9 @@ public class MainApp {
         SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = KafkaUtil.getDefaultStrategy();
         RouteBuilder routeBuilder = new LargeDirectoryRouteBuilder(resumeStrategy, new CaffeineCache<>(10000));
 
-        main.configure().addRoutesBuilder(routeBuilder);
         main.configure().addRoutesBuilder(new CheckRoute());
+        main.configure().addRoutesBuilder(routeBuilder);
+
         main.run(args);
     }
 }
