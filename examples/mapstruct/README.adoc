@@ -1,0 +1,70 @@
+== Camel Example MapStruct
+
+This example shows how to use MapStruct with Camel.
+
+https://mapstruct.org/[MapStruct] is a powerful Java bean mapping code generator.
+
+=== How to use MapStruct
+
+1. This example generates POJO classes from sample JSon data located in src/main/resources/documents.
+We use the jsonschema2pojo-maven-plugin Maven plugin (see details in `pom.xml`).
+
+2. Then we have installed MapStruct as a Java compiler plugin (see details in `pom.xml`).
+
+3. We declared the MapStruct mapping in the `BeerMapper` Java interface.
+
+4. We configured camel-mapstruct to load the mappings by package scanning (see details in `application.properties`)
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+Then you can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+And then send an HTTP POST request to Camel which will do a JSON to JSON mapping via MapStruct.
+
+[source,bash]
+----
+curl -s -X POST -H "Content-Type: application/json" -d @src/main/resources/documents/beer.json http://localhost:8080/beer
+----
+
+NOTE: The sample data are from https://random-data-api.com/api/beer/random_beer
+
+
+=== How to configure for Camel Textual Route debugging
+
+Several IDEs are providing support for Camel Textual Route debugging. To enable this possibility, you need to launch this example with the profile `camel.debug`.
+
+[source,sh]
+----
+$ mvn camel:run -Pcamel.debug
+----
+
+This profile can also be activated with camel.debug property set to true. For instance, by setting the property from command-line:
+
+[source,sh]
+----
+$ mvn camel:run -Dcamel.debug=true
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
