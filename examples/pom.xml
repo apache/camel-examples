@@ -133,7 +133,7 @@
         <module>main-xml</module>
         <module>main-yaml</module>
         <module>management</module>
-        <moudle>mapstruct</moudle>
+        <module>mapstruct</module>
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>
