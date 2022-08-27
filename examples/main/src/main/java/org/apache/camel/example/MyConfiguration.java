@@ -27,9 +27,9 @@ import org.apache.camel.PropertyInject;
 public class MyConfiguration {
 
     @BindToRegistry
-    public MyBean myBean(@PropertyInject("hi") String hi, @PropertyInject("bye") String bye) {
+    public MyBean myBean(@PropertyInject("hi") String hi) {
         // this will create an instance of this bean with the name of the method (eg myBean)
-        return new MyBean(hi, bye);
+        return new MyBean(hi);
     }
 
 }

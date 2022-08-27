@@ -32,6 +32,20 @@ Then you can run this example using
 $ mvn camel:run
 ----
 
+=== Camel CLI
+
+This application is integrated with the Camel CLI via the `camel-cli-connector-starter` dependency (see `pom.xml`).
+This allows to use the Camel CLI to manage this application, such as:
+
+    $mvn package camel:run
+
+And then use the CLI to see status:
+
+    $camel get
+      PID   NAME                          CAMEL            PLATFORM  READY  STATUS   AGE  TOTAL  FAILED  INFLIGHT  SINCE-LAST
+     90491  org.apache.camel.example.My…  3.19.0-SNAPSHOT  Camel      1/1   Running  20s     11       0         0          0s
+
+
 === How to configure for Camel Textual Route debugging
 
 Several IDEs are providing support for Camel Textual Route debugging. To enable this possibility, you need to launch this example with the profile `camel.debug`.

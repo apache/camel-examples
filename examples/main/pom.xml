@@ -61,7 +61,13 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-quartz</artifactId>
+            <artifactId>camel-timer</artifactId>
+        </dependency>
+
+        <!-- camel-cli -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cli-connector</artifactId>
         </dependency>
 
         <!-- logging -->

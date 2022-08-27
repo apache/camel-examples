@@ -32,7 +32,7 @@ class MainTest extends CamelMainTestSupport {
     @Test
     void should_support_binding_via_annotations() {
         NotifyBuilder notify = new NotifyBuilder(context)
-            .whenCompleted(1).whenBodiesDone("Bye World").create();
+            .whenCompleted(1).whenBodiesDone("Hello how are you?").create();
         assertTrue(
             notify.matches(20, TimeUnit.SECONDS), "1 message should be completed"
         );

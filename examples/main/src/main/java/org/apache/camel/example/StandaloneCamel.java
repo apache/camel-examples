@@ -42,7 +42,7 @@ public final class StandaloneCamel {
             String hello = camelContext.resolvePropertyPlaceholders("{{hi}}");
 
             // and create bean with the placeholder
-            MyBean myBean = new MyBean(hello, "Bye");
+            MyBean myBean = new MyBean(hello);
             // register bean to Camel
             camelContext.getRegistry().bind("myBean", myBean);
 
