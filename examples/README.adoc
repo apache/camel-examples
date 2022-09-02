@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 86 (0 deprecated)
+Number of Examples: 88 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -22,6 +22,8 @@ Number of Examples: 86 (0 deprecated)
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
 | link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
+
+| link:aws-secrets-manager-reloading/README.adoc[Aws Secrets Manager Reloading] (aws-secrets-manager-reloading) | Beginner | An example for showing AWS Secrets Manager Camel component with reloading
 
 | link:azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Beginner | Azure Eventhubs example
 
@@ -187,6 +189,8 @@ Number of Examples: 86 (0 deprecated)
 | link:whatsapp/README.adoc[Whatsapp] (whatsapp) | Social | An example that uses Whatsapp API
 
 | link:cdi-test/README.adoc[CDI Test] (cdi-test) | Testing | An example illustrating Camel CDI testing features
+
+| link:mapstruct/README.adoc[Mapstruct] (mapstruct) | Transformation | How to use MapStruct for POJO data mapping
 
 | link:cxf/README.adoc[CXF] (cxf) | WebService | An example which demonstrates the use of the Camel CXF component
 
