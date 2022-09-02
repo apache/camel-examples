@@ -1,0 +1,144 @@
+== Camel Example AWS Secrets Manager Reloading
+
+This example shows how to use AWS Secrets Manager to retrieve a secret, update the secret and trigger a reload of the camel context.
+
+Also notice how you can configure Camel in the `application.properties` file.
+
+=== Setup
+
+- Store the secret
+
+In this example you'll need to use the AWS CLI to run some commands during the example.
+
+First of all we'll need to create a secret in AWS Secret Manager, named `SecretTest`.
+
+We'll run
+
+[source,sh]
+----
+aws secretsmanager create-secret --name SecretTest --description "Create a secret" --region eu-west-1 --secret-string secret 
+----
+
+- Setting up the AWS credentials as enviroment variables
+
+This example uses the ProfileCredentialsProvider from AWS SDK v2. So you'll need to have a configuration file, locally to your machine.
+
+In particular you'll need to have a file placed in `~/.aws/credentials`
+
+with a content like the following
+
+[source,sh]
+----
+[default]
+aws_access_key_id = accessKey
+aws_secret_access_key = secretKey
+----
+
+[source,sh]
+----
+export CAMEL_VAULT_AWS_REGION=<region>
+export CAMEL_VAULT_AWS_USE_DEFAULT_CREDENTIALS_PROVIDER=true
+----
+
+Now you're ready to run the example.
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+Then you can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+At this point you should see:
+
+[source,sh]
+----
+14:02:19.031 [org.apache.camel.example.MyApplication.main()] INFO  org.apache.camel.main.MainSupport - Apache Camel (Main) 3.19.0-SNAPSHOT is starting
+14:02:19.121 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport - Classpath scanning enabled from base package: org.apache.camel.example
+14:02:19.204 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.e.DefaultBeanIntrospection - Invoked: 1 times (overall) [Method: setProperty, Target: org.apache.camel.vault.AwsVaultConfiguration@c3adfb, Arguments: [defaultCredentialsProvider, true]]
+14:02:19.210 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.e.DefaultBeanIntrospection - Invoked: 2 times (overall) [Method: setProperty, Target: org.apache.camel.vault.AwsVaultConfiguration@c3adfb, Arguments: [region, eu-west-1]]
+14:02:19.226 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport - Auto-configuration summary
+14:02:19.227 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.name=AWS-secrets-manager
+14:02:19.227 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.jmxEnabled=false
+14:02:19.227 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.beanIntrospectionLoggingLevel=INFO
+14:02:19.227 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.contextReloadEnabled=true
+14:02:19.227 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.aws.defaultCredentialsProvider=true
+14:02:19.227 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.aws.region=eu-west-1
+14:02:20.552 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.19.0-SNAPSHOT (AWS-secrets-manager) is starting
+14:02:20.573 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Routes startup (started:1)
+14:02:20.574 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext -     Started route1 (timer://myTimer)
+14:02:20.583 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.19.0-SNAPSHOT (AWS-secrets-manager) started in 1s327ms (build:31ms init:1s275ms start:21ms JVM-uptime:3s)
+14:02:20.720 [pool-1-thread-1] INFO  o.apache.camel.example.MyApplication - Found 50 events
+14:02:21.593 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:02:31.573 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:02:41.573 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:02:50.288 [pool-1-thread-1] INFO  o.apache.camel.example.MyApplication - Found 0 events
+14:02:51.573 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:03:01.573 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:03:11.573 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+----
+
+The example is running and it is using the original secret value. Now, in a different terminal, run the following AWS CLI command:
+
+[source,sh]
+----
+aws secretsmanager put-secret-value --secret-id SecretTest --region eu-west-1 --secret-string secretImproved
+----
+
+Now, get back, to the running Camel application and in the log you should see:
+
+[source,sh]
+----
+.
+.
+.
+14:03:50.303 [pool-1-thread-1] INFO  o.apache.camel.example.MyApplication - Found 0 events
+14:03:51.572 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:04:01.572 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:04:11.572 [Camel (AWS-secrets-manager) thread #1 - timer://myTimer] INFO  route1 - Secret value is: secret
+14:04:20.311 [pool-1-thread-1] INFO  o.apache.camel.example.MyApplication - Found 1 events
+14:04:20.312 [pool-1-thread-1] INFO  o.apache.camel.example.MyApplication - Update for secret SecretTest detected, triggering a context reload
+14:04:20.312 [pool-1-thread-1] INFO  o.a.c.i.e.DefaultContextReloadStrategy - Reloading CamelContext (AWS-secrets-manager) triggered by: AWS-secrets-manager
+14:04:21.608 [Camel (AWS-secrets-manager) thread #4 - timer://myTimer] INFO  route1 - Secret value is: secretImproved
+14:04:31.607 [Camel (AWS-secrets-manager) thread #4 - timer://myTimer] INFO  route1 - Secret value is: secretImproved
+.
+.
+.
+.
+----
+
+The Camel context has been reloaded after we noticed a `PutSecretValue` API invocation for this specific secret, in this specific region, in the AWS CloudTrail service.
+
+Now, stop the application.
+
+=== Cleanup
+
+- Delete the secret
+
+Simply run
+
+[source,sh]
+----
+aws secretsmanager delete-secret --secret-id SecretTest --region eu-west-1 --force-delete-without-recovery
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!

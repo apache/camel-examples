@@ -38,6 +38,7 @@
 
     <modules>
         <module>aws-secrets-manager</module>
+        <module>aws-secrets-manager-reloading</module>
         <module>main-endpointdsl-aws2</module>
         <module>main-endpointdsl-aws2-s3</module>
         <module>main-endpointdsl-aws2-s3-kafka</module>
