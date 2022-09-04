@@ -34,7 +34,7 @@ $ mvn camel:run
 
 === Camel CLI
 
-This application is integrated with the Camel CLI via the `camel-cli-connector-starter` dependency (see `pom.xml`).
+This application is integrated with the Camel CLI via the `camel-cli-connector` dependency (see `pom.xml`).
 This allows to use the Camel CLI to manage this application, such as:
 
     $mvn package camel:run
