@@ -53,7 +53,7 @@ public final class MyApplication {
 
         // Task to check for secret updates
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        CloudTrailReloadTriggerTask analyzerTask = new CloudTrailReloadTriggerTask(main.getCamelContext(), "SecretTest1");
+        CloudTrailReloadTriggerTask analyzerTask = new CloudTrailReloadTriggerTask(main.getCamelContext(), "SecretTest");
         executor.scheduleAtFixedRate(analyzerTask, 30, 60, TimeUnit.SECONDS);
     }
 
