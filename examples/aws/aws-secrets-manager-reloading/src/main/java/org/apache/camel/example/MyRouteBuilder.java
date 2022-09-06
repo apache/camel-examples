@@ -24,6 +24,6 @@ public class MyRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer://myTimer?fixedRate=true&period=10000")
-            .log("Secret value is: {{aws:SecretTest}}");
+            .log("Secret value is: {{aws:SecretTest1}}");
     }
 }
