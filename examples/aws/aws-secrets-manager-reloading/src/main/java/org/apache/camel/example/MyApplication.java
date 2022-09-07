@@ -49,12 +49,7 @@ public final class MyApplication {
         Main main = new Main(MyApplication.class);
 
         // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
-        main.start();
-
-        // Task to check for secret updates
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        CloudTrailReloadTriggerTask analyzerTask = new CloudTrailReloadTriggerTask(main.getCamelContext(), "SecretTest");
-        executor.scheduleAtFixedRate(analyzerTask, 30, 60, TimeUnit.SECONDS);
+        main.run(args);
     }
 
 }
