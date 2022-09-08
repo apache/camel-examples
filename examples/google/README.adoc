@@ -1,0 +1,27 @@
+= Welcome to the Apache Camel Examples
+
+== Introduction
+
+This directory contains examples for Camel Google cloud components.
+View the individual example READMEs for details.
+
+== Examples
+
+[width="100%",cols="4,2,4",options="header"]
+|===
+| Example | Category | Description
+
+
+| link:google-pubsub/README.adoc[Google Pubsub] (google-pubsub) | Cloud | Google Pubsub example
+
+|===
+
+== Help and contributions
+
+If you hit any problem using Camel or have some feedback, 
+then please https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, 
+so https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!

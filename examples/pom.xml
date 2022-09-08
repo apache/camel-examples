@@ -108,6 +108,7 @@
         <module>fhir</module>
         <module>flight-recorder</module>
         <module>ftp</module>
+        <module>google</module>
         <module>hazelcast-kubernetes</module>
         <module>java8</module>
         <module>jdbc</module>

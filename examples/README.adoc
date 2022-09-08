@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 88 (0 deprecated)
+Number of Examples: 89 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -99,6 +99,8 @@ Number of Examples: 88 (0 deprecated)
 | link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
 | link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
+
+| link:google/README.adoc[Google] (google) | Cloud | Multiple Camel Google examples
 
 | link:hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
 
