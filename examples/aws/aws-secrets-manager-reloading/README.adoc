@@ -119,6 +119,8 @@ Now, get back, to the running Camel application and in the log you should see:
 
 The Camel context has been reloaded after we noticed a `PutSecretValue` API invocation for this specific secret, in this specific region, in the AWS CloudTrail service.
 
+The example will work even if you remove the property `camel.aws.vault.secrets`, because the aws related properties will be taken into account automatically.
+
 Now, stop the application.
 
 === Cleanup
