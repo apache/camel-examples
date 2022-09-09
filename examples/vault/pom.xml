@@ -27,9 +27,9 @@
         <version>3.19.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-examples-aws-parent</artifactId>
-    <name>Camel :: Example :: AWS :: Parent</name>
-    <description>Multiple Camel AWS examples</description>
+    <artifactId>camel-examples-vault-parent</artifactId>
+    <name>Camel :: Example :: Vault :: Parent</name>
+    <description>Multiple Camel Vault examples</description>
     <packaging>pom</packaging>
 
     <properties>
@@ -37,32 +37,7 @@
     </properties>
 
     <modules>
-        <module>main-endpointdsl-aws2</module>
-        <module>main-endpointdsl-aws2-s3</module>
-        <module>main-endpointdsl-aws2-s3-kafka</module>
-        <module>main-endpointdsl-kafka-aws2-s3</module>
-        <module>main-endpointdsl-kafka-aws2-s3-restarting-policy</module>
+        <module>aws-secrets-manager</module>
+        <module>aws-secrets-manager-reloading</module>
     </modules>
-    <dependencies>
-        <!-- for testing -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-main-junit5</artifactId>
-            <version>${camel.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-infra-aws-v2</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-core</artifactId>
-            <version>1.12.150</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

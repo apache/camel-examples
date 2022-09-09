@@ -157,6 +157,7 @@
         <module>telegram</module>
         <module>transformer-demo</module>
         <module>twitter-websocket</module>
+        <module>vault</module>
         <module>widget-gadget-java</module>
         <module>widget-gadget-xml</module>
         <module>whatsapp</module>
