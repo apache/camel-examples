@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 89 (0 deprecated)
+Number of Examples: 90 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -42,6 +42,8 @@ Number of Examples: 89 (0 deprecated)
 | link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
 | link:ftp/README.adoc[FTP] (ftp) | Beginner | An example for showing Camel FTP integration
+
+| link:google-secret-manager-reloading/README.adoc[Google Secret Manager Reloading] (google-secret-manager-reloading) | Beginner | An example for showing Google Secret Manager Camel component with reloading
 
 | link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
 
