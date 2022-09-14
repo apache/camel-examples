@@ -4,6 +4,193 @@ This example shows how to use Google Secret Manager to retrieve a secret, update
 
 Also notice how you can configure Camel in the `application.properties` file.
 
+=== Setup
+
+First of all you'll need to install the gcloud cli from https://cloud.google.com/sdk/docs/install
+
+Once the Cli has been installed we can proceed to login and to setup the project with the following commands:
+
+[source,sh]
+----
+gcloud auth login
+----
+
+and
+
+[source,sh]
+----
+gcloud projects create gcp-sec-refresh --name="GCP Secret Manager Refresh"
+----
+
+The project will need a service identity for using secret manager service and we'll be able to have that through the command:
+
+[source,sh]
+----
+gcloud beta services identity create --service "secretmanager.googleapis.com" --project "gcp-sec-refresh"
+----
+
+The latter command will provide a service account name that we need to export
+
+[source,sh]
+----
+export SM_SERVICE_ACCOUNT="service-...."
+----
+
+Since we want to have notifications about event related to a specific secret through a Google Pubsub topic we'll need to create a topic for this purpose with the following command:
+
+[source,sh]
+----
+gcloud pubsub topics create "projects/gcp-sec-refresh/topics/pubsub-gcp-sec-refresh"
+----
+
+The service account will need Secret Manager authorization to publish messages on the topic just created, so we'll need to add an iam policy binding with the following command:
+
+[source,sh]
+----
+gcloud pubsub topics add-iam-policy-binding pubsub-gcp-sec-refresh --member "serviceAccount:${SM_SERVICE_ACCOUNT}" --role "roles/pubsub.publisher" --project gcp-sec-refresh
+----
+
+We now need to create a subscription to the pubsub-gcp-sec-refresh just created and we're going to call it sub-gcp-sec-refresh with the following command:
+
+[source,sh]
+----
+gcloud pubsub subscriptions create "projects/gcp-sec-refresh/subscriptions/sub-gcp-sec-refresh" --topic "projects/gcp-sec-refresh/topics/pubsub-gcp-sec-refresh"
+----
+
+Now we need to create a service account for running our application:
+
+[source,sh]
+----
+gcloud iam service-accounts create gcp-sec-refresh-sa --description="GCP Sec Refresh SA" --project gcp-sec-refresh
+----
+
+Let's give the SA an owner role:
+
+[source,sh]
+----
+gcloud projects add-iam-policy-binding gcp-sec-refresh --member="serviceAccount:gcp-sec-refresh-sa@gcp-sec-refresh.iam.gserviceaccount.com" --role="roles/owner"
+----
+
+Now we should create a Service account key file for the just create SA:
+
+[source,sh]
+----
+gcloud iam service-accounts keys create gcp-sec-refresh.json --iam-account=gcp-sec-refresh-sa@gcp-sec-refresh.iam.gserviceaccount.com
+----
+
+Modify the application.properties file to point to serviceAccountKey property to the just create gcp-sec-refresh.json file.
+
+Let's enable the Secret Manager API for our project
+
+[source,sh]
+----
+gcloud services enable secretmanager.googleapis.com --project gcp-sec-refresh
+----
+
+If needed enable also the Billing API.
+
+Now it's time to create our hello secret, with topic notification:
+
+[source,sh]
+----
+gcloud secrets create hello --topics=projects/gcp-sec-refresh/topics/pubsub-gcp-sec-refresh --project=gcp-sec-refresh
+----
+
+Let's add a value to the secret:
+
+[source,sh]
+----
+echo -n "Camel rocks! " | gcloud secrets versions add hello --data-file=- --project=gcp-sec-refresh
+----
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+Then you can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+At this point you should see:
+
+[source,sh]
+----
+06:49:49.293 [org.apache.camel.example.MyApplication.main()] INFO  org.apache.camel.main.MainSupport - Apache Camel (Main) 3.19.0-SNAPSHOT is starting
+06:49:49.377 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport - Classpath scanning enabled from base package: org.apache.camel.example
+06:49:49.477 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport - Auto-configuration summary
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.name=gcp-secrets-manager
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.jmxEnabled=false
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.beanIntrospectionLoggingLevel=INFO
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.main.contextReloadEnabled=true
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.gcp.projectId=gcp-sec-refresh
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.gcp.serviceAccountKey=file://///config/gcp-sec-refresh.json
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.gcp.refreshEnabled=true
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.gcp.refreshPeriod=60000
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.gcp.secrets=hello*
+06:49:49.478 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport -     [application.properties]       camel.vault.gcp.subscriptionName=sub-gcp-sec-refresh
+06:49:51.500 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.19.0-SNAPSHOT (gcp-secrets-manager) is starting
+06:49:51.542 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Routes startup (started:1)
+06:49:51.542 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext -     Started route1 (timer://myTimer)
+06:49:51.542 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.19.0-SNAPSHOT (gcp-secrets-manager) started in 1s126ms (build:43ms init:1s42ms start:41ms JVM-uptime:5s)
+06:49:52.549 [Camel (gcp-secrets-manager) thread #2 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks! 
+06:50:02.540 [Camel (gcp-secrets-manager) thread #2 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks! 
+06:50:12.540 [Camel (gcp-secrets-manager) thread #2 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks! 
+06:50:22.540 [Camel (gcp-secrets-manager) thread #2 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks! 
+----
+
+The example is running and it is using the original secret value. Now, in a different terminal, run the following Gcloud CLI command:
+
+[source,sh]
+----
+echo -n "Camel rocks reloaded! " | gcloud secrets versions add hello --data-file=- --project=gcp-sec-refresh
+----
+
+This will create a new secret version.
+
+Now, get back, to the running Camel application and in the log you should see:
+
+[source,sh]
+----
+.
+.
+.
+06:50:27.463 [Gax-5] INFO  o.a.c.c.g.s.m.v.PubsubReloadTriggerTask - Update for GCP secret: projects/xxxxxxx/secrets/hello detected, triggering CamelContext reload
+06:50:27.463 [Gax-5] INFO  o.a.c.s.DefaultContextReloadStrategy - Reloading CamelContext (gcp-secrets-manager) triggered by: org.apache.camel.component.google.secret.manager.vault.PubsubReloadTriggerTask$FilteringEventMessageReceiver@157068a2
+06:50:28.621 [Camel (gcp-secrets-manager) thread #5 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks reloaded! 
+06:50:38.621 [Camel (gcp-secrets-manager) thread #5 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks reloaded! 
+.
+.
+.
+.
+----
+
+The Camel context has been reloaded after we noticed a `SECRET_VERSION_ADD` event for this specific secret, in the Google Pubsub topic.
+
+The example will work even if you remove the property `camel.gcp.vault.secrets`, because the gcp related properties will be taken into account automatically.
+
+Now, stop the application.
+
+=== Cleanup
+
+- Delete the secret
+
+Simply run
+
+[source,sh]
+----
+gcloud secrets delete hello --project gcp-sec-refresh
+----
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
