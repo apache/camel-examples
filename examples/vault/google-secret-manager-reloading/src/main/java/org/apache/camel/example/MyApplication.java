@@ -16,53 +16,31 @@
  */
 package org.apache.camel.example;
 
+import java.time.Instant;
+
 import org.apache.camel.main.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.api.gax.core.CredentialsProvider;
-import com.google.api.gax.core.FixedCredentialsProvider;
-import com.google.api.gax.core.NoCredentialsProvider;
-import com.google.api.gax.grpc.GrpcTransportChannel;
-import com.google.api.gax.rpc.FixedTransportChannelProvider;
-import com.google.api.gax.rpc.TransportChannelProvider;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.pubsub.v1.MessageReceiver;
-import com.google.cloud.pubsub.v1.Subscriber;
-import com.google.cloud.pubsub.v1.AckReplyConsumer;
-import com.google.pubsub.v1.ProjectSubscriptionName;
-import com.google.pubsub.v1.PubsubMessage;
-
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-
-import org.apache.camel.spi.ContextReloadStrategy;
-import org.apache.camel.util.StringHelper;
-
-import java.time.Instant;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Main class that boot the Camel application
  */
 public final class MyApplication {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MyApplication.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MyApplication.class);
 
-    public static Instant lastTime = null;
+	public static Instant lastTime = null;
 
-    private MyApplication() {
-    }
+	private MyApplication() {
+	}
 
-    public static void main(String[] args) throws Exception {
-        // use Camels Main class
-        Main main = new Main(MyApplication.class);
+	public static void main(String[] args) throws Exception {
+		// use Camels Main class
+		Main main = new Main(MyApplication.class);
 
-        // now keep the application running until the JVM is terminated (ctrl + c or sigterm)
-        main.run(args);
-    }
+		// now keep the application running until the JVM is terminated (ctrl + c or
+		// sigterm)
+		main.run(args);
+	}
 
 }
