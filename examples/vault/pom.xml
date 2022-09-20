@@ -39,6 +39,7 @@
     <modules>
         <module>aws-secrets-manager</module>
         <module>aws-secrets-manager-reloading</module>
+        <module>azure-key-vault-reloading</module>
         <module>google-secret-manager-reloading</module>
     </modules>
 </project>
