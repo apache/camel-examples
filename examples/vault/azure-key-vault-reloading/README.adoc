@@ -1,0 +1,106 @@
+== Camel Example Azure Key Vault Reloading
+
+This example shows how to use Azure Key Vault to retrieve a secret, update the secret and trigger a reload of the camel context.
+
+Also notice how you can configure Camel in the `application.properties` file.
+
+=== Setup
+
+You'll need to have a key vault as first step.
+
+Then you'll need to create an event grid subscription to Eventhubs with a Blob Account and container for storing the checkpoint.
+
+It's not totally easy to do through the az cli, but everything could be done through the Azure UI. We're planning to improve this example by having all the instructions exposed as Azure CLI commands.
+
+Set all the credentials in the application.properties file correctly
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+Then you can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+At this point you should see:
+
+[source,sh]
+----
+14:52:59.371 [org.apache.camel.example.MyApplication.main()] INFO  org.apache.camel.main.MainSupport - Apache Camel (Main) 3.19.0-SNAPSHOT is starting
+14:52:59.449 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport - Classpath scanning enabled from base package: org.apache.camel.example
+14:52:59.526 [org.apache.camel.example.MyApplication.main()] INFO  o.apache.camel.main.BaseMainSupport - Auto-configuration summary
+.
+.
+.
+.
+14:53:02.301 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.19.0-SNAPSHOT (azure-key-vault) is starting
+14:53:02.325 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Routes startup (started:1)
+14:53:02.325 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext -     Started route1 (timer://myTimer)
+14:53:02.326 [org.apache.camel.example.MyApplication.main()] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 3.19.0-SNAPSHOT (azure-key-vault) started in 2s84ms (build:24ms init:2s36ms start:24ms JVM-uptime:5s)
+14:54:03.325 [Camel (azure-key-vault) thread #2 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks!
+14:54:13.324 [Camel (azure-key-vault) thread #2 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks!
+14:54:23.324 [Camel (azure-key-vault) thread #2 - timer://myTimer] INFO  route1 - Secret value is: Camel rocks!
+
+----
+
+The example is running and it is using the original secret value. Now, in a different terminal, run the following Az CLI command:
+
+[source,sh]
+----
+az keyvault secret set --name hello --vault-name test12345678910 --value 'Camel Rocks reloaded!'
+----
+
+This will create a new secret version.
+
+Now, get back, to the running Camel application and in the log you should see:
+
+[source,sh]
+----
+.
+.
+.
+14:55:28.646 [partition-pump-0-3] INFO  o.a.c.c.a.k.v.EventhubsReloadTriggerTask - Update for Azure secret: hello detected, triggering CamelContext reload
+14:55:28.646 [partition-pump-0-3] INFO  o.a.c.s.DefaultContextReloadStrategy - Reloading CamelContext (azure-key-vault) triggered by: Azure Secrets Refresh Task
+14:55:30.574 [Camel (azure-key-vault) thread #5 - timer://myTimer] INFO  route1 - Secret value is: Camel Rocks reloaded! 
+.
+.
+.
+.
+----
+
+The Camel context has been reloaded after we noticed a `Microsoft.KeyVault.SecretNewVersionCreated` event for this specific secret, in the Eventgrid topic.
+
+The example will work even if you remove the property `camel.azure.vault.secrets`, because the azure related properties will be taken into account automatically.
+
+Now, stop the application.
+
+=== Cleanup
+
+- Delete the secret
+
+Simply run
+
+[source,sh]
+----
+az keyvault secret delete --name hello --vault-name test12345678910
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
