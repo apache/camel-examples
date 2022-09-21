@@ -87,7 +87,7 @@ Let's enable the Secret Manager API for our project
 gcloud services enable secretmanager.googleapis.com --project gcp-sec-refresh
 ----
 
-If needed enable also the Billing API.
+If needed enable also the Billing API and Pubsub API.
 
 Now it's time to create our hello secret, with topic notification:
 
