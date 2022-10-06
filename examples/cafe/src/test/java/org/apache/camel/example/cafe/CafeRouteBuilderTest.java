@@ -30,6 +30,8 @@ import org.apache.camel.spi.Registry;
 import org.apache.camel.test.junit5.CamelTestSupport;
 import org.junit.jupiter.api.Test;
 
+import static org.apache.camel.component.mock.MockEndpoint.assertIsSatisfied;
+
 class CafeRouteBuilderTest extends CamelTestSupport {
     protected TestWaiter waiter = new TestWaiter();
     protected TestDrinkRouter driverRouter = new TestDrinkRouter();
@@ -57,7 +59,7 @@ class CafeRouteBuilderTest extends CamelTestSupport {
         
         template.sendBody("direct:cafe", order);
         
-        assertMockEndpointsSatisfied();
+        assertIsSatisfied(context);
     }
     
     @Test
