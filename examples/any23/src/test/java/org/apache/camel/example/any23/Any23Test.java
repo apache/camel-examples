@@ -21,6 +21,8 @@ import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.test.junit5.CamelTestSupport;
 import org.junit.jupiter.api.Test;
 
+import static org.apache.camel.component.mock.MockEndpoint.assertIsSatisfied;
+
 /**
  * A unit test checking that we can extract data from a page with RDF content using Apache Anything To Triples.
  */
@@ -43,7 +45,7 @@ class Any23Test extends CamelTestSupport {
 
         template.sendBody("direct:start", "This is a test message to run the example");
 
-        assertMockEndpointsSatisfied();
+        assertIsSatisfied(context);
     }
 
     @Override

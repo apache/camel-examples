@@ -57,7 +57,7 @@ class CafeRouteBuilderTest extends CamelTestSupport {
         
         template.sendBody("direct:cafe", order);
         
-        assertMockEndpointsSatisfied();
+        MockEndpoint.assertIsSatisfied(context);
     }
     
     @Test

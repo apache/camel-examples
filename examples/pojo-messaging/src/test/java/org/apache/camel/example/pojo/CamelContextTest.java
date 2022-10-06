@@ -30,7 +30,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CamelContextTest extends CamelSpringTestSupport {
 
-    @Override
     protected Path testDirectory() {
         return Paths.get("target/messages");
     }

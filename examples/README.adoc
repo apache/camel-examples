@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 92 (0 deprecated)
+Number of Examples: 91 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -26,8 +26,6 @@ Number of Examples: 92 (0 deprecated)
 | link:aws-secrets-manager-reloading/README.adoc[Aws Secrets Manager Reloading] (aws-secrets-manager-reloading) | Beginner | An example for showing AWS Secrets Manager Camel component with reloading
 
 | link:azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Beginner | Azure Eventhubs example
-
-| link:azure-eventhubs-consume/README.adoc[Azure Eventhubs Consume] (azure-eventhubs-consume) | Beginner | Azure Eventhubs example
 
 | link:azure-key-vault-reloading/README.adoc[Azure Key Vault Reloading] (azure-key-vault-reloading) | Beginner | An example for showing Azure Key Vault Camel component with reloading
 
