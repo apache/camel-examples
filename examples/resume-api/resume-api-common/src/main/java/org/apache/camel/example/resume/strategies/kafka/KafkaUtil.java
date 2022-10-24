@@ -22,14 +22,13 @@ import java.time.Duration;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.camel.resume.Resumable;
 
 public final class KafkaUtil {
     private KafkaUtil() {
 
     }
 
-    public static SingleNodeKafkaResumeStrategy<Resumable> getDefaultStrategy() {
+    public static SingleNodeKafkaResumeStrategy getDefaultStrategy() {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
@@ -41,6 +40,6 @@ public final class KafkaUtil {
                         .withMaxInitializationDuration(Duration.ofSeconds(5))
                         .build();
 
-        return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
+        return new SingleNodeKafkaResumeStrategy(resumeStrategyConfiguration);
     }
 }

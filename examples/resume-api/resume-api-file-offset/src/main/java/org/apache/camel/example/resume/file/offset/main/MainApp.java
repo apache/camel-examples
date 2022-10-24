@@ -26,7 +26,6 @@ import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.example.resume.strategies.kafka.file.LargeFileRouteBuilder;
 import org.apache.camel.main.Main;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.camel.resume.Resumable;
 
 /**
  * A Camel Application
@@ -43,7 +42,7 @@ public class MainApp {
         int batchSize = Integer.valueOf(tmp);
 
         CountDownLatch latch = new CountDownLatch(batchSize);
-        SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = KafkaUtil.getDefaultStrategy();
+        SingleNodeKafkaResumeStrategy resumeStrategy = KafkaUtil.getDefaultStrategy();
 
         RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, new CaffeineCache<>(1), latch);
         main.configure().addRoutesBuilder(routeBuilder);

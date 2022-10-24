@@ -53,7 +53,7 @@ public class MainApp {
             return;
         }
 
-        SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
+        SingleNodeKafkaResumeStrategy resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
         Integer batchSize = Integer.parseInt(System.getProperty("batch.size", "50"));
         CountDownLatch latch = new CountDownLatch(batchSize);
 
@@ -65,7 +65,7 @@ public class MainApp {
         main.start();
     }
 
-    private static SingleNodeKafkaResumeStrategy<Resumable> getUpdatableConsumerResumeStrategyForSet() {
+    private static SingleNodeKafkaResumeStrategy getUpdatableConsumerResumeStrategyForSet() {
         String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
         String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
 
@@ -76,7 +76,7 @@ public class MainApp {
                         .withTopic(kafkaTopic)
                         .build();
 
-        return new SingleNodeKafkaResumeStrategy<>(resumeStrategyConfiguration);
+        return new SingleNodeKafkaResumeStrategy(resumeStrategyConfiguration);
     }
 
     private static void loadData(KinesisClient client, String streamName, int recordCount) {
