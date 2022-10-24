@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 public class LargeDirectoryRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeDirectoryRouteBuilder.class);
-    private final KafkaResumeStrategy<Resumable> testResumeStrategy;
+    private final KafkaResumeStrategy testResumeStrategy;
     private final ResumeCache<File> cache;
 
     public LargeDirectoryRouteBuilder(KafkaResumeStrategy resumeStrategy, ResumeCache<File> cache) {

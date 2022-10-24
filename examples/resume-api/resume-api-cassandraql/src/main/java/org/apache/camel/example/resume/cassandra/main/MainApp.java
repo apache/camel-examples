@@ -25,7 +25,6 @@ import org.apache.camel.component.caffeine.resume.CaffeineCache;
 import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.main.Main;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.camel.resume.Resumable;
 
 public class MainApp {
     public static void main(String[] args) {
@@ -48,7 +47,7 @@ public class MainApp {
         }
 
         // Normal code path for consuming from Cassandra
-        SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = KafkaUtil.getDefaultStrategy();
+        SingleNodeKafkaResumeStrategy resumeStrategy = KafkaUtil.getDefaultStrategy();
 
         Main main = new Main();
 

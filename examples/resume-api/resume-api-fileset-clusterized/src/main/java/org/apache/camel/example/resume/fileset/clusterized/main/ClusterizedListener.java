@@ -24,7 +24,6 @@ import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.main.BaseMainSupport;
 import org.apache.camel.main.MainListener;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.camel.resume.Resumable;
 import org.apache.camel.resume.ResumeStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +53,7 @@ class ClusterizedListener implements MainListener {
             main.getCamelContext().addService(clusterService);
 
             LOG.trace("Creating the strategy");
-            SingleNodeKafkaResumeStrategy<Resumable> resumeStrategy = KafkaUtil.getDefaultStrategy();
+            SingleNodeKafkaResumeStrategy resumeStrategy = KafkaUtil.getDefaultStrategy();
             main.getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
 
             LOG.trace("Creating the route");
