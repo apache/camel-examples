@@ -21,8 +21,6 @@ import java.io.File;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
-import org.apache.camel.resume.Resumable;
 import org.apache.camel.resume.ResumeStrategy;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
@@ -31,28 +29,38 @@ import org.slf4j.LoggerFactory;
 
 public class LargeDirectoryRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeDirectoryRouteBuilder.class);
-    private final KafkaResumeStrategy testResumeStrategy;
+    private final ResumeStrategy resumeStrategy;
     private final ResumeCache<File> cache;
+    private final long delay;
 
-    public LargeDirectoryRouteBuilder(KafkaResumeStrategy resumeStrategy, ResumeCache<File> cache) {
-        this.testResumeStrategy = resumeStrategy;
-        this.cache = cache;
+    public LargeDirectoryRouteBuilder(ResumeStrategy resumeStrategy, ResumeCache<File> cache) {
+        this(resumeStrategy, cache, 0);
     }
 
-    private void process(Exchange exchange) {
+    public LargeDirectoryRouteBuilder(ResumeStrategy resumeStrategy, ResumeCache<File> cache, long delay) {
+        this.resumeStrategy = resumeStrategy;
+        this.cache = cache;
+        this.delay = delay;
+    }
+
+    private void process(Exchange exchange) throws InterruptedException {
         File path = exchange.getMessage().getHeader("CamelFilePath", File.class);
         LOG.debug("Processing {}", path.getPath());
         exchange.getMessage().setHeader(Exchange.OFFSET, Resumables.of(path.getParentFile(), path));
+
+        if (delay > 0) {
+            Thread.sleep(delay);
+        }
     }
 
     /**
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
-        getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, testResumeStrategy);
+        getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
         getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
 
-        from("file:{{input.dir}}?noop=true&recursive=true")
+        from("file:{{input.dir}}?noop=true&recursive=true&preSort=true")
                 .resumable(ResumeStrategy.DEFAULT_NAME)
                 .process(this::process)
                 .to("file:{{output.dir}}");

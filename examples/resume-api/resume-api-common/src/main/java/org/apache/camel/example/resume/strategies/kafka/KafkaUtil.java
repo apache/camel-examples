@@ -38,6 +38,10 @@ public final class KafkaUtil {
                         .withTopic(kafkaTopic)
                         .withProducerProperty("max.block.ms", "10000")
                         .withMaxInitializationDuration(Duration.ofSeconds(5))
+                        .withProducerProperty("delivery.timeout.ms", "30000")
+                        .withProducerProperty("session.timeout.ms", "15000")
+                        .withProducerProperty("request.timeout.ms", "15000")
+                        .withConsumerProperty("session.timeout.ms", "20000")
                         .build();
 
         return new SingleNodeKafkaResumeStrategy(resumeStrategyConfiguration);
