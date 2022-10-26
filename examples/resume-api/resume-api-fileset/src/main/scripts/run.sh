@@ -49,7 +49,7 @@ for i in $(seq 0 ${ITERATIONS}) ; do
   echo "********************************************************************************"
 
   echo "Appending ${FILE_COUNT} files to the data directory (files from the previous execution remain there)"
-  for file in $(seq 1 100) ; do
+  for file in $(seq 1 ${FILE_COUNT}) ; do
     echo ${RANDOM} > ${DATA_DIR}/${i}/${file}
   done
 
