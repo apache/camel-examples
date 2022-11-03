@@ -21,8 +21,6 @@ import java.io.File;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
-import org.apache.camel.component.wal.WriteAheadResumeStrategy;
-import org.apache.camel.component.wal.WriteAheadResumeStrategyConfiguration;
 import org.apache.camel.component.wal.WriteAheadResumeStrategyConfigurationBuilder;
 import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.example.resume.strategies.kafka.check.CheckRoute;
@@ -45,15 +43,12 @@ public class MainApp {
         final String logFile = System.getProperty("wal.log.file");
         final long delay = Long.parseLong(System.getProperty("processing.delay", "0"));
 
-        WriteAheadResumeStrategyConfiguration resumeStrategyConfiguration = WriteAheadResumeStrategyConfigurationBuilder
+        final WriteAheadResumeStrategyConfigurationBuilder configurationBuilder = WriteAheadResumeStrategyConfigurationBuilder
                 .newBuilder()
                 .withDelegateResumeStrategy(resumeStrategy)
-                .withLogFile(new File(logFile))
-                .build();
+                .withLogFile(new File(logFile));
 
-        WriteAheadResumeStrategy writeAheadResumeStrategy = new WriteAheadResumeStrategy(resumeStrategyConfiguration);
-
-        RouteBuilder routeBuilder = new LargeDirectoryRouteBuilder(writeAheadResumeStrategy, new CaffeineCache<>(10000), delay);
+        RouteBuilder routeBuilder = new LargeDirectoryRouteBuilder(configurationBuilder, new CaffeineCache<>(10000), delay);
 
         main.configure().addRoutesBuilder(new CheckRoute());
         main.configure().addRoutesBuilder(routeBuilder);

@@ -23,11 +23,6 @@ import java.util.concurrent.Executors;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
 import org.apache.camel.main.Main;
-import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfiguration;
-import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
-import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.camel.resume.Cacheable;
-import org.apache.camel.resume.Resumable;
 import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
 import org.apache.camel.test.infra.aws2.clients.KinesisUtils;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
@@ -53,31 +48,17 @@ public class MainApp {
             return;
         }
 
-        SingleNodeKafkaResumeStrategy resumeStrategy = getUpdatableConsumerResumeStrategyForSet();
         Integer batchSize = Integer.parseInt(System.getProperty("batch.size", "50"));
         CountDownLatch latch = new CountDownLatch(batchSize);
 
         Executors.newSingleThreadExecutor().submit(() -> waitForStop(main, latch));
 
-        RouteBuilder routeBuilder = new KinesisRoute(streamName, resumeStrategy, new CaffeineCache<>(100), client, latch);
+        RouteBuilder routeBuilder = new KinesisRoute(streamName, new CaffeineCache<>(100), client, latch);
 
         main.configure().addRoutesBuilder(routeBuilder);
         main.start();
     }
 
-    private static SingleNodeKafkaResumeStrategy getUpdatableConsumerResumeStrategyForSet() {
-        String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
-        String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
-
-        KafkaResumeStrategyConfiguration resumeStrategyConfiguration =
-                KafkaResumeStrategyConfigurationBuilder.newBuilder()
-                        .withCacheFillPolicy(Cacheable.FillPolicy.MAXIMIZING)
-                        .withBootstrapServers(bootStrapAddress)
-                        .withTopic(kafkaTopic)
-                        .build();
-
-        return new SingleNodeKafkaResumeStrategy(resumeStrategyConfiguration);
-    }
 
     private static void loadData(KinesisClient client, String streamName, int recordCount) {
         KinesisUtils.createStream(client, streamName);

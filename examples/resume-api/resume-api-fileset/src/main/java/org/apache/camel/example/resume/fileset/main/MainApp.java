@@ -19,11 +19,9 @@ package org.apache.camel.example.resume.fileset.main;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
-import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.example.resume.strategies.kafka.check.CheckRoute;
 import org.apache.camel.example.resume.strategies.kafka.fileset.LargeDirectoryRouteBuilder;
 import org.apache.camel.main.Main;
-import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 
 /**
  * A Camel Application
@@ -36,8 +34,7 @@ public class MainApp {
     public static void main(String... args) throws Exception {
         Main main = new Main();
 
-        SingleNodeKafkaResumeStrategy resumeStrategy = KafkaUtil.getDefaultStrategy();
-        RouteBuilder routeBuilder = new LargeDirectoryRouteBuilder(resumeStrategy, new CaffeineCache<>(10000));
+        RouteBuilder routeBuilder = new LargeDirectoryRouteBuilder(new CaffeineCache<>(10000));
 
         main.configure().addRoutesBuilder(new CheckRoute());
         main.configure().addRoutesBuilder(routeBuilder);

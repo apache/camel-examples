@@ -24,9 +24,9 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.file.FileConstants;
-import org.apache.camel.processor.resume.kafka.KafkaResumeStrategy;
+import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.resume.Resumable;
-import org.apache.camel.resume.ResumeStrategy;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
@@ -39,7 +39,6 @@ public class LargeFileRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeFileRouteBuilder.class);
 
     private ProducerTemplate producerTemplate;
-    private KafkaResumeStrategy testResumeStrategy;
     private final ResumeCache<File> cache;
 
     private long lastOffset;
@@ -47,8 +46,7 @@ public class LargeFileRouteBuilder extends RouteBuilder {
 
     private final CountDownLatch latch;
 
-    public LargeFileRouteBuilder(KafkaResumeStrategy resumeStrategy, ResumeCache<File> cache, CountDownLatch latch) {
-        this.testResumeStrategy = resumeStrategy;
+    public LargeFileRouteBuilder(ResumeCache<File> cache, CountDownLatch latch) {
         this.cache = cache;
         this.latch = latch;
     }
@@ -87,8 +85,9 @@ public class LargeFileRouteBuilder extends RouteBuilder {
     public void configure() {
         producerTemplate = getContext().createProducerTemplate();
 
-        getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, testResumeStrategy);
         getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
+
+        final KafkaResumeStrategyConfigurationBuilder defaultKafkaResumeStrategyConfigurationBuilder = KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder();
 
         from("file:{{input.dir}}?noop=true&fileName={{input.file}}")
                 .routeId("largeFileRoute")
@@ -97,7 +96,7 @@ public class LargeFileRouteBuilder extends RouteBuilder {
                     .streaming()
                     .stopOnException()
                 .resumable()
-                    .resumeStrategy(ResumeStrategy.DEFAULT_NAME)
+                    .configuration(defaultKafkaResumeStrategyConfigurationBuilder)
                     .intermittent(true)
                     .process(this::process);
 

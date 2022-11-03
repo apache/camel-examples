@@ -21,7 +21,9 @@ import java.io.File;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.resume.ResumeStrategy;
+import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
+import org.apache.camel.resume.ResumeStrategyConfiguration;
+import org.apache.camel.resume.ResumeStrategyConfigurationBuilder;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
@@ -29,16 +31,20 @@ import org.slf4j.LoggerFactory;
 
 public class LargeDirectoryRouteBuilder extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(LargeDirectoryRouteBuilder.class);
-    private final ResumeStrategy resumeStrategy;
     private final ResumeCache<File> cache;
+    private final ResumeStrategyConfigurationBuilder<? extends ResumeStrategyConfigurationBuilder, ? extends ResumeStrategyConfiguration> resumeStrategyConfigurationBuilder;
     private final long delay;
 
-    public LargeDirectoryRouteBuilder(ResumeStrategy resumeStrategy, ResumeCache<File> cache) {
-        this(resumeStrategy, cache, 0);
+    public LargeDirectoryRouteBuilder(ResumeCache<File> cache) {
+        this(KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder(), cache);
     }
 
-    public LargeDirectoryRouteBuilder(ResumeStrategy resumeStrategy, ResumeCache<File> cache, long delay) {
-        this.resumeStrategy = resumeStrategy;
+    public LargeDirectoryRouteBuilder(ResumeStrategyConfigurationBuilder<?, ?> resumeStrategyConfigurationBuilder, ResumeCache<File> cache) {
+        this(resumeStrategyConfigurationBuilder, cache, 0);
+    }
+
+    public LargeDirectoryRouteBuilder(ResumeStrategyConfigurationBuilder<? extends ResumeStrategyConfigurationBuilder, ? extends ResumeStrategyConfiguration> resumeStrategyConfigurationBuilder, ResumeCache<File> cache, long delay) {
+        this.resumeStrategyConfigurationBuilder = resumeStrategyConfigurationBuilder;
         this.cache = cache;
         this.delay = delay;
     }
@@ -57,11 +63,10 @@ public class LargeDirectoryRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
-        getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
         getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
 
-        from("file:{{input.dir}}?noop=true&recursive=true&preSort=true")
-                .resumable(ResumeStrategy.DEFAULT_NAME)
+        from("file:{{input.dir}}?noop=true&recursive=true")
+                .resumable().configuration(resumeStrategyConfigurationBuilder)
                 .process(this::process)
                 .to("file:{{output.dir}}");
     }

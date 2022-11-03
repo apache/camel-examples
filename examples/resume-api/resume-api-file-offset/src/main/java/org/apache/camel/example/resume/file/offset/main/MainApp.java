@@ -42,9 +42,8 @@ public class MainApp {
         int batchSize = Integer.valueOf(tmp);
 
         CountDownLatch latch = new CountDownLatch(batchSize);
-        SingleNodeKafkaResumeStrategy resumeStrategy = KafkaUtil.getDefaultStrategy();
 
-        RouteBuilder routeBuilder = new LargeFileRouteBuilder(resumeStrategy, new CaffeineCache<>(1), latch);
+        RouteBuilder routeBuilder = new LargeFileRouteBuilder(new CaffeineCache<>(1), latch);
         main.configure().addRoutesBuilder(routeBuilder);
 
         Executors.newSingleThreadExecutor().submit(() -> waitForStop(main, latch));
