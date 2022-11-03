@@ -29,21 +29,28 @@ public final class KafkaUtil {
     }
 
     public static SingleNodeKafkaResumeStrategy getDefaultStrategy() {
-        String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
-        String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
-
-        KafkaResumeStrategyConfiguration resumeStrategyConfiguration =
-                KafkaResumeStrategyConfigurationBuilder.newBuilder()
-                        .withBootstrapServers(bootStrapAddress)
-                        .withTopic(kafkaTopic)
-                        .withProducerProperty("max.block.ms", "10000")
-                        .withMaxInitializationDuration(Duration.ofSeconds(5))
-                        .withProducerProperty("delivery.timeout.ms", "30000")
-                        .withProducerProperty("session.timeout.ms", "15000")
-                        .withProducerProperty("request.timeout.ms", "15000")
-                        .withConsumerProperty("session.timeout.ms", "20000")
-                        .build();
+        KafkaResumeStrategyConfiguration resumeStrategyConfiguration = getDefaultKafkaResumeStrategyConfiguration();
 
         return new SingleNodeKafkaResumeStrategy(resumeStrategyConfiguration);
     }
+
+    public static KafkaResumeStrategyConfiguration getDefaultKafkaResumeStrategyConfiguration() {
+        return getDefaultKafkaResumeStrategyConfigurationBuilder().build();
+    }
+
+    public static KafkaResumeStrategyConfigurationBuilder getDefaultKafkaResumeStrategyConfigurationBuilder() {
+        String bootStrapAddress = System.getProperty("bootstrap.address", "localhost:9092");
+        String kafkaTopic = System.getProperty("resume.type.kafka.topic", "offsets");
+
+        return KafkaResumeStrategyConfigurationBuilder.newBuilder()
+                .withBootstrapServers(bootStrapAddress)
+                .withTopic(kafkaTopic)
+                .withProducerProperty("max.block.ms", "10000")
+                .withMaxInitializationDuration(Duration.ofSeconds(5))
+                .withProducerProperty("delivery.timeout.ms", "30000")
+                .withProducerProperty("session.timeout.ms", "15000")
+                .withProducerProperty("request.timeout.ms", "15000")
+                .withConsumerProperty("session.timeout.ms", "20000");
+    }
+
 }

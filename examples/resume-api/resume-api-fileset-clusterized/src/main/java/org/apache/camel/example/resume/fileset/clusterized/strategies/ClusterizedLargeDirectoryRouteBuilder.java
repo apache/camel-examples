@@ -22,7 +22,8 @@ import java.io.File;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
-import org.apache.camel.resume.ResumeStrategy;
+import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
@@ -50,12 +51,15 @@ public class ClusterizedLargeDirectoryRouteBuilder extends RouteBuilder {
     public void configure() {
         getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, new CaffeineCache<>(10000));
 
+        final KafkaResumeStrategyConfigurationBuilder defaultKafkaResumeStrategyConfigurationBuilder = KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder();
+
         from("timer:heartbeat?period=10000")
                 .routeId("heartbeat")
                 .log("HeartBeat route (timer) ...");
 
         from("master:resume-ns:file:{{input.dir}}?noop=true&recursive=true&repeatCount=1")
-                .resumable(ResumeStrategy.DEFAULT_NAME)
+                .resumable()
+                .configuration(defaultKafkaResumeStrategyConfigurationBuilder)
                 .routeId("clustered")
                 .process(this::process)
                 .to("file:{{output.dir}}");

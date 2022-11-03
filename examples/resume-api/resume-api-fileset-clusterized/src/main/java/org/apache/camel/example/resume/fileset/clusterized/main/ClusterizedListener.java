@@ -20,11 +20,8 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.zookeeper.cluster.ZooKeeperClusterService;
 import org.apache.camel.example.resume.fileset.clusterized.strategies.ClusterizedLargeDirectoryRouteBuilder;
-import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.main.BaseMainSupport;
 import org.apache.camel.main.MainListener;
-import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
-import org.apache.camel.resume.ResumeStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,8 +50,6 @@ class ClusterizedListener implements MainListener {
             main.getCamelContext().addService(clusterService);
 
             LOG.trace("Creating the strategy");
-            SingleNodeKafkaResumeStrategy resumeStrategy = KafkaUtil.getDefaultStrategy();
-            main.getCamelContext().getRegistry().bind(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
 
             LOG.trace("Creating the route");
             RouteBuilder routeBuilder = new ClusterizedLargeDirectoryRouteBuilder();

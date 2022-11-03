@@ -22,7 +22,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.aws2.kinesis.Kinesis2Constants;
-import org.apache.camel.resume.ResumeStrategy;
+import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
@@ -33,14 +33,12 @@ public class KinesisRoute extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(KinesisRoute.class);
 
     private final String streamName;
-    private final ResumeStrategy resumeStrategy;
     private final ResumeCache<String> resumeCache;
     private final KinesisClient client;
     private final CountDownLatch latch;
 
-    public KinesisRoute(String streamName, ResumeStrategy resumeStrategy, ResumeCache<String> resumeCache, KinesisClient client, CountDownLatch latch) {
+    public KinesisRoute(String streamName, ResumeCache<String> resumeCache, KinesisClient client, CountDownLatch latch) {
         this.streamName = streamName;
-        this.resumeStrategy = resumeStrategy;
         this.resumeCache = resumeCache;
         this.client = client;
         this.latch = latch;
@@ -57,14 +55,13 @@ public class KinesisRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        bindToRegistry(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
         bindToRegistry(ResumeCache.DEFAULT_NAME, resumeCache);
         bindToRegistry("amazonKinesisClient", client);
 
         String kinesisEndpointUri = "aws2-kinesis://%s?amazonKinesisClient=#amazonKinesisClient";
 
         fromF(kinesisEndpointUri, streamName)
-                .process(this::addResumeOffset)
-                .resumable(ResumeStrategy.DEFAULT_NAME);
+                .resumable().configuration(KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder())
+                .process(this::addResumeOffset);
     }
 }
