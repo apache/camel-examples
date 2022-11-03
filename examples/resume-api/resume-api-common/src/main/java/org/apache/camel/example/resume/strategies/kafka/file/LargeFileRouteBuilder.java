@@ -85,9 +85,9 @@ public class LargeFileRouteBuilder extends RouteBuilder {
     public void configure() {
         producerTemplate = getContext().createProducerTemplate();
 
-        getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
-
-        final KafkaResumeStrategyConfigurationBuilder defaultKafkaResumeStrategyConfigurationBuilder = KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder();
+        final KafkaResumeStrategyConfigurationBuilder defaultKafkaResumeStrategyConfigurationBuilder = KafkaUtil
+                .getDefaultKafkaResumeStrategyConfigurationBuilder()
+                .withResumeCache(cache);
 
         from("file:{{input.dir}}?noop=true&fileName={{input.file}}")
                 .routeId("largeFileRoute")

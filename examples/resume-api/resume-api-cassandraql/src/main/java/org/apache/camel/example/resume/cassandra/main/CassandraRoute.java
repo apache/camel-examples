@@ -23,9 +23,8 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.cassandra.CassandraConstants;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.resume.ResumeAction;
-import org.apache.camel.resume.ResumeStrategy;
-import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,15 +33,13 @@ public class CassandraRoute extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(CassandraRoute.class);
     private final CountDownLatch latch;
     private final int batchSize;
-    private final ResumeStrategy resumeStrategy;
-    private final ResumeCache<?> resumeCache;
     private final CassandraClient client;
+    private final KafkaResumeStrategyConfigurationBuilder configurationBuilder;
 
-    public CassandraRoute(CountDownLatch latch, int batchSize, ResumeStrategy resumeStrategy, ResumeCache<?> resumeCache, CassandraClient client) {
+    public CassandraRoute(CountDownLatch latch, int batchSize, KafkaResumeStrategyConfigurationBuilder configurationBuilder, CassandraClient client) {
         this.latch = latch;
         this.batchSize = batchSize;
-        this.resumeStrategy = resumeStrategy;
-        this.resumeCache = resumeCache;
+        this.configurationBuilder = configurationBuilder;
         this.client = client;
     }
 
@@ -78,15 +75,13 @@ public class CassandraRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        bindToRegistry(ResumeStrategy.DEFAULT_NAME, resumeStrategy);
-        bindToRegistry(ResumeCache.DEFAULT_NAME, resumeCache);
         bindToRegistry(CassandraConstants.CASSANDRA_RESUME_ACTION, new CustomResumeAction(client.newExampleDao()));
 
         fromF("cql:{{cassandra.host}}:{{cassandra.cql3.port}}/camel_ks?cql=%s&resultSetConversionStrategy=#class:%s",
                 ExampleDao.getSelectStatement(batchSize), ExampleResultSetConversionStrategy.class.getName())
                 .split(body()) // We receive a list of records so, for each
                 .resumable()
-                    .resumeStrategy(ResumeStrategy.DEFAULT_NAME)
+                .configuration(configurationBuilder)
                     .intermittent(true) // Set to ignore empty data sets that will generate exchanges w/ no offset information
                 .process(this::addResumeInfo);
 

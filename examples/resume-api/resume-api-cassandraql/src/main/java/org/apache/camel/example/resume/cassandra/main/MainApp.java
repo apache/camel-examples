@@ -24,6 +24,7 @@ import java.util.concurrent.Executors;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
 import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.main.Main;
+import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
 import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 
 public class MainApp {
@@ -47,7 +48,7 @@ public class MainApp {
         }
 
         // Normal code path for consuming from Cassandra
-        SingleNodeKafkaResumeStrategy resumeStrategy = KafkaUtil.getDefaultStrategy();
+        final KafkaResumeStrategyConfigurationBuilder configurationBuilder = KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder();
 
         Main main = new Main();
 
@@ -57,7 +58,8 @@ public class MainApp {
 
 
         try (CassandraClient client = new CassandraClient(host, port)) {
-            main.configure().addRoutesBuilder(new CassandraRoute(latch, batchSize, resumeStrategy, new CaffeineCache<>(10240), client));
+            configurationBuilder.withResumeCache(new CaffeineCache<>(10240));
+            main.configure().addRoutesBuilder(new CassandraRoute(latch, batchSize, configurationBuilder, client));
             main.start();
         }
     }

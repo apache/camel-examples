@@ -49,9 +49,9 @@ public class ClusterizedLargeDirectoryRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
-        getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, new CaffeineCache<>(10000));
-
-        final KafkaResumeStrategyConfigurationBuilder defaultKafkaResumeStrategyConfigurationBuilder = KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder();
+        final KafkaResumeStrategyConfigurationBuilder defaultKafkaResumeStrategyConfigurationBuilder = KafkaUtil
+                .getDefaultKafkaResumeStrategyConfigurationBuilder()
+                .withResumeCache(new CaffeineCache<>(10000));
 
         from("timer:heartbeat?period=10000")
                 .routeId("heartbeat")

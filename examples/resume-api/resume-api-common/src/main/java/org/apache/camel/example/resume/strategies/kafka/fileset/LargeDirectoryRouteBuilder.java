@@ -63,10 +63,8 @@ public class LargeDirectoryRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
-        getCamelContext().getRegistry().bind(ResumeCache.DEFAULT_NAME, cache);
-
         from("file:{{input.dir}}?noop=true&recursive=true")
-                .resumable().configuration(resumeStrategyConfigurationBuilder)
+                .resumable().configuration(resumeStrategyConfigurationBuilder.withResumeCache(cache))
                 .process(this::process)
                 .to("file:{{output.dir}}");
     }
