@@ -55,13 +55,12 @@ public class KinesisRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        bindToRegistry(ResumeCache.DEFAULT_NAME, resumeCache);
         bindToRegistry("amazonKinesisClient", client);
 
         String kinesisEndpointUri = "aws2-kinesis://%s?amazonKinesisClient=#amazonKinesisClient";
 
         fromF(kinesisEndpointUri, streamName)
-                .resumable().configuration(KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder())
+                .resumable().configuration(KafkaUtil.getDefaultKafkaResumeStrategyConfigurationBuilder().withResumeCache(resumeCache))
                 .process(this::addResumeOffset);
     }
 }
