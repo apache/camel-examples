@@ -1,0 +1,57 @@
+== Camel MinIO Example
+
+This example shows how to use Camel MinIO component to write and read objects in a bucket.
+
+The example has 2 routes :
+
+* the producer : put a file in a MinIO bucket
+* the consumer : poll a MinIO bucket and Log the content of the file.
+
+Notice how you can configure Camel in the `application.properties` file.
+
+Don't forget to add your MinIO Credentials and the bucket name.
+
+=== Run a MinIO instance
+
+You need to have an instance of MinIO server running locally.
+
+You can run it as a Docker container:
+
+[source,sh]
+----
+docker run \
+    -p 9000:9000 \
+    -p 9090:9090 \
+    -e "MINIO_ROOT_USER=xxxx" \
+    -e "MINIO_ROOT_PASSWORD=yyyyyyyy"  \
+    quay.io/minio/minio server /data  \
+    --console-address ":9090"
+----
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+You can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!

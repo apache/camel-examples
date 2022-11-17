@@ -135,6 +135,7 @@
         <module>main-yaml</module>
         <module>management</module>
         <module>mapstruct</module>
+        <module>minio</module>
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>

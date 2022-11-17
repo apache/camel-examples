@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 91 (0 deprecated)
+Number of Examples: 92 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -83,10 +83,11 @@ Number of Examples: 91 (0 deprecated)
 
 | link:main-yaml/README.adoc[Main Yaml] (main-yaml) | Beginner | An example for showing standalone Camel using YAML
 
+| link:minio/README.adoc[MinIO] (minio) | Beginner | An example for showing Camel using MinIO Component
+
 | link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
 
 | link:pojo-messaging/README.adoc[POJO Routing] (pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
-    
 
 | link:routeloader/README.adoc[Routeloader] (routeloader) | Beginner | Example loading and compiling Java routes on startup
 
