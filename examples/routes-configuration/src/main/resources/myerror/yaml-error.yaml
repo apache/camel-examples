@@ -16,7 +16,8 @@
 ## ---------------------------------------------------------------------------
 
 - route-configuration:
-    - id: "yamlError"
+    id: "yamlError"
+    on-exception:
     - on-exception:
         handled:
           constant: "true"
