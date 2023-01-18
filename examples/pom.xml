@@ -82,7 +82,6 @@
         <module>aggregate</module>
         <module>aggregate-dist</module>
         <module>any23</module>
-        <module>artemis</module>
         <module>artemis-large-messages</module>
         <module>as2</module>
         <module>aws</module>

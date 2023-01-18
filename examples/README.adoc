@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 80 (0 deprecated)
+Number of Examples: 79 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -120,8 +120,6 @@ Number of Examples: 80 (0 deprecated)
 | link:aggregate/README.adoc[Aggregate] (aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
 
 | link:aggregate-dist/README.adoc[Aggregate Dist] (aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
-
-| link:artemis/README.adoc[Widget Gadget using Apache ActiveMQ Artemis] (artemis) | EIP | The widget and gadget example from the EIP book using Apache ActiveMQ Artemis
 
 | link:bigxml-split/README.adoc[Bigxml Split] (bigxml-split) | EIP | How to deal with big XML files in Camel
 
