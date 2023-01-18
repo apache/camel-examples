@@ -82,7 +82,6 @@
         <module>aggregate</module>
         <module>aggregate-dist</module>
         <module>any23</module>
-        <module>artemis-large-messages</module>
         <module>as2</module>
         <module>aws</module>
         <module>azure</module>
@@ -138,12 +137,10 @@
         <module>routetemplate-xml</module>
         <module>routes-configuration</module>
         <module>salesforce-consumer</module>
-        <module>servlet-tomcat</module>
         <module>splunk</module>
         <module>spring</module>
         <module>spring-pulsar</module>
         <module>spring-security</module>
-        <module>spring-ws</module>
         <module>spring-xquery</module>
         <module>telegram</module>
         <module>transformer-demo</module>
