@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 72 (0 deprecated)
+Number of Examples: 71 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -142,8 +142,6 @@ Number of Examples: 72 (0 deprecated)
 | link:splunk/README.adoc[Splunk] (splunk) | Management and Monitoring | An example using Splunk
 
 | link:kafka/README.adoc[Kafka] (kafka) | Messaging | An example for Kafka
-
-| link:main-artemis/README.adoc[Main Artemis] (main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
 
 | link:netty-custom-correlation/README.adoc[Netty Custom Correlation] (netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
