@@ -21,15 +21,15 @@ Number of Examples: 92 (0 deprecated)
 
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
-| link:vault/aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
+| link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
 
-| link:vault/aws-secrets-manager-reloading/README.adoc[Aws Secrets Manager Reloading] (aws-secrets-manager-reloading) | Beginner | An example for showing AWS Secrets Manager Camel component with reloading
+| link:aws-secrets-manager-reloading/README.adoc[Aws Secrets Manager Reloading] (aws-secrets-manager-reloading) | Beginner | An example for showing AWS Secrets Manager Camel component with reloading
 
-| link:azure/azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Beginner | Azure Eventhubs example
+| link:azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Beginner | Azure Eventhubs example
 
-| link:azure/azure-key-vault-reloading/README.adoc[Azure Key Vault Reloading] (azure-key-vault-reloading) | Beginner | An example for showing Azure Key Vault Camel component with reloading
+| link:azure-key-vault-reloading/README.adoc[Azure Key Vault Reloading] (azure-key-vault-reloading) | Beginner | An example for showing Azure Key Vault Camel component with reloading
 
-| link:azure/azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Beginner | Azure Storage Blob example
+| link:azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Beginner | Azure Storage Blob example
 
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 
@@ -45,11 +45,11 @@ Number of Examples: 92 (0 deprecated)
 
 | link:ftp/README.adoc[FTP] (ftp) | Beginner | An example for showing Camel FTP integration
 
-| link:vault/google-secret-manager-reloading/README.adoc[Google Secret Manager Reloading] (google-secret-manager-reloading) | Beginner | An example for showing Google Secret Manager Camel component with reloading
+| link:google-secret-manager-reloading/README.adoc[Google Secret Manager Reloading] (google-secret-manager-reloading) | Beginner | An example for showing Google Secret Manager Camel component with reloading
 
 | link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
 
-| link:azure/kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Beginner | An example for showing standalone Camel with Kafka and Azure Storage Blob
+| link:kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Beginner | An example for showing standalone Camel with Kafka and Azure Storage Blob
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
 
@@ -63,13 +63,13 @@ Number of Examples: 92 (0 deprecated)
 
 | link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
 
-| link:aws/main-endpointdsl-aws2-s3/README.adoc[Main Endpointdsl Aws2 S3] (main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
+| link:main-endpointdsl-aws2-s3/README.adoc[Main Endpointdsl Aws2 S3] (main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
 
-| link:aws/main-endpointdsl-aws2-s3-kafka/README.adoc[Main Endpointdsl Aws2 S3 Kafka] (main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
+| link:main-endpointdsl-aws2-s3-kafka/README.adoc[Main Endpointdsl Aws2 S3 Kafka] (main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
 
-| link:aws/main-endpointdsl-kafka-aws2-s3/README.adoc[Main Endpointdsl Kafka Aws2 S3] (main-endpointdsl-kafka-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
+| link:main-endpointdsl-kafka-aws2-s3/README.adoc[Main Endpointdsl Kafka Aws2 S3] (main-endpointdsl-kafka-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
 
-| link:aws/main-endpointdsl-kafka-aws2-s3-restarting-policy/README.adoc[Main Endpointdsl Kafka Aws2 S3 Restarting Policy] (main-endpointdsl-kafka-aws2-s3-restarting-policy) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka, AWS2-S3 streaming upload mode with restarting policy
+| link:main-endpointdsl-kafka-aws2-s3-restarting-policy/README.adoc[Main Endpointdsl Kafka Aws2 S3 Restarting Policy] (main-endpointdsl-kafka-aws2-s3-restarting-policy) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka, AWS2-S3 streaming upload mode with restarting policy
 
 | link:main-health/README.adoc[Main Health] (main-health) | Beginner | An example for showing standalone Camel with Health Checks
 
@@ -83,11 +83,12 @@ Number of Examples: 92 (0 deprecated)
 
 | link:main-yaml/README.adoc[Main Yaml] (main-yaml) | Beginner | An example for showing standalone Camel using YAML
 
-| link:minio/README.adoc[MinIO] (minio) | Beginner | An example for showing Camel using MinIO Component
+| link:minio/README.adoc[Minio] (minio) | Beginner | An example for showing Camel using MinIO Component
 
 | link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
 
 | link:pojo-messaging/README.adoc[POJO Routing] (pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
+    
 
 | link:routeloader/README.adoc[Routeloader] (routeloader) | Beginner | Example loading and compiling Java routes on startup
 
@@ -109,7 +110,7 @@ Number of Examples: 92 (0 deprecated)
 
 | link:hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
 
-| link:aws/main-endpointdsl-aws2/README.adoc[Main Endpointdsl Aws2] (main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
+| link:main-endpointdsl-aws2/README.adoc[Main Endpointdsl Aws2] (main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
 | link:debezium/README.adoc[Debezium] (debezium) | Database | An example for Debezium Component
 
