@@ -79,7 +79,6 @@
     </distributionManagement>
 
     <modules>
-        <module>activemq-tomcat</module>
         <module>aggregate</module>
         <module>aggregate-dist</module>
         <module>any23</module>
@@ -94,8 +93,6 @@
         <module>cafe</module>
         <module>cafe-endpointdsl</module>
         <module>cassandra-kubernetes</module>
-        <module>cdi</module>
-        <module>cdi-test</module>
         <module>console</module>
         <module>couchbase-log</module>
         <module>csimple</module>
@@ -105,14 +102,12 @@
         <module>cxf-tomcat</module>
         <module>debezium</module>
         <module>debezium-eventhubs-blob</module>
-        <module>fhir</module>
         <module>flight-recorder</module>
         <module>ftp</module>
         <module>google</module>
         <module>hazelcast-kubernetes</module>
         <module>java8</module>
         <module>jdbc</module>
-        <module>jms-file</module>
         <module>jmx</module>
         <module>jooq</module>
         <module>kafka</module>
@@ -123,7 +118,6 @@
         <module>kotlin</module>
         <module>loan-broker-cxf</module>
         <module>loadbalancing</module>
-        <module>loan-broker-jms</module>
         <module>main</module>
         <module>main-artemis</module>
         <module>main-endpointdsl</module>
@@ -133,16 +127,13 @@
         <module>main-tiny</module>
         <module>main-xml</module>
         <module>main-yaml</module>
-        <module>management</module>
         <module>mapstruct</module>
         <module>minio</module>
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>
-        <module>pojo-messaging</module>
         <module>reactive-executor-vertx</module>
         <module>resume-api</module>
-        <module>route-throttling</module>
         <module>routeloader</module>
         <module>routetemplate</module>
         <module>routetemplate-xml</module>
@@ -157,10 +148,7 @@
         <module>spring-xquery</module>
         <module>telegram</module>
         <module>transformer-demo</module>
-        <module>twitter-websocket</module>
         <module>vault</module>
-        <module>widget-gadget-java</module>
-        <module>widget-gadget-xml</module>
         <module>whatsapp</module>
     </modules>
 

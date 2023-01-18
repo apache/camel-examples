@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 92 (0 deprecated)
+Number of Examples: 80 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -32,8 +32,6 @@ Number of Examples: 92 (0 deprecated)
 | link:azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Beginner | Azure Storage Blob example
 
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
-
-| link:cdi/README.adoc[CDI] (cdi) | Beginner | An example showing how to work with Camel and CDI for dependency injection
 
 | link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
 
@@ -87,9 +85,6 @@ Number of Examples: 92 (0 deprecated)
 
 | link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
 
-| link:pojo-messaging/README.adoc[POJO Routing] (pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
-    
-
 | link:routeloader/README.adoc[Routeloader] (routeloader) | Beginner | Example loading and compiling Java routes on startup
 
 | link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
@@ -140,19 +135,7 @@ Number of Examples: 92 (0 deprecated)
 
 | link:loan-broker-cxf/README.adoc[Loan Broker WebService] (loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
 
-| link:loan-broker-jms/README.adoc[Loan Broker JMS] (loan-broker-jms) | EIP | An example that shows the EIP's loan broker demo using JMS
-
 | link:resume-api/README.md[Resume Api] (resume-api) | EIP | Multiple Resume API examples
-
-| link:route-throttling/README.adoc[Route Throttling] (route-throttling) | EIP | A client-server example using JMS transport where we on the server side can throttle the Camel
-        route dynamically based on the flow of messages
-    
-
-| link:widget-gadget-java/README.adoc[Widget Gadget Java] (widget-gadget-java) | EIP | The widget and gadget example from the EIP book
-
-| link:widget-gadget-xml/README.adoc[Widget Gadget XML] (widget-gadget-xml) | EIP | The widget and gadget example from the EIP book
-
-| link:fhir/README.adoc[FHIR] (fhir) | Health Care | An example running Camel FHIR using Camel CDI
 
 | link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
         Spring DSL
@@ -162,17 +145,11 @@ Number of Examples: 92 (0 deprecated)
 
 | link:jmx/README.adoc[JMX] (jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
 
-| link:management/README.adoc[Management] (management) | Management and Monitoring | An example for showing Camel JMX management
-
 | link:splunk/README.adoc[Splunk] (splunk) | Management and Monitoring | An example using Splunk
-
-| link:activemq-tomcat/README.adoc[ActiveMQ Tomcat] (activemq-tomcat) | Messaging | An example using ActiveMQ Broker and Camel with Apache Tomcat
 
 | link:artemis-large-messages/README.adoc[Artemis Large Messages] (artemis-large-messages) | Messaging | Demonstrates sending large messages (handles GBs in size) between Apache Camel and ActiveMQ Artemis in
         streaming mode
     
-
-| link:jms-file/README.adoc[JMS-File] (jms-file) | Messaging | An example that persists messages from JMS to files
 
 | link:kafka/README.adoc[Kafka] (kafka) | Messaging | An example for Kafka
 
@@ -192,11 +169,7 @@ Number of Examples: 92 (0 deprecated)
 
 | link:telegram/README.adoc[Telegram] (telegram) | Social | An example that uses Telegram API
 
-| link:twitter-websocket/README.adoc[Twitter Websocket] (twitter-websocket) | Social | An example that pushes new tweets to a web page using web-socket
-
 | link:whatsapp/README.adoc[Whatsapp] (whatsapp) | Social | An example that uses Whatsapp API
-
-| link:cdi-test/README.adoc[CDI Test] (cdi-test) | Testing | An example illustrating Camel CDI testing features
 
 | link:mapstruct/README.adoc[Mapstruct] (mapstruct) | Transformation | How to use MapStruct for POJO data mapping
 
