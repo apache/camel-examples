@@ -111,10 +111,8 @@
         <module>kamelet-main</module>
         <module>kamelet-sql</module>
         <module>kotlin</module>
-        <module>loan-broker-cxf</module>
         <module>loadbalancing</module>
         <module>main</module>
-        <module>main-artemis</module>
         <module>main-endpointdsl</module>
         <module>main-health</module>
         <module>main-joor</module>

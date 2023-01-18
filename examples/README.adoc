@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 75 (0 deprecated)
+Number of Examples: 72 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -129,8 +129,6 @@ Number of Examples: 75 (0 deprecated)
 
 | link:loadbalancing/README.adoc[Load Balancing] (loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 
-| link:loan-broker-cxf/README.adoc[Loan Broker WebService] (loan-broker-cxf) | EIP | An example that shows the EIP's loan broker demo
-
 | link:resume-api/README.md[Resume Api] (resume-api) | EIP | Multiple Resume API examples
 
 | link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
@@ -164,10 +162,6 @@ Number of Examples: 75 (0 deprecated)
 | link:whatsapp/README.adoc[Whatsapp] (whatsapp) | Social | An example that uses Whatsapp API
 
 | link:mapstruct/README.adoc[Mapstruct] (mapstruct) | Transformation | How to use MapStruct for POJO data mapping
-
-| link:cxf-proxy/README.adoc[CXF Proxy] (cxf-proxy) | WebService | An example which uses Camel to proxy a web service
-
-| link:cxf-tomcat/README.adoc[CXF Tomcat] (cxf-tomcat) | WebService | An example using Camel CXF (code first) with Apache Tomcat
 |===
 // examples: END
 
