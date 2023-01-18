@@ -95,9 +95,6 @@
         <module>couchbase-log</module>
         <module>csimple</module>
         <module>csimple-joor</module>
-        <module>cxf</module>
-        <module>cxf-proxy</module>
-        <module>cxf-tomcat</module>
         <module>debezium</module>
         <module>debezium-eventhubs-blob</module>
         <module>flight-recorder</module>

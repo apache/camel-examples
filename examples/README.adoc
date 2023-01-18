@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 79 (0 deprecated)
+Number of Examples: 75 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -93,8 +93,6 @@ Number of Examples: 79 (0 deprecated)
 
 | link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
 
-| link:servlet-tomcat/README.adoc[Servlet Tomcat] (servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
-
 | link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
 
 | link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
@@ -145,10 +143,6 @@ Number of Examples: 79 (0 deprecated)
 
 | link:splunk/README.adoc[Splunk] (splunk) | Management and Monitoring | An example using Splunk
 
-| link:artemis-large-messages/README.adoc[Artemis Large Messages] (artemis-large-messages) | Messaging | Demonstrates sending large messages (handles GBs in size) between Apache Camel and ActiveMQ Artemis in
-        streaming mode
-    
-
 | link:kafka/README.adoc[Kafka] (kafka) | Messaging | An example for Kafka
 
 | link:main-artemis/README.adoc[Main Artemis] (main-artemis) | Messaging | An example for showing standalone Camel with ActiveMQ Artemis
@@ -171,13 +165,9 @@ Number of Examples: 79 (0 deprecated)
 
 | link:mapstruct/README.adoc[Mapstruct] (mapstruct) | Transformation | How to use MapStruct for POJO data mapping
 
-| link:cxf/README.adoc[CXF] (cxf) | WebService | An example which demonstrates the use of the Camel CXF component
-
 | link:cxf-proxy/README.adoc[CXF Proxy] (cxf-proxy) | WebService | An example which uses Camel to proxy a web service
 
 | link:cxf-tomcat/README.adoc[CXF Tomcat] (cxf-tomcat) | WebService | An example using Camel CXF (code first) with Apache Tomcat
-
-| link:spring-ws/README.adoc[Spring WebService] (spring-ws) | WebService | An example showing how to work with Camel and Spring Web Services
 |===
 // examples: END
 
