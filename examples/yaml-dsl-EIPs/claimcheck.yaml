@@ -1,0 +1,21 @@
+- route:
+    id: route-example-claim-check
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - claimCheck:
+            operation: Set
+            key: key1
+        - setHeader:
+            name: foo
+            expression:
+              constant:
+                expression: '456'
+        - to:
+            uri: direct:b
+        - claimCheck:
+            operation: Get
+            key: key1
+            filter: '"header:(foo|bar)'
+        - to:
+            uri: direct:c

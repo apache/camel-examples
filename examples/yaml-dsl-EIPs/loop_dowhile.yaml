@@ -1,0 +1,18 @@
+- route:
+    id: route-example-loop-dowhile
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - loop:
+            expression:
+              simple:
+                expression: ${body.length} <= 5
+            copy: false
+            doWhile: true
+            steps:
+              - to:
+                  uri: mock:result
+              - transform:
+                  expression:
+                    simple:
+                      expression: A${body}

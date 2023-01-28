@@ -1,0 +1,18 @@
+# TODO: I am really unsure about this - does one really supply the URI as a constant,
+#   with "expression" twice? This is the best I could get out of Karavan...
+- route:
+    id: route-example-enrich
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - enrich:
+            expression:
+              constant:
+                expression: http:remoteserver/foo
+            aggregationStrategy: MyStrategy
+        - to:
+            uri: direct:c
+
+- beans:
+    - name: MyStrategy
+      type: com.foo.ExampleAggregationStrategy

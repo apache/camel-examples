@@ -1,0 +1,10 @@
+- route:
+    id: route-example-bean
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - bean:
+            beanType: com.example.myBean
+            method: myMethod
+        - to:
+            uri: mock:result

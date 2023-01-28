@@ -1,0 +1,10 @@
+- route:
+    id: route-example-log
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - log:
+            message: Processing ${id}
+            loggingLevel: INFO
+        - to:
+            uri: direct:b

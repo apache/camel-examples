@@ -1,0 +1,12 @@
+- route:
+    id: route-example-loop-xpath
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - loop:
+            expression:
+              xpath:
+                expression: /hello/@times
+            steps:
+              - to:
+                  uri: mock:result

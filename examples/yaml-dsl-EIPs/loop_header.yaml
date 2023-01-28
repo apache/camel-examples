@@ -1,0 +1,12 @@
+- route:
+    id: route-example-loop-header
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - loop:
+            expression:
+              header:
+                expression: loop
+            steps:
+              - to:
+                  uri: mock:result

@@ -1,0 +1,19 @@
+# TODO a more intelligent way to detect completion, rather than a number? 
+- route:
+    id: route-example-aggregate
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - aggregate:
+            aggregationStrategy: MyAggregator
+            aggregationStrategyMethodName: aggregate
+            correlationExpression:
+              constant:
+                expression: 'true'
+                resultType: boolean
+            completionSize: 3
+        - to:
+            uri: mock:result
+- beans:
+    - name: myAggregator
+      type: com.example.myAggregator

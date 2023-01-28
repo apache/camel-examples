@@ -1,0 +1,9 @@
+- route:
+    id: route-example-convert-body-to
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - convertBodyTo:
+            type: String
+        - log:
+            message: 'The message content: ${body}'

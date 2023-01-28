@@ -1,0 +1,11 @@
+- route:
+    id: route-example-idempotentconsumer
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - idempotentConsumer:
+            expression:
+              simple:
+                expression: ${body}
+        - to:
+            uri: direct:b

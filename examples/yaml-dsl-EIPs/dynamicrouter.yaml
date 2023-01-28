@@ -1,0 +1,12 @@
+- route:
+    id: route-example-dynamic-router
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - dynamicRouter:
+            expression:
+              method:
+                method: slip
+                beanType: com.foo.MySlipBean
+        - to:
+            uri: direct:b

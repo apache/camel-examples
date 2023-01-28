@@ -1,0 +1,12 @@
+- route:
+    id: route-example-loop-constant
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - loop:
+            expression:
+              constant:
+                expression: '8'
+            steps:
+              - to:
+                  uri: mock:result

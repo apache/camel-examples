@@ -1,0 +1,24 @@
+- route:
+    id: route-example-choice
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - choice:
+            when:
+                expression:
+                  simple:
+                    expression: '{header.foo} == ''bar'''
+                steps:
+                  - to:
+                      uri: direct:b
+            when:
+                expression:
+                  simple:
+                    expression: '{header.foo} == ''cheese'''
+                steps:
+                  - to:
+                      uri: direct:c
+            otherwise:
+              steps:
+                - stop:
+                    id: stop

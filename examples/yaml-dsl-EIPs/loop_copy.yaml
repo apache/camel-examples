@@ -1,0 +1,17 @@
+- route:
+    id: route-example-loop-copy
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - loop:
+            expression:
+              constant:
+                expression: '3'
+            copy: true
+            steps:
+              - transform:
+                  expression:
+                    simple:
+                      expression: ${body}B
+              - to:
+                  uri: mock:result

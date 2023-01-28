@@ -1,0 +1,11 @@
+- route:
+    id: route-example-filter
+    from:
+      uri: kamelet:aws-cloudtrail-source
+      steps:
+        - filter:
+            expression:
+              simple:
+                expression: ${header.foo} == 'bar'
+        - to:
+            uri: direct:b
