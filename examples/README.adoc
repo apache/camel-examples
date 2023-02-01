@@ -17,8 +17,6 @@ Number of Examples: 71 (0 deprecated)
 |===
 | Example | Category | Description
 
-| link:any23/README.adoc[Any23 example] (any23) | Beginner | An example that uses the Any23 dataformat
-
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
 | link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component

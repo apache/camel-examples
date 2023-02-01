@@ -81,7 +81,6 @@
     <modules>
         <module>aggregate</module>
         <module>aggregate-dist</module>
-        <module>any23</module>
         <module>as2</module>
         <module>aws</module>
         <module>azure</module>
