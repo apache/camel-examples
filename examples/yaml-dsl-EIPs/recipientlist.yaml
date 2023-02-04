@@ -1,0 +1,6 @@
+- route:
+    from:
+      uri: kafka:example-source-topic
+      steps:
+        - recipientList:
+            header: whereTo

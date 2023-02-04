@@ -1,12 +1,11 @@
-# TODO: I am really unsure about this - does one really supply the URI as a constant,
-#   with "expression" twice? This is the best I could get out of Karavan...
 - route:
-    id: route-example-enrich
+    id: route-example-poll-enrich
     from:
       uri: kafka:example-source-topic
       steps:
-        - enrich:
-            constant: http:remoteserver/foo
+        - pollEnrich:
+            constant: file:inbox?fileName=data.txt
+            timeout: '10000'
             aggregationStrategy: SimpleAggregator
         - to:
             uri: mock:result

@@ -1,0 +1,12 @@
+- route:
+    id: route-example-load-balance
+    from:
+      uri: kafka:example-source-topic
+      steps:
+       - load-balance:
+           weighted:
+             distribution-ratio: "2,1"
+             round-robin: false
+           steps:
+             - to: "mock:x"
+             - to: "mock:y"

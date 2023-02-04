@@ -1,7 +1,7 @@
 - route:
     id: route-example-convert-body-to
     from:
-      uri: kamelet:aws-cloudtrail-source
+      uri: kafka:example-source-topic
       steps:
         - convertBodyTo:
             type: String

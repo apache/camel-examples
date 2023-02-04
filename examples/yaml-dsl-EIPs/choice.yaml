@@ -1,23 +1,22 @@
 - route:
     id: route-example-choice
     from:
-      uri: kamelet:aws-cloudtrail-source
+      uri: kafka:example-source-topic
       steps:
         - choice:
             when:
-                expression:
+              - expression:
                   simple:
-                    expression: '{header.foo} == ''bar'''
+                    expression: '${header.foo} == ''bar'''
                 steps:
                   - to:
-                      uri: direct:b
-            when:
-                expression:
+                      uri: mock:b
+              - expression:
                   simple:
-                    expression: '{header.foo} == ''cheese'''
+                    expression: '${header.foo} == ''cheese'''
                 steps:
                   - to:
-                      uri: direct:c
+                      uri: mock:c
             otherwise:
               steps:
                 - stop:

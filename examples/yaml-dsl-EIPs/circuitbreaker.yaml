@@ -1,0 +1,18 @@
+- route:
+    id: route-example-circuit-breaker
+    from:
+      uri: kafka:example-source-topic
+      steps:
+        - circuitBreaker:
+           steps:
+             - to:
+                  uri: http://fooservice.com/slow
+           configuration: "my-config"
+           resilience4jConfiguration:
+             failureRateThreshold: 10
+           onFallback:
+             steps:
+               - transform:
+                  constant: fallback message
+        - to:
+            uri: mock:result

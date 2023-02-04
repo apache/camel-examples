@@ -1,0 +1,17 @@
+- route:
+    id: cample-route-multicast
+    from:
+      uri: kafka:example-source-topic
+      steps:
+        - multicast:
+            aggregationStrategy: '#class:org.apache.camel.example.yaml.SimpleAggregator'
+            parallelProcessing: true
+            steps:
+              - to:
+                  uri: mock:a
+              - to:
+                  uri: mock:b
+              - to:
+                  uri: mock:c
+        - to:
+            uri: mock:result

@@ -1,7 +1,7 @@
 - route:
     id: route-example-loop-dowhile
     from:
-      uri: kamelet:aws-cloudtrail-source
+      uri: kafka:example-source-topic
       steps:
         - loop:
             expression:

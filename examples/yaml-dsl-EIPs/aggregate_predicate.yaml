@@ -1,0 +1,16 @@
+# The PredicateAggregator class implements Predicate as well as AggregationStrategy
+# The Aggregate EIP uses this predicate as the completionPredicate automatically
+
+- route:
+    id: route-example-aggregate-predicate
+    from:
+      uri: kafka:example-source-topic
+      steps:
+        - aggregate:
+            aggregationStrategy: PredicateAggregator
+            aggregationStrategyMethodName: aggregate
+        - to:
+            uri: mock:result
+- beans:
+    - name: SimpleAggregator
+      type: org.apache.camel.example.yaml.PredicateAggregator

@@ -1,10 +1,9 @@
 - route:
-    id: route-example-log
+    id: route-example-process
     from:
       uri: kafka:example-source-topic
       steps:
-        - log:
-            message: Processing ${id}
-            loggingLevel: INFO
+        - process:
+            ref: '#class:com.foo.MyProcessor'
         - to:
             uri: mock:result

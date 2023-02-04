@@ -1,11 +1,10 @@
-# TODO a more intelligent way to detect completion, rather than a number? 
 - route:
     id: route-example-aggregate
     from:
-      uri: kamelet:aws-cloudtrail-source
+      uri: kafka:example-source-topic
       steps:
         - aggregate:
-            aggregationStrategy: MyAggregator
+            aggregationStrategy: SimpleAggregator
             aggregationStrategyMethodName: aggregate
             correlationExpression:
               constant:
@@ -15,5 +14,5 @@
         - to:
             uri: mock:result
 - beans:
-    - name: myAggregator
-      type: com.example.myAggregator
+    - name: SimpleAggregator
+      type: org.apache.camel.example.yaml.SimpleAggregator

@@ -1,7 +1,7 @@
 - route:
     id: route-example-claim-check
     from:
-      uri: kamelet:aws-cloudtrail-source
+      uri: kafka:example-source-topic
       steps:
         - claimCheck:
             operation: Set
@@ -12,10 +12,10 @@
               constant:
                 expression: '456'
         - to:
-            uri: direct:b
+            uri: mock:b
         - claimCheck:
             operation: Get
             key: key1
             filter: '"header:(foo|bar)'
         - to:
-            uri: direct:c
+            uri: mock:c

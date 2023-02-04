@@ -1,0 +1,15 @@
+- route:
+    id: cample-route-multicast
+    from:
+      uri: file:inbox/xml
+      steps:
+        - unmarshal:
+            yaml:
+              id: yaml1
+        - to:
+            uri: bean:validateOrder
+        - marshal:
+            yaml:
+              id: yaml2
+        - to:
+            uri: jms:queue:order

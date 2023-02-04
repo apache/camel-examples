@@ -1,7 +1,7 @@
 - route:
     id: route-example-dynamic-router
     from:
-      uri: kamelet:aws-cloudtrail-source
+      uri: kafka:example-source-topic
       steps:
         - dynamicRouter:
             expression:
@@ -9,4 +9,4 @@
                 method: slip
                 beanType: com.foo.MySlipBean
         - to:
-            uri: direct:b
+            uri: mock:result

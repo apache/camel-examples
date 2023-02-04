@@ -1,11 +1,11 @@
 - route:
-    id: route-example-filter
     from:
       uri: kafka:example-source-topic
       steps:
-        - filter:
+        - delay:
+            asyncDelayed: true
             expression:
-              simple:
-                expression: ${header.foo} == 'bar'
+              constant:
+                expression: '3'
         - to:
             uri: mock:result

@@ -1,11 +1,12 @@
 - route:
     id: route-example-idempotentconsumer
     from:
-      uri: kamelet:aws-cloudtrail-source
+      uri: kafka:example-source-topic
       steps:
         - idempotentConsumer:
+            idempotentRepository: MemoryIdempotentRepository
             expression:
               simple:
                 expression: ${body}
         - to:
-            uri: direct:b
+            uri: mock:result
