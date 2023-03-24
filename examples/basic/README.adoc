@@ -5,7 +5,7 @@
 This is a very basic example that shows how to get started with Camel.
 
 This example shows you that Camel can be used in standalone mode
-as a _public static void main_ application.
+as a `_public static void main_` application.
 
 The example has only 1 java file in the link:../basic/src/main/java/org/apache/camel/example/basic/CamelBasic.java[`CamelBasic.java`] located in the src folder.
 There is code comments explaining in more details.
