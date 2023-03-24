@@ -2,7 +2,7 @@
 
 This example shows using csimple (compiled simple) scripting language in your Camel routes.
 
-A maven plugin (configured in pom.xml) detects the csimple scripts from the project source code and then generate Java source code in `src/generated/java` folder which then gets compiled with the regular Java compiler.
+A maven plugin (configured in `pom.xml`) detects the csimple scripts from the project source code and then generate Java source code in `src/generated/java` folder which then gets compiled with the regular Java compiler.
 
 This makes the csimple language native Java compiled, with no runtime overhead.
 The generated source code in `src/generated/java` is just regular Java source code and you can therefore debug the code. You can try this by loading the project into a Java IDE, and then launch the application in debug mode from the `MyApplication` class. You can then set breakpoints in the generated source code in the `src/generated/java` folder.
