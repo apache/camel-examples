@@ -3,7 +3,7 @@
 This example shows how to use the Camel Main module
 to define a route from Couchbase to Log.
 
-Set your application.properties options correctly.
+Set your `application.properties` options correctly.
 You'll need also a running couchbase server.
 
 === Setting up the Couchbase Container
@@ -15,7 +15,7 @@ First run the container
 docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase:7.0.3
 ----
 
-Now go to localhost:8091 and create a new cluster with username/password admin/password
+Now go to `localhost:8091` and create a new cluster with username/password admin/password
 
 Use the sample bucket beer-sample to populate the bucket.
 
