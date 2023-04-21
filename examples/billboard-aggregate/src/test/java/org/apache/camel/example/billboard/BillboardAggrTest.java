@@ -45,8 +45,8 @@ public class BillboardAggrTest extends CamelTestSupport {
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext ctx = super.createCamelContext();
-        ctx.adapt(ExtendedCamelContext.class).setExchangeFactory(new PooledExchangeFactory());
-        ctx.adapt(ExtendedCamelContext.class).getExchangeFactory().setStatisticsEnabled(true);
+        ctx.getCamelContextExtension().setExchangeFactory(new PooledExchangeFactory());
+        ctx.getCamelContextExtension().getExchangeFactory().setStatisticsEnabled(true);
         ctx.disableJMX();
         return ctx;
     }
