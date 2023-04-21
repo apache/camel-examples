@@ -76,7 +76,7 @@ Run the Debezium consumer in the separate shell
 $ mvn exec:java -Pdebezium-consumer
 ----
 
-Initially, you will Debezium will perform a snapshot of the whitelisted tables per `application.properties`, hence you should expect
+Initially, Debezium will perform a snapshot of the whitelisted tables per `application.properties`, hence you should expect
 the data to be replicated into Cassandra. Once the snapshot mode is done, you can try to insert a new row, update fields, delete etc. on PostgreSQL whitelisted table(s), you should see
 the changes reflecting on Cassandra as well, you can verify that by running the following query on cqlsh:
 ```
