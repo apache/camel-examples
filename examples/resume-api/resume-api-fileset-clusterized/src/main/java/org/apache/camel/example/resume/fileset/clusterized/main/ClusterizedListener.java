@@ -65,10 +65,6 @@ class ClusterizedListener implements MainListener {
     }
 
     @Override
-    public void configure(CamelContext context) {
-    }
-
-    @Override
     public void beforeStart(BaseMainSupport main) {
     }
 
