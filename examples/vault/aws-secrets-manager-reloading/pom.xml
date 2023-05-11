@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.example</groupId>
         <artifactId>camel-examples-vault-parent</artifactId>
-        <version>3.20.0</version>
+        <version>3.20.4</version>
     </parent>
 
     <artifactId>camel-example-aws-secrets-manager-reloading</artifactId>
