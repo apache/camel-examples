@@ -148,12 +148,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <site-repo-url>scpexe://people.apache.org/www/camel.apache.org/maven/</site-repo-url>
-        <jdk.version>11</jdk.version>
+        <jdk.version>17</jdk.version>
         <compiler.fork>false</compiler.fork>
 
         <camel.version>${project.version}</camel.version>
 
-	<!-- Versions -->
         <activemq-version>5.17.4</activemq-version>
         <arquillian-version>1.7.0.Alpha10</arquillian-version>
         <arquillian-tomcat-version>1.1.0.Final</arquillian-tomcat-version>

@@ -46,6 +46,11 @@ And then use the CLI to see status:
      90491  org.apache.camel.example.My…  3.19.0-SNAPSHOT  Camel      1/1   Running  20s     11       0         0          0s
 
 
+=== Camel Web Console
+
+This example comes with embedded developer console that is accessible via `http://localhost:8080/q/dev`.
+You can also check status of health-check via `http://localhost:8080/q/health`.
+
 === How to configure for Camel Textual Route debugging
 
 Several IDEs are providing support for Camel Textual Route debugging. To enable this possibility, you need to launch this example with the profile `camel.debug`.

@@ -64,6 +64,22 @@
             <artifactId>camel-timer</artifactId>
         </dependency>
 
+        <!-- camel-main web console -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-platform-http-main</artifactId>
+        </dependency>
+        <!-- developer consoles for web console -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-console</artifactId>
+        </dependency>
+        <!-- JMX metrics for web console -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-management</artifactId>
+        </dependency>
+
         <!-- camel-cli -->
         <dependency>
             <groupId>org.apache.camel</groupId>
