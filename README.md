@@ -23,3 +23,18 @@ Then, install the root pom:
 
 After that, you should be able to execute the examples following each example's
 readme's instructions.
+
+=== Examples
+
+// examples: START
+// examples: END
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback,
+then please https://camel.apache.org/community/support[let us know].
+
+We also love contributors,
+so https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
