@@ -1,15 +1,25 @@
-# Apache Camel Examples
+= Welcome to the Apache Camel Examples
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.camel/apache-camel/badge.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/org.apache.camel/apache-camel)
-[![Javadocs](https://www.javadoc.io/badge/org.apache.camel/apache-camel.svg?color=brightgreen)](https://www.javadoc.io/doc/org.apache.camel/camel-api)
-[![Stack Overflow](https://img.shields.io/:stack%20overflow-apache--camel-brightgreen.svg)](http://stackoverflow.com/questions/tagged/apache-camel)
-[![Chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://camel.zulipchat.com/)
-[![Twitter](https://img.shields.io/twitter/follow/ApacheCamel.svg?label=Follow&style=social)](https://twitter.com/ApacheCamel)
+== Introduction
 
+This project contains the various examples for working with Apache
+Camel. The examples can be run using Maven. When using the Maven
+command, Maven will attempt to download the required dependencies from a
+central repository to your local repository.
+View the individual example READMEs for details.
 
-[Apache Camel](http://camel.apache.org/) is a powerful open source integration framework based on known
-Enterprise Integration Patterns with powerful bean integration.
+=== Executing
 
-### Introduction
+Master branch should only be used for development purposes, which will be pointing
+to the SNAPSHOT version of the next release.
 
-This project provides examples for Apache Camel.
+To execute the examples, checkout into the tag for the latest release. For example:
+
+`$ git checkout tags/camel-examples-4.0.0`
+
+Then, install the root pom:
+
+`$ mvn install`
+
+After that, you should be able to execute the examples following each example's
+readme's instructions.
