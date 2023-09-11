@@ -40,9 +40,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.postgresql.ds.PGSimpleDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
+
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.CreateStreamRequest;
 
@@ -58,13 +61,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class DebeziumTest extends CamelMainTestSupport {
 
-    private static final String PGSQL_IMAGE = "debezium/example-postgres:1.9";
+    private static final String PGSQL_IMAGE = "debezium/example-postgres:2.3.2.Final";
     private static final String CASSANDRA_IMAGE = "cassandra:4.0.1";
 
     private static final String SOURCE_DB_NAME = "debezium-db";
     private static final String SOURCE_DB_SCHEMA = "inventory";
     private static final String SOURCE_DB_USERNAME = "pgsql-user";
     private static final String SOURCE_DB_PASSWORD = "pgsql-pw";
+    private static final Logger LOGGER = LoggerFactory.getLogger(DebeziumTest.class);
 
     @RegisterExtension
     private static final AWSService AWS_SERVICE = AWSServiceFactory.createKinesisService();
@@ -122,23 +126,27 @@ class DebeziumTest extends CamelMainTestSupport {
     @Test
     void should_propagate_db_event_thanks_to_debezium() {
         NotifyBuilder notify = new NotifyBuilder(context).from("aws2-kinesis:*").whenCompleted(3).create();
-
+        LOGGER.debug("Doing initial select");
         List<?> resultSource = template.requestBody("direct:select", null, List.class);
         assertEquals(9, resultSource.size(), "We should not have additional products in source");
         await().atMost(20, SECONDS).until(() -> template.requestBody("direct:result", null, List.class).size(), equalTo(0));
+        // Wait until the notification message is written to the logfile
+        // If the insert is done before the end of the snapshot, no events are received
+        await().atMost(2, SECONDS).until(() ->  snapshotIsDone());
 
+        LOGGER.debug("Doing insert");
         template.sendBody("direct:insert", new Object[] { 1, "scooter", "Small 2-wheel yellow scooter", 5.54 });
 
         resultSource = template.requestBody("direct:select", null, List.class);
         assertEquals(10, resultSource.size(), "We should have one additional product in source");
         await().atMost(20, SECONDS).until(() -> template.requestBody("direct:result", null, List.class).size(), equalTo(1));
-
+        LOGGER.debug("Doing update");
         template.sendBody("direct:update", new Object[] { "yellow scooter", 1 });
 
         resultSource = template.requestBody("direct:select", null, List.class);
         assertEquals(10, resultSource.size(), "We should not have more product in source");
         await().atMost(20, SECONDS).until(() -> template.requestBody("direct:result", null, List.class).size(), equalTo(1));
-
+        LOGGER.debug("Doing delete");
         template.sendBody("direct:delete", new Object[] { 1 });
 
         resultSource = template.requestBody("direct:select", null, List.class);
@@ -148,6 +156,15 @@ class DebeziumTest extends CamelMainTestSupport {
         assertTrue(
             notify.matches(60, SECONDS), "3 messages should be completed"
         );
+    }
+
+    private boolean snapshotIsDone() {
+        Path log = Path.of("target/notifications.log");
+        try {
+            return(Files.size(log)>0);
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     @Override

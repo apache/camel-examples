@@ -26,12 +26,17 @@
   <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
     <package>org.apache.camel.example.spring</package>
   </camelContext>
+  
+   <!-- Start an embedded artemis server, configured with broker.xml -->
+   <bean id="EmbeddedActiveMQ" class="org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ" 
+   init-method="start" destroy-method="stop">
+   </bean>
 
   <!-- lets configure the default ActiveMQ broker URL -->
   <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
     <property name="connectionFactory">
-      <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="vm://localhost?broker.persistent=false&amp;broker.useJmx=true"/>
+       <bean class="org.apache.activemq.artemis.jms.client.ActiveMQJMSConnectionFactory">
+        <constructor-arg value="vm://0"/>
       </bean>
     </property>
   </bean>

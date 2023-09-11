@@ -19,6 +19,8 @@ apiVersion: "apps/v1"
 kind: StatefulSet
 metadata:
   name: cassandra
+  labels:
+    app: cassandra
 spec:
   serviceName: cassandra
   replicas: 2
@@ -32,7 +34,7 @@ spec:
     spec:
       containers:
       - name: cassandra
-        image: gcr.io/google-samples/cassandra:v12
+        image: gcr.io/google-samples/cassandra:v13
         imagePullPolicy: Always
         ports:
         - containerPort: 7000
@@ -45,7 +47,11 @@ spec:
           name: cql
         resources:
           limits:
-            cpu: 0.25
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
         securityContext:
           capabilities:
             add:
@@ -53,7 +59,10 @@ spec:
         lifecycle:
           preStop:
             exec:
-              command: ["/bin/sh", "-c", "PID=$(pidof java) && kill $PID && while ps -p $PID > /dev/null; do sleep 1; done"]
+              command: 
+              - /bin/bash
+              - -c
+              - nodetool drain
         env:
           - name: MAX_HEAP_SIZE
             value: 512M
@@ -67,8 +76,6 @@ spec:
             value: "DC1-K8Demo"
           - name: CASSANDRA_RACK
             value: "Rack1-K8Demo"
-          - name: CASSANDRA_AUTO_BOOTSTRAP
-            value: "false"
           - name: POD_IP
             valueFrom:
               fieldRef:
@@ -79,8 +86,8 @@ spec:
             - /bin/bash
             - -c
             - /ready-probe.sh
-          initialDelaySeconds: 15
-          timeoutSeconds: 5
+          initialDelaySeconds: 60 # wait for JMX server to start up
+          timeoutSeconds: 60
         # These volume mounts are persistent. They are like inline claims,
         # but not exactly because the names need to match exactly one of
         # the stateful pod volumes.
@@ -93,10 +100,16 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: cassandra-data
-      annotations:
-        volume.alpha.kubernetes.io/storage-class: anything
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
           storage: 1Gi
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fast
+provisioner: k8s.io/minikube-hostpath
+parameters:
+  type: pd-ssd

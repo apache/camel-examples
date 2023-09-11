@@ -41,7 +41,7 @@ public final class MyApplication {
 
         @Override
         public void configure() throws Exception {
-            from("timer:simple?period=503")
+            from("timer:simple?includeMetadata=true&period=503")
                 .id("simple-route")
                 .transform()
                     .exchange(this::dateToTime)
