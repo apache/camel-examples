@@ -151,7 +151,7 @@ class DebeziumTest extends CamelMainTestSupport {
 
         resultSource = template.requestBody("direct:select", null, List.class);
         assertEquals(9, resultSource.size(), "We should have one less product in source");
-        await().atMost(120, SECONDS).until(() -> template.requestBody("direct:result", null, List.class).size(), equalTo(0));
+        await().atMost(20, SECONDS).until(() -> template.requestBody("direct:result", null, List.class).size(), equalTo(0));
 
         assertTrue(
             notify.matches(60, SECONDS), "3 messages should be completed"
