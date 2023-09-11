@@ -82,6 +82,12 @@
             <version>${log4j2-version}</version>
             <scope>runtime</scope>
         </dependency>
+        
+		<dependency>
+    		<groupId>jakarta.activation</groupId>
+    		<artifactId>jakarta.activation-api</artifactId>
+    		<version>${jakarta-activation-version}</version>
+		</dependency>
 
         <!-- for testing -->
         <dependency>

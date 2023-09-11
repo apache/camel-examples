@@ -63,10 +63,12 @@ public final class DebeziumPgSQLConsumerToKinesis {
                         + "&databasePort={{debezium.postgres.databasePort}}"
                         + "&databaseUser={{debezium.postgres.databaseUser}}"
                         + "&databasePassword={{debezium.postgres.databasePassword}}"
-                        + "&databaseServerName={{debezium.postgres.databaseServerName}}"
+                        + "&topicPrefix={{debezium.postgres.topicPrefix}}"
                         + "&databaseDbname={{debezium.postgres.databaseDbname}}"
                         + "&schemaIncludeList={{debezium.postgres.schemaIncludeList}}"
                         + "&tableIncludeList={{debezium.postgres.tableIncludeList}}"
+                        + "&replicaIdentityAutosetValues={{debezium.postgres.replica.identity.autoset.values}}"
+                        + "&additionalProperties.notification.enabled.channels=log"
                         + "&offsetStorageFileName={{debezium.postgres.offsetStorageFileName}}")
                         .routeId("FromDebeziumPgSql")
                         // We will need to prepare the data for Kinesis, however we need to mention here is that Kinesis is a bit different from Kafka in terms
