@@ -94,7 +94,7 @@
         <!-- Test dependencies BEGIN -->
         <dependency>
             <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-tomcat-embedded-9</artifactId>
+            <artifactId>arquillian-tomcat-embedded-10</artifactId>
             <version>${arquillian-tomcat-version}</version>
             <scope>test</scope>
         </dependency>
@@ -122,6 +122,14 @@
             <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
+
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>${jakarta-servlet-api-version}</version>
+    <scope>test</scope>
+</dependency>
+
         <!-- Test dependencies END -->
 
     </dependencies>

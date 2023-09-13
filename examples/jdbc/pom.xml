@@ -78,6 +78,11 @@
         <!-- jdbc -->
         <dependency>
             <groupId>org.apache.derby</groupId>
+            <artifactId>derbytools</artifactId>
+            <version>${derby-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>${derby-version}</version>
         </dependency>
