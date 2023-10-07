@@ -34,17 +34,17 @@ Number of Examples: 75 (0 deprecated)
 |===
 | Example | Category | Description
 
-| link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) |  |
+| link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) |  | 
 
-| link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) |  |
+| link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) |  | 
 
-| link:resume-api/resume-api-file-offset/README.md[Resume Api File Offset] (resume-api-file-offset) |  |
+| link:resume-api/resume-api-file-offset/README.md[Resume Api File Offset] (resume-api-file-offset) |  | 
 
-| link:resume-api/resume-api-fileset/README.md[Resume Api Fileset] (resume-api-fileset) |  |
+| link:resume-api/resume-api-fileset/README.md[Resume Api Fileset] (resume-api-fileset) |  | 
 
-| link:resume-api/resume-api-fileset-clusterized/README.md[Resume Api Fileset Clusterized] (resume-api-fileset-clusterized) |  |
+| link:resume-api/resume-api-fileset-clusterized/README.md[Resume Api Fileset Clusterized] (resume-api-fileset-clusterized) |  | 
 
-| link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) |  |
+| link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) |  | 
 
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
@@ -157,8 +157,8 @@ Number of Examples: 75 (0 deprecated)
 | link:loadbalancing/README.adoc[Load Balancing] (loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 
 | link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
-Spring DSL
-
+        Spring DSL
+    
 
 | link:flight-recorder/README.adoc[Flight Recorder] (flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
 
