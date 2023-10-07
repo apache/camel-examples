@@ -2,7 +2,7 @@
 
 == Introduction
 
-This project contains the various examples for working with Apache
+This directory contains the various examples for working with Apache
 Camel. The examples can be run using Maven. When using the Maven
 command, Maven will attempt to download the required dependencies from a
 central repository to your local repository.
@@ -24,15 +24,174 @@ Then, install the root pom:
 After that, you should be able to execute the examples following each example's
 readme's instructions.
 
-=== Examples
+
+== Examples
 
 // examples: START
+Number of Examples: 75 (0 deprecated)
+
+[width="100%",cols="4,2,4",options="header"]
+|===
+| Example | Category | Description
+
+| link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) |  |
+
+| link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) |  |
+
+| link:resume-api/resume-api-file-offset/README.md[Resume Api File Offset] (resume-api-file-offset) |  |
+
+| link:resume-api/resume-api-fileset/README.md[Resume Api Fileset] (resume-api-fileset) |  |
+
+| link:resume-api/resume-api-fileset-clusterized/README.md[Resume Api Fileset Clusterized] (resume-api-fileset-clusterized) |  |
+
+| link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) |  |
+
+| link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
+
+| link:vault/aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
+
+| link:vault/aws-secrets-manager-reloading/README.adoc[Aws Secrets Manager Reloading] (aws-secrets-manager-reloading) | Beginner | An example for showing AWS Secrets Manager Camel component with reloading
+
+| link:azure/azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Beginner | Azure Eventhubs example
+
+| link:vault/azure-key-vault-reloading/README.adoc[Azure Key Vault Reloading] (azure-key-vault-reloading) | Beginner | An example for showing Azure Key Vault Camel component with reloading
+
+| link:azure/azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Beginner | Azure Storage Blob example
+
+| link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
+
+| link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
+
+| link:couchbase-log/README.adoc[Couchbase Log] (couchbase-log) | Beginner | An example for showing standalone Camel with Couchbase
+
+| link:csimple/README.adoc[Csimple] (csimple) | Beginner | Shows using compiled simple language
+
+| link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
+
+| link:ftp/README.adoc[FTP] (ftp) | Beginner | An example for showing Camel FTP integration
+
+| link:google/google-pubsub/README.adoc[Google Pubsub] (google-pubsub) | Beginner | Google Pubsub example
+
+| link:vault/google-secret-manager-reloading/README.adoc[Google Secret Manager Reloading] (google-secret-manager-reloading) | Beginner | An example for showing Google Secret Manager Camel component with reloading
+
+| link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
+
+| link:azure/kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Beginner | An example for showing standalone Camel with Kafka and Azure Storage Blob
+
+| link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
+
+| link:kamelet-chucknorris/README.adoc[Kamelet Chucknorris] (kamelet-chucknorris) | Beginner | How easy it is to create your own Kamelets
+
+| link:kamelet-main/README.adoc[Kamelet Main] (kamelet-main) | Beginner | How to easily run Kamelets
+
+| link:kamelet-sql/README.adoc[Kamelet Sql] (kamelet-sql) | Beginner | Consume from PostgreSQL database connected through an AWS Secrets Manager Secret
+
+| link:main/README.adoc[Main] (main) | Beginner | An example for showing standalone Camel
+
+| link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
+
+| link:aws/main-endpointdsl-aws2-s3/README.adoc[Main Endpointdsl Aws2 S3] (main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
+
+| link:aws/main-endpointdsl-aws2-s3-kafka/README.adoc[Main Endpointdsl Aws2 S3 Kafka] (main-endpointdsl-aws2-s3-kafka) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3 and Kafka
+
+| link:aws/main-endpointdsl-kafka-aws2-s3/README.adoc[Main Endpointdsl Kafka Aws2 S3] (main-endpointdsl-kafka-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
+
+| link:aws/main-endpointdsl-kafka-aws2-s3-restarting-policy/README.adoc[Main Endpointdsl Kafka Aws2 S3 Restarting Policy] (main-endpointdsl-kafka-aws2-s3-restarting-policy) | Beginner | An example for showing standalone Camel with Endpoint DSL and Kafka, AWS2-S3 streaming upload mode with restarting policy
+
+| link:main-health/README.adoc[Main Health] (main-health) | Beginner | An example for showing standalone Camel with Health Checks
+
+| link:main-joor/README.adoc[Main Joor] (main-joor) | Beginner | An example for showing standalone Camel with jOOR runtime Java compiled
+
+| link:main-lambda/README.adoc[Main Lambda] (main-lambda) | Beginner | Camel routes lambda style
+
+| link:main-tiny/README.adoc[Main Tiny] (main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
+
+| link:main-xml/README.adoc[Main Xml] (main-xml) | Beginner | An example for showing standalone Camel using XML
+
+| link:main-yaml/README.adoc[Main Yaml] (main-yaml) | Beginner | An example for showing standalone Camel using YAML
+
+| link:minio/README.adoc[Minio] (minio) | Beginner | An example for showing Camel using MinIO Component
+
+| link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
+
+| link:routeloader/README.adoc[Routeloader] (routeloader) | Beginner | Example loading and compiling Java routes on startup
+
+| link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
+
+| link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
+
+| link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
+
+| link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
+
+| link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
+
+| link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
+
+| link:hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
+
+| link:aws/main-endpointdsl-aws2/README.adoc[Main Endpointdsl Aws2] (main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
+
+| link:debezium/README.adoc[Debezium] (debezium) | Database | An example for Debezium Component
+
+| link:debezium-eventhubs-blob/README.adoc[Debezium Eventhubs Blob] (debezium-eventhubs-blob) | Database | An example for Debezium Component with Azure Event Hubs and Azure Storage Blob
+
+| link:jdbc/README.adoc[JDBC] (jdbc) | Database | An example for showing Camel using JDBC component
+
+| link:jooq/README.adoc[JOOQ] (jooq) | Database | An example for showing Camel using JOOQ component
+
+| link:mongodb/README.adoc[Mongodb] (mongodb) | Database | An example that uses Camel MongoDB component
+
+| link:aggregate/README.adoc[Aggregate] (aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
+
+| link:aggregate-dist/README.adoc[Aggregate Dist] (aggregate-dist) | EIP | How to use the JdbcAggregationRepository in a distributed environment
+
+| link:bigxml-split/README.adoc[Bigxml Split] (bigxml-split) | EIP | How to deal with big XML files in Camel
+
+| link:billboard-aggregate/README.adoc[Billboard Aggregate] (billboard-aggregate) | EIP | Billboard aggregation example
+
+| link:cafe/README.adoc[Cafe] (cafe) | EIP | A cafe example showing how to work with Camel
+
+| link:cafe-endpointdsl/README.adoc[Cafe Endpointdsl] (cafe-endpointdsl) | EIP | A cafe example showing how to work with Camel and the Endpoint DSL
+
+| link:loadbalancing/README.adoc[Load Balancing] (loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
+
+| link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
+Spring DSL
+
+
+| link:flight-recorder/README.adoc[Flight Recorder] (flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
+
+| link:jmx/README.adoc[JMX] (jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
+
+| link:splunk/README.adoc[Splunk] (splunk) | Management and Monitoring | An example using Splunk
+
+| link:kafka/README.adoc[Kafka] (kafka) | Messaging | An example for Kafka
+
+| link:netty-custom-correlation/README.adoc[Netty Custom Correlation] (netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
+
+| link:spring-pulsar/README.adoc[Spring Pulsar] (spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
+
+| link:kotlin/README.adoc[Kotlin] (kotlin) | Other Languages | A Camel route using Kotlin
+
+| link:reactive-executor-vertx/README.adoc[Reactive Executor Vertx] (reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
+
+| link:spring-security/README.adoc[Spring Security] (spring-security) | Security | An example showing how to work with Camel and Spring Security
+
+| link:salesforce-consumer/README.adoc[Salesforce Consumer] (salesforce-consumer) | Social | An example that uses Salesforce Rest Streaming API
+
+| link:telegram/README.adoc[Telegram] (telegram) | Social | An example that uses Telegram API
+
+| link:whatsapp/README.adoc[Whatsapp] (whatsapp) | Social | An example that uses Whatsapp API
+
+| link:mapstruct/README.adoc[Mapstruct] (mapstruct) | Transformation | How to use MapStruct for POJO data mapping
+|===
 // examples: END
 
-=== Help and contributions
+== Help and contributions
 
 If you hit any problem using Camel or have some feedback,
-then please https://camel.apache.org/community/support[let us know].
+then please https://camel.apache.org/community/support/[let us know].
 
 We also love contributors,
 so https://camel.apache.org/community/contributing/[get involved] :-)
