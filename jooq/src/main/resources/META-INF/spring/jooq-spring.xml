@@ -35,13 +35,8 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <bean id="transactionAwareDataSource"
-          class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-
     <bean class="org.jooq.impl.DataSourceConnectionProvider" name="connectionProvider">
-        <constructor-arg ref="transactionAwareDataSource"/>
+        <constructor-arg ref="dataSource"/>
     </bean>
 
     <bean id="dsl" class="org.jooq.impl.DefaultDSLContext">
