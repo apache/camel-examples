@@ -34,6 +34,18 @@ Number of Examples: 75 (0 deprecated)
 |===
 | Example | Category | Description
 
+| link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) |  | An example for showing the Resume API for consuming AWS Kinesis data streams.
+
+| link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) |  | An example for showing the Resume API for consuming data from Apache Cassandra.
+
+| link:resume-api/resume-api-file-offset/README.md[Resume Api File Offset] (resume-api-file-offset) |  | An example for showing the Resume API for processing a large file.
+
+| link:resume-api/resume-api-fileset/README.md[Resume Api Fileset] (resume-api-fileset) |  | An example for showing the Resume API for processing a large directory.
+
+| link:resume-api/resume-api-fileset-clusterized/README.md[Resume Api Fileset Clusterized] (resume-api-fileset-clusterized) |  | An example for showing the Resume API for processing a large directory in clusterized mode.
+
+| link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) |  | An example for showing the Resume API for processing a large directory using the write ahead log.
+
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
 | link:vault/aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Beginner | An example for showing AWS Secrets Manager Camel component
@@ -102,14 +114,6 @@ Number of Examples: 75 (0 deprecated)
 
 | link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
 
-| link:resume-api/resume-api-file-offset/README.md[Resume Api File Offset] (resume-api-file-offset) | Beginner | An example for showing the Resume API for processing a large file.
-
-| link:resume-api/resume-api-fileset/README.md[Resume Api Fileset] (resume-api-fileset) | Beginner | An example for showing the Resume API for processing a large directory
-
-| link:resume-api/resume-api-fileset-clusterized/README.md[Resume Api Fileset Clusterized] (resume-api-fileset-clusterized) | Beginner | An example for showing the Resume API for processing a large directory in clusterized mode
-
-| link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) | Cloud | An example for showing the Resume API for processing a large directory using a the write ahead log
-
 | link:routeloader/README.adoc[Routeloader] (routeloader) | Beginner | Example loading and compiling Java routes on startup
 
 | link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
@@ -128,9 +132,6 @@ Number of Examples: 75 (0 deprecated)
 
 | link:aws/main-endpointdsl-aws2/README.adoc[Main Endpointdsl Aws2] (main-endpointdsl-aws2) | Cloud | An example for showing standalone Camel with multiple AWS2 components
 
-| link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) | Cloud | An example for showing the Resume API for consuming AWS Kinesis data streams
-
-
 | link:debezium/README.adoc[Debezium] (debezium) | Database | An example for Debezium Component
 
 | link:debezium-eventhubs-blob/README.adoc[Debezium Eventhubs Blob] (debezium-eventhubs-blob) | Database | An example for Debezium Component with Azure Event Hubs and Azure Storage Blob
@@ -140,8 +141,6 @@ Number of Examples: 75 (0 deprecated)
 | link:jooq/README.adoc[JOOQ] (jooq) | Database | An example for showing Camel using JOOQ component
 
 | link:mongodb/README.adoc[Mongodb] (mongodb) | Database | An example that uses Camel MongoDB component
-
-| link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) | Database | An example for showing the Resume API for consuming data from Apache Cassandra
 
 | link:aggregate/README.adoc[Aggregate] (aggregate) | EIP | Demonstrates the persistent support for the Camel aggregator
 
