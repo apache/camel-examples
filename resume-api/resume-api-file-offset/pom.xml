@@ -28,6 +28,7 @@
 
     <artifactId>resume-api-file-offset</artifactId>
     <name>Camel :: Example :: Resume API :: File Offset</name>
+    <description>An example for showing the Resume API for processing a large file.</description>
 
     <properties>
         <resume.main.class>org.apache.camel.example.resume.file.offset.main.MainApp</resume.main.class>

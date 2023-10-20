@@ -28,6 +28,7 @@
 
     <artifactId>resume-api-fileset-clusterized</artifactId>
     <name>Camel :: Example :: Resume API :: Clusterized File Set</name>
+    <description>An example for showing the Resume API for processing a large directory in clusterized mode.</description>
 
     <properties>
         <resume.main.class>org.apache.camel.example.resume.fileset.clusterized.main.MainApp</resume.main.class>
