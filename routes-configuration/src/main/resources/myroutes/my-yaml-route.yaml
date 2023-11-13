@@ -21,7 +21,7 @@
     from:
       uri: "timer:yaml?period=3s"
       steps:
-        - set-body:
+        - setBody:
             simple: "Timer fired ${header.CamelTimerCounter} times"
         - to:
             uri: "log:yaml"
