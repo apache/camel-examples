@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 75 (0 deprecated)
+Number of Examples: 76 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -171,6 +171,8 @@ Number of Examples: 75 (0 deprecated)
 | link:netty-custom-correlation/README.adoc[Netty Custom Correlation] (netty-custom-correlation) | Messaging | An example for showing Camel Netty with custom codec and correlation id
 
 | link:spring-pulsar/README.adoc[Spring Pulsar] (spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
+
+| link:main-micrometer/README.adoc[Main Micrometer] (main-micrometer) | Observability | Standalone Camel with Micrometer and Prometheus
 
 | link:kotlin/README.adoc[Kotlin] (kotlin) | Other Languages | A Camel route using Kotlin
 
