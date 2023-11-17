@@ -5,6 +5,9 @@ and with HTTP endpoint for exposing statistics for scraping by Prometheus.
 
 The application is configured in the `application.properties` file.
 
+The route is in YAML DSL and was created with Apache Camel Karavan.
+You can try Karavan with the online editor at: https://karavan.space/
+
 === Build
 
 First compile the example by executing:
@@ -38,10 +41,9 @@ This allows to use the Camel CLI to manage this application, such as:
 
 And then use the CLI to see status:
 
-    $camel get
-      PID   NAME                          CAMEL            PLATFORM  READY  STATUS   AGE  TOTAL  FAILED  INFLIGHT  SINCE-LAST
-     90491  org.apache.camel.example.My…  3.19.0-SNAPSHOT  Camel      1/1   Running  20s     11       0         0          0s
-
+    $camel ps
+      PID   NAME         CAMEL  PLATFORM  READY  STATUS   RELOAD  AGE  ROUTE  MSG/S  TOTAL  FAIL  INFLIGHT  LAST  DELTA  SINCE-LAST
+     92545  MyCoolCamel  4.3.0  Camel      1/1   Running       0  53s    3/3   0.00     10     0         0     0      0     4s/4s/-
 
 === Camel Web Console
 
