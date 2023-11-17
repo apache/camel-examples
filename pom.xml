@@ -116,6 +116,7 @@
         <module>main-health</module>
         <module>main-joor</module>
         <module>main-lambda</module>
+        <module>main-micrometer</module>
         <module>main-tiny</module>
         <module>main-xml</module>
         <module>main-yaml</module>

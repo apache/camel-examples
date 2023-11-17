@@ -1,0 +1,59 @@
+== Camel Example Main Micrometer
+
+This example shows how to run Camel standalone with Micrometer metrics
+and with HTTP endpoint for exposing statistics for scraping by Prometheus.
+
+The application is configured in the `application.properties` file.
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+Then you can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+=== Micrometer
+
+The statistics from Micrometer can be observed from HTTP at:
+
+    http://localhost:8080/q/metrics
+
+=== Camel CLI
+
+This application is integrated with the Camel CLI via the `camel-cli-connector` dependency (see `pom.xml`).
+This allows to use the Camel CLI to manage this application, such as:
+
+    $mvn package camel:run
+
+And then use the CLI to see status:
+
+    $camel get
+      PID   NAME                          CAMEL            PLATFORM  READY  STATUS   AGE  TOTAL  FAILED  INFLIGHT  SINCE-LAST
+     90491  org.apache.camel.example.My…  3.19.0-SNAPSHOT  Camel      1/1   Running  20s     11       0         0          0s
+
+
+=== Camel Web Console
+
+This example comes with embedded developer console that is accessible via `http://localhost:8080/q/dev`.
+You can also check status of health-check via `http://localhost:8080/q/health`.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
