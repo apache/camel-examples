@@ -79,6 +79,11 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-management</artifactId>
         </dependency>
+        <!-- jolokia http plugin -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-platform-http-jolokia</artifactId>
+        </dependency>
 
         <!-- camel-cli -->
         <dependency>
