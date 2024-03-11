@@ -19,7 +19,7 @@ We'll run
 aws secretsmanager create-secret --name SecretTest --description "Create a secret" --region eu-west-1 --secret-string secret 
 ----
 
-- Setting up the AWS credentials as enviroment variables
+- Setting up the AWS credentials as environment variables
 
 This example uses the ProfileCredentialsProvider from AWS SDK v2. So you'll need to have a configuration file, locally to your machine.
 

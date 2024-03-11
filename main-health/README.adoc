@@ -7,7 +7,7 @@ them automatic discovered by Camel and used as parts of its health-check system.
 The example has two routes, a timer that calls a bean that flips a boolean that
 causes the custom health check to be in either UP or DOWN state.
 
-The 2nd route is on purpose made to fail on startup by configuring netty to an unknown host.
+The 2nd route is on purpose made to fail on startup by configuring Netty to an unknown host.
 Camel supervising route controller will attempt to restart the route up till 10 times before exhausting.
 
 The route's health check will therefore report this route as DOWN until its exhausted

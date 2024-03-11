@@ -6,7 +6,7 @@ An example which shows how to integrate Camel with Splunk.
 
 This example requires that an Splunk Server is up and running. (For this
 example, sample data provide by Splunk was used. Steps for loading this
-data into splunk are documented http://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/GetthetutorialdataintoSplunk[here])
+data into Splunk are documented http://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/GetthetutorialdataintoSplunk[here])
 
 This project consists of the following examples:
 

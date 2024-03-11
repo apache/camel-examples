@@ -1,6 +1,6 @@
-== Whatsapp API Example
+== WhatsApp API Example
 
-This example shows how to use Whatsapp API.
+This example shows how to use WhatsApp API.
 
 === How to run
 
