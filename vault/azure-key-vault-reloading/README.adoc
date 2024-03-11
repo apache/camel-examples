@@ -8,7 +8,7 @@ Also notice how you can configure Camel in the `application.properties` file.
 
 You'll need to have a key vault as first step.
 
-Then you'll need to create an event grid subscription to Eventhubs with a Blob Account and container for storing the checkpoint.
+Then you'll need to create an event grid subscription to Event Hubs with a Blob Account and container for storing the checkpoint.
 
 It's not totally easy to do through the az cli, but everything could be done through the Azure UI. We're planning to improve this example by having all the instructions exposed as Azure CLI commands.
 
@@ -78,7 +78,7 @@ Now, get back, to the running Camel application and in the log you should see:
 .
 ----
 
-The Camel context has been reloaded after we noticed a `Microsoft.KeyVault.SecretNewVersionCreated` event for this specific secret, in the Eventgrid topic.
+The Camel context has been reloaded after we noticed a `Microsoft.KeyVault.SecretNewVersionCreated` event for this specific secret, in the Event Grid topic.
 
 The example will work even if you remove the property `camel.azure.vault.secrets`, because the azure related properties will be taken into account automatically.
 

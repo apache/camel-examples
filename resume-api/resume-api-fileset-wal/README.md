@@ -59,7 +59,7 @@ docker network connect --alias kafka resume-api-fileset-wal_default resume-api-f
 While running the demo, note how the application performs the recovery prior to starting the execution. 
 
 
-*Note*: it assumes docker-compose will create the containers using its defualt name pattern. If that's not the case, 
+*Note*: it assumes docker-compose will create the containers using its default name pattern. If that's not the case, 
 please adjust the names accordingly.
 
 

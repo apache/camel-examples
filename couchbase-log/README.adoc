@@ -4,7 +4,7 @@ This example shows how to use the Camel Main module
 to define a route from Couchbase to Log.
 
 Set your `application.properties` options correctly.
-You'll need also a running couchbase server.
+You'll need also a running Couchbase server.
 
 === Setting up the Couchbase Container
 

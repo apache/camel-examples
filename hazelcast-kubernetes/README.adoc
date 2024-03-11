@@ -10,7 +10,7 @@ https://github.com/kubernetes/kubernetes/tree/master/examples/storage/hazelcast
 
 This example is based on:
 
-* Minikube (Kubernetes version >= 1.5) or Minishift (Openshift >= 3.5)
+* Minikube (Kubernetes version >= 1.5) or Minishift (OpenShift >= 3.5)
 * Fabric8 Maven Plugin (version >= 3.2)
 
 === Prerequisites

@@ -21,7 +21,7 @@ $ mvn compile
 
 To run the example type
 
-[source,shh]
+[source,sh]
 ----
 $ mvn camel:run
 ----
