@@ -17,7 +17,7 @@
 
 - route:
     # refer to the route configuration by the id to use for this route
-    route-configuration-id: "yamlError"
+    routeConfigurationId: "yamlError"
     from:
       uri: "timer:yaml?period=3s"
       steps:
@@ -26,8 +26,8 @@
         - to:
             uri: "log:yaml"
             parameters:
-              show-body-type: false
-              show-exchange-pattern: false
-        - throw-exception:
-            exception-type: "java.lang.IllegalArgumentException"
+              showBodyType: false
+              showExchangePattern: false
+        - throwException:
+            exceptionType: "java.lang.IllegalArgumentException"
             message: "Error from yaml"
