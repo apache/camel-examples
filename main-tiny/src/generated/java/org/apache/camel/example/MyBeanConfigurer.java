@@ -21,8 +21,7 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
     public boolean configure(CamelContext camelContext, Object obj, String name, Object value, boolean ignoreCase) {
         org.apache.camel.example.MyBean target = (org.apache.camel.example.MyBean) obj;
         switch (ignoreCase ? name.toLowerCase() : name) {
-        case "hi":
-        case "Hi": target.setHi(property(camelContext, java.lang.String.class, value)); return true;
+        case "hi": target.setHi(property(camelContext, java.lang.String.class, value)); return true;
         default: return false;
         }
     }
@@ -30,8 +29,7 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
     @Override
     public Class<?> getOptionType(String name, boolean ignoreCase) {
         switch (ignoreCase ? name.toLowerCase() : name) {
-        case "hi":
-        case "Hi": return java.lang.String.class;
+        case "hi": return java.lang.String.class;
         default: return null;
         }
     }
@@ -40,8 +38,7 @@ public class MyBeanConfigurer extends org.apache.camel.support.component.Propert
     public Object getOptionValue(Object obj, String name, boolean ignoreCase) {
         org.apache.camel.example.MyBean target = (org.apache.camel.example.MyBean) obj;
         switch (ignoreCase ? name.toLowerCase() : name) {
-        case "hi":
-        case "Hi": return target.getHi();
+        case "hi": return target.getHi();
         default: return null;
         }
     }
