@@ -10,7 +10,7 @@ View the individual example READMEs for details.
 
 === Executing
 
-Master branch should only be used for development purposes, which will be pointing
+Main branch should only be used for development purposes, which will be pointing
 to the SNAPSHOT version of the next release.
 
 To execute the examples, checkout into the tag for the latest release. For example:
