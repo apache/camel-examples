@@ -17,7 +17,7 @@
         <route id="loadbalancer">
             <from uri="direct:loadbalance"/>
             <loadBalance inheritErrorHandler="false">
-                <failover roundRobin="true"/>
+                <failoverLoadBalancer roundRobin="true"/>
                 <to uri="mina:tcp://localhost:9991?sync=true"/>
                 <to uri="mina:tcp://localhost:9992?sync=true"/>
             </loadBalance>
