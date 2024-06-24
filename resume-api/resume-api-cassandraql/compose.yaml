@@ -15,8 +15,13 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-version: '3.4'
 services:
+  cassandra:
+    image: cassandra:4
+    logging:
+      driver: "none"
+    ports:
+      - "9042:9042"
   zookeeper:
     image: quay.io/strimzi/kafka:0.28.0-kafka-3.1.0
     logging:
@@ -52,3 +57,4 @@ services:
       context: .
     depends_on:
       - kafka
+      - cassandra

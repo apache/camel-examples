@@ -15,7 +15,7 @@ Building the demo
 To build the demo and the containers:
 
 ```shell
-mvn clean package && docker-compose build
+mvn clean package && docker compose build
 ```
 
 Run
@@ -24,7 +24,7 @@ Run
 To run the demo:
 
 ```shell
-docker-compose up -d && docker-compose logs --no-log-prefix -f example ; docker-compose down
+docker compose up -d && docker compose logs --no-log-prefix -f example ; docker compose down
 ```
 
 Advanced / Manual
