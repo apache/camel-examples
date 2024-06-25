@@ -20,8 +20,8 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.component.as2.api.util.AS2Utils;
 import org.apache.camel.component.as2.internal.AS2Constants;
-import org.apache.http.HttpRequest;
-import org.apache.http.protocol.HttpCoreContext;
+import org.apache.hc.core5.http.HttpRequest;
+import org.apache.hc.core5.http.protocol.HttpCoreContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
