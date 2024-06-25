@@ -15,7 +15,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-version: '3.4'
 services:
   zookeeper:
     image: quay.io/strimzi/kafka:0.28.0-kafka-3.1.0
@@ -46,9 +45,21 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-  example:
+  example-1:
     build:
       dockerfile: src/main/docker/Dockerfile
       context: .
+    environment:
+      NODE_ID: "camel-1"
+      NODE_HOST: "zookeeper:2181"
+    depends_on:
+      - kafka
+  example-2:
+    build:
+      dockerfile: src/main/docker/Dockerfile
+      context: .
+    environment:
+      NODE_ID: "camel-2"
+      NODE_HOST: "zookeeper:2181"
     depends_on:
       - kafka

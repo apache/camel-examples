@@ -15,8 +15,16 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-version: '3.4'
 services:
+  kinesis:
+    image: localstack/localstack:latest
+    logging:
+      driver: "none"
+    ports:
+      - "4566:4566"
+#      - "4571:4571"
+    environment:
+      SERVICES: kinesis
   zookeeper:
     image: quay.io/strimzi/kafka:0.28.0-kafka-3.1.0
     logging:
