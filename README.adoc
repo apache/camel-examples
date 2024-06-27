@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 76 (0 deprecated)
+Number of Examples: 77 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -89,6 +89,8 @@ Number of Examples: 76 (0 deprecated)
 | link:main/README.adoc[Main] (main) | Beginner | An example for showing standalone Camel
 
 | link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
+
+| link:aws/main-endpointdsl-aws-kcl-kinesis/README.adoc[Main Endpointdsl Aws Kcl Kinesis] (main-endpointdsl-aws-kcl-kinesis) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-Kinesis
 
 | link:aws/main-endpointdsl-aws2-s3/README.adoc[Main Endpointdsl Aws2 S3] (main-endpointdsl-aws2-s3) | Beginner | An example for showing standalone Camel with Endpoint DSL and AWS2-S3
 
