@@ -1,0 +1,43 @@
+== Camel Example Main Endpoint DSL with AWS2 Kinesis component
+
+This example shows how to use the endpoint DSL in your Camel routes
+to define endpoints using type safe fluent builders, which are Java methods
+that are compiled.
+
+The example will poll a Kinesis Data Stream by using KCL consumers.
+
+You'll need to create the stream from your AWS console or your AWS CLI.
+
+Notice how you can configure Camel in the `application.properties` file.
+
+This example will use the AWS default credentials Provider: https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
+Set your credentials accordingly.
+Don't forget to add the stream name.
+
+=== Build
+
+First compile the example by executing:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== How to run
+
+You can run this example using
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
