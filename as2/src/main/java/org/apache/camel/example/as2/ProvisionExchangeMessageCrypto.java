@@ -29,14 +29,14 @@ public class ProvisionExchangeMessageCrypto implements Processor {
         AS2Component component =  exchange.getContext().getComponent("as2", AS2Component.class);
         AS2Configuration configuration = component.getConfiguration();
         
-        exchange.getIn().setHeader("CamelAS2.signingAlgorithm", configuration.getSigningAlgorithm());
-        exchange.getIn().setHeader("CamelAS2.signingCertificateChain", configuration.getSigningCertificateChain());
-        exchange.getIn().setHeader("CamelAS2.signingPrivateKey", configuration.getSigningPrivateKey());
-        exchange.getIn().setHeader("CamelAS2.signedReceiptMicAlgorithms", configuration.getSignedReceiptMicAlgorithms());
-        exchange.getIn().setHeader("CamelAS2.encryptingAlgorithm", configuration.getEncryptingAlgorithm());
-        exchange.getIn().setHeader("CamelAS2.encryptingCertificateChain", configuration.getEncryptingCertificateChain());
-        exchange.getIn().setHeader("CamelAS2.decryptingPrivateKey", configuration.getDecryptingPrivateKey());
-        exchange.getIn().setHeader("CamelAS2.compressionAlgorithm", configuration.getCompressionAlgorithm());
+        exchange.getIn().setHeader("CamelAs2.signingAlgorithm", configuration.getSigningAlgorithm());
+        exchange.getIn().setHeader("CamelAs2.signingCertificateChain", configuration.getSigningCertificateChain());
+        exchange.getIn().setHeader("CamelAs2.signingPrivateKey", configuration.getSigningPrivateKey());
+        exchange.getIn().setHeader("CamelAs2.signedReceiptMicAlgorithms", configuration.getSignedReceiptMicAlgorithms());
+        exchange.getIn().setHeader("CamelAs2.encryptingAlgorithm", configuration.getEncryptingAlgorithm());
+        exchange.getIn().setHeader("CamelAs2.encryptingCertificateChain", configuration.getEncryptingCertificateChain());
+        exchange.getIn().setHeader("CamelAs2.decryptingPrivateKey", configuration.getDecryptingPrivateKey());
+        exchange.getIn().setHeader("CamelAs2.compressionAlgorithm", configuration.getCompressionAlgorithm());
 
     }
 
