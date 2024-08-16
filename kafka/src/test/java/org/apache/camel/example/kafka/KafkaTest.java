@@ -57,11 +57,11 @@ class KafkaTest extends CamelTestSupport {
         return camelContext;
     }
 
-    @BeforeEach
-    public void setUp() throws Exception {
+    public void setupResources() throws Exception {
         // Replace the from endpoint to send messages easily
+    	// still use the deprecated method for now as method is not visible camelContextConfiguration().replaceRouteFromWith("input", "direct:in");
         replaceRouteFromWith("input", "direct:in");
-        super.setUp();
+        super.setupResources();
     }
 
     @Test
