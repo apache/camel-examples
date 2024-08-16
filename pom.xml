@@ -109,7 +109,8 @@
         <module>kamelet-chucknorris</module>
         <module>kamelet-main</module>
         <module>kamelet-sql</module>
-        <module>kotlin</module>
+        <!-- Commenting out kotlin as there are compilation failure and the dsl is now deprecated -->
+        <!--<module>kotlin</module>-->
         <module>loadbalancing</module>
         <module>main</module>
         <module>main-endpointdsl</module>
