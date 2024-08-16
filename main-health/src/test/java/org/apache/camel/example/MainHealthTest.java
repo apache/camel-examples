@@ -19,11 +19,9 @@ package org.apache.camel.example;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.camel.util.PropertiesHelper.asProperties;
@@ -40,11 +38,11 @@ class MainHealthTest extends CamelMainTestSupport {
     }
 
     @Override
-    @BeforeEach
-    public void setUp() throws Exception {
+    public void setupResources() throws Exception {
         // Prevent failure by replacing the failing endpoint
+    	// still use the deprecated method for now as method is not visible camelContextConfiguration().replaceRouteFromWith("netty", "direct:foo");
         replaceRouteFromWith("netty", "direct:foo");
-        super.setUp();
+        super.setupResources();
     }
 
     @Test
