@@ -109,8 +109,6 @@
         <module>kamelet-chucknorris</module>
         <module>kamelet-main</module>
         <module>kamelet-sql</module>
-        <!-- Commenting out kotlin as there are compilation failure and the dsl is now deprecated -->
-        <!--<module>kotlin</module>-->
         <module>loadbalancing</module>
         <module>main</module>
         <module>main-endpointdsl</module>
@@ -136,7 +134,6 @@
         <module>splunk</module>
         <module>spring</module>
         <module>spring-pulsar</module>
-        <module>spring-security</module>
         <module>spring-xquery</module>
         <module>telegram</module>
         <module>transformer-demo</module>
