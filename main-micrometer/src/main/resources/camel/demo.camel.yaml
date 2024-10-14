@@ -1,9 +1,6 @@
 - route:
-    nodePrefixId: route-e2a
-    id: route-8847
     from:
       uri: timer
-      id: from-0922
       parameters:
         timerName: timer1
         delay: '1000'
@@ -11,30 +8,33 @@
       steps:
         - setBody:
             expression:
-              simple:
-                expression: Hello World
-                id: simple-3fc3
-            id: setBody-b8e4
+              constant:
+                expression: Hello
         - to:
             uri: direct
-            id: to-280f
             parameters:
-              name: direct1
+              name: echo
+        - log:
+            message: ${body}
 - route:
-    nodePrefixId: route-6ce
-    id: route-a9b6
     from:
       uri: direct
-      id: from-a1fa
       parameters:
-        name: direct1
+        name: echo
       steps:
         - setBody:
-            constant: 'HELLO'
-            id: log-dcfc
+            simple: '${body}${body}'
+- route:
+    from:
+      uri: direct
+      parameters:
+        name: bye
+      steps:
+        - setBody:
+            constant: 'BYE WORLD'
+        - log:
+            message: ${body}
 - rest:
-    id: rest-8cd4
-    post:
-      - path: /rest-api
-        to: direct:direct1
-        id: post-032f
+    get:
+      - path: /bye
+        to: direct:bye
