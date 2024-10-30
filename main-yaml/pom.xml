@@ -33,7 +33,7 @@
     <description>An example for showing standalone Camel using YAML</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Camel Standalone</category>
     </properties>
 
     <dependencyManagement>

@@ -34,7 +34,7 @@
     <description>An example for showing standalone Camel with as few JARs on classpath as possible</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Camel Standalone</category>
     </properties>
 
     <dependencyManagement>

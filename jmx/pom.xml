@@ -33,7 +33,7 @@
     <description>An example showing how to work with Camel and JMX</description>
 
     <properties>
-        <category>Management and Monitoring</category>
+        <category>Observability</category>
         <title>JMX</title>
     </properties>
 

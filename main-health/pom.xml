@@ -34,7 +34,7 @@
     <description>An example for showing standalone Camel with Health Checks</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Observability</category>
     </properties>
 
     <dependencyManagement>

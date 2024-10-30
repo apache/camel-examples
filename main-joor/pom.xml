@@ -33,7 +33,7 @@
     <description>An example for showing standalone Camel with jOOR runtime Java compiled</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Camel Standalone</category>
     </properties>
 
     <dependencyManagement>

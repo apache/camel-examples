@@ -64,22 +64,6 @@ Number of Examples: 74 (0 deprecated)
 
 | link:kamelet-sql/README.adoc[Kamelet Sql] (kamelet-sql) | Beginner | Consume from PostgreSQL database connected through an AWS Secrets Manager Secret
 
-| link:main/README.adoc[Main] (main) | Beginner | An example for showing standalone Camel
-
-| link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Beginner | An example for showing standalone Camel with Endpoint DSL
-
-| link:main-health/README.adoc[Main Health] (main-health) | Beginner | An example for showing standalone Camel with Health Checks
-
-| link:main-joor/README.adoc[Main Joor] (main-joor) | Beginner | An example for showing standalone Camel with jOOR runtime Java compiled
-
-| link:main-lambda/README.adoc[Main Lambda] (main-lambda) | Beginner | Camel routes lambda style
-
-| link:main-tiny/README.adoc[Main Tiny] (main-tiny) | Beginner | An example for showing standalone Camel with as few JARs on classpath as possible
-
-| link:main-xml/README.adoc[Main Xml] (main-xml) | Beginner | An example for showing standalone Camel using XML
-
-| link:main-yaml/README.adoc[Main Yaml] (main-yaml) | Beginner | An example for showing standalone Camel using YAML
-
 | link:minio/README.adoc[Minio] (minio) | Beginner | An example for showing Camel using MinIO Component
 
 | link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
@@ -95,6 +79,20 @@ Number of Examples: 74 (0 deprecated)
 | link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
 
 | link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
+
+| link:main/README.adoc[Main] (main) | Camel Standalone | An example for showing standalone Camel
+
+| link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Camel Standalone | An example for showing standalone Camel with Endpoint DSL
+
+| link:main-joor/README.adoc[Main Joor] (main-joor) | Camel Standalone | An example for showing standalone Camel with jOOR runtime Java compiled
+
+| link:main-lambda/README.adoc[Main Lambda] (main-lambda) | Camel Standalone | Camel routes lambda style
+
+| link:main-tiny/README.adoc[Main Tiny] (main-tiny) | Camel Standalone | An example for showing standalone Camel with as few JARs on classpath as possible
+
+| link:main-xml/README.adoc[Main Xml] (main-xml) | Camel Standalone | An example for showing standalone Camel using XML
+
+| link:main-yaml/README.adoc[Main Yaml] (main-yaml) | Camel Standalone | An example for showing standalone Camel using YAML
 
 | link:azure/azure-eventhubs/README.adoc[Azure Eventhubs] (azure-eventhubs) | Cloud | Azure Eventhubs example
 
@@ -152,12 +150,6 @@ Number of Examples: 74 (0 deprecated)
         Spring DSL
     
 
-| link:flight-recorder/README.adoc[Flight Recorder] (flight-recorder) | Management and Monitoring | Diagnosing Camel with Java Flight Recorder
-
-| link:jmx/README.adoc[JMX] (jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
-
-| link:splunk/README.adoc[Splunk] (splunk) | Management and Monitoring | An example using Splunk
-
 | link:google/google-pubsub/README.adoc[Google Pubsub] (google-pubsub) | Messaging | Google Pubsub example
 
 | link:kafka/README.adoc[Kafka] (kafka) | Messaging | An example for Kafka
@@ -166,7 +158,15 @@ Number of Examples: 74 (0 deprecated)
 
 | link:spring-pulsar/README.adoc[Spring Pulsar] (spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
+| link:flight-recorder/README.adoc[Flight Recorder] (flight-recorder) | Observability | Diagnosing Camel with Java Flight Recorder
+
+| link:jmx/README.adoc[JMX] (jmx) | Observability | An example showing how to work with Camel and JMX
+
+| link:main-health/README.adoc[Main Health] (main-health) | Observability | An example for showing standalone Camel with Health Checks
+
 | link:main-micrometer/README.adoc[Main Micrometer] (main-micrometer) | Observability | Standalone Camel with Micrometer and Prometheus
+
+| link:splunk/README.adoc[Splunk] (splunk) | Observability | An example using Splunk
 
 | link:vault/aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Security | An example for showing AWS Secrets Manager Camel component
 

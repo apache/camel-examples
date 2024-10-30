@@ -34,7 +34,7 @@
     <description>Diagnosing Camel with Java Flight Recorder</description>
 
     <properties>
-        <category>Management and Monitoring</category>
+        <category>Observability</category>
     </properties>
 
     <dependencyManagement>

@@ -32,7 +32,7 @@
     <description>An example using Splunk</description>
 
     <properties>
-        <category>Management and Monitoring</category>
+        <category>Observability</category>
     </properties>
 
     <dependencyManagement>
