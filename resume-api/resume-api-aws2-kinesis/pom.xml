@@ -31,6 +31,7 @@
     <description>An example for showing the Resume API for consuming AWS Kinesis data streams.</description>
 
     <properties>
+        <category>Advanced</category>
         <resume.main.class>org.apache.camel.example.resume.aws.kinesis.main.MainApp</resume.main.class>
     </properties>
 

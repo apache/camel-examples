@@ -28,23 +28,23 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 77 (0 deprecated)
+Number of Examples: 74 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
 
-| link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) |  | An example for showing the Resume API for consuming AWS Kinesis data streams.
+| link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) | Advanced | An example for showing the Resume API for consuming AWS Kinesis data streams.
 
-| link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) |  | An example for showing the Resume API for consuming data from Apache Cassandra.
+| link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) | Advanced | An example for showing the Resume API for consuming data from Apache Cassandra.
 
-| link:resume-api/resume-api-file-offset/README.md[Resume Api File Offset] (resume-api-file-offset) |  | An example for showing the Resume API for processing a large file.
+| link:resume-api/resume-api-file-offset/README.md[Resume Api File Offset] (resume-api-file-offset) | Advanced | An example for showing the Resume API for processing a large file.
 
-| link:resume-api/resume-api-fileset/README.md[Resume Api Fileset] (resume-api-fileset) |  | An example for showing the Resume API for processing a large directory.
+| link:resume-api/resume-api-fileset/README.md[Resume Api Fileset] (resume-api-fileset) | Advanced | An example for showing the Resume API for processing a large directory.
 
-| link:resume-api/resume-api-fileset-clusterized/README.md[Resume Api Fileset Clusterized] (resume-api-fileset-clusterized) |  | An example for showing the Resume API for processing a large directory in clusterized mode.
+| link:resume-api/resume-api-fileset-clusterized/README.md[Resume Api Fileset Clusterized] (resume-api-fileset-clusterized) | Advanced | An example for showing the Resume API for processing a large directory in clusterized mode.
 
-| link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) |  | An example for showing the Resume API for processing a large directory using the write ahead log.
+| link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) | Advanced | An example for showing the Resume API for processing a large directory using the write ahead log.
 
 | link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
 
@@ -175,8 +175,6 @@ Number of Examples: 77 (0 deprecated)
 | link:spring-pulsar/README.adoc[Spring Pulsar] (spring-pulsar) | Messaging | An example using Spring XML to talk to the Pulsar server from different kind of client techniques
 
 | link:main-micrometer/README.adoc[Main Micrometer] (main-micrometer) | Observability | Standalone Camel with Micrometer and Prometheus
-
-| link:reactive-executor-vertx/README.adoc[Reactive Executor Vertx] (reactive-executor-vertx) | Reactive | An example for showing using VertX as reactive executor with standalone Camel
 
 | link:salesforce-consumer/README.adoc[Salesforce Consumer] (salesforce-consumer) | Social | An example that uses Salesforce Rest Streaming API
 
