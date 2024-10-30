@@ -33,7 +33,7 @@
     <description>Example with global routes configuration for error handling</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Advanced</category>
     </properties>
 
     <dependencyManagement>

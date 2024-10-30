@@ -33,7 +33,7 @@
     <description>How to use route templates (parameterized routes)</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Advanced</category>
     </properties>
 
     <dependencyManagement>

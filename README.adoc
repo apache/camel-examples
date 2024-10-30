@@ -50,6 +50,12 @@ Number of Examples: 74 (0 deprecated)
 
 | link:routeloader/README.adoc[Routeloader] (routeloader) | Advanced | Example loading and compiling Java routes on startup
 
+| link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Advanced | Example with global routes configuration for error handling
+
+| link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Advanced | How to use route templates (parameterized routes)
+
+| link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Advanced | How to use route templates (parameterized routes) in XML
+
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 
 | link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
@@ -57,16 +63,6 @@ Number of Examples: 74 (0 deprecated)
 | link:csimple/README.adoc[Csimple] (csimple) | Beginner | Shows using compiled simple language
 
 | link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
-
-| link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
-
-| link:minio/README.adoc[Minio] (minio) | Beginner | An example for showing Camel using MinIO Component
-
-| link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
-
-| link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
-
-| link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
 
 | link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
 
@@ -135,6 +131,10 @@ Number of Examples: 74 (0 deprecated)
 | link:as2/README.adoc[AS2 Example] (as2) | File | An example which demonstrates the use of the Camel AS2 component
 
 | link:ftp/README.adoc[FTP] (ftp) | File | An example for showing Camel FTP integration
+
+| link:minio/README.adoc[Minio] (minio) | File | An example for showing Camel using MinIO Component
+
+| link:kamelet/README.adoc[Kamelet] (kamelet) | Kamelet | How to use Kamelets
 
 | link:kamelet-chucknorris/README.adoc[Kamelet Chucknorris] (kamelet-chucknorris) | Kamelet | How easy it is to create your own Kamelets
 

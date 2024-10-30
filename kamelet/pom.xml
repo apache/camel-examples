@@ -33,7 +33,7 @@
     <description>How to use Kamelets</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Kamelet</category>
     </properties>
 
     <dependencyManagement>
