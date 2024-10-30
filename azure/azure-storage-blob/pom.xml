@@ -33,7 +33,7 @@
     <description>Azure Storage Blob example</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Cloud</category>
     </properties>
 
     <dependencyManagement>

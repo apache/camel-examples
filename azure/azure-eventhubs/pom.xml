@@ -34,7 +34,7 @@
     <description>Azure Eventhubs example</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Cloud</category>
     </properties>
 
     <dependencyManagement>

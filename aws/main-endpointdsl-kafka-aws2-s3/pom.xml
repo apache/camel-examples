@@ -34,7 +34,7 @@
     <description>An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Cloud</category>
     </properties>
 
     <dependencyManagement>

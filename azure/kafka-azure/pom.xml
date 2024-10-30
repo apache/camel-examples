@@ -34,7 +34,7 @@
     <description>An example for showing standalone Camel with Kafka and Azure Storage Blob</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Cloud</category>
     </properties>
 
     <dependencyManagement>

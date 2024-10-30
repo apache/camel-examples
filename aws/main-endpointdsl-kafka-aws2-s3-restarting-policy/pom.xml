@@ -34,7 +34,7 @@
     <description>An example for showing standalone Camel with Endpoint DSL and Kafka, AWS2-S3 streaming upload mode with restarting policy</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Cloud</category>
     </properties>
 
     <dependencyManagement>

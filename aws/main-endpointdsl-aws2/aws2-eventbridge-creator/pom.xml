@@ -34,7 +34,7 @@
     <description>An example for showing standalone Camel with Endpoint DSL and AWS2-Eventbridge</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Cloud</category>
     </properties>
 
     <dependencyManagement>
