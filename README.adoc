@@ -13,9 +13,9 @@ View the individual example READMEs for details.
 Main branch should only be used for development purposes, which will be pointing
 to the SNAPSHOT version of the next release.
 
-To execute the examples, checkout into the tag for the latest release. For example:
+To execute the examples, checkout into the tag for the desired release. For example:
 
-`$ git checkout tags/camel-examples-4.0.0`
+`$ git checkout tags/camel-examples-4.8.0`
 
 Then, install the root pom:
 
