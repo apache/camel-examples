@@ -124,7 +124,6 @@
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>oaipmh</module>
-        <module>reactive-executor-vertx</module>
         <module>resume-api</module>
         <module>routeloader</module>
         <module>routetemplate</module>
