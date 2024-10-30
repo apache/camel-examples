@@ -33,7 +33,7 @@
     <description>An example for showing Azure Key Vault Camel component with reloading</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Security</category>
     </properties>
 
     <dependencyManagement>

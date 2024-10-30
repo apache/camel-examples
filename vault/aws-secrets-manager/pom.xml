@@ -33,7 +33,7 @@
     <description>An example for showing AWS Secrets Manager Camel component</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Security</category>
     </properties>
 
     <dependencyManagement>

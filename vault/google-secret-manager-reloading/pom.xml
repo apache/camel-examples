@@ -33,7 +33,7 @@
     <description>An example for showing Google Secret Manager Camel component with reloading</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Security</category>
     </properties>
 
     <dependencyManagement>
