@@ -32,7 +32,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <category>Beginner</category>
+        <category>Search</category>
         <title>OAIPMH example</title>
     </properties>
 
@@ -49,16 +49,21 @@
         </dependencies>
     </dependencyManagement>
 
-
     <dependencies>
+
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
+            <artifactId>camel-oaipmh</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
             <artifactId>camel-management</artifactId>
         </dependency>
+
         <!-- logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -72,10 +77,6 @@
             <version>${log4j2-version}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-oaipmh</artifactId>
-        </dependency>
         <!-- for testing -->
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -83,7 +84,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>

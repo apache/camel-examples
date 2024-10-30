@@ -33,7 +33,7 @@
     <description>Example loading and compiling Java routes on startup</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Advanced</category>
     </properties>
 
     <dependencyManagement>

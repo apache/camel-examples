@@ -34,7 +34,7 @@
     <description>Consume from PostgreSQL database connected through an AWS Secrets Manager Secret</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Kamelet</category>
     </properties>
 
     <dependencyManagement>

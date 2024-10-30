@@ -34,7 +34,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <category>Input/Output Type Contract</category>
+        <category>Transformation</category>
         <title>Transformer and Validator Spring XML</title>
     </properties>
 

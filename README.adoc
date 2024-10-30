@@ -48,6 +48,8 @@ Number of Examples: 74 (0 deprecated)
 
 | link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) | Advanced | An example for showing the Resume API for processing a large directory using the write ahead log.
 
+| link:routeloader/README.adoc[Routeloader] (routeloader) | Advanced | Example loading and compiling Java routes on startup
+
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 
 | link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
@@ -58,17 +60,7 @@ Number of Examples: 74 (0 deprecated)
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
 
-| link:kamelet-chucknorris/README.adoc[Kamelet Chucknorris] (kamelet-chucknorris) | Beginner | How easy it is to create your own Kamelets
-
-| link:kamelet-main/README.adoc[Kamelet Main] (kamelet-main) | Beginner | How to easily run Kamelets
-
-| link:kamelet-sql/README.adoc[Kamelet Sql] (kamelet-sql) | Beginner | Consume from PostgreSQL database connected through an AWS Secrets Manager Secret
-
 | link:minio/README.adoc[Minio] (minio) | Beginner | An example for showing Camel using MinIO Component
-
-| link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Beginner | An example with OAIPMH component
-
-| link:routeloader/README.adoc[Routeloader] (routeloader) | Beginner | Example loading and compiling Java routes on startup
 
 | link:routes-configuration/README.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
 
@@ -77,8 +69,6 @@ Number of Examples: 74 (0 deprecated)
 | link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
 
 | link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
-
-| link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Beginner | An example using Spring XML to transform a message using XQuery
 
 | link:main/README.adoc[Main] (main) | Camel Standalone | An example for showing standalone Camel
 
@@ -146,9 +136,11 @@ Number of Examples: 74 (0 deprecated)
 
 | link:ftp/README.adoc[FTP] (ftp) | File | An example for showing Camel FTP integration
 
-| link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
-        Spring DSL
-    
+| link:kamelet-chucknorris/README.adoc[Kamelet Chucknorris] (kamelet-chucknorris) | Kamelet | How easy it is to create your own Kamelets
+
+| link:kamelet-main/README.adoc[Kamelet Main] (kamelet-main) | Kamelet | How to easily run Kamelets
+
+| link:kamelet-sql/README.adoc[Kamelet Sql] (kamelet-sql) | Kamelet | Consume from PostgreSQL database connected through an AWS Secrets Manager Secret
 
 | link:google/google-pubsub/README.adoc[Google Pubsub] (google-pubsub) | Messaging | Google Pubsub example
 
@@ -168,6 +160,8 @@ Number of Examples: 74 (0 deprecated)
 
 | link:splunk/README.adoc[Splunk] (splunk) | Observability | An example using Splunk
 
+| link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Search | An example with OAIPMH component
+
 | link:vault/aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Security | An example for showing AWS Secrets Manager Camel component
 
 | link:vault/aws-secrets-manager-reloading/README.adoc[Aws Secrets Manager Reloading] (aws-secrets-manager-reloading) | Security | An example for showing AWS Secrets Manager Camel component with reloading
@@ -183,6 +177,12 @@ Number of Examples: 74 (0 deprecated)
 | link:whatsapp/README.adoc[Whatsapp] (whatsapp) | Social | An example that uses Whatsapp API
 
 | link:mapstruct/README.adoc[Mapstruct] (mapstruct) | Transformation | How to use MapStruct for POJO data mapping
+
+| link:spring-xquery/README.adoc[Spring XQuery] (spring-xquery) | Transformation | An example using Spring XML to transform a message using XQuery
+
+| link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Transformation | An example demonstrating declarative transformation and validation along data type declaration using
+        Spring DSL
+    
 |===
 // examples: END
 

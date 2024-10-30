@@ -34,7 +34,7 @@
     <description>How easy it is to create your own Kamelets</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Kamelet</category>
     </properties>
 
     <dependencyManagement>
