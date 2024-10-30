@@ -29,7 +29,7 @@
   <description>An example which demonstrates the use of the Camel AS2 component</description>
 
   <properties>
-     <category>Beginner</category>
+     <category>File</category>
      <title>AS2 Example</title>
   </properties>
 

@@ -33,7 +33,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <category>Cloud</category>
+        <category>Database</category>
         <!-- dependency versions -->
         <cassandra.driver.version>3.7.2</cassandra.driver.version>
         <main.class>org.apache.camel.spring.Main</main.class>

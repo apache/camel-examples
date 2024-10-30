@@ -100,7 +100,7 @@
         <module>ftp</module>
         <module>google</module>
         <module>hazelcast-kubernetes</module>
-        <module>java8</module>
+        <module>java-lambda</module>
         <module>jdbc</module>
         <module>jmx</module>
         <module>jooq</module>

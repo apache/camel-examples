@@ -27,13 +27,13 @@
         <version>4.9.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-java8</artifactId>
+    <artifactId>camel-example-java-lambda</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Java8</name>
-    <description>An example for showing Camel DSL for Java 8</description>
+    <name>Camel :: Example :: Java Lambda </name>
+    <description>An example for showing Camel DSL using Java Lambda coding style</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Advanced</category>
     </properties>
 
     <dependencyManagement>

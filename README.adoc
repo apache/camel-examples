@@ -34,6 +34,8 @@ Number of Examples: 74 (0 deprecated)
 |===
 | Example | Category | Description
 
+| link:java-lambda/README.adoc[Java Lambda] (java-lambda) | Advanced | An example for showing Camel DSL using Java Lambda coding style
+
 | link:resume-api/resume-api-aws2-kinesis/README.md[Resume Api Aws2 Kinesis] (resume-api-aws2-kinesis) | Advanced | An example for showing the Resume API for consuming AWS Kinesis data streams.
 
 | link:resume-api/resume-api-cassandraql/README.md[Resume Api Cassandraql] (resume-api-cassandraql) | Advanced | An example for showing the Resume API for consuming data from Apache Cassandra.
@@ -46,23 +48,13 @@ Number of Examples: 74 (0 deprecated)
 
 | link:resume-api/resume-api-fileset-wal/README.md[Resume Api Fileset Wal] (resume-api-fileset-wal) | Advanced | An example for showing the Resume API for processing a large directory using the write ahead log.
 
-| link:as2/README.adoc[AS2 Example] (as2) | Beginner | An example which demonstrates the use of the Camel AS2 component
-
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 
 | link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
 
-| link:couchbase-log/README.adoc[Couchbase Log] (couchbase-log) | Beginner | An example for showing standalone Camel with Couchbase
-
 | link:csimple/README.adoc[Csimple] (csimple) | Beginner | Shows using compiled simple language
 
 | link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
-
-| link:ftp/README.adoc[FTP] (ftp) | Beginner | An example for showing Camel FTP integration
-
-| link:google/google-pubsub/README.adoc[Google Pubsub] (google-pubsub) | Beginner | Google Pubsub example
-
-| link:java8/README.adoc[Java8] (java8) | Beginner | An example for showing Camel DSL for Java 8
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Beginner | How to use Kamelets
 
@@ -108,8 +100,6 @@ Number of Examples: 74 (0 deprecated)
 
 | link:azure/azure-storage-blob/README.adoc[Azure Storage Blob] (azure-storage-blob) | Cloud | Azure Storage Blob example
 
-| link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Cloud | An example with Camel and Cassandra running on Kubernetes
-
 | link:hazelcast-kubernetes/README.adoc[Hazelcast Kubernetes] (hazelcast-kubernetes) | Cloud | An example with Camel and Hazelcast running on Kubernetes
 
 | link:azure/kafka-azure/README.adoc[Kafka Azure] (kafka-azure) | Cloud | An example for showing standalone Camel with Kafka and Azure Storage Blob
@@ -125,6 +115,10 @@ Number of Examples: 74 (0 deprecated)
 | link:aws/main-endpointdsl-kafka-aws2-s3/README.adoc[Main Endpointdsl Kafka Aws2 S3] (main-endpointdsl-kafka-aws2-s3) | Cloud | An example for showing standalone Camel with Endpoint DSL and Kafka and AWS2 S3
 
 | link:aws/main-endpointdsl-kafka-aws2-s3-restarting-policy/README.adoc[Main Endpointdsl Kafka Aws2 S3 Restarting Policy] (main-endpointdsl-kafka-aws2-s3-restarting-policy) | Cloud | An example for showing standalone Camel with Endpoint DSL and Kafka, AWS2-S3 streaming upload mode with restarting policy
+
+| link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Database | An example with Camel and Cassandra running on Kubernetes
+
+| link:couchbase-log/README.adoc[Couchbase Log] (couchbase-log) | Database | An example for showing standalone Camel with Couchbase
 
 | link:debezium/README.adoc[Debezium] (debezium) | Database | An example for Debezium Component
 
@@ -150,6 +144,10 @@ Number of Examples: 74 (0 deprecated)
 
 | link:loadbalancing/README.adoc[Load Balancing] (loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 
+| link:as2/README.adoc[AS2 Example] (as2) | File | An example which demonstrates the use of the Camel AS2 component
+
+| link:ftp/README.adoc[FTP] (ftp) | File | An example for showing Camel FTP integration
+
 | link:transformer-demo/README.adoc[Transformer and Validator Spring XML] (transformer-demo) | Input/Output Type Contract | An example demonstrating declarative transformation and validation along data type declaration using
         Spring DSL
     
@@ -159,6 +157,8 @@ Number of Examples: 74 (0 deprecated)
 | link:jmx/README.adoc[JMX] (jmx) | Management and Monitoring | An example showing how to work with Camel and JMX
 
 | link:splunk/README.adoc[Splunk] (splunk) | Management and Monitoring | An example using Splunk
+
+| link:google/google-pubsub/README.adoc[Google Pubsub] (google-pubsub) | Messaging | Google Pubsub example
 
 | link:kafka/README.adoc[Kafka] (kafka) | Messaging | An example for Kafka
 

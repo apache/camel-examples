@@ -33,7 +33,7 @@
     <description>An example for showing Camel FTP integration</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>File</category>
         <title>FTP</title>
     </properties>
 

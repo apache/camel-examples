@@ -34,7 +34,7 @@
     <description>Google Pubsub example</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Messaging</category>
     </properties>
 
     <dependencyManagement>
