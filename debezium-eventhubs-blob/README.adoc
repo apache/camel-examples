@@ -83,7 +83,7 @@ Run the Azure Event Hubs to Azure Storage Blob producer first
 $ mvn compile exec:java -Peventhubs-producer
 ----
 
-Run the Debezium consumer in the seperate shell
+Run the Debezium consumer in the separate shell
 
 [source,sh]
 ----
