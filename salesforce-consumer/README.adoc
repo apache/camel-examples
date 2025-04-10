@@ -7,7 +7,7 @@ This examples uses OAuth 2.0 Refresh Token Flow, which requires 3 credentials co
 
 NOTE: You might want to sign up with your own Developer account at developer.salesforce.com. After you have done that, you’ll need to create a Connected Application for your integration.
 
-NOTE: This was written with Salesforce Lightening user interface. Classic user interface might have slightly different menu and/or workflow.
+NOTE: This was written with Salesforce Lightning user interface. Classic user interface might have slightly different menu and/or workflow.
 
 Here is an example workflow of creating a Connected Application and get required credentials. For more details, please check Salesforce online manual
 https://help.salesforce.com/articleView?id=extend_code_overview.htm&type=5
