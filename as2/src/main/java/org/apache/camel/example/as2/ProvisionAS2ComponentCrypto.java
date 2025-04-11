@@ -59,7 +59,7 @@ public class ProvisionAS2ComponentCrypto implements CamelContextAware {
         configuration.setSigningAlgorithm(AS2SignatureAlgorithm.SHA512WITHRSA);
         configuration.setSigningCertificateChain(certList.toArray(new Certificate[0]));
         configuration.setSigningPrivateKey(signingKP.getPrivate());
-        configuration.setSignedReceiptMicAlgorithms(new String[] {"sha1", "md5"});
+        configuration.setSignedReceiptMicAlgorithms("sha1,md5");
         configuration.setEncryptingAlgorithm(AS2EncryptionAlgorithm.AES128_CBC);
         configuration.setEncryptingCertificateChain(certList.toArray(new Certificate[0]));
         configuration.setDecryptingPrivateKey(decryptingKP.getPrivate());
