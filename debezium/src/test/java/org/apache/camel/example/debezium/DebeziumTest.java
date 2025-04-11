@@ -31,8 +31,8 @@ import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.infra.aws.common.services.AWSService;
 import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
 import org.apache.camel.test.infra.aws2.services.AWSServiceFactory;
-import org.apache.camel.test.infra.cassandra.services.CassandraLocalContainerService;
 import org.apache.camel.test.infra.cassandra.services.CassandraService;
+import org.apache.camel.test.infra.cassandra.services.CassandraServiceFactory;
 import org.apache.camel.test.infra.postgres.services.PostgresLocalContainerService;
 import org.apache.camel.test.infra.postgres.services.PostgresService;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
@@ -42,7 +42,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
@@ -62,7 +61,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DebeziumTest extends CamelMainTestSupport {
 
     private static final String PGSQL_IMAGE = "debezium/example-postgres:2.3.2.Final";
-    private static final String CASSANDRA_IMAGE = "cassandra:4.0.1";
 
     private static final String SOURCE_DB_NAME = "debezium-db";
     private static final String SOURCE_DB_SCHEMA = "inventory";
@@ -80,11 +78,7 @@ class DebeziumTest extends CamelMainTestSupport {
                 .withPassword(SOURCE_DB_PASSWORD)
     );
     @RegisterExtension
-    private static final CassandraService CASSANDRA_SERVICE = new CassandraLocalContainerService(
-        new CassandraContainer<>(CASSANDRA_IMAGE)
-            .withInitScript("org/apache/camel/example/debezium/db-init.cql")
-    );
-
+    private static final CassandraService CASSANDRA_SERVICE = CassandraServiceFactory.createLocalService("org/apache/camel/example/debezium/db-init.cql");
 
     @BeforeEach
     void init() throws IOException {
