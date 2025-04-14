@@ -9,7 +9,7 @@
         <routeTemplate id="route-template-mina">
             <templateParameter name="host"/>
             <route>
-                <from uri="mina:tcp://{{host}}"/>
+                <from uri="mina:tcp://{{host}}?objectCodecPattern=*"/>
                 <setHeader name="minaServer">
                     <constant>{{host}}</constant>
                 </setHeader>

@@ -16,10 +16,10 @@
              in case of failure -->
         <route id="loadbalancer">
             <from uri="direct:loadbalance"/>
-            <loadBalance inheritErrorHandler="false">
-                <failoverLoadBalancer roundRobin="true"/>
-                <to uri="mina:tcp://localhost:9991?sync=true"/>
-                <to uri="mina:tcp://localhost:9992?sync=true"/>
+            <loadBalance>
+                <failoverLoadBalancer roundRobin="true" inheritErrorHandler="false"/>
+                <to uri="mina:tcp://localhost:9991?sync=true&amp;objectCodecPattern=*"/>
+                <to uri="mina:tcp://localhost:9992?sync=true&amp;objectCodecPattern=*"/>
             </loadBalance>
             <log message="${body}"/>
         </route>
