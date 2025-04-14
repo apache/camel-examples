@@ -81,7 +81,6 @@
     <modules>
         <module>aggregate</module>
         <module>aggregate-dist</module>
-        <module>as2</module>
         <module>aws</module>
         <module>azure</module>
         <module>basic</module>
@@ -358,8 +357,6 @@
                             <!-- camel-salesforce BSD license from salesforce developers -->
                             <exclude>**/CometDReplayExtension.java</exclude>
                             <exclude>**/LICENSE-SALESFORCE.txt</exclude>
-                            <!-- camel-as2 -->
-                            <exclude>**/mdnDescription.vm</exclude>
                             <!-- camel-jbpm -->
                             <exclude>**/src/main/resources/*.wid</exclude>
                             <!-- camel website and user-manual -->

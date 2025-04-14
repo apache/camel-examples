@@ -128,8 +128,6 @@ Number of Examples: 74 (0 deprecated)
 
 | link:loadbalancing/README.adoc[Load Balancing] (loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 
-| link:as2/README.adoc[AS2 Example] (as2) | File | An example which demonstrates the use of the Camel AS2 component
-
 | link:ftp/README.adoc[FTP] (ftp) | File | An example for showing Camel FTP integration
 
 | link:minio/README.adoc[Minio] (minio) | File | An example for showing Camel using MinIO Component
