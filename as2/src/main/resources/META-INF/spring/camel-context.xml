@@ -70,7 +70,10 @@ UNZ+1+00000000000778'
               </constant>
           </transform>
            <setHeader name="CamelAs2.ediMessageContentType">
-             <simple resultType="org.apache.hc.core5.http.ContentType">application/edifact;charset=US-ASCII</simple>
+             <constant>application/edifact</constant>
+           </setHeader>
+           <setHeader name="CamelAs2.ediMessageCharset">
+             <constant>US-ASCII</constant>
            </setHeader>
 	       <setHeader name="CamelAs2.ediMessageTransferEncoding">
 	         <constant>7bit</constant>
