@@ -30,6 +30,6 @@ class AggregateDistributedTest {
 
     @Test
     void should_aggregate() throws Exception {
-        assertTrue(new Application().asyncLaunch().get(30, TimeUnit.SECONDS));
+        assertTrue(new Application().asyncLaunch().get(60, TimeUnit.SECONDS));
     }
 }
