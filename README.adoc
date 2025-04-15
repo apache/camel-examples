@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 73 (0 deprecated)
+Number of Examples: 72 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -157,8 +157,6 @@ Number of Examples: 73 (0 deprecated)
 | link:main-micrometer/README.adoc[Main Micrometer] (main-micrometer) | Observability | Standalone Camel with Micrometer and Prometheus
 
 | link:splunk/README.adoc[Splunk] (splunk) | Observability | An example using Splunk
-
-| link:oaipmh/README.adoc[OAIPMH example] (oaipmh) | Search | An example with OAIPMH component
 
 | link:vault/aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Security | An example for showing AWS Secrets Manager Camel component
 
