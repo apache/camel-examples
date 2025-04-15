@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.junit5.CamelContextConfiguration;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
@@ -87,12 +88,13 @@ class FtpTest extends CamelMainTestSupport {
     }
 
     @Override
-    protected Properties useOverridePropertiesWithPropertiesComponent() {
-        return asProperties(
-            "ftp.port", Integer.toString(PORT),
-            "ftp.username", "admin",
-            "ftp.password", "admin"
-        );
+    public void configureContext(CamelContextConfiguration camelContextConfiguration) {
+        super.configureContext(camelContextConfiguration);
+        Properties overridenProperties = asProperties(
+                "ftp.port", Integer.toString(PORT),
+                "ftp.username", "admin",
+                "ftp.password", "admin");
+        camelContextConfiguration.withUseOverridePropertiesWithPropertiesComponent(overridenProperties);
     }
 
     @Test

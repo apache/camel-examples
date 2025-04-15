@@ -35,6 +35,7 @@ import org.apache.camel.test.infra.cassandra.services.CassandraService;
 import org.apache.camel.test.infra.cassandra.services.CassandraServiceFactory;
 import org.apache.camel.test.infra.postgres.services.PostgresLocalContainerService;
 import org.apache.camel.test.infra.postgres.services.PostgresService;
+import org.apache.camel.test.junit5.CamelContextConfiguration;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -106,15 +107,14 @@ class DebeziumTest extends CamelMainTestSupport {
     }
 
     @Override
-    protected Properties useOverridePropertiesWithPropertiesComponent() {
-        // Override the host and port of the broker
-        return asProperties(
-            "debezium.postgres.databaseHostName", POSTGRES_SERVICE.host(),
-            "debezium.postgres.databasePort", Integer.toString(POSTGRES_SERVICE.port()),
-            "debezium.postgres.databaseUser", SOURCE_DB_USERNAME,
-            "debezium.postgres.databasePassword", SOURCE_DB_PASSWORD,
-            "cassandra.node", String.format("%s:%d", CASSANDRA_SERVICE.getCassandraHost(), CASSANDRA_SERVICE.getCQL3Port())
-        );
+    public void configureContext(CamelContextConfiguration camelContextConfiguration) {
+        super.configureContext(camelContextConfiguration);
+        Properties overridenProperties = asProperties("debezium.postgres.databaseHostName", POSTGRES_SERVICE.host(),
+                "debezium.postgres.databasePort", Integer.toString(POSTGRES_SERVICE.port()),
+                "debezium.postgres.databaseUser", SOURCE_DB_USERNAME,
+                "debezium.postgres.databasePassword", SOURCE_DB_PASSWORD,
+                "cassandra.node", String.format("%s:%d", CASSANDRA_SERVICE.getCassandraHost(), CASSANDRA_SERVICE.getCQL3Port()));
+        camelContextConfiguration.withUseOverridePropertiesWithPropertiesComponent(overridenProperties);
     }
 
     @Test

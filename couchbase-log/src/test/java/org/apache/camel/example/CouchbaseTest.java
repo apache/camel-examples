@@ -34,6 +34,7 @@ import org.apache.camel.component.couchbase.CouchbaseConstants;
 import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.infra.couchbase.services.CouchbaseService;
 import org.apache.camel.test.infra.couchbase.services.CouchbaseServiceFactory;
+import org.apache.camel.test.junit5.CamelContextConfiguration;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -80,14 +81,15 @@ class CouchbaseTest extends CamelMainTestSupport {
     }
 
     @Override
-    protected Properties useOverridePropertiesWithPropertiesComponent() {
-        return asProperties(
-            "couchbase.host", SERVICE.getHostname(),
-            "couchbase.port", Integer.toString(SERVICE.getPort()),
-            "couchbase.username", SERVICE.getUsername(),
-            "couchbase.password", SERVICE.getPassword(),
-            "couchbase.bucket", BUCKET
-        );
+    public void configureContext(CamelContextConfiguration camelContextConfiguration) {
+        super.configureContext(camelContextConfiguration);
+        Properties overridenProperties = asProperties(
+                "couchbase.host", SERVICE.getHostname(),
+                "couchbase.port", Integer.toString(SERVICE.getPort()),
+                "couchbase.username", SERVICE.getUsername(),
+                "couchbase.password", SERVICE.getPassword(),
+                "couchbase.bucket", BUCKET);
+        camelContextConfiguration.withUseOverridePropertiesWithPropertiesComponent(overridenProperties);
     }
 
     @Test

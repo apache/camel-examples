@@ -18,6 +18,7 @@ package org.apache.camel.example;
 
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.main.MainConfigurationProperties;
+import org.apache.camel.test.junit5.CamelContextConfiguration;
 import org.apache.camel.test.main.junit5.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +34,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CSimpleTest extends CamelMainTestSupport {
 
     @Override
-    protected Properties useOverridePropertiesWithPropertiesComponent() {
-        return asProperties("myPeriod", Integer.toString(500));
+    public void configureContext(CamelContextConfiguration camelContextConfiguration) {
+        super.configureContext(camelContextConfiguration);
+        Properties overridenProperties = asProperties("myPeriod", Integer.toString(500));
+        camelContextConfiguration.withUseOverridePropertiesWithPropertiesComponent(overridenProperties);
     }
 
     @Test
