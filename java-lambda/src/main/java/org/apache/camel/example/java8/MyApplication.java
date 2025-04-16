@@ -59,7 +59,7 @@ public final class MyApplication {
                     .when()
                         .body(Objects::isNull)
                         .log("Received null body")
-                .endChoice();
+                .end();
         }
 
         private Long dateToTime(Exchange e) {
