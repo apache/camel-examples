@@ -13,6 +13,7 @@ import static org.apache.camel.language.csimple.CSimpleHelper.*;
 public class CSimpleScript1 extends org.apache.camel.language.csimple.CSimpleSupport {
 
     Language bean;
+    UuidGenerator uuid;
 
     public CSimpleScript1() {
     }
