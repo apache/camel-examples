@@ -97,7 +97,7 @@ You should then see an output similar to this:
 [INFO] k8s: 2020-08-07 12:34:38,012 [main           ] INFO  AbstractCamelContext           - Apache Camel 3.8.0-SNAPSHOT (camel-1) is starting
 [INFO] k8s: 2020-08-07 12:34:38,019 [main           ] INFO  AbstractCamelContext           - StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
 [INFO] k8s: 2020-08-07 12:34:38,019 [main           ] INFO  AbstractCamelContext           - Using HealthCheck: camel-health
-[INFO] k8s: 2020-08-07 12:34:38,664 [main           ] INFO  DefaultMavenCoordinates        - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.12.0-SNAPSHOT
+[INFO] k8s: 2020-08-07 12:34:38,664 [main           ] INFO  DefaultMavenCoordinates        - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.13.0-SNAPSHOT
 [INFO] k8s: 2020-08-07 12:34:39,554 [s0-admin-0     ] INFO  Clock                          - Using native clock for microsecond precision
 [INFO] k8s: 2020-08-07 12:34:41,453 [main           ] INFO  InternalRouteStartupManager    - Route: cassandra-route started and consuming from: timer://foo
 [INFO] k8s: 2020-08-07 12:34:41,454 [main           ] INFO  AbstractCamelContext           - Total 1 routes, of which 1 are started
