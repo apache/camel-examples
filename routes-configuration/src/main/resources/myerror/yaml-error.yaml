@@ -15,10 +15,10 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-- route-configuration:
+- routeConfiguration:
     id: "yamlError"
-    on-exception:
-    - on-exception:
+    onException:
+    - onException:
         handled:
           constant: "true"
         exception:
