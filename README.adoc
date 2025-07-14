@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 72 (0 deprecated)
+Number of Examples: 73 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -69,6 +69,8 @@ Number of Examples: 72 (0 deprecated)
 | link:main/README.adoc[Main] (main) | Camel Standalone | An example for showing standalone Camel
 
 | link:main-endpointdsl/README.adoc[Main Endpointdsl] (main-endpointdsl) | Camel Standalone | An example for showing standalone Camel with Endpoint DSL
+
+| link:main-groovy/README.adoc[Main Groovy] (main-groovy) | Camel Standalone | An example for showing standalone Camel using YAML with Groovy scripts
 
 | link:main-joor/README.adoc[Main Joor] (main-joor) | Camel Standalone | An example for showing standalone Camel with jOOR runtime Java compiled
 

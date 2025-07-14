@@ -1,0 +1,24 @@
+- route:
+    from:
+      uri: file
+      parameters:
+        directoryName: data
+        noop: true
+      steps:
+        - unmarshal:
+            json:
+              library: Jackson
+              unmarshalType: OrderDTO
+        - setVariable:
+            name: level
+            expression:
+              groovy:
+                expression: |-
+                  gold = OrderService.isGold(body)
+                  return gold ? "Gold" : "Silver"
+        - script:
+            expression:
+              groovy:
+                expression: body.level = variable.level
+        - log:
+            message: ${body}
