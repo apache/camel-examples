@@ -104,7 +104,7 @@
                 <version>${camel.version}</version>
                 <configuration>
                     <!-- use built-in logging, instead of logback -->
-                    <logLevel>INFO</logLevel>
+                    <loggingLevel>INFO</loggingLevel>
                     <mainClass>org.apache.camel.example.MyApplication</mainClass>
                 </configuration>
             </plugin>
