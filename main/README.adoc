@@ -49,9 +49,11 @@ And then use the CLI to see status:
 === Camel Web Console
 
 This example comes with embedded developer console that is accessible via `http://localhost:8080/q/dev`.
-You can also check status of health-check via `http://localhost:8080/q/health`.
-You can also access https://jolokia.org/[jolokia] api via `http://localhost:8080/q/jolokia`.
-This gives you access to basic JMX operations. For example, to query https://docs.oracle.com/javase/8/docs/api/java/lang/management/MemoryMXBean.html[MemoryMBean], use `http://localhost:8080/q/jolokia/read/java.lang:type=Memory/HeapMemoryUsage/used`.
+You can also check status of health-check via `http://localhost:8080/observe/health`.
+
+You can also access https://jolokia.org/[jolokia] api via `http://localhost:8080/observe/jolokia`.
+This gives you access to basic JMX operations.
+For example, to query https://docs.oracle.com/javase/8/docs/api/java/lang/management/MemoryMXBean.html[MemoryMBean], use `http://localhost:8080/q/jolokia/read/java.lang:type=Memory/HeapMemoryUsage/used`.
 
 === How to configure for Camel Textual Route debugging
 

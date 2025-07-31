@@ -30,7 +30,7 @@ $ mvn camel:run
 
 The statistics from Micrometer can be observed from HTTP at:
 
-    http://localhost:8080/q/metrics
+    http://localhost:8080/observe/metrics
 
 === Camel CLI
 
@@ -48,7 +48,7 @@ And then use the CLI to see status:
 === Camel Web Console
 
 This example comes with embedded developer console that is accessible via `http://localhost:8080/q/dev`.
-You can also check status of health-check via `http://localhost:8080/q/health`.
+You can also check status of health-check via `http://localhost:8080/observe/health`.
 
 === Help and contributions
 
