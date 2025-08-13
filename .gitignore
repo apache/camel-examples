@@ -26,3 +26,4 @@ components/camel-cxf/activemq-data
 .flattened-pom.xml
 .java-version
 .camel-jbang
+.camel-jbang-run
