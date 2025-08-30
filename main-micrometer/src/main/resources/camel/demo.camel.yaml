@@ -10,10 +10,12 @@
             expression:
               constant:
                 expression: Hello
-        - to:
-            uri: direct
-            parameters:
-              name: echo
+        - circuitBreaker:
+            steps:
+              - to:
+                  uri: direct
+                  parameters:
+                    name: echo
         - log:
             message: ${body}
 - route:
