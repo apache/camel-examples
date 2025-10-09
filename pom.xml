@@ -123,6 +123,7 @@
         <module>mongodb</module>
         <module>netty-custom-correlation</module>
         <module>quickfixj</module>
+        <module>pubnub</module>
         <module>resume-api</module>
         <module>routeloader</module>
         <module>routetemplate</module>
