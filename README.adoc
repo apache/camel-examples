@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 73 (0 deprecated)
+Number of Examples: 72 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -105,8 +105,6 @@ Number of Examples: 73 (0 deprecated)
 | link:cassandra-kubernetes/README.adoc[Cassandra Kubernetes] (cassandra-kubernetes) | Database | An example with Camel and Cassandra running on Kubernetes
 
 | link:couchbase-log/README.adoc[Couchbase Log] (couchbase-log) | Database | An example for showing standalone Camel with Couchbase
-
-| link:debezium/README.adoc[Debezium] (debezium) | Database | An example for Debezium Component
 
 | link:debezium-eventhubs-blob/README.adoc[Debezium Eventhubs Blob] (debezium-eventhubs-blob) | Database | An example for Debezium Component with Azure Event Hubs and Azure Storage Blob
 
