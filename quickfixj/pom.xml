@@ -29,8 +29,8 @@
 
     <artifactId>camel-example-quickfixj</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: QuickFIX/J</name>
-    <description>Camel QuickFIX/J support</description>
+    <name>Camel :: Example :: QuickFIX/J</name>
+    <description>Camel QuickFIX/J example</description>
 
     <properties>
     </properties>
