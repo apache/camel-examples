@@ -29,7 +29,7 @@
 
     <artifactId>camel-example-azure-storage-blob</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Azure Storage Blob</name>
+    <name>Camel :: Example :: Azure :: Storage Blob</name>
     <description>Azure Storage Blob example</description>
 
     <properties>

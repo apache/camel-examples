@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-debezium-eventhubs-blob</artifactId>
-    <name>Camel :: Example :: Debezium :: Azure Event Hubs :: Azure Storage Blob</name>
+    <name>Camel :: Example :: Debezium :: Azure</name>
     <description>An example for Debezium Component with Azure Event Hubs and Azure Storage Blob</description>
 
     <properties>
