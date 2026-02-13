@@ -52,7 +52,7 @@ public final class Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    private static final int THREADS = 20;
+    private static final int THREADS = 5;
     private static final int END = 100;
 
     private static final String CID_HEADER = "corrId";
