@@ -41,6 +41,6 @@ class Java8Test extends CamelMainTestSupport {
 
     @Override
     protected void configure(MainConfigurationProperties configuration) {
-        configuration.addRoutesBuilder(new MyApplication.MyRouteBuilder());
+        configuration.addRoutesBuilder(new MyRouteBuilder());
     }
 }
