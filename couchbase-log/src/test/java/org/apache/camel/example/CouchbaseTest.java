@@ -58,7 +58,7 @@ class CouchbaseTest extends CamelMainTestSupport {
     @BeforeAll
     static void init() {
         CLUSTER = Cluster.connect(
-            SERVICE.getConnectionString(), SERVICE.getUsername(), SERVICE.getPassword()
+            SERVICE.getConnectionString(), SERVICE.username(), SERVICE.password()
         );
         DesignDocument designDoc = new DesignDocument(
             CouchbaseConstants.DEFAULT_DESIGN_DOCUMENT_NAME,
@@ -84,10 +84,10 @@ class CouchbaseTest extends CamelMainTestSupport {
     public void configureContext(CamelContextConfiguration camelContextConfiguration) {
         super.configureContext(camelContextConfiguration);
         Properties overridenProperties = asProperties(
-                "couchbase.host", SERVICE.getHostname(),
-                "couchbase.port", Integer.toString(SERVICE.getPort()),
-                "couchbase.username", SERVICE.getUsername(),
-                "couchbase.password", SERVICE.getPassword(),
+                "couchbase.host", SERVICE.hostname(),
+                "couchbase.port", Integer.toString(SERVICE.port()),
+                "couchbase.username", SERVICE.username(),
+                "couchbase.password", SERVICE.password(),
                 "couchbase.bucket", BUCKET);
         camelContextConfiguration.withUseOverridePropertiesWithPropertiesComponent(overridenProperties);
     }

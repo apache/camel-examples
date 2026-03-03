@@ -43,8 +43,7 @@ class MainHealthTest extends CamelMainTestSupport {
     @Override
     public void setupResources() throws Exception {
         // Prevent failure by replacing the failing endpoint
-    	// still use the deprecated method for now as method is not visible camelContextConfiguration().replaceRouteFromWith("netty", "direct:foo");
-        replaceRouteFromWith("netty", "direct:foo");
+    	camelContextConfiguration().replaceRouteFromWith("netty", "direct:foo");
         super.setupResources();
     }
 

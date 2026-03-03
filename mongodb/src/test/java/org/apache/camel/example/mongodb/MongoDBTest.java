@@ -40,13 +40,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MongoDBTest extends CamelMainTestSupport {
 
     private static final String BASE_URI = "http://localhost:8081";
+    private static final String MONGODB_URL_PREFIX = "mongodb://";
 
     @RegisterExtension
     private static final MongoDBService SERVICE = MongoDBServiceFactory.createService();
 
     @Override
     protected void bindToRegistry(Registry registry) throws Exception {
-        registry.bind("myDb", MongoClients.create(SERVICE.getReplicaSetUrl()));
+		registry.bind("myDb", MongoClients.create(MONGODB_URL_PREFIX + SERVICE.hosts()));
     }
 
     @Test

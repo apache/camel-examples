@@ -32,7 +32,7 @@ public class LiveLocationUsage implements TelegramMethodUsage {
     public void run(CamelContext context) throws InterruptedException {
         ProducerTemplate template = context.createProducerTemplate();
         SendLocationMessage msg = new SendLocationMessage(latitude, longitude);
-        msg.setLivePeriod(new Integer(60));
+        msg.setLivePeriod(Integer.valueOf(60));
         MessageResult firstLocationMessage = template.requestBody("direct:start", msg, MessageResult.class);
         System.out.println(firstLocationMessage);
 
