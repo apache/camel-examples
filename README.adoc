@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 72 (0 deprecated)
+Number of Examples: 73 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -65,6 +65,8 @@ Number of Examples: 72 (0 deprecated)
 | link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | Shows using compiled simple language with jOOR compiler
 
 | link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
+
+| link:timer/README.adoc[Timer] (timer) | Beginner | An example showing how to work with Camel Timer component
 
 | link:main/README.adoc[Main] (main) | Camel Standalone | An example for showing standalone Camel
 
