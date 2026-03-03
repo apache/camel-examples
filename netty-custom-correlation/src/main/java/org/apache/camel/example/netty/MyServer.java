@@ -18,7 +18,6 @@ package org.apache.camel.example.netty;
 
 import org.apache.camel.BindToRegistry;
 import org.apache.camel.Configuration;
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.netty.DefaultChannelHandlerFactory;
 import org.apache.camel.main.Main;

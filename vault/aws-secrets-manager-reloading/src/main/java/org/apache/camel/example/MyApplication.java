@@ -16,21 +16,11 @@
  */
 package org.apache.camel.example;
 
-import org.apache.camel.component.aws.secretsmanager.vault.CloudTrailReloadTriggerTask;
+import java.time.Instant;
+
 import org.apache.camel.main.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.camel.spi.ContextReloadStrategy;
-import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.cloudtrail.CloudTrailClient;
-import software.amazon.awssdk.services.cloudtrail.model.*;
-
-import java.time.Instant;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Main class that boot the Camel application

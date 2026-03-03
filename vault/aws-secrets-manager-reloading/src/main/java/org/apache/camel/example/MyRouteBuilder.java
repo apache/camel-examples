@@ -17,7 +17,6 @@
 package org.apache.camel.example;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.aws.secretsmanager.SecretsManagerConstants;
 
 public class MyRouteBuilder extends RouteBuilder {
 
