@@ -22,10 +22,8 @@ import java.util.concurrent.Executors;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
-import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.example.resume.strategies.kafka.file.LargeFileRouteBuilder;
 import org.apache.camel.main.Main;
-import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 
 /**
  * A Camel Application

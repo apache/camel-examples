@@ -24,7 +24,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.caffeine.resume.CaffeineCache;
 import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
-import org.apache.camel.resume.cache.ResumeCache;
 import org.apache.camel.support.resume.Resumables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

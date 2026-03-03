@@ -25,7 +25,6 @@ import org.apache.camel.component.caffeine.resume.CaffeineCache;
 import org.apache.camel.example.resume.strategies.kafka.KafkaUtil;
 import org.apache.camel.main.Main;
 import org.apache.camel.processor.resume.kafka.KafkaResumeStrategyConfigurationBuilder;
-import org.apache.camel.processor.resume.kafka.SingleNodeKafkaResumeStrategy;
 
 public class MainApp {
     public static void main(String[] args) {

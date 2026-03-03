@@ -16,7 +16,6 @@
  */
 package org.apache.camel.example.resume.fileset.clusterized.main;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.zookeeper.cluster.ZooKeeperClusterService;
 import org.apache.camel.example.resume.fileset.clusterized.strategies.ClusterizedLargeDirectoryRouteBuilder;
