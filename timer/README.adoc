@@ -1,0 +1,66 @@
+== Camel Timer Example
+
+=== Introduction
+
+This example shows how to work with the Camel Timer component.
+
+The Timer component is used to generate message exchanges when a timer fires. It's useful for:
+
+- Polling resources at regular intervals
+- Scheduling batch jobs
+- Triggering periodic tasks
+- Creating heartbeat mechanisms
+
+This example demonstrates various timer configurations including:
+
+- Simple periodic timer
+- Timer with initial delay
+- Timer with repeat count
+- Timer with fixed rate vs fixed delay
+
+The example is minimal and shows how to use the timer component in standalone mode as a `public static void main` application.
+
+=== Build
+
+You will need to compile this example first:
+
+[source,sh]
+----
+$ mvn compile
+----
+
+=== Run
+
+To run the example type
+
+[source,sh]
+----
+$ mvn camel:run
+----
+
+The example will run for about 5 seconds demonstrating different timer patterns.
+
+To stop the example hit `ctrl+c`
+
+You can also run the example from your editor such as Eclipse, IDEA etc,
+by opening the class link:../timer/src/main/java/org/apache/camel/example/timer/TimerExample.java[org.apache.camel.example.timer.TimerExample]
+and then right click, and chose run java application.
+
+=== Configuration
+
+The example shows multiple timer configurations:
+
+- `timer:simple` - Fires every 300ms
+- `timer:withDelay` - Fires every 300ms after a 500ms initial delay
+- `timer:limited` - Fires only 3 times with 100ms interval
+- `timer:fixedRate` - Fires every 500ms at fixed rate regardless of processing time
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
