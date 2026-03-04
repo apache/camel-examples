@@ -146,7 +146,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <site-repo-url>scpexe://people.apache.org/www/camel.apache.org/maven/</site-repo-url>
-        <jdk.version>17</jdk.version>
+        <jdk.version>21</jdk.version>
         <compiler.fork>false</compiler.fork>
 
         <camel.version>${project.version}</camel.version>
