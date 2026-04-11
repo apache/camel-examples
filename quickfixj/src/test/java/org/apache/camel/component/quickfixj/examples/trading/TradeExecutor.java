@@ -37,6 +37,7 @@ import quickfix.MessageUtils;
 import quickfix.Session;
 import quickfix.SessionID;
 import quickfix.SessionNotFound;
+import quickfix.ValidationSettings;
 import quickfix.field.ApplVerID;
 import quickfix.field.AvgPx;
 import quickfix.field.CumQty;
@@ -205,7 +206,7 @@ public class TradeExecutor {
                 try {
                     ApplVerID applVerID = getApplVerID(session, message);
                     DataDictionary appDataDictionary = provider.getApplicationDataDictionary(applVerID);
-                    appDataDictionary.validate(message, true);
+                    appDataDictionary.validate(message, true, new ValidationSettings());
                 } catch (Exception e) {
                     LogUtil.logThrowable(sessionID, "Outgoing message failed validation: "
                                                     + e.getMessage(),
