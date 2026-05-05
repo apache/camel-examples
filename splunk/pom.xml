@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-splunk</artifactId>
-    <name>Camel :: Example :: Splunk</name>
+    <name>Camel :: Example :: Splunk (deprecated)</name>
     <description>An example using Splunk</description>
 
     <properties>
