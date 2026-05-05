@@ -1,4 +1,4 @@
-== Camel Splunk example
+== Camel Splunk example (deprecated)
 
 === Introduction
 
