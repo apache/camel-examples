@@ -129,7 +129,6 @@
         <module>routetemplate-xml</module>
         <module>routes-configuration</module>
         <module>salesforce-consumer</module>
-        <module>splunk</module>
         <module>spring</module>
         <module>spring-pulsar</module>
         <module>spring-xquery</module>
