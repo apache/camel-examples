@@ -55,6 +55,15 @@ You can also access https://jolokia.org/[jolokia] api via `http://localhost:8080
 This gives you access to basic JMX operations.
 For example, to query https://docs.oracle.com/javase/8/docs/api/java/lang/management/MemoryMXBean.html[MemoryMBean], use `http://localhost:8080/q/jolokia/read/java.lang:type=Memory/HeapMemoryUsage/used`.
 
+=== Route Diagram
+
+This example automatic generates a visual route diagram, which is generated as part of testing (see `MainDiagramTest.java`),
+and the file is stored in the `doc` folder.
+
+NOTE: This requires having `camel-diagram` as test scoped dependency.
+
+image::doc/foo.png[Foo Camel Route Diagram]
+
 === How to configure for Camel Textual Route debugging
 
 Several IDEs are providing support for Camel Textual Route debugging. To enable this possibility, you need to launch this example with the profile `camel.debug`.

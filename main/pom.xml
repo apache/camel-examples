@@ -110,6 +110,12 @@
             <artifactId>camel-test-main-junit6</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- route diagram dumper -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-diagram</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
