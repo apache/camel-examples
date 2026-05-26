@@ -36,6 +36,6 @@ jobs:
             java-version: ${{ matrix.java }}
             cache: 'maven'
       - name: mvn build
-        run: ./mvnw -V --no-transfer-progress clean install -DskipTests
+        run: ./mvnw -V --no-transfer-progress clean install -DskipTests -X
       - name: mvn test
-        run: ./mvnw -V --no-transfer-progress test --fail-at-end
+        run: ./mvnw -V --no-transfer-progress test --fail-at-end -X
