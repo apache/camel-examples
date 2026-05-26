@@ -172,7 +172,7 @@
         <tomcat-version>10.1.13</tomcat-version>
         <jkube-version>1.14.0</jkube-version>
         <wsdl4j-version>1.6.3</wsdl4j-version>
-        <fabric8-maven-plugin-version>4.4.1</fabric8-maven-plugin-version>
+        <fabric8-maven-plugin-version>4.4.2</fabric8-maven-plugin-version>
     </properties>
 
     <repositories>
