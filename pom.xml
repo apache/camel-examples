@@ -160,7 +160,7 @@
         <pax-url-aether>2.6.2</pax-url-aether>
         <jaxb-version>2.3.0</jaxb-version>
         <!-- These are not inherited from Camel via camel-dependencies -->
-        <maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>
+        <maven-compiler-plugin-version>3.15.0</maven-compiler-plugin-version>
         <maven-surefire-plugin-version>3.1.2</maven-surefire-plugin-version>
         <maven-javadoc-plugin-version>3.5.0</maven-javadoc-plugin-version>
         <maven-release-plugin-version>3.0.1</maven-release-plugin-version>
