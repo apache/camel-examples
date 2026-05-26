@@ -35,7 +35,7 @@
     <properties>
         <category>Database</category>
         <!-- dependency versions -->
-        <cassandra.driver.version>3.7.2</cassandra.driver.version>
+        <cassandra.driver.version>4.0.0</cassandra.driver.version>
         <main.class>org.apache.camel.spring.Main</main.class>
     </properties>
 
