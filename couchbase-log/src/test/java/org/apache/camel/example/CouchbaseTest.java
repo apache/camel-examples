@@ -26,6 +26,7 @@ import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.json.JsonObject;
 import com.couchbase.client.java.manager.bucket.BucketSettings;
 import com.couchbase.client.java.manager.bucket.BucketType;
+import com.couchbase.client.java.manager.bucket.StorageBackend;
 import com.couchbase.client.java.manager.view.DesignDocument;
 import com.couchbase.client.java.manager.view.View;
 import com.couchbase.client.java.view.DesignDocumentNamespace;
@@ -68,7 +69,7 @@ class CouchbaseTest extends CamelMainTestSupport {
             )
         );
         CLUSTER.buckets().createBucket(
-                BucketSettings.create(BUCKET).bucketType(BucketType.COUCHBASE).flushEnabled(true));
+                BucketSettings.create(BUCKET).bucketType(BucketType.COUCHBASE).storageBackend(StorageBackend.COUCHSTORE).flushEnabled(true));
         CLUSTER.bucket(BUCKET).viewIndexes().upsertDesignDocument(designDoc, DesignDocumentNamespace.PRODUCTION);
     }
 
@@ -83,7 +84,9 @@ class CouchbaseTest extends CamelMainTestSupport {
     @Override
     public void configureContext(CamelContextConfiguration camelContextConfiguration) {
         super.configureContext(camelContextConfiguration);
+        System.out.println("#### " + SERVICE.getConnectionString());
         Properties overridenProperties = asProperties(
+                "couchbase.connectionString", SERVICE.getConnectionString(),
                 "couchbase.host", SERVICE.hostname(),
                 "couchbase.port", Integer.toString(SERVICE.port()),
                 "couchbase.username", SERVICE.username(),
