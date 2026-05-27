@@ -16,8 +16,7 @@
  */
 package org.apache.camel.example.kubernetes.jkube;
 
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Session;
+import com.datastax.oss.driver.api.core.CqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +25,7 @@ public class CqlPopulateBean {
     private static final Logger log = LoggerFactory.getLogger(CqlPopulateBean.class);
 
     public void populate() {
-        try (Cluster cluster = Cluster.builder().addContactPoint("cassandra").build();
-            Session session = cluster.connect()) {
+        try (CqlSession session = CqlSession.builder()/*.addContactEndPoint("cassandra")*/.build();) {
             session.execute("CREATE KEYSPACE IF NOT EXISTS test WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor':1};");
             session.execute("CREATE TABLE IF NOT EXISTS test.users ( id int primary key, name text );");
             session.execute("INSERT INTO test.users (id,name) VALUES (1, 'oscerd') IF NOT EXISTS;");

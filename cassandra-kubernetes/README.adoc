@@ -47,7 +47,7 @@ cassandra-1                                1/1       Running   0          2h
 You can also verify the health of your cluster by running
 
 ----
-$ kubectl exec <pod_name> -it nodetool status
+$ kubectl exec <pod_name> -- nodetool status
 Datacenter: DC1-K8Demo
 ======================
 Status=Up/Down

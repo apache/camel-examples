@@ -35,7 +35,7 @@
     <properties>
         <category>Database</category>
         <!-- dependency versions -->
-        <cassandra.driver.version>4.0.0</cassandra.driver.version>
+        <cassandra.driver.version>4.19.2</cassandra.driver.version>
         <main.class>org.apache.camel.spring.Main</main.class>
     </properties>
 
@@ -74,8 +74,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.datastax.cassandra</groupId>
-            <artifactId>cassandra-driver-core</artifactId>
+            <groupId>org.apache.cassandra</groupId>
+            <artifactId>java-driver-core</artifactId>
             <version>${cassandra.driver.version}</version>
             <exclusions>
                 <exclusion>
