@@ -94,6 +94,11 @@
             <artifactId>hsqldb</artifactId>
             <version>${hsqldb-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>${commons-dbcp2-version}</version>
+        </dependency>
 
         <!-- for testing -->
         <dependency>
