@@ -30,8 +30,8 @@
 
     <artifactId>camel-example-csimple</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Compiled Simple</name>
-    <description>Shows using compiled simple language</description>
+    <name>Camel :: Example :: Compiled Simple (deprecated)</name>
+    <description>Shows using compiled simple language (deprecated)</description>
 
     <properties>
         <category>Beginner</category>

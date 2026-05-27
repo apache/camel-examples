@@ -30,8 +30,8 @@
 
     <artifactId>camel-example-csimple-joor</artifactId>
     <packaging>jar</packaging>
-    <name>Camel :: Example :: Compiled Simple jOOR</name>
-    <description>Shows using compiled simple language with jOOR compiler</description>
+    <name>Camel :: Example :: Compiled Simple jOOR (deprecated)</name>
+    <description>(deprecated) Shows using compiled simple language with jOOR compiler</description>
 
     <properties>
         <category>Beginner</category>
