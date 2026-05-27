@@ -23,7 +23,7 @@ public class MyRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from("couchbase:http://{{couchbase.host}}:{{couchbase.port}}?bucket={{couchbase.bucket}}&username={{couchbase.username}}&password={{couchbase.password}}&consumerProcessedStrategy={{couchbase.consumerProcessedStrategy}}")
+        from("couchbase:http://{{couchbase.host}}:{{couchbase.port}}?bucket={{couchbase.bucket}}&username={{couchbase.username}}&password={{couchbase.password}}&consumerProcessedStrategy={{couchbase.consumerProcessedStrategy}}&useView=true&connectionString={{couchbase.connectionString}}")
           .to("log:info");
 
     }
