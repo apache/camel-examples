@@ -3,7 +3,7 @@
 === Introduction
 
 This example shows how to use camel-jdbc component with an embedded
-Apache Derby database.
+H2 database.
 
 === Build
 
