@@ -29,8 +29,8 @@
   <!--
   Embedded in-memory database setup.
   -->
-  <jdbc:embedded-database id="dataSource" type="DERBY">
-    <jdbc:script location="classpath:create-derby.sql"/>
+  <jdbc:embedded-database id="dataSource" type="H2">
+    <jdbc:script location="classpath:create-h2.sql"/>
   </jdbc:embedded-database>
 
   <!--

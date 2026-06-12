@@ -56,7 +56,7 @@ public final class Application {
     private static final int END = 100;
 
     private static final String CID_HEADER = "corrId";
-    private static final String DB_URL = "jdbc:derby:target/testdb;create=true";
+    private static final String DB_URL = "jdbc:h2:file:./target/testdb";
     private static final String DB_USER = "admin";
     private static final String DB_PASS = "admin";
 
@@ -153,7 +153,7 @@ public final class Application {
                             + "version bigint not null"
                             + ")");
         } catch (SQLException e) {
-            if (!e.getMessage().contains("already exists")) {
+            if (!e.getMessage().toLowerCase().contains("already exist")) {
                 LOG.error("Database initialization failure", e);
             }
         }
