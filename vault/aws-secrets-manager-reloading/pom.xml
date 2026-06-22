@@ -34,7 +34,7 @@
 
     <properties>
         <category>Security</category>
-        <aws-java-sdk2-version>2.46.12</aws-java-sdk2-version>
+        <aws-java-sdk2-version>2.46.15</aws-java-sdk2-version>
     </properties>
 
     <dependencyManagement>
