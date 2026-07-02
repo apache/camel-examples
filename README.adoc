@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 72 (0 deprecated)
+Number of Examples: 72 (2 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -60,9 +60,9 @@ Number of Examples: 72 (0 deprecated)
 
 | link:console/README.adoc[Console] (console) | Beginner | An example that reads input from the console
 
-| link:csimple/README.adoc[Csimple] (csimple) | Beginner | (deprecated) Shows using compiled simple language
+| link:csimple/README.adoc[Csimple] (csimple) | Beginner | *deprecated* Shows using compiled simple language (deprecated)
 
-| link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | (deprecated) Shows using compiled simple language with jOOR compiler
+| link:csimple-joor/README.adoc[Csimple Joor] (csimple-joor) | Beginner | *deprecated* (deprecated) Shows using compiled simple language with jOOR compiler
 
 | link:spring/README.adoc[Spring] (spring) | Beginner | An example showing how to work with Camel and Spring
 
