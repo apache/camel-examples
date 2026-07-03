@@ -35,7 +35,7 @@
     <properties>
         <category>Database</category>
         <title>JDBC</title>
-        <h2-version>2.2.224</h2-version>
+        <h2-version>2.4.240</h2-version>
     </properties>
 
     <dependencyManagement>
