@@ -91,8 +91,6 @@
         <module>cassandra-kubernetes</module>
         <module>console</module>
         <module>couchbase-log</module>
-        <module>csimple</module>
-        <module>csimple-joor</module>
         <module>debezium-eventhubs-blob</module>
         <module>flight-recorder</module>
         <module>ftp</module>
