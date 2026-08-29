@@ -1,0 +1,24 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+#
+
+- route:
+    id: genai-chat
+    from:
+      uri: timer:genai
+      parameters:
+        period: "15000"
+      steps:
+        - setBody:
+            constant: "In one sentence, what is Apache Camel integration?"
+        - to:
+            uri: langchain4j-chat:demo
+            parameters:
+              chatModel: "#chatLanguageModel"
+        - log:
+            message: "LLM reply: ${body}"
+        - log:
+            message: "Models: req=${header.CamelLangChain4jChatRequestModel} resp=${header.CamelLangChain4jChatResponseModel}"

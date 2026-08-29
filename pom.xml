@@ -132,6 +132,7 @@
         <module>spring</module>
         <module>spring-pulsar</module>
         <module>spring-xquery</module>
+        <module>spring-boot</module>
         <module>telegram</module>
         <module>timer</module>
         <module>transformer-demo</module>

@@ -1,0 +1,20 @@
+# Observability stack for Camel GenAI observability blog (Blog 2)
+# Images aligned with camel-test-infra-observability
+
+services:
+  prometheus:
+    image: quay.io/prometheus/prometheus:v3.13.2
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  victoriatraces:
+    image: mirror.gcr.io/victoriametrics/victoria-traces:v0.10.0
+    ports:
+      - "9428:9428"
+
+  perses:
+    image: mirror.gcr.io/persesdev/perses:v0.54.0
+    ports:
+      - "8088:8080"

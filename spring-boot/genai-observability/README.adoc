@@ -1,0 +1,68 @@
+= Spring Boot GenAI Observability Example
+
+== Introduction
+
+This example demonstrates *GenAI observability* in Apache Camel 4.23+ with Spring Boot:
+OpenTelemetry `gen_ai.*` span attributes and Micrometer metrics for `langchain4j-chat`
+LLM calls, visualized with Prometheus and VictoriaTraces.
+
+It pairs with the community blog post *GenAI Observability with Spring Boot and the Camel Observability Stack*.
+
+=== Prerequisites
+
+* Java 17+
+* Maven 3.9+
+* Docker (for observability stack)
+* https://ollama.com/[Ollama] with `llama3.2` pulled
+
+== Build
+
+[source,shell]
+----
+mvn compile
+----
+
+== Run
+
+Terminal 1 — Ollama:
+
+[source,shell]
+----
+ollama pull llama3.2
+ollama serve
+----
+
+Terminal 2 — observability stack (Prometheus + VictoriaTraces + Perses):
+
+[source,shell]
+----
+docker compose up -d
+----
+
+Terminal 3 — Spring Boot application:
+
+[source,shell]
+----
+mvn spring-boot:run
+----
+
+== Verify GenAI observability
+
+[source,shell]
+----
+curl -s http://localhost:8080/actuator/prometheus | grep gen_ai
+----
+
+* Prometheus: `http://localhost:9090`
+* VictoriaTraces: `http://localhost:9428/select/vmui`
+* Perses: `http://localhost:8088`
+
+== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
