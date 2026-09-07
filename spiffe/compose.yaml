@@ -1,0 +1,107 @@
+## Licensed to the Apache Software Foundation (ASF) under one or more
+## contributor license agreements.  See the NOTICE file distributed with
+## this work for additional information regarding copyright ownership.
+## The ASF licenses this file to You under the Apache License, Version 2.0
+## (the "License"); you may not use this file except in compliance with
+## the License.  You may obtain a copy of the License at
+##
+##      http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+
+# everything the three Camel applications have in common: the same image, the SPIFFE Workload API socket of the
+# SPIRE agent, and the PID namespace of the SPIRE container (the agent attests a workload by looking up the process
+# that connects to the Workload API, so it must be able to see it)
+x-camel-application: &camel-application
+  build:
+    context: .
+    dockerfile: src/main/docker/Dockerfile
+  image: camel-example-spiffe
+  pid: "service:spire"
+  volumes:
+    - spire-sockets:/run/spire/sockets
+  depends_on:
+    spire:
+      condition: service_healthy
+
+services:
+
+  # SPIRE server and agent in one container (see spire/entrypoint.sh): the server issues the identities,
+  # the agent attests the workloads and hands them their SVIDs through the SPIFFE Workload API
+  spire:
+    build: ./spire
+    volumes:
+      - spire-sockets:/run/spire/sockets
+    healthcheck:
+      test: ["CMD", "/opt/spire/bin/spire-agent", "healthcheck", "-socketPath", "/run/spire/sockets/agent.sock"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+
+  # the second hop: an HTTP API that only the backend may call. uid 1004 is registered as
+  # spiffe://example.org/inventory
+  inventory:
+    <<: *camel-application
+    command: ["org.apache.camel.example.spiffe.inventory.InventoryApplication"]
+    user: "1004:1004"
+    environment:
+      CAMEL_MAIN_NAME: inventory
+      SPIFFE_ENDPOINT_SOCKET: unix:///run/spire/sockets/agent.sock
+    ports:
+      - "8081:8080"
+
+  # the HTTP API the clients talk to, which calls the inventory with its own identity.
+  # uid 1002 is registered as spiffe://example.org/backend
+  backend:
+    <<: *camel-application
+    command: ["org.apache.camel.example.spiffe.backend.BackendApplication"]
+    user: "1002:1002"
+    environment:
+      CAMEL_MAIN_NAME: backend
+      SPIFFE_ENDPOINT_SOCKET: unix:///run/spire/sockets/agent.sock
+    ports:
+      - "8080:8080"
+    depends_on:
+      spire:
+        condition: service_healthy
+      inventory:
+        condition: service_started
+
+  # the client that is allowed to read the orders (but not the audit trail): uid 1001 is registered as
+  # spiffe://example.org/frontend
+  frontend:
+    <<: *camel-application
+    command: ["org.apache.camel.example.spiffe.frontend.FrontendApplication"]
+    user: "1001:1001"
+    environment:
+      CAMEL_MAIN_NAME: frontend
+      SPIFFE_ENDPOINT_SOCKET: unix:///run/spire/sockets/agent.sock
+    depends_on:
+      spire:
+        condition: service_healthy
+      backend:
+        condition: service_started
+
+  # the very same code and image as the frontend, but another Unix user, hence another identity: uid 1003 is
+  # registered as spiffe://example.org/auditor, which may read the audit trail but not the orders
+  auditor:
+    <<: *camel-application
+    command: ["org.apache.camel.example.spiffe.frontend.FrontendApplication"]
+    user: "1003:1003"
+    environment:
+      CAMEL_MAIN_NAME: auditor
+      SPIFFE_ENDPOINT_SOCKET: unix:///run/spire/sockets/agent.sock
+    depends_on:
+      spire:
+        condition: service_healthy
+      backend:
+        condition: service_started
+
+volumes:
+  # the Unix domain socket of the SPIFFE Workload API, shared between the SPIRE agent and the workloads
+  spire-sockets:

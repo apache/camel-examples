@@ -1,0 +1,373 @@
+== Camel Example SPIFFE
+
+This example shows how to give Camel applications a cryptographic workload identity with the
+https://camel.apache.org/components/next/spiffe-component.html[Camel SPIFFE component] (`camel-spiffe`),
+and how a small chain of services uses that identity to authenticate and authorize their calls without any shared
+secret, password or API key in the code, in the configuration or on disk.
+
+https://spiffe.io/[SPIFFE] (Secure Production Identity Framework For Everyone) names a workload with a SPIFFE ID
+such as `spiffe://example.org/frontend` and proves that name with two kinds of SPIFFE Verifiable Identity Documents
+(SVIDs): an X.509-SVID (a certificate) and a JWT-SVID (a token). https://spiffe.io/docs/latest/spire-about/[SPIRE]
+is the reference implementation: a SPIRE server issues the documents and a SPIRE agent hands them out to the
+workloads through the SPIFFE Workload API, once it has _attested_ them, that is, once it has checked who they are.
+In this example the agent attests a workload by the Unix user it runs as.
+
+=== What the example does
+
+Four Camel applications and a SPIRE deployment run with Docker Compose, all in the trust domain `example.org`:
+
+----
+                    +---------------------------------------------------------------------+
+                    |  spire: SPIRE server + SPIRE agent                                  |
+                    |                                                                     |
+                    |  registration entries                                               |
+                    |    unix:uid:1001  ->  spiffe://example.org/frontend                 |
+                    |    unix:uid:1002  ->  spiffe://example.org/backend                  |
+                    |    unix:uid:1003  ->  spiffe://example.org/auditor                  |
+                    |    unix:uid:1004  ->  spiffe://example.org/inventory                |
+                    +----------------------------------+----------------------------------+
+                                                       |  SPIFFE Workload API (Unix socket)
+          +-------------------+----------------------+-+-------------------------+
+          |                   |                      |                           |
++---------+--------+ +--------+---------+ +----------+---------+ +---------------+--------+
+| frontend         | | auditor          | | backend            | | inventory              |
+| uid 1001         | | uid 1003         | | uid 1002           | | uid 1004               |
+|                  | |                  | |                    | |                        |
+| fetchJwtSvid     | | fetchJwtSvid     | | validateJwtSvid    | | validateJwtSvid        |
+| fetchX509Svid    | | fetchX509Svid    | | fetchJwtSvid       | | fetchX509Svid          |
+|                  | |                  | | fetchX509Svid      | |                        |
++---------+--------+ +--------+---------+ +----+----------+----+ +---------------+--------+
+          |                   |               ^          |                       ^
+          |  GET /api/orders  |               |          |  GET /api/stock       |
+          |  GET /api/audit   |               |          |  Authorization: Bearer JWT (backend)
+          |  Authorization: Bearer JWT        |          |  X-On-Behalf-Of: <caller>
+          +-------------------+---------------+          +-----------------------+
+                 frontend: orders 200, audit 403
+                 auditor:  orders 403, audit 200
+----
+
+* The *backend* exposes `GET /api/orders` and `GET /api/audit`. Both routes use the same
+  <<the-workload-identity-policy,workload identity policy>>: every request must carry a JWT-SVID as bearer token,
+  which the backend hands to the Workload API (`validateJwtSvid`) to check its signature, its expiry and that it was
+  minted for the backend (the _audience_ of the token). The SPIFFE ID of the caller comes back in the
+  `CamelSpiffeSpiffeId` header, and the allow-list of the route decides whether that caller may use it.
+* The *inventory* is the second hop. To serve the orders, the backend asks it for the stock levels with a JWT-SVID
+  of its own (`fetchJwtSvid`, this time with the inventory as audience) and tells it on whose behalf it asks. The
+  inventory uses the very same policy: it accepts the backend, and nobody else.
+* The *frontend* asks the Workload API every 10 seconds for a JWT-SVID with the backend as audience
+  (`fetchJwtSvid`) and reads the orders with it, completed with the stock levels (HTTP 200). Every 30 seconds it
+  also tries to read the audit trail, which it is not allowed to (HTTP 403). Every 45 seconds it asks for a token
+  minted for some other service and presents that one instead, which the backend rejects (HTTP 401).
+* The *auditor* is the very same code and image as the frontend, but it runs as another Unix user. The SPIRE agent
+  therefore gives it another identity, `spiffe://example.org/auditor`, with the opposite permissions: it may read
+  the audit trail of the backend (HTTP 200), that is, who called what and with which outcome, but not the orders
+  (HTTP 403).
+* All four applications also fetch their X.509-SVID once a minute (`fetchX509Svid`) and log a summary of the
+  certificate: the SPIFFE ID (a URI subject alternative name), the serial number and the validity period. The
+  certificates are short-lived (10 minutes) and the SPIRE agent rotates them before they expire, so the summary
+  changes over time without the applications doing anything about it.
+
+The identities are not configured anywhere in the applications: they come from the `spire` container, which
+registers the workloads at startup (see `spire/entrypoint.sh`). What each identity may do is a few lines of
+`application.properties`:
+
+[source,properties]
+----
+backend.allow.orders = spiffe://example.org/frontend
+backend.allow.audit = spiffe://example.org/auditor
+inventory.allow.stock = spiffe://example.org/backend
+----
+
+[width="100%",cols="1,1,3,5",options="header"]
+|===
+| Container | Unix uid | SPIFFE ID | What it may do
+
+| `frontend` | 1001 | `spiffe://example.org/frontend` | `GET /api/orders` on the backend (200); the audit trail is denied (403)
+| `auditor` | 1003 | `spiffe://example.org/auditor` | `GET /api/audit` on the backend (200); the orders are denied (403)
+| `backend` | 1002 | `spiffe://example.org/backend` | serves the orders and the audit trail, `GET /api/stock` on the inventory (200)
+| `inventory` | 1004 | `spiffe://example.org/inventory` | serves the stock levels to the backend
+|===
+
+[#the-workload-identity-policy]
+=== The workload identity policy
+
+`WorkloadIdentityPolicy` is a Camel
+https://camel.apache.org/manual/route-configuration.html[route configuration]: the checks it contains run before
+the first step of every route that opts in with `routeConfigurationId(WorkloadIdentityPolicy.ID)`, so the routes
+of the backend and of the inventory contain business logic only. It is instantiated once per service
+(`new WorkloadIdentityPolicy("backend")`), which is how it finds the audience of the service and the allow-lists of
+its routes in the configuration.
+
+[source,java]
+----
+// whatever goes wrong while checking the token means that the caller is not authenticated: HTTP 401
+policy.onException(JwtSvidException.class, IllegalArgumentException.class)
+        .handled(true)
+        .setBody(method(RejectionReason.class, "of"))
+        .bean(auditTrail, "record(${routeId}, null, 'rejected', ${body})")
+        .log(LoggingLevel.WARN, "Rejected request to ${routeId}: ${body}")
+        .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(401))
+        .setBody(simple("401 Unauthorized: ${body}"))
+        .removeHeaders("CamelSpiffe*");
+
+// runs before the first step of every route that uses this policy
+policy.interceptFrom()
+        // authentication: the bearer token must be a JWT-SVID minted for this service
+        .setHeader(SpiffeConstants.TOKEN).method(BearerToken.class, "extract")
+        .removeHeader("Authorization")
+        .to("spiffe:" + service + "?operation=validateJwtSvid&audience={{" + service + ".audience}}")
+        // authorization: the caller must be on the allow-list of the route
+        .choice()
+            .when(method(allowList, "isAllowed(${routeId}, ${header.CamelSpiffeSpiffeId})"))
+                .bean(auditTrail, "record(${routeId}, ${header.CamelSpiffeSpiffeId}, 'allowed', null)")
+                .log("Authenticated caller ${header.CamelSpiffeSpiffeId}, allowed to call ${routeId}")
+            .otherwise()
+                .bean(auditTrail, "record(${routeId}, ${header.CamelSpiffeSpiffeId}, 'denied', null)")
+                .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(403))
+                .setBody(simple("403 Forbidden: ${header.CamelSpiffeSpiffeId} is not allowed to call ${routeId}"))
+                .removeHeaders("CamelSpiffe*")
+                // the route itself does not run
+                .stop()
+        .end();
+----
+
+`validateJwtSvid` takes the token from the `CamelSpiffeToken` header. The message body becomes the validated
+`io.spiffe.svid.jwtsvid.JwtSvid` and the SPIFFE ID of the caller is set as the `CamelSpiffeSpiffeId` header. A
+failed validation throws an `io.spiffe.exception.JwtSvidException`, whose cause says why (expired, wrong audience,
+unknown key, ...); the policy puts that reason in the HTTP 401 response. `AllowList` looks up
+`<service>.allow.<route id>` in the configuration, and `AuditTrail` keeps the last decisions of the policy, which
+the backend exposes on `/api/audit`.
+
+=== The Camel routes
+
+* The backend (`BackendRoutes`) serves the orders, and makes the second hop with its own identity:
+`fetchJwtSvid` with the inventory as audience. The caller it is serving travels along in a header, for the audit
+trail of the inventory, which trusts that header only because the backend itself is authenticated and allowed to
+call it. Nothing of the second hop is sent back to the caller.
++
+[source,java]
+----
+from("platform-http:/api/orders?httpMethodRestrict=GET").routeId("orders")
+    .routeConfigurationId(WorkloadIdentityPolicy.ID)
+    // the policy has authenticated and authorized the caller by the time the route starts
+    .bean(OrderService.class, "listOrders")
+    .setProperty("orders", body())
+    .setProperty("onBehalfOf", header(SpiffeConstants.SPIFFE_ID))
+    .to("direct:stockLevels")
+    .bean(OrderService.class, "withStock")
+    .marshal().json()
+    .removeHeaders("CamelSpiffe*");
+
+from("direct:stockLevels").routeId("stock-levels")
+    .to("spiffe:backend?operation=fetchJwtSvid&audience={{inventory.audience}}")
+    .setHeader("Authorization", simple("Bearer ${body}"))
+    .setHeader("X-On-Behalf-Of", exchangeProperty("onBehalfOf"))
+    .setBody(simple("${null}"))
+    .removeHeaders("CamelHttp*")
+    .removeHeaders("CamelSpiffe*")
+    .to("http://{{inventory.host}}:{{inventory.port}}/api/stock?httpMethod=GET")
+    .removeHeader("Authorization")
+    .removeHeader("X-On-Behalf-Of")
+    .unmarshal().json(Map.class);
+----
+
+* The inventory (`InventoryRoutes`) is the same policy applied to another service:
++
+[source,java]
+----
+from("platform-http:/api/stock?httpMethodRestrict=GET").routeId("stock")
+    .routeConfigurationId(WorkloadIdentityPolicy.ID)
+    .log("Serving the stock levels to ${header.CamelSpiffeSpiffeId} on behalf of ${header.X-On-Behalf-Of}")
+    .bean(StockService.class, "levels")
+    .marshal().json()
+    .removeHeaders("CamelSpiffe*");
+----
+
+* The frontend (`FrontendRoutes`) gets its tokens with `fetchJwtSvid`: the message body becomes the token, the
+SPIFFE ID and the expiry of the token are set as the `CamelSpiffeSpiffeId` and `CamelSpiffeExpiry` headers. The
+timers only set the path to call; the `wrong-audience` route also sets the `CamelSpiffeAudience` header, which
+overrides the audience of the endpoint for that message.
++
+[source,java]
+----
+from("timer:orders?period={{frontend.period}}").routeId("orders")
+    .setHeader(Exchange.HTTP_PATH, constant("/api/orders"))
+    .to("direct:callBackend");
+
+from("direct:callBackend").routeId("call-backend")
+    .to("spiffe:frontend?operation=fetchJwtSvid&audience={{backend.audience}}")
+    .log("Fetched a JWT-SVID for ${header.CamelSpiffeSpiffeId} (valid until ${header.CamelSpiffeExpiry})")
+    .setHeader("Authorization", simple("Bearer ${body}"))
+    .setBody(simple("${null}"))
+    .removeHeaders("CamelSpiffe*")
+    .to("http://{{backend.host}}:{{backend.port}}?httpMethod=GET&throwExceptionOnFailure=false")
+    .log("GET ${header.CamelHttpPath} answered HTTP ${header.CamelHttpResponseCode}: ${body}");
+----
+
+* All applications run `IdentityRoutes`, where `fetchX509Svid` makes the message body an
+  `io.spiffe.svid.x509svid.X509Svid` with the certificate chain, the private key and the SPIFFE ID of the
+  workload. `X509SvidSummary` describes the leaf certificate, and only the certificate: the private key is never
+  logged.
+
+The component finds the Workload API through the standard `SPIFFE_ENDPOINT_SOCKET` environment variable, which
+`compose.yaml` sets for each application. The `camel.component.spiffe.spiffe-socket-path` option in
+`application.properties` (commented out) does the same from the configuration.
+
+=== Build
+
+The example is built with Maven:
+
+[source,sh]
+----
+$ mvn package
+----
+
+This also runs the unit tests, which do not need SPIRE (see below), and copies the runtime dependencies to
+`target/lib`, from where `src/main/docker/Dockerfile` picks them up.
+
+=== How to run
+
+You need Docker with Docker Compose. Build the images and start everything with:
+
+[source,sh]
+----
+$ docker compose up --build
+----
+
+The `spire` container starts a SPIRE server, registers the four workloads, then starts a SPIRE agent that joins
+the server with a one-time token. Once the agent serves the Workload API, the inventory and the backend start, then
+the frontend and the auditor. Within a few seconds the logs show the frontend getting the orders with their stock
+levels, the inventory serving the backend on behalf of the frontend, the auditor being turned away from the orders
+but reading the audit trail and, now and then, the frontend being rejected when it presents a token minted for
+another audience:
+
+----
+spire-1     | Registering spiffe://example.org/frontend for the workload running with uid 1001
+spire-1     | Registering spiffe://example.org/backend for the workload running with uid 1002
+spire-1     | Registering spiffe://example.org/auditor for the workload running with uid 1003
+spire-1     | Registering spiffe://example.org/inventory for the workload running with uid 1004
+spire-1     | time="..." level=info msg="Node attestation was successful" ...
+frontend-1  | 17:27:23.6 [timer://orders] call-backend INFO  Fetched a JWT-SVID for spiffe://example.org/frontend (valid until ...)
+backend-1   | 17:27:23.7 [worker-thread-1] orders INFO  Authenticated caller spiffe://example.org/frontend, allowed to call orders
+inventory-1 | 17:27:23.9 [worker-thread-0] stock INFO  Authenticated caller spiffe://example.org/backend, allowed to call stock
+inventory-1 | 17:27:23.9 [worker-thread-0] stock INFO  Serving the stock levels to spiffe://example.org/backend on behalf of spiffe://example.org/frontend
+frontend-1  | 17:27:24.0 [timer://orders] call-backend INFO  GET /api/orders answered HTTP 200: {"caller":"spiffe://example.org/frontend","orders":[{"id":1001,"item":"Camel in Action, 2nd edition","quantity":2,"inStock":true},{"id":1002,"item":"Enterprise Integration Patterns","quantity":1,"inStock":false},...
+backend-1   | 17:27:23.7 [worker-thread-0] orders WARN  Authenticated caller spiffe://example.org/auditor is not allowed to call orders
+auditor-1   | 17:27:23.7 [timer://orders] call-backend INFO  GET /api/orders answered HTTP 403: 403 Forbidden: spiffe://example.org/auditor is not allowed to call orders
+auditor-1   | 17:27:52.3 [timer://audit] call-backend INFO  GET /api/audit answered HTTP 200: {"service":"backend","decisions":[{"time":"2026-09-03T17:27:23Z","route":"orders","caller":"spiffe://example.org/auditor","outcome":"denied"},{"time":"2026-09-03T17:27:23Z","route":"orders","caller":"spiffe://example.org/frontend","outcome":"allowed"},...
+frontend-1  | 17:27:52.3 [timer://audit] call-backend INFO  GET /api/audit answered HTTP 403: 403 Forbidden: spiffe://example.org/frontend is not allowed to call audit
+frontend-1  | 17:28:07.3 [timer://wrongAudience] wrong-audience INFO  Asking for a JWT-SVID with the wrong audience, the backend should reject it
+backend-1   | 17:28:07.3 [worker-thread-10] orders WARN  Rejected request to orders: Error validating JWT SVID: INVALID_ARGUMENT: expected audience in ["spiffe://example.org/backend"] (audience=["spiffe://example.org/some-other-service"])
+frontend-1  | 17:28:07.3 [timer://wrongAudience] call-backend INFO  GET /api/orders answered HTTP 401: 401 Unauthorized: Error validating JWT SVID: INVALID_ARGUMENT: expected audience in ["spiffe://example.org/backend"] (audience=["spiffe://example.org/some-other-service"])
+inventory-1 | 17:28:22.3 [timer://identity] identity INFO  X.509-SVID of spiffe://example.org/inventory
+inventory-1 |     serial number : 1b9d0f4c7d0e6d2a5f7c3b1e9a8d6c4f
+inventory-1 |     subject       : O=SPIRE, C=US
+inventory-1 |     issuer        : SERIALNUMBER=..., CN=example.org, O=Apache Camel, C=US
+inventory-1 |     valid from    : 2026-09-03T17:27:12Z
+inventory-1 |     valid until   : 2026-09-03T17:37:22Z
+inventory-1 |     URI SANs      : [spiffe://example.org/inventory]
+inventory-1 |     chain length  : 1 certificate(s)
+----
+
+A few things to try while it runs:
+
+* Call the services yourself. You have no SPIFFE identity and no token, so both turn you away (the inventory is
+  published on port 8081):
++
+[source,sh]
+----
+$ curl -i http://localhost:8080/api/orders
+HTTP/1.1 401 Unauthorized
+...
+401 Unauthorized: no bearer token in the Authorization header
+
+$ curl -i http://localhost:8081/api/stock
+HTTP/1.1 401 Unauthorized
+...
+----
+
+* Look at the registration entries, that is, at who is who in the trust domain:
++
+[source,sh]
+----
+$ docker compose exec spire /opt/spire/bin/spire-server entry show
+----
+
+* Watch the X.509-SVID of an application being rotated. The SPIRE agent renews a certificate halfway through its
+  lifetime, so about every five minutes the serial number and the validity period in the summary change, while the
+  SPIFFE ID stays the same:
++
+[source,sh]
+----
+$ docker compose logs -f frontend | grep -A 8 "X.509-SVID of"
+----
+
+* Read why a token was rejected from the point of view of the SPIRE agent, which is what actually validates it:
++
+[source,sh]
+----
+$ docker compose logs spire | grep "Failed to validate JWT"
+----
+
+* Change who may do what: add `spiffe://example.org/auditor` to `backend.allow.orders` in
+  `src/main/resources/application.properties`, then rebuild and restart the backend with
+  `mvn package -DskipTests && docker compose up --build -d backend`. Nothing changes in the auditor, yet its next
+  call gets the orders back. Or add `spiffe://example.org/frontend` to `inventory.allow.stock` and see that the
+  frontend still cannot call the inventory: its tokens are minted for the backend, not for the inventory.
+
+Stop everything, and remove the containers and the volume with the Workload API socket, with:
+
+[source,sh]
+----
+$ docker compose down -v
+----
+
+NOTE: The `spire` container is a shortcut for the purpose of this example: it runs the SPIRE server and the SPIRE
+agent side by side and as root, and the Camel applications share its PID namespace so that the agent can attest
+them with the `unix` workload attestor. A real deployment runs the server on its own, one agent per node and,
+on Kubernetes, attests the workloads by their pod and service account instead of their Unix user.
+
+=== Running the tests
+
+[source,sh]
+----
+$ mvn test
+----
+
+The tests do not need SPIRE. Each test class binds a Mockito mock of `io.spiffe.workloadapi.WorkloadApiClient` to
+the Camel registry with `@BindToRegistry`, and the SPIFFE component autowires the single client it finds there (its
+`workloadApiClient` option). The routes under test are therefore exactly the ones that run in the containers, only
+the SPIRE agent is replaced by a fake that mints, validates or refuses SVIDs as the test needs. The backend and the
+inventory are tested over HTTP, on the embedded server of Camel Main, so the policy runs exactly as in the
+containers; the backend test also stubs the inventory on that server to check the second hop.
+
+=== Running the applications outside Docker
+
+The applications can also run directly on your machine with `mvn camel:run`, as long as a SPIRE agent (or any other
+SPIFFE Workload API) is reachable and has a registration entry for the process that runs them:
+
+[source,sh]
+----
+$ export SPIFFE_ENDPOINT_SOCKET=unix:///tmp/spire-agent/public/api.sock
+$ mvn camel:run -Dcamel.server.port=8081 -Dcamel.mainClass=org.apache.camel.example.spiffe.inventory.InventoryApplication
+$ mvn camel:run -Dinventory.host=localhost -Dinventory.port=8081
+$ mvn camel:run -Dbackend.host=localhost -Dcamel.mainClass=org.apache.camel.example.spiffe.frontend.FrontendApplication
+----
+
+Keep in mind that all the applications then run as the same Unix user, hence with the same SPIFFE ID, unless the
+Workload API you use attests them differently.
+
+The Workload API is a gRPC service on a Unix domain socket, for which the SPIFFE Java library needs a native
+transport. The `pom.xml` of the example includes the Linux one (`io.spiffe:grpc-netty-linux`), which is what the
+containers need. On macOS replace it with `io.spiffe:grpc-netty-macos` or, on Apple silicon,
+`io.spiffe:grpc-netty-macos-aarch64`.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
