@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.styra.opa.OPAClient;
+import com.styra.opa.OPAException;
 import io.spiffe.exception.JwtSvidException;
 import io.spiffe.spiffeid.SpiffeId;
 import io.spiffe.svid.jwtsvid.JwtSvid;
@@ -42,15 +44,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests the backend over HTTP, on the embedded server of Camel Main, against a fake SPIFFE Workload API and a stub of
- * the inventory service. The spiffe component autowires the single {@link WorkloadApiClient} it finds in the
- * registry, so the routes and the policy under test are exactly the ones used at runtime: only the SPIRE agent is
- * replaced.
+ * Tests the backend over HTTP, on the embedded server of Camel Main, against a fake SPIFFE Workload API, a fake OPA
+ * and a stub of the inventory service. The spiffe and opa components autowire the single {@link WorkloadApiClient}
+ * and {@link OPAClient} they find in the registry, so the routes and the policy under test are exactly the ones used
+ * at runtime: only the SPIRE agent and the OPA server are replaced.
  */
 class BackendRoutesTest extends CamelMainTestSupport {
 
@@ -58,6 +63,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
     private static final String INVENTORY = "spiffe://example.org/inventory";
     private static final String FRONTEND = "spiffe://example.org/frontend";
     private static final String AUDITOR = "spiffe://example.org/auditor";
+    private static final String POLICY = "camel/spiffe/backend/allow";
     private static final String STOCK_LEVELS
             = "{\"Camel in Action, 2nd edition\":12,\"Enterprise Integration Patterns\":0,\"Zero Trust Networks\":5}";
 
@@ -68,9 +74,14 @@ class BackendRoutesTest extends CamelMainTestSupport {
     private final WorkloadIdentityPolicy policy = new WorkloadIdentityPolicy("backend");
     /** The headers of the last request received by the stub inventory. */
     private final Map<String, Object> inventoryRequestHeaders = new ConcurrentHashMap<>();
+    /** The last input document sent to OPA. */
+    private final Map<String, Object> opaInput = new ConcurrentHashMap<>();
 
     @BindToRegistry
     private final WorkloadApiClient workloadApiClient = mock(WorkloadApiClient.class);
+
+    @BindToRegistry
+    private final OPAClient opaClient = mock(OPAClient.class);
 
     @Override
     protected void configure(MainConfigurationProperties configuration) {
@@ -105,6 +116,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
     @Test
     void frontendGetsTheOrdersWithTheStockLevels() throws Exception {
+        opaDecidesLikeThePolicy();
         JwtSvid frontend = jwtSvid(FRONTEND, null);
         when(workloadApiClient.validateJwtSvid("frontend-token", BACKEND)).thenReturn(frontend);
         JwtSvid backend = jwtSvid(BACKEND, "backend-token");
@@ -117,6 +129,13 @@ class BackendRoutesTest extends CamelMainTestSupport {
         assertTrue(body.contains("\"caller\":\"spiffe://example.org/frontend\""), body);
         assertTrue(body.contains("\"item\":\"Camel in Action, 2nd edition\",\"quantity\":2,\"inStock\":true"), body);
         assertTrue(body.contains("\"item\":\"Enterprise Integration Patterns\",\"quantity\":1,\"inStock\":false"), body);
+
+        // OPA was asked about the caller and the route, and told nothing else
+        assertEquals("orders", opaInput.get("routeId"));
+        Map<?, ?> headers = (Map<?, ?>) opaInput.get("headers");
+        assertEquals(FRONTEND, headers.get(SpiffeConstants.SPIFFE_ID));
+        assertFalse(headers.containsKey(SpiffeConstants.TOKEN), "the token must not be sent to OPA");
+        assertFalse(headers.containsKey("Authorization"), "the token must not be sent to OPA");
 
         // the second hop was made with the identity of the backend, on behalf of the frontend
         assertEquals("Bearer backend-token", inventoryRequestHeaders.get("Authorization"));
@@ -131,6 +150,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
     @Test
     void auditorMayNotReadTheOrders() throws Exception {
+        opaDecidesLikeThePolicy();
         JwtSvid auditor = jwtSvid(AUDITOR, null);
         when(workloadApiClient.validateJwtSvid("auditor-token", BACKEND)).thenReturn(auditor);
 
@@ -143,6 +163,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
     @Test
     void auditorReadsTheAuditTrail() throws Exception {
+        opaDecidesLikeThePolicy();
         JwtSvid auditor = jwtSvid(AUDITOR, null);
         when(workloadApiClient.validateJwtSvid("auditor-token", BACKEND)).thenReturn(auditor);
 
@@ -161,6 +182,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
     @Test
     void frontendMayNotReadTheAuditTrail() throws Exception {
+        opaDecidesLikeThePolicy();
         JwtSvid frontend = jwtSvid(FRONTEND, null);
         when(workloadApiClient.validateJwtSvid("frontend-token", BACKEND)).thenReturn(frontend);
 
@@ -171,6 +193,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
     @Test
     void invalidTokenIsUnauthorized() throws Exception {
+        opaDecidesLikeThePolicy();
         // this is how the java-spiffe library reports a token that the Workload API refused
         when(workloadApiClient.validateJwtSvid("token-for-another-service", BACKEND))
                 .thenThrow(new JwtSvidException("Error validating JWT SVID",
@@ -185,6 +208,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
     @Test
     void missingTokenIsUnauthorized() throws Exception {
+        opaDecidesLikeThePolicy();
         HttpResponse<String> response = get("/api/orders", null);
 
         assertEquals(401, response.statusCode());
@@ -194,6 +218,7 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
     @Test
     void unreachableInventoryIsABadGateway() throws Exception {
+        opaDecidesLikeThePolicy();
         JwtSvid frontend = jwtSvid(FRONTEND, null);
         when(workloadApiClient.validateJwtSvid("frontend-token", BACKEND)).thenReturn(frontend);
         when(workloadApiClient.fetchJwtSvid(INVENTORY)).thenThrow(new JwtSvidException("no identity issued"));
@@ -202,6 +227,36 @@ class BackendRoutesTest extends CamelMainTestSupport {
 
         assertEquals(502, response.statusCode());
         assertEquals("502 Bad Gateway: no identity issued", response.body());
+    }
+
+    @Test
+    void unreachableOpaIsServiceUnavailable() throws Exception {
+        when(opaClient.evaluate(eq(POLICY), anyMap(), eq(Object.class)))
+                .thenThrow(new OPAException("connection refused"));
+        JwtSvid frontend = jwtSvid(FRONTEND, null);
+        when(workloadApiClient.validateJwtSvid("frontend-token", BACKEND)).thenReturn(frontend);
+
+        HttpResponse<String> response = get("/api/orders", "Bearer frontend-token");
+
+        // the policy fails closed: nobody gets in while OPA cannot decide
+        assertEquals(503, response.statusCode());
+        assertEquals("503 Service Unavailable: the policy could not be evaluated", response.body());
+    }
+
+    /**
+     * The fake OPA decides like opa/backend.rego does, and keeps the input document for the tests to check.
+     */
+    private void opaDecidesLikeThePolicy() throws Exception {
+        when(opaClient.evaluate(eq(POLICY), anyMap(), eq(Object.class))).thenAnswer(invocation -> {
+            Map<String, Object> input = invocation.getArgument(1);
+            opaInput.clear();
+            opaInput.putAll(input);
+            Map<?, ?> headers = (Map<?, ?>) input.get("headers");
+            Object caller = headers.get(SpiffeConstants.SPIFFE_ID);
+            Object route = input.get("routeId");
+            return ("orders".equals(route) && FRONTEND.equals(caller))
+                    || ("audit".equals(route) && AUDITOR.equals(caller));
+        });
     }
 
     private static HttpResponse<String> get(String path, String authorization) throws Exception {
