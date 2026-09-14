@@ -2,8 +2,11 @@
 
 This example shows how to give Camel applications a cryptographic workload identity with the
 https://camel.apache.org/components/next/spiffe-component.html[Camel SPIFFE component] (`camel-spiffe`),
-and how a small chain of services uses that identity to authenticate and authorize their calls without any shared
-secret, password or API key in the code, in the configuration or on disk.
+and how a small chain of services uses that identity to authenticate their calls without any shared secret,
+password or API key in the code, in the configuration or on disk. What an authenticated caller may do is decided
+by https://www.openpolicyagent.org/[Open Policy Agent] through the
+https://camel.apache.org/components/next/opa-component.html[Camel OPA component] (`camel-opa`), with the rules
+written in Rego and kept out of the routes.
 
 https://spiffe.io/[SPIFFE] (Secure Production Identity Framework For Everyone) names a workload with a SPIFFE ID
 such as `spiffe://example.org/frontend` and proves that name with two kinds of SPIFFE Verifiable Identity Documents
@@ -14,7 +17,8 @@ In this example the agent attests a workload by the Unix user it runs as.
 
 === What the example does
 
-Four Camel applications and a SPIRE deployment run with Docker Compose, all in the trust domain `example.org`:
+Four Camel applications, a SPIRE deployment and an OPA server run with Docker Compose, all in the trust domain
+`example.org`:
 
 ----
                     +---------------------------------------------------------------------+
@@ -37,23 +41,29 @@ Four Camel applications and a SPIRE deployment run with Docker Compose, all in t
 | fetchX509Svid    | | fetchX509Svid    | | fetchJwtSvid       | | fetchX509Svid          |
 |                  | |                  | | fetchX509Svid      | |                        |
 +---------+--------+ +--------+---------+ +----+----------+----+ +---------------+--------+
-          |                   |               ^          |                       ^
-          |  GET /api/orders  |               |          |  GET /api/stock       |
-          |  GET /api/audit   |               |          |  Authorization: Bearer JWT (backend)
-          |  Authorization: Bearer JWT        |          |  X-On-Behalf-Of: <caller>
-          +-------------------+---------------+          +-----------------------+
-                 frontend: orders 200, audit 403
-                 auditor:  orders 403, audit 200
+          |                   |               ^     |    |                  ^    |
+          |  GET /api/orders  |               |     |    |  GET /api/stock  |    |
+          |  GET /api/audit   |               |     |    |  Authorization: Bearer JWT (backend)
+          |  Authorization: Bearer JWT        |     |    |  X-On-Behalf-Of: <caller>
+          +-------------------+---------------+     |    +------------------+    |
+                 frontend: orders 200, audit 403    |                            |
+                 auditor:  orders 403, audit 200    |  may <caller> call <route>?|
+                                                    v                            v
+                                        +-----------+----------------------------+-----------+
+                                        | opa: Open Policy Agent, policies in opa/*.rego     |
+                                        +----------------------------------------------------+
 ----
 
 * The *backend* exposes `GET /api/orders` and `GET /api/audit`. Both routes use the same
   <<the-workload-identity-policy,workload identity policy>>: every request must carry a JWT-SVID as bearer token,
   which the backend hands to the Workload API (`validateJwtSvid`) to check its signature, its expiry and that it was
   minted for the backend (the _audience_ of the token). The SPIFFE ID of the caller comes back in the
-  `CamelSpiffeSpiffeId` header, and the allow-list of the route decides whether that caller may use it.
+  `CamelSpiffeSpiffeId` header. The backend then asks OPA whether that caller may use that route, and OPA answers
+  from the Rego policy of the backend.
 * The *inventory* is the second hop. To serve the orders, the backend asks it for the stock levels with a JWT-SVID
   of its own (`fetchJwtSvid`, this time with the inventory as audience) and tells it on whose behalf it asks. The
-  inventory uses the very same policy: it accepts the backend, and nobody else.
+  inventory uses the very same policy, with its own Rego rules: it accepts the backend, and only on behalf of a
+  caller who may read the orders.
 * The *frontend* asks the Workload API every 10 seconds for a JWT-SVID with the backend as audience
   (`fetchJwtSvid`) and reads the orders with it, completed with the stock levels (HTTP 200). Every 30 seconds it
   also tries to read the audit trail, which it is not allowed to (HTTP 403). Every 45 seconds it asks for a token
@@ -68,14 +78,36 @@ Four Camel applications and a SPIRE deployment run with Docker Compose, all in t
   changes over time without the applications doing anything about it.
 
 The identities are not configured anywhere in the applications: they come from the `spire` container, which
-registers the workloads at startup (see `spire/entrypoint.sh`). What each identity may do is a few lines of
-`application.properties`:
+registers the workloads at startup (see `spire/entrypoint.sh`). What each identity may do is not in the
+applications either: it is the Rego policy of each service in the `opa` directory, which the `opa` container
+serves and reloads when it changes. This is `opa/backend.rego`:
 
-[source,properties]
+[source,rego]
 ----
-backend.allow.orders = spiffe://example.org/frontend
-backend.allow.audit = spiffe://example.org/auditor
-inventory.allow.stock = spiffe://example.org/backend
+package camel.spiffe.backend
+
+default allow := false
+
+# which SPIFFE IDs may call which route of the backend
+permissions := {
+	"orders": {"spiffe://example.org/frontend"},
+	"audit": {"spiffe://example.org/auditor"},
+}
+
+allow if {
+	input.headers.CamelSpiffeSpiffeId in permissions[input.routeId]
+}
+----
+
+and `opa/inventory.rego` refers to it, so that the inventory only serves the backend on behalf of a caller who may
+read the orders:
+
+[source,rego]
+----
+allow if {
+	headers.camelspiffespiffeid == "spiffe://example.org/backend"
+	headers["x-on-behalf-of"] in data.camel.spiffe.backend.permissions.orders
+}
 ----
 
 [width="100%",cols="1,1,3,5",options="header"]
@@ -95,8 +127,8 @@ inventory.allow.stock = spiffe://example.org/backend
 https://camel.apache.org/manual/route-configuration.html[route configuration]: the checks it contains run before
 the first step of every route that opts in with `routeConfigurationId(WorkloadIdentityPolicy.ID)`, so the routes
 of the backend and of the inventory contain business logic only. It is instantiated once per service
-(`new WorkloadIdentityPolicy("backend")`), which is how it finds the audience of the service and the allow-lists of
-its routes in the configuration.
+(`new WorkloadIdentityPolicy("backend")`), which is how it finds the audience of the service in the configuration
+and the policy of the service in OPA. SPIFFE authenticates, OPA authorizes:
 
 [source,java]
 ----
@@ -110,15 +142,26 @@ policy.onException(JwtSvidException.class, IllegalArgumentException.class)
         .setBody(simple("401 Unauthorized: ${body}"))
         .removeHeaders("CamelSpiffe*");
 
+// OPA could not decide (unreachable, an error, an undefined decision): nobody gets in, HTTP 503
+policy.onException(OpaPolicyEvaluationException.class)
+        .handled(true)
+        .bean(auditTrail, "record(${routeId}, ${header.CamelSpiffeSpiffeId}, 'error', ${exception.message})")
+        .log(LoggingLevel.ERROR, "Could not evaluate the policy for ${routeId}: ${exception.message}")
+        .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(503))
+        .setBody(constant("503 Service Unavailable: the policy could not be evaluated"))
+        .removeHeaders("CamelSpiffe*");
+
 // runs before the first step of every route that uses this policy
 policy.interceptFrom()
         // authentication: the bearer token must be a JWT-SVID minted for this service
         .setHeader(SpiffeConstants.TOKEN).method(BearerToken.class, "extract")
         .removeHeader("Authorization")
         .to("spiffe:" + service + "?operation=validateJwtSvid&audience={{" + service + ".audience}}")
-        // authorization: the caller must be on the allow-list of the route
+        // authorization: OPA gets the SPIFFE ID of the caller and the id of the route, nothing else
+        .to("opa:camel/spiffe/" + service + "/allow?serverUrl={{opa.url}}"
+            + "&includeHeaders=" + SpiffeConstants.SPIFFE_ID + ",X-On-Behalf-Of")
         .choice()
-            .when(method(allowList, "isAllowed(${routeId}, ${header.CamelSpiffeSpiffeId})"))
+            .when(header(OpaConstants.DECISION_ALLOW).isEqualTo(true))
                 .bean(auditTrail, "record(${routeId}, ${header.CamelSpiffeSpiffeId}, 'allowed', null)")
                 .log("Authenticated caller ${header.CamelSpiffeSpiffeId}, allowed to call ${routeId}")
             .otherwise()
@@ -128,15 +171,28 @@ policy.interceptFrom()
                 .removeHeaders("CamelSpiffe*")
                 // the route itself does not run
                 .stop()
-        .end();
+        .end()
+        .removeHeaders("CamelOpa*");
 ----
 
 `validateJwtSvid` takes the token from the `CamelSpiffeToken` header. The message body becomes the validated
 `io.spiffe.svid.jwtsvid.JwtSvid` and the SPIFFE ID of the caller is set as the `CamelSpiffeSpiffeId` header. A
 failed validation throws an `io.spiffe.exception.JwtSvidException`, whose cause says why (expired, wrong audience,
-unknown key, ...); the policy puts that reason in the HTTP 401 response. `AllowList` looks up
-`<service>.allow.<route id>` in the configuration, and `AuditTrail` keeps the last decisions of the policy, which
-the backend exposes on `/api/audit`.
+unknown key, ...); the policy puts that reason in the HTTP 401 response.
+
+The `opa` endpoint builds an input document out of the message and asks OPA to evaluate the rule at the given
+path, `camel/spiffe/backend/allow` for the backend. With `includeHeaders` set, the document only carries the two
+headers the policy needs, so the token never leaves the application:
+
+[source,json]
+----
+{"headers": {"CamelSpiffeSpiffeId": "spiffe://example.org/frontend"}, "routeId": "orders", "exchangeId": "..."}
+----
+
+The verdict comes back in the `CamelOpaDecisionAllow` header. The component fails closed: if OPA cannot be reached
+or cannot evaluate the policy, it throws an `OpaPolicyEvaluationException` instead of answering, and the policy
+turns that into an HTTP 503. `AuditTrail` keeps the last decisions of the policy, which the backend exposes on
+`/api/audit`.
 
 === The Camel routes
 
@@ -222,8 +278,16 @@ The example is built with Maven:
 $ mvn package
 ----
 
-This also runs the unit tests, which do not need SPIRE (see below), and copies the runtime dependencies to
-`target/lib`, from where `src/main/docker/Dockerfile` picks them up.
+This also runs the unit tests, which need neither SPIRE nor OPA (see below), and copies the runtime dependencies
+to `target/lib`, from where `src/main/docker/Dockerfile` picks them up.
+
+The Rego policies have unit tests of their own in `opa/policy_test.rego`, which run with the OPA binary or its
+container image:
+
+[source,sh]
+----
+$ docker run --rm -v $PWD/opa:/policies:ro,z openpolicyagent/opa:1.9.0-static test /policies -v
+----
 
 === How to run
 
@@ -235,8 +299,8 @@ $ docker compose up --build
 ----
 
 The `spire` container starts a SPIRE server, registers the four workloads, then starts a SPIRE agent that joins
-the server with a one-time token. Once the agent serves the Workload API, the inventory and the backend start, then
-the frontend and the auditor. Within a few seconds the logs show the frontend getting the orders with their stock
+the server with a one-time token. The `opa` container loads the policies of the `opa` directory. Once the agent
+serves the Workload API, the inventory and the backend start, then the frontend and the auditor. Within a few seconds the logs show the frontend getting the orders with their stock
 levels, the inventory serving the backend on behalf of the frontend, the auditor being turned away from the orders
 but reading the audit trail and, now and then, the frontend being rejected when it presents a token minted for
 another audience:
@@ -251,6 +315,7 @@ frontend-1  | 17:27:23.6 [timer://orders] call-backend INFO  Fetched a JWT-SVID 
 backend-1   | 17:27:23.7 [worker-thread-1] orders INFO  Authenticated caller spiffe://example.org/frontend, allowed to call orders
 inventory-1 | 17:27:23.9 [worker-thread-0] stock INFO  Authenticated caller spiffe://example.org/backend, allowed to call stock
 inventory-1 | 17:27:23.9 [worker-thread-0] stock INFO  Serving the stock levels to spiffe://example.org/backend on behalf of spiffe://example.org/frontend
+opa-1       | {"decision_id":"...","input":{"exchangeId":"...","headers":{"CamelSpiffeSpiffeId":"spiffe://example.org/frontend"},"routeId":"orders"},"path":"camel/spiffe/backend/allow","result":true,...}
 frontend-1  | 17:27:24.0 [timer://orders] call-backend INFO  GET /api/orders answered HTTP 200: {"caller":"spiffe://example.org/frontend","orders":[{"id":1001,"item":"Camel in Action, 2nd edition","quantity":2,"inStock":true},{"id":1002,"item":"Enterprise Integration Patterns","quantity":1,"inStock":false},...
 backend-1   | 17:27:23.7 [worker-thread-0] orders WARN  Authenticated caller spiffe://example.org/auditor is not allowed to call orders
 auditor-1   | 17:27:23.7 [timer://orders] call-backend INFO  GET /api/orders answered HTTP 403: 403 Forbidden: spiffe://example.org/auditor is not allowed to call orders
@@ -293,6 +358,18 @@ HTTP/1.1 401 Unauthorized
 $ docker compose exec spire /opt/spire/bin/spire-server entry show
 ----
 
+* Ask OPA the same question the backend asks, with the input document the component sends (OPA is published on
+  port 8181), and read its decision log to see every question the services asked:
++
+[source,sh]
+----
+$ curl -s -X POST localhost:8181/v1/data/camel/spiffe/backend/allow \
+    -d '{"input": {"headers": {"CamelSpiffeSpiffeId": "spiffe://example.org/auditor"}, "routeId": "audit"}}'
+{"decision_id":"...","result":true}
+
+$ docker compose logs opa | grep '"result"'
+----
+
 * Watch the X.509-SVID of an application being rotated. The SPIRE agent renews a certificate halfway through its
   lifetime, so about every five minutes the serial number and the validity period in the summary change, while the
   SPIFFE ID stays the same:
@@ -309,11 +386,16 @@ $ docker compose logs -f frontend | grep -A 8 "X.509-SVID of"
 $ docker compose logs spire | grep "Failed to validate JWT"
 ----
 
-* Change who may do what: add `spiffe://example.org/auditor` to `backend.allow.orders` in
-  `src/main/resources/application.properties`, then rebuild and restart the backend with
-  `mvn package -DskipTests && docker compose up --build -d backend`. Nothing changes in the auditor, yet its next
-  call gets the orders back. Or add `spiffe://example.org/frontend` to `inventory.allow.stock` and see that the
-  frontend still cannot call the inventory: its tokens are minted for the backend, not for the inventory.
+* Change who may do what without touching the applications: add `"spiffe://example.org/auditor"` to the `orders`
+  set in `opa/backend.rego` and save the file. OPA reloads the policy, and the next call of the auditor gets the
+  orders back. Nothing was rebuilt or restarted. Then take it out again and watch the auditor being denied
+  again.
+
+* Stop OPA with `docker compose stop opa` and watch what happens to the backend: nobody gets in anymore. The
+  requests in flight wait while the OPA client retries, about 45 seconds the first time, then every call is
+  answered with HTTP 503 and the audit trail records an `error` decision. The policy fails closed: a decision point
+  that cannot be reached is never an allow. Start OPA again with `docker compose start opa` and the calls succeed
+  again.
 
 Stop everything, and remove the containers and the volume with the Workload API socket, with:
 
@@ -334,23 +416,27 @@ on Kubernetes, attests the workloads by their pod and service account instead of
 $ mvn test
 ----
 
-The tests do not need SPIRE. Each test class binds a Mockito mock of `io.spiffe.workloadapi.WorkloadApiClient` to
-the Camel registry with `@BindToRegistry`, and the SPIFFE component autowires the single client it finds there (its
-`workloadApiClient` option). The routes under test are therefore exactly the ones that run in the containers, only
-the SPIRE agent is replaced by a fake that mints, validates or refuses SVIDs as the test needs. The backend and the
-inventory are tested over HTTP, on the embedded server of Camel Main, so the policy runs exactly as in the
-containers; the backend test also stubs the inventory on that server to check the second hop.
+The tests need neither SPIRE nor OPA. Each test class binds a Mockito mock of
+`io.spiffe.workloadapi.WorkloadApiClient` and, for the HTTP services, of `com.styra.opa.OPAClient` to the Camel
+registry with `@BindToRegistry`; the SPIFFE and OPA components autowire the single client they find there (their
+`workloadApiClient` and `opaClient` options). The routes under test are therefore exactly the ones that run in the
+containers, only the SPIRE agent and the OPA server are replaced by fakes: one mints, validates or refuses SVIDs as
+the test needs, the other decides like the Rego policies do and lets the tests check what it was asked. The backend
+and the inventory are tested over HTTP, on the embedded server of Camel Main, so the policy runs exactly as in the
+containers; the backend test also stubs the inventory on that server to check the second hop. The Rego policies
+themselves are tested with `opa test`, as shown above.
 
 === Running the applications outside Docker
 
 The applications can also run directly on your machine with `mvn camel:run`, as long as a SPIRE agent (or any other
-SPIFFE Workload API) is reachable and has a registration entry for the process that runs them:
+SPIFFE Workload API) is reachable and has a registration entry for the process that runs them, and an OPA server
+with the policies of the `opa` directory listens somewhere (`docker compose up opa` starts one on port 8181):
 
 [source,sh]
 ----
 $ export SPIFFE_ENDPOINT_SOCKET=unix:///tmp/spire-agent/public/api.sock
 $ mvn camel:run -Dcamel.server.port=8081 -Dcamel.mainClass=org.apache.camel.example.spiffe.inventory.InventoryApplication
-$ mvn camel:run -Dinventory.host=localhost -Dinventory.port=8081
+$ mvn camel:run -Dinventory.host=localhost -Dinventory.port=8081 -Dopa.url=http://localhost:8181
 $ mvn camel:run -Dbackend.host=localhost -Dcamel.mainClass=org.apache.camel.example.spiffe.frontend.FrontendApplication
 ----
 

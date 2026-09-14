@@ -21,7 +21,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Date;
+import java.util.Map;
 
+import com.styra.opa.OPAClient;
 import io.spiffe.spiffeid.SpiffeId;
 import io.spiffe.svid.jwtsvid.JwtSvid;
 import io.spiffe.workloadapi.WorkloadApiClient;
@@ -33,15 +35,19 @@ import org.apache.camel.test.main.junit6.CamelMainTestSupport;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests the inventory over HTTP, on the embedded server of Camel Main, against a fake SPIFFE Workload API.
+ * Tests the inventory over HTTP, on the embedded server of Camel Main, against a fake SPIFFE Workload API and a fake
+ * OPA that decides like opa/inventory.rego does.
  */
 class InventoryRoutesTest extends CamelMainTestSupport {
 
     private static final String INVENTORY = "spiffe://example.org/inventory";
+    private static final String POLICY = "camel/spiffe/inventory/allow";
 
     // static, because configureContext() runs in the constructor of CamelTestSupport, before the instance
     // fields are initialized
@@ -50,6 +56,9 @@ class InventoryRoutesTest extends CamelMainTestSupport {
 
     @BindToRegistry
     private final WorkloadApiClient workloadApiClient = mock(WorkloadApiClient.class);
+
+    @BindToRegistry
+    private final OPAClient opaClient = mock(OPAClient.class);
 
     @Override
     protected void configure(MainConfigurationProperties configuration) {
@@ -60,6 +69,7 @@ class InventoryRoutesTest extends CamelMainTestSupport {
 
     @Test
     void backendGetsTheStockLevels() throws Exception {
+        opaDecidesLikeThePolicy();
         JwtSvid backend = jwtSvid("spiffe://example.org/backend");
         when(workloadApiClient.validateJwtSvid("backend-token", INVENTORY)).thenReturn(backend);
 
@@ -72,6 +82,7 @@ class InventoryRoutesTest extends CamelMainTestSupport {
 
     @Test
     void frontendMayNotAskTheInventoryDirectly() throws Exception {
+        opaDecidesLikeThePolicy();
         JwtSvid frontend = jwtSvid("spiffe://example.org/frontend");
         when(workloadApiClient.validateJwtSvid("frontend-token", INVENTORY)).thenReturn(frontend);
 
@@ -83,10 +94,37 @@ class InventoryRoutesTest extends CamelMainTestSupport {
     }
 
     @Test
+    void backendMayNotAskOnBehalfOfSomeoneWhoMayNotReadTheOrders() throws Exception {
+        opaDecidesLikeThePolicy();
+        JwtSvid backend = jwtSvid("spiffe://example.org/backend");
+        when(workloadApiClient.validateJwtSvid("backend-token", INVENTORY)).thenReturn(backend);
+
+        HttpResponse<String> response = get("Bearer backend-token", "spiffe://example.org/auditor");
+
+        assertEquals(403, response.statusCode());
+    }
+
+    @Test
     void missingTokenIsUnauthorized() throws Exception {
+        opaDecidesLikeThePolicy();
         HttpResponse<String> response = get(null, null);
 
         assertEquals(401, response.statusCode());
+    }
+
+    /**
+     * The fake OPA decides like opa/inventory.rego does: the backend, on behalf of a caller that may read the orders.
+     */
+    private void opaDecidesLikeThePolicy() throws Exception {
+        when(opaClient.evaluate(eq(POLICY), anyMap(), eq(Object.class))).thenAnswer(invocation -> {
+            Map<String, Object> input = invocation.getArgument(1);
+            Map<?, ?> headers = (Map<?, ?>) input.get("headers");
+            Object caller = headers.get("CamelSpiffeSpiffeId");
+            Object onBehalfOf = headers.entrySet().stream()
+                    .filter(header -> "X-On-Behalf-Of".equalsIgnoreCase(String.valueOf(header.getKey())))
+                    .map(Map.Entry::getValue).findFirst().orElse(null);
+            return "spiffe://example.org/backend".equals(caller) && "spiffe://example.org/frontend".equals(onBehalfOf);
+        });
     }
 
     private static HttpResponse<String> get(String authorization, String onBehalfOf) throws Exception {
