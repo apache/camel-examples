@@ -28,7 +28,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 71 (0 deprecated)
+Number of Examples: 72 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -55,6 +55,8 @@ Number of Examples: 71 (0 deprecated)
 | link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Advanced | How to use route templates (parameterized routes)
 
 | link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Advanced | How to use route templates (parameterized routes) in XML
+
+| link:ai-tools-spiffe-opa/README.adoc[AI Tools with SPIFFE and OPA] (ai-tools-spiffe-opa) | AI | An example for guarding the tools of a Camel AI agent with SPIFFE workload identity and an Open Policy Agent policy evaluated in-process as WebAssembly
 
 | link:basic/README.adoc[Basic] (basic) | Beginner | Basic example
 

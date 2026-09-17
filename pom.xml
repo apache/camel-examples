@@ -81,6 +81,7 @@
     <modules>
         <module>aggregate</module>
         <module>aggregate-dist</module>
+        <module>ai-tools-spiffe-opa</module>
         <module>aws</module>
         <module>azure</module>
         <module>basic</module>
@@ -338,6 +339,8 @@
                             <exclude>**/src/main/data/*.patient</exclude>
                             <exclude>**/src/main/data/*.csv</exclude>
                             <exclude>**/src/main/resources/avro/*.avsc</exclude>
+                            <!-- the ai-tools-spiffe-opa example ships a pre-built WebAssembly OPA policy bundle (see its build-policy.sh) -->
+                            <exclude>**/src/main/resources/opa/*.tar.gz</exclude>
                             <!-- generated files -->
                             <exclude>**/target/**/*</exclude>
                             <exclude>**/eclipse-classes/**/*</exclude>
