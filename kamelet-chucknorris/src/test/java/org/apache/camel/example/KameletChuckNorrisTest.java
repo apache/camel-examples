@@ -40,6 +40,6 @@ class KameletChuckNorrisTest extends CamelMainTestSupport {
 
     @Override
     protected void configure(MainConfigurationProperties configuration) {
-        configuration.withRoutesIncludePattern("camel/*");
+        configuration.withRoutesIncludePattern("camel/*.yaml");
     }
 }

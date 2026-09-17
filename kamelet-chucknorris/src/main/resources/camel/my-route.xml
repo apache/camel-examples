@@ -1,6 +1,0 @@
-<routes xmlns="http://camel.apache.org/schema/spring">
-    <route>
-        <from uri="kamelet:chuck-norris-source"/>
-        <log message="${body}"/>
-    </route>
-</routes>
