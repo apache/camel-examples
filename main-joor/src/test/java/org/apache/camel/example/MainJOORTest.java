@@ -29,7 +29,7 @@ import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * A unit test checking that Camel supports jOOR language in the Camel DSL.
+ * A unit test checking that Camel supports the java language (backed by jOOR) in the Camel DSL.
  */
 class MainJOORTest extends CamelMainTestSupport {
 
@@ -41,7 +41,7 @@ class MainJOORTest extends CamelMainTestSupport {
     }
 
     @Test
-    void should_support_joor_in_dsl() {
+    void should_support_java_in_dsl() {
         NotifyBuilder notify = new NotifyBuilder(context).whenCompleted(10).create();
         assertTrue(
             notify.matches(20, TimeUnit.SECONDS), "10 messages should be completed"
