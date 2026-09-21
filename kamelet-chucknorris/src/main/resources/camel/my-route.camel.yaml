@@ -1,0 +1,5 @@
+- route:
+    from:
+      uri: kamelet:chuck-norris-source
+      steps:
+        - log: "${body}"
