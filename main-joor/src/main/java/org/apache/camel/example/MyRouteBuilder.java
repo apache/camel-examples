@@ -25,7 +25,7 @@ public class MyRouteBuilder extends RouteBuilder {
         from("timer:foo?period={{myPeriod}}")
             .bean(UserFactoryBean.class, "createUser")
             .choice()
-                .when(joor("var user = bodyAs(MyUser); return user.getName() != null && user.getAge() > 21"))
+                .when(java("var user = bodyAs(MyUser); return user.getName() != null && user.getAge() > 21"))
                     .log("User ${body} can enter bar")
                 .otherwise()
                     .log("User ${body} cannot enter bar");
