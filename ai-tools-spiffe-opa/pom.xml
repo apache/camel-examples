@@ -35,7 +35,7 @@
     <properties>
         <category>AI</category>
         <title>AI Tools with SPIFFE and OPA</title>
-        <maven-dependency-plugin-version>3.8.1</maven-dependency-plugin-version>
+        <maven-dependency-plugin-version>3.11.0</maven-dependency-plugin-version>
     </properties>
 
     <dependencyManagement>
