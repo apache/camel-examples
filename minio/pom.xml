@@ -27,8 +27,8 @@
     </parent>
 
     <artifactId>camel-example-minio</artifactId>
-    <name>Camel :: Example :: MinIO</name>
-    <description>An example for showing Camel using MinIO Component</description>
+    <name>Camel :: Example :: MinIO (Deprecated)</name>
+    <description>An example for showing Camel using MinIO Component (Deprecated)</description>
     <packaging>jar</packaging>
 
     <properties>
