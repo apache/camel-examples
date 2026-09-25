@@ -130,7 +130,7 @@ Number of Examples: 72 (0 deprecated)
 
 | link:ftp/README.adoc[FTP] (ftp) | File | An example for showing Camel FTP integration
 
-| link:minio/README.adoc[Minio] (minio) | File | An example for showing Camel using MinIO Component
+| link:minio/README.adoc[Minio] (minio) | File | (Deprecated) An example for showing Camel using MinIO Component
 
 | link:kamelet/README.adoc[Kamelet] (kamelet) | Kamelet | How to use Kamelets
 

@@ -1,4 +1,4 @@
-== Camel MinIO Example
+== Camel MinIO Example (Deprecated)
 
 This example shows how to use Camel MinIO component to write and read objects in a bucket.
 
