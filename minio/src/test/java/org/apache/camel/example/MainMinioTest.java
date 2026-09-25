@@ -24,6 +24,7 @@ import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.infra.minio.services.MinioService;
 import org.apache.camel.test.infra.minio.services.MinioServiceFactory;
 import org.apache.camel.test.main.junit6.CamelMainTestSupport;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -31,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled("MinIO was deprecated in 4.23. The upstream project is closed and container images were aggressively removed from registries.")
 public class MainMinioTest extends CamelMainTestSupport {
 
     @RegisterExtension
