@@ -1,0 +1,60 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">One request, two specialists, coordinated by Apache Camel</title>
+  <desc id="desc">Camel selects weather and cost specialists with semantic questions, calls their Camel A2A routes in parallel, checks their replies, and merges accepted contributions into one checked answer.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#d8b98d"/></marker>
+  </defs>
+  <rect width="1200" height="600" rx="20" fill="#211e19"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="60" y="66" font-size="18" font-weight="700" letter-spacing="3" fill="#ff9b36">APACHE CAMEL</text>
+    <text x="60" y="126" font-size="42" font-weight="700" fill="#fff5e9">One request. Two specialists.</text>
+    <text x="60" y="174" font-size="22" fill="#d6c9b7">“Rain in Lisbon on Tuesday, and an SUV for five days?”</text>
+
+    <g fill="none" stroke="#d8b98d" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M322 351H379V287H437"/>
+      <path d="M379 351V430H437"/>
+      <path d="M729 287H791V351H847"/>
+      <path d="M729 430H791V351" marker-end="none"/>
+    </g>
+
+    <rect x="60" y="285" width="260" height="132" rx="14" fill="#392b1d" stroke="#f28c28" stroke-width="2"/>
+    <text x="82" y="323" font-size="15" font-weight="700" letter-spacing="1.5" fill="#ffaf54">CAMEL COORDINATOR</text>
+    <text x="82" y="358" font-size="26" font-weight="700" fill="#fff5e9">Select specialists</text>
+    <text x="82" y="391" font-size="19" fill="#e5d3b9">Semantic questions</text>
+
+    <rect x="439" y="232" width="290" height="110" rx="14" fill="#1c343b" stroke="#54b6c5" stroke-width="2"/>
+    <text x="462" y="266" font-size="14" font-weight="700" letter-spacing="1.4" fill="#88d9e4">CAMEL A2A SPECIALIST</text>
+    <text x="462" y="300" font-size="25" font-weight="700" fill="#effcfd">Weather</text>
+    <text x="462" y="325" font-size="17" fill="#b5d8de">Demo forecast · Tuesday</text>
+
+    <rect x="439" y="375" width="290" height="110" rx="14" fill="#263a2c" stroke="#80bd8e" stroke-width="2"/>
+    <text x="462" y="409" font-size="14" font-weight="700" letter-spacing="1.4" fill="#a5ddb2">CAMEL A2A SPECIALIST</text>
+    <text x="462" y="443" font-size="25" font-weight="700" fill="#f2fcf4">Cost</text>
+    <text x="462" y="468" font-size="17" fill="#c1dec8">Demo rates · Five days</text>
+
+    <rect x="849" y="285" width="291" height="132" rx="14" fill="#352c42" stroke="#b6a0d0" stroke-width="2"/>
+    <text x="872" y="323" font-size="15" font-weight="700" letter-spacing="1.5" fill="#d4bceb">CAMEL COORDINATOR</text>
+    <text x="872" y="358" font-size="26" font-weight="700" fill="#faf5ff">Merge and check</text>
+    <text x="872" y="391" font-size="19" fill="#d9cee5">One combined answer</text>
+
+    <rect x="489" y="518" width="190" height="32" rx="16" fill="#40372c"/>
+    <text x="584" y="540" text-anchor="middle" font-size="17" fill="#f3dec1">Split · parallel calls</text>
+    <text x="60" y="555" font-size="16" fill="#bcae9c">Checked replies, bounded retries.</text>
+  </g>
+</svg>
