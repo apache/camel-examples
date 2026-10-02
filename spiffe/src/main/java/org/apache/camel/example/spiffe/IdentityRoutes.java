@@ -39,10 +39,10 @@ public class IdentityRoutes extends RouteBuilder {
                 .log(LoggingLevel.WARN, "Could not fetch the X.509-SVID: ${exception.message}");
 
         from("timer:identity?period={{identity.period}}").routeId("identity")
-                // fetchX509Svid is also the default operation of the component. The message body becomes an
-                // io.spiffe.svid.x509svid.X509Svid and the SPIFFE ID is set as the CamelSpiffeSpiffeId header
+                // fetchX509Svid is also the default operation of the component. The message body becomes the
+                // certificate chain, without the private key, and the SPIFFE ID is set as the CamelSpiffeSpiffeId header
                 .to("spiffe:identity?operation=fetchX509Svid")
-                // the X509Svid also carries the private key of the workload, so never log the body as-is
+                // describe the leaf certificate instead of logging the whole chain
                 .bean(X509SvidSummary.class, "describe")
                 .log("${body}");
     }

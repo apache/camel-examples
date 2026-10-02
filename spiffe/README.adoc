@@ -260,10 +260,10 @@ from("direct:callBackend").routeId("call-backend")
     .log("GET ${header.CamelHttpPath} answered HTTP ${header.CamelHttpResponseCode}: ${body}");
 ----
 
-* All applications run `IdentityRoutes`, where `fetchX509Svid` makes the message body an
-  `io.spiffe.svid.x509svid.X509Svid` with the certificate chain, the private key and the SPIFFE ID of the
-  workload. `X509SvidSummary` describes the leaf certificate, and only the certificate: the private key is never
-  logged.
+* All applications run `IdentityRoutes`, where `fetchX509Svid` makes the message body the certificate chain of the
+  workload and sets its SPIFFE ID as the `CamelSpiffeSpiffeId` header. The private key stays off the message: the
+  component only puts the whole `X509Svid` on the body when `x509Response=svid` is set. `X509SvidSummary`
+  describes the leaf certificate.
 
 The component finds the Workload API through the standard `SPIFFE_ENDPOINT_SOCKET` environment variable, which
 `compose.yaml` sets for each application. The `camel.component.spiffe.spiffe-socket-path` option in
