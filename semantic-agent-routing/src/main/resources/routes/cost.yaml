@@ -1,0 +1,40 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Answer A2A pricing requests through the chat model using the demo rental rates.
+- route:
+    id: cost-agent
+    from:
+      uri: a2a:cost
+      parameters:
+        name: cost
+        description: Camel car rental cost specialist using demonstration data
+        protocolBinding: JSONRPC
+        httpServerComponent: platform-http
+        validateAuth: false
+      steps:
+        - to:
+            uri: openai:chat-completion
+            parameters:
+              temperature: "{{openai.temperature}}"
+              requestTimeout: "{{openai.request-timeout}}"
+              systemMessage: >-
+                You are the cost specialist for a car rental demonstration.
+                Answer only the part of the request within your specialty; other specialists handle the other topics.
+                Keep replies short and label supplied facts as demo data. Do not invent external information
+                or claim to perform real bookings. Ask for missing details. Facts:
+                Demo daily rates in EUR: compact 40, SUV 75; no extra fees in this demo.
+                A five-day SUV rental totals 375 EUR.
+                For other durations request a quote; do not invent prices.

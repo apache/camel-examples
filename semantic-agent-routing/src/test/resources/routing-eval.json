@@ -1,0 +1,170 @@
+[
+  {
+    "id": "weather",
+    "group": "single",
+    "request": "Will it rain in Lisbon on Tuesday?",
+    "expected": [
+      [
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "cost",
+    "group": "single",
+    "request": "How much is an SUV for five days?",
+    "expected": [
+      [
+        "cost"
+      ]
+    ]
+  },
+  {
+    "id": "reservation",
+    "group": "single",
+    "request": "What is the status of reservation R-100?",
+    "expected": [
+      [
+        "reservation"
+      ]
+    ]
+  },
+  {
+    "id": "hours",
+    "group": "general",
+    "request": "What time does the rental desk close?",
+    "expected": [
+      [
+        "general"
+      ]
+    ]
+  },
+  {
+    "id": "hello",
+    "group": "general",
+    "request": "Hello, good morning!",
+    "expected": [
+      [
+        "general"
+      ]
+    ]
+  },
+  {
+    "id": "thanks",
+    "group": "general",
+    "request": "Thanks for your help!",
+    "expected": [
+      [
+        "general"
+      ]
+    ]
+  },
+  {
+    "id": "wet-roads",
+    "group": "indirect",
+    "request": "Should I expect wet roads in Lisbon on Tuesday?",
+    "expected": [
+      [
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "budget",
+    "group": "indirect",
+    "request": "Would 400 EUR cover five days in an SUV?",
+    "expected": [
+      [
+        "cost"
+      ]
+    ]
+  },
+  {
+    "id": "confirmation",
+    "group": "indirect",
+    "request": "Is R-100 still confirmed for Paris?",
+    "expected": [
+      [
+        "reservation"
+      ]
+    ]
+  },
+  {
+    "id": "weather-cost",
+    "group": "multi",
+    "request": "Will it rain in Lisbon on Tuesday, and how much is an SUV for five days?",
+    "expected": [
+      [
+        "weather",
+        "cost"
+      ]
+    ]
+  },
+  {
+    "id": "reservation-cost",
+    "group": "multi",
+    "request": "Check reservation R-100 and tell me the daily rate for a compact car.",
+    "expected": [
+      [
+        "reservation",
+        "cost"
+      ]
+    ]
+  },
+  {
+    "id": "reservation-weather",
+    "group": "multi",
+    "request": "Check my booking R-100 and tell me whether Lisbon will be rainy on Tuesday.",
+    "expected": [
+      [
+        "reservation",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "all-three",
+    "group": "multi",
+    "request": "Check R-100, tell me the weather in Lisbon on Tuesday, and price a five-day SUV rental.",
+    "expected": [
+      [
+        "reservation",
+        "weather",
+        "cost"
+      ]
+    ]
+  },
+  {
+    "id": "insurance",
+    "group": "indirect",
+    "request": "Are there extra fees in your demo prices?",
+    "expected": [
+      [
+        "cost"
+      ]
+    ]
+  },
+  {
+    "id": "pet-policy",
+    "group": "general",
+    "request": "Can I bring a dog in the rental car?",
+    "expected": [
+      [
+        "general"
+      ],
+      [
+        "reservation"
+      ]
+    ]
+  },
+  {
+    "id": "jobs",
+    "group": "general",
+    "request": "Do you have any jobs available at the rental desk?",
+    "expected": [
+      [
+        "general"
+      ]
+    ]
+  }
+]
