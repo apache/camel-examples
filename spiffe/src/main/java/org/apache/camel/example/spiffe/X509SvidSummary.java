@@ -22,11 +22,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import io.spiffe.svid.x509svid.X509Svid;
+import org.apache.camel.Body;
+import org.apache.camel.Header;
+import org.apache.camel.component.spiffe.SpiffeConstants;
 
 /**
- * Turns an {@link X509Svid} into a human-readable summary of its leaf certificate. Only the certificate is described:
- * the private key that comes with the SVID is never printed.
+ * Turns the X.509-SVID fetched by the spiffe component into a human-readable summary of its leaf certificate. By
+ * default the component puts only the certificate chain on the message body, and the SPIFFE ID in a header, so the
+ * private key of the workload never reaches the route.
  */
 public class X509SvidSummary {
 
@@ -36,8 +39,9 @@ public class X509SvidSummary {
      */
     private static final int URI_NAME = 6;
 
-    public String describe(X509Svid svid) throws CertificateParsingException {
-        X509Certificate leaf = svid.getLeaf();
+    public String describe(@Body List<X509Certificate> chain, @Header(SpiffeConstants.SPIFFE_ID) String spiffeId)
+            throws CertificateParsingException {
+        X509Certificate leaf = chain.get(0);
         return String.format("""
                 X.509-SVID of %s
                     serial number : %s
@@ -47,14 +51,14 @@ public class X509SvidSummary {
                     valid until   : %s
                     URI SANs      : %s
                     chain length  : %d certificate(s)""",
-                svid.getSpiffeId(),
+                spiffeId,
                 leaf.getSerialNumber().toString(16),
                 leaf.getSubjectX500Principal(),
                 leaf.getIssuerX500Principal(),
                 leaf.getNotBefore().toInstant(),
                 leaf.getNotAfter().toInstant(),
                 uriSubjectAlternativeNames(leaf),
-                svid.getChain().size());
+                chain.size());
     }
 
     private static List<String> uriSubjectAlternativeNames(X509Certificate certificate)
