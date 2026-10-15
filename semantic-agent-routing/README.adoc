@@ -77,7 +77,7 @@ Install the development CLI once, then use the commands below without version fl
 
 [source,shell]
 ----
-jbang app install --force --fresh -Dcamel.jbang.version=4.23.0-SNAPSHOT camel@apache/camel
+jbang app install --force --fresh -Dcamel.jbang.version=4.24.0-SNAPSHOT camel@apache/camel
 camel version
 ----
 
