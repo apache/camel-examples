@@ -71,6 +71,10 @@ limitations under the License.
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
+            <artifactId>camel-semantic-typesafe-ai</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
             <artifactId>camel-typesafe-ai</artifactId>
         </dependency>
         <dependency>
