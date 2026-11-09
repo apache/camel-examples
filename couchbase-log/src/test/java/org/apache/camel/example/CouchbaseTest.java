@@ -17,7 +17,6 @@
 package org.apache.camel.example;
 
 import java.time.Duration;
-import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -26,12 +25,8 @@ import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.json.JsonObject;
 import com.couchbase.client.java.manager.bucket.BucketSettings;
 import com.couchbase.client.java.manager.bucket.BucketType;
-import com.couchbase.client.java.manager.bucket.StorageBackend;
-import com.couchbase.client.java.manager.view.DesignDocument;
-import com.couchbase.client.java.manager.view.View;
-import com.couchbase.client.java.view.DesignDocumentNamespace;
+import com.couchbase.client.java.manager.query.CreatePrimaryQueryIndexOptions;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.component.couchbase.CouchbaseConstants;
 import org.apache.camel.main.MainConfigurationProperties;
 import org.apache.camel.test.infra.couchbase.services.CouchbaseService;
 import org.apache.camel.test.infra.couchbase.services.CouchbaseServiceFactory;
@@ -61,16 +56,12 @@ class CouchbaseTest extends CamelMainTestSupport {
         CLUSTER = Cluster.connect(
             SERVICE.getConnectionString(), SERVICE.username(), SERVICE.password()
         );
-        DesignDocument designDoc = new DesignDocument(
-            CouchbaseConstants.DEFAULT_DESIGN_DOCUMENT_NAME,
-            Collections.singletonMap(
-                CouchbaseConstants.DEFAULT_VIEWNAME,
-                new View("function (doc, meta) {  emit(meta.id, doc);}")
-            )
-        );
         CLUSTER.buckets().createBucket(
-                BucketSettings.create(BUCKET).bucketType(BucketType.COUCHBASE).storageBackend(StorageBackend.COUCHSTORE).flushEnabled(true));
-        CLUSTER.bucket(BUCKET).viewIndexes().upsertDesignDocument(designDoc, DesignDocumentNamespace.PRODUCTION);
+                BucketSettings.create(BUCKET).bucketType(BucketType.COUCHBASE).flushEnabled(true));
+        CLUSTER.bucket(BUCKET).waitUntilReady(Duration.ofSeconds(30));
+        // Create a primary index so the SQL++ consumer can query the bucket
+        CLUSTER.queryIndexes().createPrimaryIndex(BUCKET,
+                CreatePrimaryQueryIndexOptions.createPrimaryQueryIndexOptions().ignoreIfExists(true));
     }
 
     @AfterAll
@@ -84,7 +75,6 @@ class CouchbaseTest extends CamelMainTestSupport {
     @Override
     public void configureContext(CamelContextConfiguration camelContextConfiguration) {
         super.configureContext(camelContextConfiguration);
-        System.out.println("#### " + SERVICE.getConnectionString());
         Properties overridenProperties = asProperties(
                 "couchbase.connectionString", SERVICE.getConnectionString(),
                 "couchbase.host", SERVICE.hostname(),
