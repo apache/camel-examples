@@ -60,6 +60,7 @@ class CouchbaseTest extends CamelMainTestSupport {
         CLUSTER = Cluster.connect(
             SERVICE.getConnectionString(), SERVICE.username(), SERVICE.password()
         );
+        CLUSTER.waitUntilReady(Duration.ofSeconds(30));
         CLUSTER.buckets().createBucket(
                 BucketSettings.create(BUCKET).bucketType(BucketType.COUCHBASE).flushEnabled(true));
         CLUSTER.bucket(BUCKET).waitUntilReady(Duration.ofSeconds(30));
