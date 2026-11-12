@@ -36,6 +36,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.camel.util.PropertiesHelper.asProperties;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,6 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * A unit test checking that Camel consume data from Couchbase.
  */
 class CouchbaseTest extends CamelMainTestSupport {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CouchbaseTest.class);
 
     private static final String BUCKET = "test-bucket-" + System.currentTimeMillis();
 
@@ -59,9 +63,40 @@ class CouchbaseTest extends CamelMainTestSupport {
         CLUSTER.buckets().createBucket(
                 BucketSettings.create(BUCKET).bucketType(BucketType.COUCHBASE).flushEnabled(true));
         CLUSTER.bucket(BUCKET).waitUntilReady(Duration.ofSeconds(30));
-        // Create a primary index so the SQL++ consumer can query the bucket
-        CLUSTER.queryIndexes().createPrimaryIndex(BUCKET,
-                CreatePrimaryQueryIndexOptions.createPrimaryQueryIndexOptions().ignoreIfExists(true));
+        // Create a primary index so the SQL++ consumer can query the bucket.
+        // Retry because the query service may need extra time to become reachable
+        // after the KV bucket is ready (Couchbase initialises services in parallel,
+        // and Testcontainers' external-port remapping may not yet be reflected in
+        // the SDK's cluster topology on the first attempt).
+        createPrimaryIndexWithRetry(SERVICE.getConnectionString(), SERVICE.username(), SERVICE.password());
+    }
+
+    /**
+     * Creates a primary index on {@link #BUCKET}, retrying with fresh cluster connections until the query service is
+     * reachable or the maximum number of attempts is exhausted.
+     */
+    private static void createPrimaryIndexWithRetry(String connectionString, String username, String password) {
+        int maxAttempts = 10;
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            // Use a short-lived cluster per attempt so we always get a fresh topology snapshot.
+            try (Cluster c = Cluster.connect(connectionString, username, password)) {
+                c.queryIndexes().createPrimaryIndex(BUCKET,
+                        CreatePrimaryQueryIndexOptions.createPrimaryQueryIndexOptions().ignoreIfExists(true));
+                return;
+            } catch (Exception e) {
+                if (attempt == maxAttempts) {
+                    throw new RuntimeException("Failed to create primary index after " + maxAttempts + " attempts", e);
+                }
+                LOG.info("Query service not yet available (attempt {}/{}), retrying in 3s: {}",
+                        attempt, maxAttempts, e.getMessage());
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException("Interrupted while waiting for query service", ie);
+                }
+            }
+        }
     }
 
     @AfterAll
