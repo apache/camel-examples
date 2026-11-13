@@ -18,7 +18,7 @@
       type: org.apache.camel.example.routing.TripSupport
 
 - semantic:
-    question:
+    evaluation:
       specialist:
         type: choice
         instructions: Which car rental specialist should handle the customer's request?
