@@ -26,6 +26,7 @@ public interface BeerMapper {
 
     @Mapping(source = "style", target = "category")
     @Mapping(source = "alcohol", target = "strength")
+    @Mapping(target = "kind", constant = "beer")
     Beverage toBeverage(Beer beer);
 
 }
