@@ -16,11 +16,13 @@
 - beans:
     - name: tripSupport
       type: org.apache.camel.example.routing.TripSupport
+    - name: typesafe-ai
+      type: org.apache.camel.component.typesafeai.TypeSafeAiSemanticAdapter
 
 - semantic:
     evaluation:
       specialist:
-        expert: decisions
+        expert: typesafe-ai
         type: choice
         instructions: Which car rental specialist should handle the customer's request?
         criteria:
@@ -29,22 +31,22 @@
           cost: Rental prices, total cost, budget, fees or price comparison
           general: Greetings, service information or other questions
       needsReservation:
-        expert: decisions
+        expert: typesafe-ai
         type: boolean
         instructions: Does answering this customer request fully require input about booking details, reservation lookup, changes or cancellation?
         threshold: "{{routing.fan-out-threshold}}"
       needsWeather:
-        expert: decisions
+        expert: typesafe-ai
         type: boolean
         instructions: Does answering this customer request fully require input about weather, rain, forecasts or driving conditions at the destination?
         threshold: "{{routing.fan-out-threshold}}"
       needsCost:
-        expert: decisions
+        expert: typesafe-ai
         type: boolean
         instructions: Does answering this customer request fully require input about rental prices, total cost, budget or fees?
         threshold: "{{routing.fan-out-threshold}}"
       relevant:
-        expert: decisions
+        expert: typesafe-ai
         type: boolean
         instructions: >-
           Does the drafted reply address every requested part within the named specialist's
@@ -56,7 +58,7 @@
         uncertainty: 0.1
         uncertaintyPolicy: non-match
       complete:
-        expert: decisions
+        expert: typesafe-ai
         type: boolean
         instructions: >-
           Does the final reply address every part of the customer's original request,
