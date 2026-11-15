@@ -8,6 +8,18 @@ command, Maven will attempt to download the required dependencies from a
 central repository to your local repository.
 View the individual example READMEs for details.
 
+== AI coding assistants
+
+If you are using an AI coding assistant (Claude Code, GitHub Copilot, Cursor, Gemini CLI, etc.)
+to work with these examples, the following resources provide full Camel context:
+
+* link:AGENTS.md[AGENTS.md] — guidance for AI agents working in this repository
+* https://camel.apache.org/llms.txt[llms.txt] — LLM-friendly index of all Apache Camel documentation
+* https://camel.apache.org/manual/camel-jbang-mcp.html[Camel MCP server] — Model Context Protocol server for Camel; gives your AI assistant direct access to the component catalog, endpoint options, and EIPs
+
+Documentation pages are also available as Markdown by replacing `.html` with `.md` in the URL
+(e.g. `https://camel.apache.org/components/latest/timer-component.md`).
+
 === Executing
 
 Main branch should only be used for development purposes, which will be pointing
